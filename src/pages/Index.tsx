@@ -4,6 +4,7 @@ import OpportunitySection from "@/components/OpportunitySection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
 import WhoWeAreSection from "@/components/WhoWeAreSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <OpportunitySection />
       <ProblemSection />
       <SolutionSection />
+      <HowItWorksSection />
       <WhoWeAreSection />
     </div>
   );
