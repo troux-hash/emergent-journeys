@@ -131,34 +131,19 @@ const HowItWorksSection = () => {
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
               {infoCategories.map((cat, i) => (
                 <RevealSection key={cat.num} delay={0.7 + i * 0.08}>
-                  <div className="bg-parchment-dark border border-border p-6 h-full flex flex-col">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-full bg-background/60 border border-border flex items-center justify-center flex-shrink-0">
-                        <cat.icon className="w-5 h-5 text-gold" strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <span className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                          {cat.num} of 5
-                        </span>
-                        <h4 className="font-display text-base font-medium text-foreground leading-tight">
-                          {cat.label}
-                        </h4>
-                      </div>
+                  <div className="bg-parchment-dark border border-border p-5 h-full flex flex-col items-center text-center">
+                    <div className="w-10 h-10 rounded-full bg-background/60 border border-border flex items-center justify-center mb-3">
+                      <cat.icon className="w-5 h-5 text-gold" strokeWidth={1.5} />
                     </div>
-                    <p className="font-body text-xs text-gold mb-4 italic">{cat.subtitle}</p>
-                    <ul className="space-y-2 flex-1">
-                      {cat.items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-2">
-                          <span className="text-gold mt-1 text-xs">•</span>
-                          <span className="font-body text-sm text-muted-foreground leading-relaxed">
-                            {item}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                    <span className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
+                      {cat.num} of 5
+                    </span>
+                    <h4 className="font-display text-sm font-medium text-foreground leading-tight">
+                      {cat.label}
+                    </h4>
                   </div>
                 </RevealSection>
               ))}
