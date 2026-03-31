@@ -64,6 +64,18 @@ const SolutionSection = () => {
           </RevealSection>
         </div>
 
+        {/* CTA */}
+        <RevealSection delay={0.15}>
+          <div className="text-center mb-20">
+            <a
+              href="mailto:teddy225@mit.edu"
+              className="inline-block font-label text-sm tracking-[0.2em] uppercase bg-primary text-primary-foreground px-10 py-4 hover:opacity-90 transition-opacity"
+            >
+              Get in Touch
+            </a>
+          </div>
+        </RevealSection>
+
         {/* Value from Day 1 */}
         <RevealSection delay={0.2}>
           <div className="bg-earth-dark text-earth-light p-8 md:p-12">
