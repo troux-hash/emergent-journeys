@@ -1,12 +1,5 @@
 import RevealSection from "./RevealSection";
 
-const steps = [
-  { num: "01", title: "Build", desc: "Schema.org AI profile — live in 48 hours" },
-  { num: "02", title: "Discover", desc: "ChatGPT, Perplexity, Google surface the lodge" },
-  { num: "03", title: "Book", desc: "Direct booking engine — 8% Fichua fee, operator owns guest" },
-  { num: "04", title: "Own", desc: "Intelligence: who found them, why, what converts" },
-];
-
 const SolutionSection = () => {
   return (
     <section id="solution" className="bg-parchment py-24 md:py-32 px-6 md:px-12 lg:px-20">
@@ -14,25 +7,37 @@ const SolutionSection = () => {
         <RevealSection>
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">The Solution</p>
           <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-4">
-            A machine-readable identity<br />
-            <em className="text-gold">for every African lodge.</em>
+            Visible. Bookable.<br />
+            <em className="text-gold">Profitable from Day 1.</em>
           </h2>
-          <p className="font-body text-muted-foreground max-w-lg mb-16">
-            Findable by AI. Bookable direct. Intelligence for the operator. Not another OTA — the operating system independent African operators have never had.
+          <p className="font-body text-muted-foreground max-w-lg mb-16 leading-relaxed">
+            Your guests discover you on TikTok. They message you on WhatsApp. But they book somewhere else — because there's nothing in between. Fichua is that bridge.
           </p>
         </RevealSection>
 
-        {/* 4-step flow */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-          {steps.map((step, i) => (
-            <RevealSection key={step.num} delay={i * 0.1}>
-              <div className="text-center p-6 bg-parchment-dark border border-border relative">
-                <p className="font-display text-4xl font-bold text-gold/20 mb-4">{step.num}</p>
-                <h3 className="font-display text-xl font-medium text-foreground mb-2">{step.title}</h3>
-                <p className="font-body text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
-                {i < steps.length - 1 && (
-                  <span className="hidden md:block absolute top-1/2 -right-3 text-gold/30 font-display text-2xl">→</span>
-                )}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {[
+            {
+              label: "Where they find you",
+              title: "TikTok · Instagram · AI Search",
+              text: "Your guests are already looking. They just can't find you where it matters.",
+            },
+            {
+              label: "Where they talk to you",
+              title: "WhatsApp · DMs · Email",
+              text: "Conversations happen — but conversations don't convert without infrastructure.",
+            },
+            {
+              label: "Where they should book you",
+              title: "Direct. Not through an OTA.",
+              text: "Fichua turns interest into revenue — on your terms, not Booking.com's.",
+            },
+          ].map((card, i) => (
+            <RevealSection key={card.title} delay={i * 0.12}>
+              <div className="p-8 md:p-10 bg-parchment-dark border border-border h-full">
+                <p className="font-label text-[10px] tracking-[0.3em] uppercase text-gold mb-3">{card.label}</p>
+                <h3 className="font-display text-xl md:text-2xl font-medium text-foreground mb-4">{card.title}</h3>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">{card.text}</p>
               </div>
             </RevealSection>
           ))}
@@ -50,11 +55,8 @@ const SolutionSection = () => {
                 <p key={item} className="font-label text-xs tracking-wider text-earth-dark-foreground/70">{item}</p>
               ))}
             </div>
-            <p className="font-body text-sm text-earth-dark-foreground/60 leading-relaxed mb-4">
-              No Schema.org. No JSON-LD. No structured data. ChatGPT cannot see it — at all.
-            </p>
             <p className="font-display text-lg italic text-gold">
-              The consequence: ChatGPT recommends chain hotels instead. The lodge loses every AI-referred traveller — forever.
+              ChatGPT recommends chain hotels instead. The lodge loses every AI-referred traveller — forever.
             </p>
           </div>
         </RevealSection>
