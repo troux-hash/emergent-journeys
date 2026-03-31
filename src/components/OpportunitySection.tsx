@@ -25,7 +25,7 @@ const trends = [
 
 const OpportunitySection = () => {
   return (
-    <section className="bg-parchment py-16 md:py-20 px-6 md:px-12 lg:px-20">
+    <section id="opportunity" className="bg-parchment py-8 md:py-12 px-6 md:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto text-center">
         <RevealSection>
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">The Opportunity</p>
