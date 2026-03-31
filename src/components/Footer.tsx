@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import RevealSection from "./RevealSection";
 import { Mail, Instagram, Linkedin } from "lucide-react";
 
@@ -81,8 +82,8 @@ const Footer = () => {
           {/* Legal */}
           <div className="flex items-center gap-6 font-label text-[10px] tracking-[0.15em] uppercase text-earth-dark-foreground/40">
             <span>© {new Date().getFullYear()} Fichua</span>
-            <a href="#" className="hover:text-gold transition-colors">Privacy</a>
-            <a href="#" className="hover:text-gold transition-colors">Terms</a>
+            <Link to="/privacy" className="hover:text-gold transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-gold transition-colors">Terms</Link>
           </div>
         </div>
       </div>
