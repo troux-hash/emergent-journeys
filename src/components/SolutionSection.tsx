@@ -43,21 +43,25 @@ const SolutionSection = () => {
           ))}
         </div>
 
-        {/* Brutal Truth callout */}
+        {/* What to expect */}
         <RevealSection delay={0.3}>
           <div className="bg-earth-dark text-earth-light p-8 md:p-12">
-            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">The Brutal Truth</p>
-            <h3 className="font-display text-2xl md:text-3xl font-medium mb-4">
-              Yokan Lodge — Senegal's most prominent independent lodge.
+            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">What You Should Expect</p>
+            <h3 className="font-display text-2xl md:text-3xl font-medium mb-6">
+              How Fichua impacts your business.
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              {["Modern website ✓", "Professional photography ✓", "11 years operating ✓", "Zero AI discoverability ✗"].map((item) => (
-                <p key={item} className="font-label text-xs tracking-wider text-earth-dark-foreground/70">{item}</p>
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { title: "More direct bookings", text: "Guests find and book you without a middleman taking 20%." },
+                { title: "AI visibility from Day 1", text: "ChatGPT, Perplexity, and Google surface your lodge — not the chain hotel down the road." },
+                { title: "You own your guest", text: "Every booking, every conversation, every relationship stays yours." },
+              ].map((item) => (
+                <div key={item.title}>
+                  <h4 className="font-display text-xl font-medium text-gold mb-2">{item.title}</h4>
+                  <p className="font-body text-sm text-earth-dark-foreground/70 leading-relaxed">{item.text}</p>
+                </div>
               ))}
             </div>
-            <p className="font-display text-lg italic text-gold">
-              ChatGPT recommends chain hotels instead. The lodge loses every AI-referred traveller — forever.
-            </p>
           </div>
         </RevealSection>
       </div>

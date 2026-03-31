@@ -1,21 +1,9 @@
 import RevealSection from "./RevealSection";
 
 const forces = [
-  {
-    num: "01",
-    title: "AI Replaced Google",
-    text: "ChatGPT, Perplexity, and Google AI answer travel questions before any OTA is consulted. 82% of travellers pre-decide via AI. Early movers win the visibility race.",
-  },
-  {
-    num: "02",
-    title: "Africa's Cultural Moment",
-    text: "IShowSpeed's Africa Tour generated 16M+ hours watched. Gen Z is discovering Africa through AI and social. The demand signal is real and accelerating now.",
-  },
-  {
-    num: "03",
-    title: "The Authenticity Shift",
-    text: "72% of Gen Z prioritise authentic, locally-owned experiences over chain hotels. Sustainable tourism growing at 2× the rate of conventional travel. Africa is the world's most compelling answer.",
-  },
+  { num: "01", title: "AI Replaced Google" },
+  { num: "02", title: "Africa's Cultural Moment Is Now" },
+  { num: "03", title: "Travellers Prioritise Authentic, Locally-Owned Experiences" },
 ];
 
 const WhyNowSection = () => {
@@ -24,13 +12,10 @@ const WhyNowSection = () => {
       <div className="max-w-7xl mx-auto">
         <RevealSection>
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Why Now</p>
-          <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-4">
+          <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-16">
             Three forces.<br />
             <em className="text-gold">All peaked in 2025–26.</em>
           </h2>
-          <p className="font-body text-muted-foreground max-w-md mb-16">
-            This window is open. It won't stay open.
-          </p>
         </RevealSection>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -41,8 +26,7 @@ const WhyNowSection = () => {
                   {force.num}
                 </span>
                 <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-3">{force.num}</p>
-                <h3 className="font-display text-xl md:text-2xl font-medium text-foreground mb-4">{force.title}</h3>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">{force.text}</p>
+                <h3 className="font-display text-xl md:text-2xl font-medium text-foreground">{force.title}</h3>
               </div>
             </RevealSection>
           ))}
