@@ -35,7 +35,7 @@ const partnerLogos = [
 
 const TrustSection = () => {
   return (
-    <section className="bg-parchment py-16 md:py-24 px-6 md:px-12 lg:px-20">
+    <section id="trust" className="bg-parchment py-16 md:py-24 px-6 md:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto">
         <RevealSection>
           <div className="text-center mb-16">
