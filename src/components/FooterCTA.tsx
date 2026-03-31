@@ -16,19 +16,8 @@ const FooterCTA = () => {
             href="mailto:teddy225@mit.edu"
             className="inline-block font-label text-sm tracking-[0.2em] uppercase bg-gold text-earth-dark px-10 py-4 hover:opacity-90 transition-opacity mb-6"
           >
-            teddy225@mit.edu
+            Get in Touch
           </a>
-          <p className="font-body text-sm text-earth-dark-foreground/50 mt-4">
-            Teddy Roux · MIT Sloan Fellows MBA 2026
-          </p>
-        </RevealSection>
-
-        <RevealSection delay={0.2}>
-          <div className="border-t border-gold/10 mt-16 pt-8">
-            <p className="font-label text-[10px] tracking-[0.3em] uppercase text-gold/40">
-              Strictly Confidential
-            </p>
-          </div>
         </RevealSection>
       </div>
     </section>

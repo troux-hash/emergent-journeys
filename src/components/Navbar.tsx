@@ -6,9 +6,6 @@ const navItems = [
   { label: "Problem", href: "#problem" },
   { label: "Why Now", href: "#why-now" },
   { label: "Solution", href: "#solution" },
-  { label: "Model", href: "#model" },
-  { label: "Traction", href: "#traction" },
-  { label: "Vision", href: "#vision" },
 ];
 
 const Navbar = () => {
