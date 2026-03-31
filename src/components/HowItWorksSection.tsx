@@ -41,74 +41,11 @@ const steps = [
 ];
 
 const infoCategories = [
-  {
-    num: 1,
-    label: "Identity & Contact",
-    subtitle: "Who you are and how guests reach you.",
-    icon: UserCheck,
-    items: [
-      "Property name & alternate / local name",
-      "Property type (lodge, hotel, guesthouse…)",
-      "Country, region & physical address",
-      "GPS coordinates",
-      "Email, phone / WhatsApp",
-      "Website URL & social handles (Instagram, TripAdvisor)",
-    ],
-  },
-  {
-    num: 2,
-    label: "Property Details",
-    subtitle: "What the place actually is.",
-    icon: Building2,
-    items: [
-      "Number of rooms & max guest capacity",
-      "Star / tier rating & year established",
-      "Check-in / check-out times",
-      "Amenities list (Wi-Fi, pool, spa…)",
-      "Spoken languages",
-      "Pet & smoking policies",
-      "Property description (150–300 words)",
-    ],
-  },
-  {
-    num: 3,
-    label: "Room Types & Pricing",
-    subtitle: "The offer catalog that drives bookings.",
-    icon: BedDouble,
-    items: [
-      "Room type names & descriptions",
-      "Base price per room per night & currency",
-      "Peak season dates & supplement %",
-      "Direct booking discount vs OTAs",
-      "Payment methods accepted (incl. Mobile Money)",
-      "Currencies accepted",
-    ],
-  },
-  {
-    num: 4,
-    label: "Experiences & Sustainability",
-    subtitle: "What makes your property worth choosing.",
-    icon: Sparkles,
-    items: [
-      "Signature experiences (cultural tours, wildlife drives…)",
-      "Local ownership status",
-      "Community impact activities",
-      "Environmental certifications",
-      "Local sourcing (food, staff)",
-      "Languages of experiences offered",
-    ],
-  },
-  {
-    num: 5,
-    label: "Social Proof",
-    subtitle: "The signal layer that determines ranking.",
-    icon: Star,
-    items: [
-      "Aggregate rating (e.g. 4.7 / 5) & number of reviews",
-      "2–3 guest review excerpts",
-      "Awards or press mentions",
-    ],
-  },
+  { num: 1, label: "Identity & Contact", icon: UserCheck },
+  { num: 2, label: "Property Details", icon: Building2 },
+  { num: 3, label: "Room Types & Pricing", icon: BedDouble },
+  { num: 4, label: "Experiences & Sustainability", icon: Sparkles },
+  { num: 5, label: "Social Proof", icon: Star },
 ];
 
 const HowItWorksSection = () => {
