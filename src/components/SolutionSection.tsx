@@ -4,57 +4,87 @@ const SolutionSection = () => {
   return (
     <section id="solution" className="bg-parchment py-24 md:py-32 px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
+        {/* Fichua vs the status quo */}
         <RevealSection>
-          <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">The Solution</p>
+          <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
+            Fichua vs. The Status Quo
+          </p>
           <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-4">
-            Visible. Bookable.<br />
-            <em className="text-gold">Profitable from Day 1.</em>
+            You already have the guests.<br />
+            <em className="text-gold">You just keep losing them.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-lg mb-16 leading-relaxed">
-            Your guests discover you on TikTok. They message you on WhatsApp. But they book somewhere else — because there's nothing in between. Fichua is that bridge.
+            They find you on TikTok. They DM you on Instagram. They chat on WhatsApp. Then they book a chain hotel on Booking.com — because you have no way to close.
           </p>
         </RevealSection>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {[
-            {
-              label: "Where they find you",
-              title: "TikTok · Instagram · AI Search",
-              text: "Your guests are already looking. They just can't find you where it matters.",
-            },
-            {
-              label: "Where they talk to you",
-              title: "WhatsApp · DMs · Email",
-              text: "Conversations happen — but conversations don't convert without infrastructure.",
-            },
-            {
-              label: "Where they should book you",
-              title: "Direct. Not through an OTA.",
-              text: "Fichua turns interest into revenue — on your terms, not Booking.com's.",
-            },
-          ].map((card, i) => (
-            <RevealSection key={card.title} delay={i * 0.12}>
-              <div className="p-8 md:p-10 bg-parchment-dark border border-border h-full">
-                <p className="font-label text-[10px] tracking-[0.3em] uppercase text-gold mb-3">{card.label}</p>
-                <h3 className="font-display text-xl md:text-2xl font-medium text-foreground mb-4">{card.title}</h3>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">{card.text}</p>
+        <div className="grid md:grid-cols-2 gap-6 mb-20">
+          {/* Without Fichua */}
+          <RevealSection>
+            <div className="p-8 md:p-10 bg-parchment-dark border border-border h-full">
+              <p className="font-label text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-4">Without Fichua</p>
+              <div className="space-y-5">
+                {[
+                  { channel: "TikTok / Instagram", result: "They see you — then forget you." },
+                  { channel: "WhatsApp", result: "They message you — then ghost." },
+                  { channel: "Booking.com", result: "They book someone else — and you pay 20% anyway." },
+                ].map((item) => (
+                  <div key={item.channel} className="flex items-start gap-3">
+                    <span className="text-destructive font-display text-lg leading-none mt-0.5">✗</span>
+                    <div>
+                      <p className="font-label text-xs tracking-wider uppercase text-foreground">{item.channel}</p>
+                      <p className="font-body text-sm text-muted-foreground">{item.result}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </RevealSection>
-          ))}
+            </div>
+          </RevealSection>
+
+          {/* With Fichua */}
+          <RevealSection delay={0.12}>
+            <div className="p-8 md:p-10 bg-earth-dark text-earth-light border border-gold/20 h-full">
+              <p className="font-label text-[10px] tracking-[0.3em] uppercase text-gold mb-4">With Fichua</p>
+              <div className="space-y-5">
+                {[
+                  { channel: "AI Search", result: "ChatGPT and Google recommend you — by name." },
+                  { channel: "Direct Booking", result: "Guests book you instantly. No middleman. No 20% cut." },
+                  { channel: "Your Guest, Your Data", result: "Every conversation, every booking, every relationship — yours." },
+                ].map((item) => (
+                  <div key={item.channel} className="flex items-start gap-3">
+                    <span className="text-gold font-display text-lg leading-none mt-0.5">✓</span>
+                    <div>
+                      <p className="font-label text-xs tracking-wider uppercase text-gold/80">{item.channel}</p>
+                      <p className="font-body text-sm text-earth-dark-foreground/70">{item.result}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </RevealSection>
         </div>
 
-        {/* What to expect */}
-        <RevealSection delay={0.3}>
+        {/* Value from Day 1 */}
+        <RevealSection delay={0.2}>
           <div className="bg-earth-dark text-earth-light p-8 md:p-12">
-            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">What You Should Expect</p>
-            <h3 className="font-display text-2xl md:text-3xl font-medium mb-6">
-              How Fichua impacts your business.
+            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Day 1 Impact</p>
+            <h3 className="font-display text-2xl md:text-3xl font-medium mb-8">
+              Value you can measure <em className="text-gold">immediately.</em>
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { title: "More direct bookings", text: "Guests find and book you without a middleman taking 20%." },
-                { title: "AI visibility from Day 1", text: "ChatGPT, Perplexity, and Google surface your lodge — not the chain hotel down the road." },
-                { title: "You own your guest", text: "Every booking, every conversation, every relationship stays yours." },
+                {
+                  title: "AI finds you",
+                  text: "Your lodge appears in ChatGPT, Perplexity, and Google — not the chain hotel down the road.",
+                },
+                {
+                  title: "Guests book direct",
+                  text: "No OTA commission. No middleman. You keep 92% of every booking.",
+                },
+                {
+                  title: "You own the relationship",
+                  text: "Guest data, repeat visits, referrals — all yours. Build a business, not a listing.",
+                },
               ].map((item) => (
                 <div key={item.title}>
                   <h4 className="font-display text-xl font-medium text-gold mb-2">{item.title}</h4>
