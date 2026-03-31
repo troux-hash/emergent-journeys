@@ -4,7 +4,6 @@ import { Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "Problem", href: "#problem" },
-  { label: "Why Now", href: "#why-now" },
   { label: "Solution", href: "#solution" },
 ];
 
