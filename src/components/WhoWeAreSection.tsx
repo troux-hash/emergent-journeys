@@ -37,7 +37,7 @@ const WhoWeAreSection = () => {
             Who We Are
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground leading-tight mb-4">
-            Born from Africa's most enduring tourism networks.{" "}
+            Rooted in Africa's real economy.{" "}
             <span className="text-primary">
               Powered by the world's most innovative university.
             </span>
