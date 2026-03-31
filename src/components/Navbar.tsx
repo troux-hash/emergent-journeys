@@ -40,13 +40,9 @@ const Navbar = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16">
-          <a href="#" className="font-display text-lg font-medium text-foreground tracking-wide">
-            Fichua
-          </a>
-
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-center h-16">
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -68,7 +64,7 @@ const Navbar = () => {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-foreground"
+            className="md:hidden p-2 text-foreground absolute right-6"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
