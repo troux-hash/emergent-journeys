@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const navItems = [
   { label: "The Problem", href: "#problem" },
@@ -56,6 +57,7 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
+            <LanguageSwitcher />
             <a
               href="#contact"
               className="font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-5 py-2 hover:opacity-90 transition-opacity"
@@ -100,13 +102,17 @@ const Navbar = () => {
                 </motion.a>
               ))}
             </nav>
+            <div className="mt-6 flex items-center gap-3">
+              <LanguageSwitcher />
+              <span className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground">Language</span>
+            </div>
             <motion.a
               href="#contact"
               onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.3 }}
-              className="mt-8 font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-6 py-4 text-center hover:opacity-90 transition-opacity"
+              className="mt-6 font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-6 py-4 text-center hover:opacity-90 transition-opacity"
             >
               For Operators
             </motion.a>
