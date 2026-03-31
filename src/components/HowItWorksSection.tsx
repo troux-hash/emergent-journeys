@@ -127,7 +127,7 @@ const HowItWorksSection = () => {
                 Five categories. Every field has a purpose.
               </h3>
               <p className="font-body text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Every piece of information maps directly to a Schema.org JSON-LD output — the technical moat that makes your property discoverable by ChatGPT, Perplexity, and Google AI.
+                Every detail helps guests find you — across search engines, AI tools, and booking platforms.
               </p>
             </div>
 
