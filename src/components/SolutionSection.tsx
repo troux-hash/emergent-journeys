@@ -10,8 +10,8 @@ const SolutionSection = () => {
             Fichua vs. The Status Quo
           </p>
           <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-4">
-            You already have the guests.<br />
-            <em className="text-gold">You just keep losing them.</em>
+            The guests who do find operators<br />
+            <em className="text-gold">don't convert to bookings and revenue.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-lg mx-auto mb-12 leading-relaxed">
             They find you on TikTok. They DM you on Instagram. They chat on WhatsApp. Then they book a chain hotel on Booking.com — because you have no way to close.
