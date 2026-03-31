@@ -57,6 +57,7 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
+            <LanguageSwitcher />
             <a
               href="#contact"
               className="font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-5 py-2 hover:opacity-90 transition-opacity"
