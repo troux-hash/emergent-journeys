@@ -2,39 +2,8 @@ import RevealSection from "./RevealSection";
 
 const SolutionSection = () => {
   return (
-    <section id="solution" className="bg-parchment py-16 md:py-20 px-6 md:px-12 lg:px-20">
+    <section id="solution" className="bg-parchment py-12 md:py-16 px-6 md:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto text-center">
-        {/* Day 1 Impact — now comes first */}
-        <RevealSection>
-          <div className="bg-earth-dark text-earth-light p-8 md:p-12 mb-16">
-            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Day 1 Impact</p>
-            <h3 className="font-display text-2xl md:text-3xl font-medium mb-8">
-              Value you can measure <em className="text-gold">immediately.</em>
-            </h3>
-            <div className="grid md:grid-cols-3 gap-8 text-left">
-              {[
-                {
-                  title: "AI finds you",
-                  text: "Your lodge appears in ChatGPT, Perplexity, and Google — not the chain hotel down the road.",
-                },
-                {
-                  title: "Guests book direct",
-                  text: "No OTA commission. No middleman. You keep 92% of every booking.",
-                },
-                {
-                  title: "You own the relationship",
-                  text: "Guest data, repeat visits, referrals — all yours. Build a business, not a listing.",
-                },
-              ].map((item) => (
-                <div key={item.title}>
-                  <h4 className="font-display text-xl font-medium text-gold mb-2">{item.title}</h4>
-                  <p className="font-body text-sm text-earth-light/70 leading-relaxed">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </RevealSection>
-
         {/* Fichua vs the status quo */}
         <RevealSection>
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
@@ -49,7 +18,7 @@ const SolutionSection = () => {
           </p>
         </RevealSection>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
           {/* Without Fichua */}
           <RevealSection>
             <div className="p-8 md:p-10 bg-parchment-dark border border-border h-full text-left">
@@ -95,7 +64,38 @@ const SolutionSection = () => {
           </RevealSection>
         </div>
 
-        {/* CTA at the end */}
+        {/* Day 1 Impact */}
+        <RevealSection delay={0.1}>
+          <div className="bg-earth-dark text-earth-light p-8 md:p-12 mb-12">
+            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Day 1 Impact</p>
+            <h3 className="font-display text-2xl md:text-3xl font-medium mb-8">
+              Value you can measure <em className="text-gold">immediately.</em>
+            </h3>
+            <div className="grid md:grid-cols-3 gap-8 text-left">
+              {[
+                {
+                  title: "AI finds you",
+                  text: "Your lodge appears in ChatGPT, Perplexity, and Google — not the chain hotel down the road.",
+                },
+                {
+                  title: "Guests book direct",
+                  text: "No OTA commission. No middleman. You keep 92% of every booking.",
+                },
+                {
+                  title: "You own the relationship",
+                  text: "Guest data, repeat visits, referrals — all yours. Build a business, not a listing.",
+                },
+              ].map((item) => (
+                <div key={item.title}>
+                  <h4 className="font-display text-xl font-medium text-gold mb-2">{item.title}</h4>
+                  <p className="font-body text-sm text-earth-light/70 leading-relaxed">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </RevealSection>
+
+        {/* Single Get in Touch CTA */}
         <RevealSection delay={0.15}>
           <div className="text-center">
             <a
