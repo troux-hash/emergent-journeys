@@ -21,7 +21,7 @@ const problems = [
 
 const ProblemSection = () => {
   return (
-    <section id="problem" className="bg-earth-dark text-earth-light py-12 md:py-16 px-6 md:px-12 lg:px-20">
+    <section id="problem" className="bg-earth-dark text-earth-light py-8 md:py-12 px-6 md:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto text-center">
         <RevealSection>
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">The Problem</p>

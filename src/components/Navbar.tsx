@@ -3,8 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Problem", href: "#problem" },
-  { label: "Solution", href: "#solution" },
+  { label: "The Problem", href: "#problem" },
+  { label: "The Opportunity", href: "#opportunity" },
+  { label: "Fichua Impact from Day 1", href: "#solution" },
+  { label: "How it Works", href: "#how-it-works" },
+  { label: "Who We Are", href: "#who-we-are" },
 ];
 
 const Navbar = () => {
