@@ -102,13 +102,17 @@ const Navbar = () => {
                 </motion.a>
               ))}
             </nav>
+            <div className="mt-6 flex items-center gap-3">
+              <LanguageSwitcher />
+              <span className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground">Language</span>
+            </div>
             <motion.a
               href="#contact"
               onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.3 }}
-              className="mt-8 font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-6 py-4 text-center hover:opacity-90 transition-opacity"
+              className="mt-6 font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-6 py-4 text-center hover:opacity-90 transition-opacity"
             >
               For Operators
             </motion.a>
