@@ -1,0 +1,152 @@
+import { useState } from "react";
+import RevealSection from "./RevealSection";
+import { Send, CheckCircle } from "lucide-react";
+
+const OperatorSignupSection = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    property: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // For now, just show success state
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="contact" className="bg-earth-dark text-earth-light py-16 md:py-24 px-6 md:px-12 lg:px-20">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+          {/* Left: Copy */}
+          <RevealSection>
+            <div>
+              <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
+                For Operators
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl font-medium leading-tight text-earth-light mb-6">
+                Ready to be <em className="text-gold">found?</em>
+              </h2>
+              <p className="font-body text-sm md:text-base text-earth-dark-foreground/70 leading-relaxed mb-8">
+                Join Fichua and get your property in front of international travellers 
+                and AI search engines — in under 20 minutes. No contracts. No upfront fees. 
+                Just more bookings, more revenue, and a partner who shows up.
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  "AI-powered visibility on ChatGPT, Google & more",
+                  "Direct bookings — no 20% OTA commissions",
+                  "Dedicated Fichua Buddy on WhatsApp",
+                  "Secure payments via Visa",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                    <p className="font-body text-sm text-earth-dark-foreground/60">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </RevealSection>
+
+          {/* Right: Form */}
+          <RevealSection delay={0.1}>
+            {submitted ? (
+              <div className="bg-earth-dark-foreground/5 border border-earth-dark-foreground/10 p-8 md:p-10 text-center">
+                <CheckCircle className="w-10 h-10 text-gold mx-auto mb-4" strokeWidth={1.5} />
+                <h3 className="font-display text-xl font-medium text-earth-light mb-2">
+                  We'll be in touch!
+                </h3>
+                <p className="font-body text-sm text-earth-dark-foreground/60">
+                  A member of the Fichua team will reach out within 24 hours to schedule your onboarding call.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="bg-earth-dark-foreground/5 border border-earth-dark-foreground/10 p-8 md:p-10 space-y-5">
+                <h3 className="font-display text-lg font-medium text-earth-light mb-2">
+                  Get started — it takes 2 minutes
+                </h3>
+
+                <div>
+                  <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    maxLength={100}
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                    placeholder="e.g. Sarah Njeri"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                    Property Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    maxLength={150}
+                    value={formData.property}
+                    onChange={(e) => setFormData({ ...formData, property: e.target.value })}
+                    className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                    placeholder="e.g. Kilima Lodge"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    maxLength={255}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                    placeholder="sarah@kilimalodge.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                    WhatsApp / Phone
+                  </label>
+                  <input
+                    type="tel"
+                    maxLength={20}
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                    placeholder="+254 700 000 000"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2 font-label text-xs tracking-[0.2em] uppercase bg-gold text-earth-dark px-6 py-4 hover:opacity-90 transition-opacity mt-2"
+                >
+                  <Send className="w-4 h-4" strokeWidth={1.5} />
+                  Request Onboarding Call
+                </button>
+
+                <p className="font-body text-[11px] text-earth-dark-foreground/40 text-center">
+                  No contracts. No upfront fees. Cancel anytime.
+                </p>
+              </form>
+            )}
+          </RevealSection>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default OperatorSignupSection;
