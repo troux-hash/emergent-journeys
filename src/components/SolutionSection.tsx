@@ -86,7 +86,7 @@ const SolutionSection = () => {
         {/* Day 1 Impact */}
         <RevealSection delay={0.1}>
           <div className="bg-earth-dark text-earth-light p-8 md:p-12 mb-12">
-            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Day 1 Impact</p>
+            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Increase your Revenues</p>
             <h3 className="font-display text-2xl md:text-3xl font-medium mb-8">
               Value you can measure <em className="text-gold">immediately.</em>
             </h3>

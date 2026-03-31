@@ -8,30 +8,35 @@ const steps = [
     icon: Users,
     body: "A 20-minute call with someone from Fichua — no pressure, no jargon. We set up your profile together, answer every question, and make sure you're comfortable before anything goes live.",
     note: "Your Fichua Buddy is assigned here — available on WhatsApp anytime, not just today.",
+    impact: "You're never alone — support starts before you even go live.",
   },
   {
     num: 2,
     label: "Your hotel goes live",
     icon: Globe,
     body: "Your profile is published and visible to international travel agencies and travelers actively searching for authentic African stays. AI search engines like ChatGPT and Google can now recommend you by name.",
+    impact: "Instant global visibility — guests can find and book you from anywhere.",
   },
   {
     num: 3,
     label: "Bookings start arriving",
     icon: CalendarCheck,
     body: "Booking requests come to you in one clear place — no scattered WhatsApp threads, no missed emails. You review, accept, and manage everything simply.",
+    impact: "No more missed bookings — every request is captured and organized.",
   },
   {
     num: 4,
     label: "You get paid directly",
     icon: CreditCard,
     body: "Payments go straight to you via Visa — securely and reliably. Your financial data is protected to the highest standards. No middleman holding your money.",
+    impact: "Your money hits your account — no commissions, no delays.",
   },
   {
     num: 5,
     label: "You grow, your way",
     icon: TrendingUp,
     body: "More visibility. More bookings. More revenue. You own the guest relationship, the data, and the business you're building — on your terms.",
+    impact: "Sustainable growth you control — more revenue, more independence.",
   },
 ];
 
