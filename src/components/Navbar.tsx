@@ -82,7 +82,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-parchment/98 backdrop-blur-sm pt-20 px-6 flex flex-col"
+            className="fixed inset-0 z-40 bg-parchment pt-20 px-6 flex flex-col"
           >
             <nav className="flex flex-col gap-1 mt-4">
               {navItems.map((item, i) => (
