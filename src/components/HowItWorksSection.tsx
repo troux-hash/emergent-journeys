@@ -89,6 +89,11 @@ const HowItWorksSection = () => {
                         </p>
                       </div>
                     )}
+                    {step.impact && (
+                      <p className="mt-3 font-label text-xs tracking-[0.1em] uppercase text-gold">
+                        ⚡ {step.impact}
+                      </p>
+                    )}
                   </div>
                 </div>
               </RevealSection>
