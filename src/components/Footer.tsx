@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import RevealSection from "./RevealSection";
 import { Mail, Instagram, Linkedin } from "lucide-react";
 
