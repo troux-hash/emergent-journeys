@@ -6,7 +6,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 const navItems = [
   { label: "The Problem", href: "#problem" },
   { label: "The Opportunity", href: "#opportunity" },
-  { label: "Day 1 Impact", href: "#solution" },
+  { label: "Increase your Revenues", href: "#solution" },
   { label: "How it Works", href: "#how-it-works" },
   { label: "Who We Are", href: "#who-we-are" },
 ];
@@ -40,7 +40,7 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16">
-          <a href="#" className="flex items-center">
+          <a href="#" className="flex items-center mr-4">
             <div className="w-28 h-8 bg-muted/50 border border-border rounded flex items-center justify-center">
               <span className="font-label text-[10px] tracking-[0.15em] uppercase text-muted-foreground">Logo</span>
             </div>
