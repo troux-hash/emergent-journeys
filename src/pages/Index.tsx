@@ -11,7 +11,7 @@ const Index = () => {
       <HeroSection />
       <ProblemSection />
       <SolutionSection />
-      <FooterCTA />
+      
     </div>
   );
 };
