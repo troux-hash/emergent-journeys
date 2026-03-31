@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-lodge.jpg";
+import safariLodge from "@/assets/safari-lodge.jpg";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex">
       {/* Left: Content */}
-      <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-20 py-32 z-10">
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-20 py-24 z-10">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -41,7 +42,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.6 }}
-          className="flex flex-wrap gap-12 mb-12"
+          className="flex flex-wrap gap-12"
         >
           {[
             { value: "$170B", label: "Africa tourism market" },
@@ -54,27 +55,17 @@ const HeroSection = () => {
             </div>
           ))}
         </motion.div>
-
-        <motion.a
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          href="mailto:teddy225@mit.edu"
-          className="inline-block font-label text-xs tracking-[0.2em] uppercase bg-primary text-primary-foreground px-8 py-4 hover:opacity-90 transition-opacity w-fit"
-        >
-          Get in Touch
-        </motion.a>
       </div>
 
-      {/* Right: Dark panel with image */}
+      {/* Right: Image panel with safari lodge */}
       <div className="hidden lg:block w-[40%] relative overflow-hidden">
         <div className="absolute inset-0 bg-earth-dark z-10 mix-blend-multiply opacity-40" />
         <img
-          src={heroImage}
-          alt="African boutique lodge at sunset"
+          src={safariLodge}
+          alt="Luxury safari lodge in the African savanna"
           className="absolute inset-0 w-full h-full object-cover"
           width={1280}
-          height={1920}
+          height={720}
         />
         <motion.span
           initial={{ opacity: 0 }}

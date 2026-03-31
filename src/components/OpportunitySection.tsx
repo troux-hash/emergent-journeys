@@ -1,4 +1,5 @@
 import RevealSection from "./RevealSection";
+// Reduced vertical padding to tighten section spacing
 
 const trends = [
   {
