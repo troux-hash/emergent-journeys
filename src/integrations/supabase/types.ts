@@ -21,6 +21,8 @@ export type Database = {
           is_read: boolean
           language: string
           message: string
+          sender_type: string
+          session_id: string
           visitor_email: string | null
           visitor_name: string
         }
@@ -30,6 +32,8 @@ export type Database = {
           is_read?: boolean
           language?: string
           message: string
+          sender_type?: string
+          session_id?: string
           visitor_email?: string | null
           visitor_name?: string
         }
@@ -39,6 +43,8 @@ export type Database = {
           is_read?: boolean
           language?: string
           message?: string
+          sender_type?: string
+          session_id?: string
           visitor_email?: string | null
           visitor_name?: string
         }
