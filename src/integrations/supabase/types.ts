@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          language: string
+          message: string
+          visitor_email: string | null
+          visitor_name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          language?: string
+          message: string
+          visitor_email?: string | null
+          visitor_name?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          language?: string
+          message?: string
+          visitor_email?: string | null
+          visitor_name?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string

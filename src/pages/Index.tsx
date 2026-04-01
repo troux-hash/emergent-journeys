@@ -8,6 +8,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import TrustSection from "@/components/TrustSection";
 import OperatorSignupSection from "@/components/OperatorSignupSection";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
       <TrustSection />
       <OperatorSignupSection />
       <Footer />
+      <ChatWidget />
     </div>
   );
 };
