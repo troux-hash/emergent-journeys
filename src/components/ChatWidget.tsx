@@ -41,19 +41,36 @@ const ChatWidget = () => {
     if (!trimmed || !name.trim()) return;
 
     setSending(true);
+    const msgId = crypto.randomUUID();
     const { error } = await supabase.from("chat_messages").insert({
+      id: msgId,
       visitor_name: name.trim(),
       visitor_email: email.trim() || null,
       message: trimmed,
       language: langCode,
     });
 
-    setSending(false);
     if (error) {
+      setSending(false);
       toast.error("Failed to send message");
       return;
     }
 
+    // Send email notification (fire-and-forget, don't block UX)
+    supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "chat-notification",
+        idempotencyKey: `chat-notify-${msgId}`,
+        templateData: {
+          visitorName: name.trim(),
+          visitorEmail: email.trim() || undefined,
+          message: trimmed,
+          language: langCode,
+        },
+      },
+    }).catch(() => {}); // silently fail — message is already saved
+
+    setSending(false);
     setSent(true);
     setMessage("");
     toast.success(lang.successMsg);
