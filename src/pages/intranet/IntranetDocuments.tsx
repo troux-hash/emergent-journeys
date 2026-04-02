@@ -214,11 +214,11 @@ const IntranetDocuments = () => {
       )}
 
       <Dialog open={dialogOpen} onOpenChange={(open) => { if (!open) requestClose(); else setDialogOpen(true); }}>
-        <DialogContent className="top-4 max-h-[calc(100vh-2rem)] max-w-lg translate-y-0 grid-rows-[auto,minmax(0,1fr),auto] gap-0 overflow-hidden p-0">
-          <DialogHeader className="px-6 pb-0 pt-6">
+        <DialogContent className="top-4 h-[min(42rem,calc(100vh-2rem))] max-h-[calc(100vh-2rem)] max-w-lg translate-y-0 grid-rows-[auto,minmax(0,1fr),auto] gap-0 overflow-hidden p-0">
+          <DialogHeader className="shrink-0 px-6 pb-0 pt-6">
             <DialogTitle>{editing ? "Edit Document" : "New Document"}</DialogTitle>
           </DialogHeader>
-          <div className="space-y-3 overflow-y-auto px-6 py-4">
+          <div className="min-h-0 space-y-3 overflow-y-auto px-6 py-4">
             <Input
               placeholder="Title"
               value={form.title}
@@ -241,7 +241,7 @@ const IntranetDocuments = () => {
               rows={8}
             />
           </div>
-          <div className="border-t border-border bg-background px-6 py-4">
+          <div className="shrink-0 border-t border-border bg-background px-6 py-4">
             <div className="flex gap-2">
               <Button variant="outline" className="flex-1" onClick={requestClose}>Cancel</Button>
               <Button className="flex-1" onClick={handleSave}>{editing ? "Update" : "Create"}</Button>
