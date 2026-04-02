@@ -11,6 +11,11 @@ import Terms from "./pages/Terms.tsx";
 import Unsubscribe from "./pages/Unsubscribe.tsx";
 import AdminChat from "./pages/AdminChat.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
+import IntranetLayout from "./pages/IntranetLayout.tsx";
+import IntranetDashboard from "./pages/intranet/IntranetDashboard.tsx";
+import IntranetDocuments from "./pages/intranet/IntranetDocuments.tsx";
+import IntranetTasks from "./pages/intranet/IntranetTasks.tsx";
+import IntranetProjects from "./pages/intranet/IntranetProjects.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +35,12 @@ const App = () => (
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="/admin/chat" element={<AdminChat />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/intranet" element={<IntranetLayout />}>
+              <Route index element={<IntranetDashboard />} />
+              <Route path="documents" element={<IntranetDocuments />} />
+              <Route path="tasks" element={<IntranetTasks />} />
+              <Route path="projects" element={<IntranetProjects />} />
+            </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
