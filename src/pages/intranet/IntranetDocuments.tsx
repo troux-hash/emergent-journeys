@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
@@ -186,7 +186,7 @@ const IntranetDocuments = () => {
       )}
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{editing ? "Edit Document" : "New Document"}</DialogTitle>
           </DialogHeader>
@@ -210,7 +210,7 @@ const IntranetDocuments = () => {
               placeholder="Content (supports plain text / markdown)"
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
-              rows={12}
+              rows={8}
             />
             <Button className="w-full" onClick={handleSave}>{editing ? "Update" : "Create"}</Button>
           </div>
