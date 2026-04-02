@@ -57,7 +57,7 @@ const IntranetDocuments = () => {
     } else {
       const { error } = await supabase
         .from("intranet_documents")
-        .insert({ title: form.title, content: form.content, category: form.category, created_by: user!.id });
+        .insert({ title: form.title, content: form.content, category: form.category, created_by: currentUser.id });
       if (error) { toast.error(error.message); return; }
       toast.success("Document created");
     }
