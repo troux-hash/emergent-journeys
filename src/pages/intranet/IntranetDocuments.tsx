@@ -44,7 +44,9 @@ const IntranetDocuments = () => {
 
   const handleSave = async () => {
     if (!form.title.trim()) { toast.error("Title is required"); return; }
-    if (!user) { toast.error("You must be logged in"); return; }
+    const { data: { session } } = await supabase.auth.getSession();
+    const currentUser = session?.user;
+    if (!currentUser) { toast.error("You must be logged in"); return; }
     if (editing) {
       const { error } = await supabase
         .from("intranet_documents")
@@ -55,7 +57,7 @@ const IntranetDocuments = () => {
     } else {
       const { error } = await supabase
         .from("intranet_documents")
-        .insert({ title: form.title, content: form.content, category: form.category, created_by: user!.id });
+        .insert({ title: form.title, content: form.content, category: form.category, created_by: currentUser.id });
       if (error) { toast.error(error.message); return; }
       toast.success("Document created");
     }
