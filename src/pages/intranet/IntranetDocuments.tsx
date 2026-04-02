@@ -70,9 +70,16 @@ const IntranetDocuments = () => {
   const handleSave = async () => {
     const normalizedTitle = deriveDocumentTitle(form.title, form.content);
     if (!normalizedTitle) { toast.error("Add a title or some content"); return; }
-    const { data: { session } } = await supabase.auth.getSession();
-    const currentUser = session?.user;
-    if (!currentUser) { toast.error("You must be logged in"); return; }
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    if (sessionError) { console.error("Session error:", sessionError); }
+    let currentUser = session?.user ?? null;
+    if (!currentUser) {
+      // Try refreshing the session if it expired
+      const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
+      if (refreshError) { console.error("Refresh error:", refreshError); }
+      currentUser = refreshData?.user ?? null;
+    }
+    if (!currentUser) { toast.error("You must be logged in. Please refresh the page and sign in again."); return; }
     if (editing) {
       const { error } = await supabase
         .from("intranet_documents")
