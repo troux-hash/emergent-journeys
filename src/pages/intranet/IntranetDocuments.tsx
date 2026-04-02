@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { deriveDocumentTitle } from "./document-utils";
 
 interface Doc {
   id: string;
@@ -67,21 +68,22 @@ const IntranetDocuments = () => {
   useEffect(() => { fetchDocs(); }, []);
 
   const handleSave = async () => {
-    if (!form.title.trim()) { toast.error("Title is required"); return; }
+    const normalizedTitle = deriveDocumentTitle(form.title, form.content);
+    if (!normalizedTitle) { toast.error("Add a title or some content"); return; }
     const { data: { session } } = await supabase.auth.getSession();
     const currentUser = session?.user;
     if (!currentUser) { toast.error("You must be logged in"); return; }
     if (editing) {
       const { error } = await supabase
         .from("intranet_documents")
-        .update({ title: form.title, content: form.content, category: form.category })
+        .update({ title: normalizedTitle, content: form.content, category: form.category })
         .eq("id", editing.id);
       if (error) { toast.error(error.message); return; }
       toast.success("Document updated");
     } else {
       const { error } = await supabase
         .from("intranet_documents")
-        .insert({ title: form.title, content: form.content, category: form.category, created_by: currentUser.id });
+        .insert({ title: normalizedTitle, content: form.content, category: form.category, created_by: currentUser.id });
       if (error) { toast.error(error.message); return; }
       toast.success("Document created");
     }
