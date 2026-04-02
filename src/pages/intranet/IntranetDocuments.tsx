@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
@@ -31,6 +32,29 @@ const IntranetDocuments = () => {
   const [editing, setEditing] = useState<Doc | null>(null);
   const [form, setForm] = useState({ title: "", content: "", category: "general" });
   const [viewing, setViewing] = useState<Doc | null>(null);
+  const [confirmDiscardOpen, setConfirmDiscardOpen] = useState(false);
+  const initialFormRef = useRef({ title: "", content: "", category: "general" });
+
+  const isDirty = useCallback(() => {
+    const init = initialFormRef.current;
+    return form.title !== init.title || form.content !== init.content || form.category !== init.category;
+  }, [form]);
+
+  const requestClose = useCallback(() => {
+    if (isDirty()) {
+      setConfirmDiscardOpen(true);
+    } else {
+      setDialogOpen(false);
+      setEditing(null);
+    }
+  }, [isDirty]);
+
+  const confirmDiscard = () => {
+    setConfirmDiscardOpen(false);
+    setDialogOpen(false);
+    setEditing(null);
+    setForm({ title: "", content: "", category: "general" });
+  };
 
   const fetchDocs = async () => {
     const { data } = await supabase
@@ -77,13 +101,17 @@ const IntranetDocuments = () => {
 
   const openEdit = (doc: Doc) => {
     setEditing(doc);
-    setForm({ title: doc.title, content: doc.content, category: doc.category });
+    const initial = { title: doc.title, content: doc.content, category: doc.category };
+    setForm(initial);
+    initialFormRef.current = initial;
     setDialogOpen(true);
   };
 
   const openNew = () => {
     setEditing(null);
-    setForm({ title: "", content: "", category: "general" });
+    const initial = { title: "", content: "", category: "general" };
+    setForm(initial);
+    initialFormRef.current = initial;
     setDialogOpen(true);
   };
 
@@ -185,7 +213,7 @@ const IntranetDocuments = () => {
         </div>
       )}
 
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog open={dialogOpen} onOpenChange={(open) => { if (!open) requestClose(); else setDialogOpen(true); }}>
         <DialogContent className="top-4 max-h-[calc(100vh-2rem)] max-w-lg translate-y-0 grid-rows-[auto,minmax(0,1fr),auto] gap-0 overflow-hidden p-0">
           <DialogHeader className="px-6 pb-0 pt-6">
             <DialogTitle>{editing ? "Edit Document" : "New Document"}</DialogTitle>
@@ -214,10 +242,28 @@ const IntranetDocuments = () => {
             />
           </div>
           <div className="border-t border-border bg-background px-6 py-4">
-            <Button className="w-full" onClick={handleSave}>{editing ? "Update" : "Create"}</Button>
+            <div className="flex gap-2">
+              <Button variant="outline" className="flex-1" onClick={requestClose}>Cancel</Button>
+              <Button className="flex-1" onClick={handleSave}>{editing ? "Update" : "Create"}</Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={confirmDiscardOpen} onOpenChange={setConfirmDiscardOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Discard unsaved changes?</AlertDialogTitle>
+            <AlertDialogDescription>
+              You have unsaved changes that will be lost if you close this dialog.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Keep editing</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDiscard}>Discard</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
