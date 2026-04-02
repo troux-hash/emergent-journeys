@@ -84,6 +84,7 @@ const Footer = () => {
             <span>© {new Date().getFullYear()} Fichua</span>
             <Link to="/privacy" className="hover:text-gold transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-gold transition-colors">Terms</Link>
+            <Link to="/intranet" className="hover:text-gold transition-colors">Intranet</Link>
           </div>
         </div>
       </div>
