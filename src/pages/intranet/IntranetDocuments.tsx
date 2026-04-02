@@ -186,11 +186,11 @@ const IntranetDocuments = () => {
       )}
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
-          <DialogHeader>
+        <DialogContent className="top-4 max-h-[calc(100vh-2rem)] max-w-lg translate-y-0 grid-rows-[auto,minmax(0,1fr),auto] gap-0 overflow-hidden p-0">
+          <DialogHeader className="px-6 pb-0 pt-6">
             <DialogTitle>{editing ? "Edit Document" : "New Document"}</DialogTitle>
           </DialogHeader>
-          <div className="space-y-3">
+          <div className="space-y-3 overflow-y-auto px-6 py-4">
             <Input
               placeholder="Title"
               value={form.title}
@@ -212,6 +212,8 @@ const IntranetDocuments = () => {
               onChange={(e) => setForm({ ...form, content: e.target.value })}
               rows={8}
             />
+          </div>
+          <div className="border-t border-border bg-background px-6 py-4">
             <Button className="w-full" onClick={handleSave}>{editing ? "Update" : "Create"}</Button>
           </div>
         </DialogContent>
