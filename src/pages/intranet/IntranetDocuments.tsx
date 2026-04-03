@@ -34,6 +34,7 @@ const IntranetDocuments = () => {
   const [form, setForm] = useState({ title: "", content: "", category: "general" });
   const [viewing, setViewing] = useState<Doc | null>(null);
   const [confirmDiscardOpen, setConfirmDiscardOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const initialFormRef = useRef({ title: "", content: "", category: "general" });
 
   const isDirty = useCallback(() => {
@@ -54,7 +55,9 @@ const IntranetDocuments = () => {
     setConfirmDiscardOpen(false);
     setDialogOpen(false);
     setEditing(null);
-    setForm({ title: "", content: "", category: "general" });
+    const initial = { title: "", content: "", category: "general" };
+    initialFormRef.current = initial;
+    setForm(initial);
   };
 
   const fetchDocs = async () => {
@@ -68,36 +71,58 @@ const IntranetDocuments = () => {
   useEffect(() => { fetchDocs(); }, []);
 
   const handleSave = async () => {
+    if (isSaving) return;
+
     const normalizedTitle = deriveDocumentTitle(form.title, form.content);
     if (!normalizedTitle) { toast.error("Add a title or some content"); return; }
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-    if (sessionError) { console.error("Session error:", sessionError); }
-    let currentUser = session?.user ?? null;
-    if (!currentUser) {
-      // Try refreshing the session if it expired
-      const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
-      if (refreshError) { console.error("Refresh error:", refreshError); }
-      currentUser = refreshData?.user ?? null;
+
+    setIsSaving(true);
+
+    try {
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) { console.error("Session error:", sessionError); }
+
+      let currentUser = session?.user ?? null;
+      if (!currentUser) {
+        const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
+        if (refreshError) { console.error("Refresh error:", refreshError); }
+        currentUser = refreshData?.user ?? null;
+      }
+
+      if (!currentUser) {
+        toast.error("You must be logged in. Please refresh the page and sign in again.");
+        return;
+      }
+
+      if (editing) {
+        const { error } = await supabase
+          .from("intranet_documents")
+          .update({ title: normalizedTitle, content: form.content, category: form.category })
+          .eq("id", editing.id);
+
+        if (error) { toast.error(error.message); return; }
+        toast.success("Document updated");
+      } else {
+        const { error } = await supabase
+          .from("intranet_documents")
+          .insert({ title: normalizedTitle, content: form.content, category: form.category, created_by: currentUser.id });
+
+        if (error) { toast.error(error.message); return; }
+        toast.success("Document created");
+      }
+
+      const initial = { title: "", content: "", category: "general" };
+      initialFormRef.current = initial;
+      setDialogOpen(false);
+      setEditing(null);
+      setForm(initial);
+      fetchDocs();
+    } catch (error) {
+      console.error("Document save failed:", error);
+      toast.error("Document save failed. Please try again.");
+    } finally {
+      setIsSaving(false);
     }
-    if (!currentUser) { toast.error("You must be logged in. Please refresh the page and sign in again."); return; }
-    if (editing) {
-      const { error } = await supabase
-        .from("intranet_documents")
-        .update({ title: normalizedTitle, content: form.content, category: form.category })
-        .eq("id", editing.id);
-      if (error) { toast.error(error.message); return; }
-      toast.success("Document updated");
-    } else {
-      const { error } = await supabase
-        .from("intranet_documents")
-        .insert({ title: normalizedTitle, content: form.content, category: form.category, created_by: currentUser.id });
-      if (error) { toast.error(error.message); return; }
-      toast.success("Document created");
-    }
-    setDialogOpen(false);
-    setEditing(null);
-    setForm({ title: "", content: "", category: "general" });
-    fetchDocs();
   };
 
   const handleDelete = async (id: string) => {
@@ -223,7 +248,7 @@ const IntranetDocuments = () => {
       )}
 
       <Dialog open={dialogOpen} onOpenChange={(open) => { if (!open) requestClose(); else setDialogOpen(true); }}>
-        <DialogContent className="top-4 h-[min(42rem,calc(100vh-2rem))] max-h-[calc(100vh-2rem)] max-w-lg translate-y-0 grid-rows-[auto,minmax(0,1fr),auto] gap-0 overflow-hidden p-0">
+        <DialogContent className="flex max-h-[calc(100vh-2rem)] max-w-lg flex-col gap-0 overflow-hidden p-0">
           <DialogHeader className="shrink-0 px-6 pb-0 pt-6">
             <DialogTitle>{editing ? "Edit Document" : "New Document"}</DialogTitle>
           </DialogHeader>
@@ -253,7 +278,9 @@ const IntranetDocuments = () => {
           <div className="shrink-0 border-t border-border bg-background px-6 py-4">
             <div className="flex gap-2">
               <Button variant="outline" className="flex-1" onClick={requestClose}>Cancel</Button>
-              <Button className="flex-1" onClick={handleSave}>{editing ? "Update" : "Create"}</Button>
+              <Button className="flex-1" onClick={handleSave} disabled={isSaving}>
+                {isSaving ? (editing ? "Updating..." : "Creating...") : (editing ? "Update" : "Create")}
+              </Button>
             </div>
           </div>
         </DialogContent>
