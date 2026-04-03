@@ -143,6 +143,7 @@ const IntranetDocuments = () => {
     const initial = { title: doc.title, content: doc.content, category: doc.category };
     setForm(initial);
     initialFormRef.current = initial;
+    setViewing(null);
     setDialogOpen(true);
   };
 
