@@ -38,23 +38,6 @@ const HeroSection = () => {
           Fichua makes them findable, bookable, and profitable.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.6 }}
-          className="flex flex-wrap gap-12"
-        >
-          {[
-            { value: "$170B", label: "Africa tourism market" },
-            { value: "82%", label: "Travellers decide via AI" },
-            { value: "<5%", label: "Operators AI-visible" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="font-display text-2xl md:text-3xl font-semibold text-foreground">{stat.value}</p>
-              <p className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-1">{stat.label}</p>
-            </div>
-          ))}
-        </motion.div>
       </div>
 
       {/* Right: Image panel with safari lodge */}
