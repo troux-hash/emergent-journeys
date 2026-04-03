@@ -14,8 +14,8 @@ const Index = () => {
   return (
     <div className="grain-overlay">
       <Navbar />
-      <OpportunitySection />
       <HeroSection />
+      <OpportunitySection />
       <ProblemSection />
       <SolutionSection />
       <HowItWorksSection />
