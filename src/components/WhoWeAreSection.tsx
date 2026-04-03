@@ -21,6 +21,12 @@ const pillars = [
       "We are not building for Africa from the outside. Our team is present across the continent — operators know us, trust us, and helped shape what we built.",
   },
   {
+    icon: BrainCircuit,
+    title: "AI at the core",
+    description:
+      "We use artificial intelligence to help operators price smarter, reach the right travellers, and turn their story into visibility — without needing to become tech experts.",
+  },
+  {
     icon: Shield,
     title: "Secure by design",
     description:
