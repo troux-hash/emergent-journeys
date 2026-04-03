@@ -36,6 +36,7 @@ const IntranetDocuments = () => {
   const [viewing, setViewing] = useState<Doc | null>(null);
   const [confirmDiscardOpen, setConfirmDiscardOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const initialFormRef = useRef({ title: "", content: "", category: "general" });
 
   const isDirty = useCallback(() => {
