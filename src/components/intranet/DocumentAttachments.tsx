@@ -188,11 +188,11 @@ const DocumentAttachments = ({ documentId, userId, readOnly, onPendingFiles }: P
               </>
             ) : (
               <>
-                <Button variant="ghost" size="sm" className="h-5 w-5 p-0" onClick={() => handleDownload(item.attachment)}>
+                <Button variant="ghost" size="sm" className="h-5 w-5 p-0" onClick={() => handleDownload((item as any).attachment)}>
                   <Download className="h-3 w-3" />
                 </Button>
                 {!readOnly && (
-                  <Button variant="ghost" size="sm" className="h-5 w-5 p-0" onClick={() => handleDelete(item.attachment)}>
+                  <Button variant="ghost" size="sm" className="h-5 w-5 p-0" onClick={() => handleDelete((item as any).attachment)}>
                     <Trash2 className="h-3 w-3" />
                   </Button>
                 )}
