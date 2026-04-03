@@ -100,11 +100,19 @@ const IntranetDocuments = () => {
         if (error) { toast.error(error.message); return; }
         toast.success("Document updated");
       } else {
-        const { error } = await supabase
+        const { data: newDoc, error } = await supabase
           .from("intranet_documents")
-          .insert({ ...payload, created_by: user.id });
+          .insert({ ...payload, created_by: user.id })
+          .select("id")
+          .single();
 
         if (error) { toast.error(error.message); return; }
+
+        // Upload any pending files
+        if (newDoc && pendingFiles.length > 0) {
+          await uploadPendingFiles(newDoc.id, user.id, pendingFiles);
+          setPendingFiles([]);
+        }
         toast.success("Document created");
       }
 
