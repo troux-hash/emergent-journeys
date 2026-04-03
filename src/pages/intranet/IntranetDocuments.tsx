@@ -151,6 +151,7 @@ const IntranetDocuments = () => {
     const initial = { title: "", content: "", category: "general" };
     setForm(initial);
     initialFormRef.current = initial;
+    setPendingFiles([]);
     setDialogOpen(true);
   };
 
