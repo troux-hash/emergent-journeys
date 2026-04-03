@@ -178,6 +178,9 @@ const IntranetDocuments = () => {
         <div className="prose prose-sm max-w-none whitespace-pre-wrap text-foreground font-body">
           {viewing.content || "No content yet."}
         </div>
+        {user?.id && (
+          <DocumentAttachments documentId={viewing.id} userId={user.id} readOnly />
+        )}
         <div className="flex gap-2 pt-4">
           <Button variant="outline" size="sm" onClick={() => openEdit(viewing)}>
             <Pencil className="h-3 w-3 mr-1" /> Edit
