@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const navItems = [
-  { label: "The Opportunity", href: "#opportunity" },
+  { label: "Africa Time", href: "#opportunity" },
   { label: "The Problem", href: "#problem" },
   { label: "Increase Your Revenues", href: "#solution" },
   { label: "How It Works", href: "#how-it-works" },
