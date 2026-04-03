@@ -1,12 +1,12 @@
 import RevealSection from "./RevealSection";
-import { Shield, MapPin, GraduationCap, Briefcase } from "lucide-react";
+import { Shield, MapPin, GraduationCap, Briefcase, BrainCircuit } from "lucide-react";
 
 const pillars = [
   {
     icon: GraduationCap,
     title: "Rooted at MIT — the #1 university in the world",
     description:
-      "Our founder is an MIT Sloan Fellow MBA (Class of 2026), embedded in one of the most vibrant entrepreneurial ecosystems on the planet — including the Martin Trust Center for Entrepreneurship and the Kuo Center. The thinking, the network, and the rigour inform everything we build.",
+      "Our founder is an MIT Sloan Fellow MBA (Class of 2026), embedded in one of the most vibrant entrepreneurial ecosystems on the planet. The thinking, the network, and the rigour inform everything we build.",
   },
   {
     icon: Briefcase,
@@ -19,6 +19,12 @@ const pillars = [
     title: "Boots on the ground",
     description:
       "We are not building for Africa from the outside. Our team is present across the continent — operators know us, trust us, and helped shape what we built.",
+  },
+  {
+    icon: BrainCircuit,
+    title: "AI at the core",
+    description:
+      "We use artificial intelligence to help operators price smarter, reach the right travellers, and turn their story into visibility — without needing to become tech experts.",
   },
   {
     icon: Shield,
