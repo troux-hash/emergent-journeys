@@ -6,7 +6,7 @@ const pillars = [
     icon: GraduationCap,
     title: "Rooted at MIT — the #1 university in the world",
     description:
-      "Our founder is an MIT Sloan Fellow MBA (Class of 2026), embedded in one of the most vibrant entrepreneurial ecosystems on the planet — including the Martin Trust Center for Entrepreneurship and the Kuo Center. The thinking, the network, and the rigour inform everything we build.",
+      "Our founder is an MIT Sloan Fellow MBA (Class of 2026), embedded in one of the most vibrant entrepreneurial ecosystems on the planet. The thinking, the network, and the rigour inform everything we build.",
   },
   {
     icon: Briefcase,
