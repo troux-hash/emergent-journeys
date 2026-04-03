@@ -25,7 +25,7 @@ interface Doc {
 const categories = ["general", "sop", "guide", "policy", "template"];
 
 const IntranetDocuments = () => {
-  const { user } = useAdminAuth();
+  const { user, loading: authLoading } = useAdminAuth();
   const [docs, setDocs] = useState<Doc[]>([]);
   const [search, setSearch] = useState("");
   const [filterCat, setFilterCat] = useState("all");
@@ -71,33 +71,28 @@ const IntranetDocuments = () => {
   useEffect(() => { fetchDocs(); }, []);
 
   const handleSave = async () => {
-    if (isSaving) return;
+    if (isSaving || authLoading) return;
 
     const normalizedTitle = deriveDocumentTitle(form.title, form.content);
     if (!normalizedTitle) { toast.error("Add a title or some content"); return; }
+    if (!user?.id) {
+      toast.error("You must be logged in. Please refresh the page and sign in again.");
+      return;
+    }
 
     setIsSaving(true);
 
     try {
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-      if (sessionError) { console.error("Session error:", sessionError); }
-
-      let currentUser = session?.user ?? null;
-      if (!currentUser) {
-        const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
-        if (refreshError) { console.error("Refresh error:", refreshError); }
-        currentUser = refreshData?.user ?? null;
-      }
-
-      if (!currentUser) {
-        toast.error("You must be logged in. Please refresh the page and sign in again.");
-        return;
-      }
+      const payload = {
+        title: normalizedTitle,
+        content: form.content,
+        category: form.category,
+      };
 
       if (editing) {
         const { error } = await supabase
           .from("intranet_documents")
-          .update({ title: normalizedTitle, content: form.content, category: form.category })
+          .update(payload)
           .eq("id", editing.id);
 
         if (error) { toast.error(error.message); return; }
@@ -105,7 +100,7 @@ const IntranetDocuments = () => {
       } else {
         const { error } = await supabase
           .from("intranet_documents")
-          .insert({ title: normalizedTitle, content: form.content, category: form.category, created_by: currentUser.id });
+          .insert({ ...payload, created_by: user.id });
 
         if (error) { toast.error(error.message); return; }
         toast.success("Document created");
@@ -116,7 +111,7 @@ const IntranetDocuments = () => {
       setDialogOpen(false);
       setEditing(null);
       setForm(initial);
-      fetchDocs();
+      await fetchDocs();
     } catch (error) {
       console.error("Document save failed:", error);
       toast.error("Document save failed. Please try again.");
@@ -278,8 +273,8 @@ const IntranetDocuments = () => {
           <div className="shrink-0 border-t border-border bg-background px-6 py-4">
             <div className="flex gap-2">
               <Button variant="outline" className="flex-1" onClick={requestClose}>Cancel</Button>
-              <Button className="flex-1" onClick={handleSave} disabled={isSaving}>
-                {isSaving ? (editing ? "Updating..." : "Creating...") : (editing ? "Update" : "Create")}
+              <Button className="flex-1" onClick={handleSave} disabled={isSaving || authLoading}>
+                {authLoading ? "Checking access..." : isSaving ? (editing ? "Updating..." : "Creating...") : (editing ? "Update" : "Create")}
               </Button>
             </div>
           </div>
