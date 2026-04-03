@@ -59,11 +59,11 @@ const HeroSection = () => {
 
       {/* Right: Image panel with safari lodge */}
       <div className="hidden lg:block w-[40%] relative overflow-hidden">
-        <div className="absolute inset-0 bg-earth-dark z-10 mix-blend-multiply opacity-40" />
+        <div className="absolute inset-0 bg-earth-dark/20 z-10" />
         <img
           src={safariLodge}
-          alt="Luxury safari lodge in the African savanna"
-          className="absolute inset-0 w-full h-full object-cover"
+          alt="Cheetah hidden in golden savanna grass"
+          className="absolute inset-0 w-full h-full object-cover object-[30%_center]"
           width={1280}
           height={720}
         />
