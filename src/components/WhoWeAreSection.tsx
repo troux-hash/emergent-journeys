@@ -1,5 +1,5 @@
 import RevealSection from "./RevealSection";
-import { Shield, MapPin, GraduationCap, Briefcase } from "lucide-react";
+import { Shield, MapPin, GraduationCap, Briefcase, BrainCircuit } from "lucide-react";
 
 const pillars = [
   {
