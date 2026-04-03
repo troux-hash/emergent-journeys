@@ -283,6 +283,13 @@ const IntranetDocuments = () => {
               onChange={(e) => setForm({ ...form, content: e.target.value })}
               rows={8}
             />
+            {user?.id && (
+              <DocumentAttachments
+                documentId={editing?.id ?? null}
+                userId={user.id}
+                onPendingFiles={setPendingFiles}
+              />
+            )}
           </div>
           <div className="shrink-0 border-t border-border bg-background px-6 py-4">
             <div className="flex gap-2">
