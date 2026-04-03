@@ -137,6 +137,47 @@ export type Database = {
         }
         Relationships: []
       }
+      intranet_attachments: {
+        Row: {
+          content_type: string
+          created_at: string
+          document_id: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id: string
+          uploaded_by: string
+        }
+        Insert: {
+          content_type?: string
+          created_at?: string
+          document_id: string
+          file_name: string
+          file_path: string
+          file_size?: number
+          id?: string
+          uploaded_by: string
+        }
+        Update: {
+          content_type?: string
+          created_at?: string
+          document_id?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intranet_attachments_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "intranet_documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       intranet_documents: {
         Row: {
           category: string
