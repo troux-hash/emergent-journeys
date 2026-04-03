@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { deriveDocumentTitle } from "./document-utils";
+import DocumentAttachments, { uploadPendingFiles } from "@/components/intranet/DocumentAttachments";
 
 interface Doc {
   id: string;
@@ -35,6 +36,7 @@ const IntranetDocuments = () => {
   const [viewing, setViewing] = useState<Doc | null>(null);
   const [confirmDiscardOpen, setConfirmDiscardOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const initialFormRef = useRef({ title: "", content: "", category: "general" });
 
   const isDirty = useCallback(() => {
@@ -98,11 +100,19 @@ const IntranetDocuments = () => {
         if (error) { toast.error(error.message); return; }
         toast.success("Document updated");
       } else {
-        const { error } = await supabase
+        const { data: newDoc, error } = await supabase
           .from("intranet_documents")
-          .insert({ ...payload, created_by: user.id });
+          .insert({ ...payload, created_by: user.id })
+          .select("id")
+          .single();
 
         if (error) { toast.error(error.message); return; }
+
+        // Upload any pending files
+        if (newDoc && pendingFiles.length > 0) {
+          await uploadPendingFiles(newDoc.id, user.id, pendingFiles);
+          setPendingFiles([]);
+        }
         toast.success("Document created");
       }
 
@@ -141,6 +151,7 @@ const IntranetDocuments = () => {
     const initial = { title: "", content: "", category: "general" };
     setForm(initial);
     initialFormRef.current = initial;
+    setPendingFiles([]);
     setDialogOpen(true);
   };
 
@@ -167,6 +178,9 @@ const IntranetDocuments = () => {
         <div className="prose prose-sm max-w-none whitespace-pre-wrap text-foreground font-body">
           {viewing.content || "No content yet."}
         </div>
+        {user?.id && (
+          <DocumentAttachments documentId={viewing.id} userId={user.id} readOnly />
+        )}
         <div className="flex gap-2 pt-4">
           <Button variant="outline" size="sm" onClick={() => openEdit(viewing)}>
             <Pencil className="h-3 w-3 mr-1" /> Edit
@@ -269,6 +283,13 @@ const IntranetDocuments = () => {
               onChange={(e) => setForm({ ...form, content: e.target.value })}
               rows={8}
             />
+            {user?.id && (
+              <DocumentAttachments
+                documentId={editing?.id ?? null}
+                userId={user.id}
+                onPendingFiles={setPendingFiles}
+              />
+            )}
           </div>
           <div className="shrink-0 border-t border-border bg-background px-6 py-4">
             <div className="flex gap-2">
