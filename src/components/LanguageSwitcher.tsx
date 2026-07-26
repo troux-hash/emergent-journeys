@@ -13,6 +13,7 @@ const languages = [
   { code: "fr", label: "Français" },
   { code: "zh-CN", label: "中文" },
   { code: "pt", label: "Português" },
+  { code: "rw", label: "Kinyarwanda" },
 ];
 
 const LanguageSwitcher = () => {
