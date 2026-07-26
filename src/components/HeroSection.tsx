@@ -12,7 +12,7 @@ const HeroSection = () => {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-8"
         >
-          For Independent African Lodges
+          For Independent Operators
         </motion.p>
 
         <motion.h1
@@ -21,9 +21,9 @@ const HeroSection = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="font-display text-4xl md:text-5xl lg:text-7xl font-medium leading-[1.1] text-foreground mb-6"
         >
-          Your lodge deserves<br />
+          You deserve<br />
           to be found.<br />
-          <em className="text-gold">We make sure it is.</em>
+          <em className="text-gold">We make sure you are.</em>
         </motion.h1>
 
         <motion.p
@@ -32,8 +32,7 @@ const HeroSection = () => {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="font-body text-base md:text-lg text-muted-foreground max-w-lg mb-10 leading-relaxed"
         >
-          You lose bookings every day — to chain hotels, to OTAs, to invisibility on AI search.
-          Fichua puts you back in front of travellers, and keeps 100% of your revenue in your pocket.
+          You run a great place. But guests can't find you. Fichua puts you in front of the right people and keeps every booking direct.
         </motion.p>
 
         <motion.div
