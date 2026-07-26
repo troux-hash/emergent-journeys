@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Plus, Trash2, ExternalLink } from "lucide-react";
+import { Plus, Trash2, ExternalLink, MapPin, Sparkles, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 
 interface Lead {
@@ -60,6 +60,23 @@ interface RoomType {
   max_guests: number;
 }
 
+interface PhotoAnalysisEntry {
+  index: number;
+  url: string;
+  category: string;
+  quality: "good" | "needs_work" | "poor" | string;
+  quality_note: string;
+  authenticity_flag: "none" | "possibly_edited" | string;
+}
+
+interface PhotoAnalysis {
+  photos: PhotoAnalysisEntry[];
+  missingCategories: string[];
+  recommendedCoverUrl: string | null;
+  failedToFetch?: number;
+  skipped?: number;
+}
+
 const CHECKLIST: { key: keyof Pick<Operator, "identity_verified" | "photo_gps_verified" | "whatsapp_verified" | "payout_verified">; label: string; help: string }[] = [
   { key: "identity_verified", label: "Identity & ownership", help: "National ID / business registration matches the sign-up name" },
   { key: "photo_gps_verified", label: "Property reality check", help: "3+ photos cross-checked against the GPS pin" },
@@ -82,6 +99,9 @@ const IntranetOperators = () => {
   const [editing, setEditing] = useState<Operator | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({ name: "", price_per_night: "", max_guests: "2" });
+  const [geocoding, setGeocoding] = useState(false);
+  const [analyzingPhotos, setAnalyzingPhotos] = useState(false);
+  const [photoAnalysis, setPhotoAnalysis] = useState<PhotoAnalysis | null>(null);
 
   const fetchAll = async () => {
     const [leadsRes, opsRes] = await Promise.all([
@@ -138,13 +158,61 @@ const IntranetOperators = () => {
     }
     toast.success("Draft listing created — fill in the rest before publishing");
     setEditing(data as Operator);
+    setPhotoAnalysis(null);
     setDialogOpen(true);
     fetchAll();
   };
 
   const openEdit = (op: Operator) => {
     setEditing({ ...op });
+    setPhotoAnalysis(null);
     setDialogOpen(true);
+  };
+
+  const handleSuggestGps = async () => {
+    if (!editing) return;
+    const query = [editing.address, editing.city, editing.country].filter(Boolean).join(", ");
+    if (!query) {
+      toast.error("Enter an address, city, or country first");
+      return;
+    }
+    setGeocoding(true);
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`
+      );
+      const results = await res.json();
+      if (!results || results.length === 0) {
+        toast.error("No match found — try a more specific address");
+        return;
+      }
+      setEditing({ ...editing, lat: Number(results[0].lat), lng: Number(results[0].lon) });
+      toast.success("Coordinates suggested — verify against a photo/satellite check before confirming the checklist item");
+    } catch {
+      toast.error("Lookup failed — check your connection and try again");
+    } finally {
+      setGeocoding(false);
+    }
+  };
+
+  const handleAnalyzePhotos = async () => {
+    if (!editing) return;
+    const images = [editing.hero_image, ...(editing.images || [])].filter(Boolean) as string[];
+    if (images.length === 0) {
+      toast.error("Add at least one photo URL first");
+      return;
+    }
+    setAnalyzingPhotos(true);
+    setPhotoAnalysis(null);
+    const { data, error } = await supabase.functions.invoke("analyze-operator-photos", {
+      body: { images },
+    });
+    setAnalyzingPhotos(false);
+    if (error || (data && (data as { error?: string }).error)) {
+      toast.error((data as { error?: string })?.error || error?.message || "Analysis failed");
+      return;
+    }
+    setPhotoAnalysis(data as PhotoAnalysis);
   };
 
   const handleSave = async () => {
@@ -313,6 +381,14 @@ const IntranetOperators = () => {
                   onChange={(e) => setEditing({ ...editing, lng: e.target.value ? Number(e.target.value) : null })}
                 />
               </div>
+              <Button type="button" variant="outline" size="sm" onClick={handleSuggestGps} disabled={geocoding}>
+                <MapPin className="h-3.5 w-3.5 mr-1" />
+                {geocoding ? "Looking up..." : "Suggest GPS from address"}
+              </Button>
+              <p className="text-xs text-muted-foreground -mt-2">
+                Auto-suggested from the address/city/country above — this speeds up entry but doesn't replace the
+                photo-vs-GPS verification check.
+              </p>
 
               <div className="grid grid-cols-3 gap-3">
                 <Input placeholder="Phone / WhatsApp" value={editing.phone || ""} onChange={(e) => setEditing({ ...editing, phone: e.target.value })} />
@@ -327,6 +403,63 @@ const IntranetOperators = () => {
                 value={(editing.images || []).join("\n")}
                 onChange={(e) => setEditing({ ...editing, images: e.target.value.split("\n").map((s) => s.trim()).filter(Boolean) })}
               />
+
+              <div className="space-y-2">
+                <Button type="button" variant="outline" size="sm" onClick={handleAnalyzePhotos} disabled={analyzingPhotos}>
+                  <Sparkles className="h-3.5 w-3.5 mr-1" />
+                  {analyzingPhotos ? "Analyzing..." : "Analyze Photos"}
+                </Button>
+                <p className="text-xs text-muted-foreground">
+                  Categorizes each photo, flags quality issues, suggests a cover image, and flags anything that looks
+                  deceptively edited. Read-only — never changes or generates images itself.
+                </p>
+
+                {photoAnalysis && (
+                  <div className="border border-border rounded p-3 space-y-3 mt-2">
+                    {photoAnalysis.missingCategories.length > 0 && (
+                      <p className="flex items-center gap-1.5 text-xs text-amber-700">
+                        <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+                        Missing: {photoAnalysis.missingCategories.join(", ")}
+                      </p>
+                    )}
+                    <div className="grid grid-cols-2 gap-2">
+                      {photoAnalysis.photos.map((ph) => (
+                        <div key={ph.index} className="flex gap-2 border border-border rounded p-2">
+                          <img src={ph.url} alt="" className="w-14 h-14 object-cover rounded shrink-0" />
+                          <div className="min-w-0 space-y-1">
+                            <div className="flex flex-wrap items-center gap-1">
+                              <Badge variant="outline" className="text-[10px]">{ph.category}</Badge>
+                              <Badge
+                                variant={ph.quality === "good" ? "default" : ph.quality === "poor" ? "destructive" : "outline"}
+                                className="text-[10px]"
+                              >
+                                {ph.quality}
+                              </Badge>
+                              {ph.url === photoAnalysis.recommendedCoverUrl && (
+                                <Badge className="text-[10px]">Suggested cover</Badge>
+                              )}
+                              {ph.authenticity_flag === "possibly_edited" && (
+                                <Badge variant="destructive" className="text-[10px]">Check authenticity</Badge>
+                              )}
+                            </div>
+                            <p className="text-xs text-muted-foreground truncate">{ph.quality_note}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {photoAnalysis.recommendedCoverUrl && photoAnalysis.recommendedCoverUrl !== editing.hero_image && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setEditing({ ...editing, hero_image: photoAnalysis.recommendedCoverUrl! })}
+                      >
+                        Use suggested cover
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
+
               <Textarea
                 placeholder="Amenities, one per line"
                 rows={3}
