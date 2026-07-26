@@ -32,6 +32,7 @@ export type Database = {
           room_type_id: string
           special_requests: string | null
           status: string
+          stay_range: unknown
           total_price: number
           updated_at: string
           utm_campaign: string | null
@@ -55,6 +56,7 @@ export type Database = {
           room_type_id: string
           special_requests?: string | null
           status?: string
+          stay_range?: unknown
           total_price: number
           updated_at?: string
           utm_campaign?: string | null
@@ -78,6 +80,7 @@ export type Database = {
           room_type_id?: string
           special_requests?: string | null
           status?: string
+          stay_range?: unknown
           total_price?: number
           updated_at?: string
           utm_campaign?: string | null
@@ -467,8 +470,8 @@ export type Database = {
           is_verified: boolean | null
           lat: number | null
           lead_id: string | null
-          local_hire_percent: number | null
           lng: number | null
+          local_hire_percent: number | null
           name: string
           payment_accepted: string[]
           payout_verified: boolean
@@ -507,8 +510,8 @@ export type Database = {
           is_verified?: boolean | null
           lat?: number | null
           lead_id?: string | null
-          local_hire_percent?: number | null
           lng?: number | null
+          local_hire_percent?: number | null
           name: string
           payment_accepted?: string[]
           payout_verified?: boolean
@@ -547,8 +550,8 @@ export type Database = {
           is_verified?: boolean | null
           lat?: number | null
           lead_id?: string | null
-          local_hire_percent?: number | null
           lng?: number | null
+          local_hire_percent?: number | null
           name?: string
           payment_accepted?: string[]
           payout_verified?: boolean
@@ -762,21 +765,12 @@ export type Database = {
     }
     Functions: {
       check_room_availability: {
-        Args: { p_check_in: string; p_check_out: string; p_room_type_id: string }
+        Args: {
+          p_check_in: string
+          p_check_out: string
+          p_room_type_id: string
+        }
         Returns: boolean
-      }
-      get_booking_for_review: {
-        Args: { p_booking_id: string; p_token: string }
-        Returns: {
-          already_reviewed: boolean
-          check_in: string
-          check_out: string
-          operator_name: string
-        }[]
-      }
-      submit_verified_review: {
-        Args: { p_booking_id: string; p_rating: number; p_review_text: string; p_token: string }
-        Returns: string
       }
       delete_email: {
         Args: { message_id: number; queue_name: string }
@@ -786,6 +780,15 @@ export type Database = {
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      get_booking_for_review: {
+        Args: { p_booking_id: string; p_token: string }
+        Returns: {
+          already_reviewed: boolean
+          check_in: string
+          check_out: string
+          operator_name: string
+        }[]
       }
       get_chat_session_messages: {
         Args: { p_session_id: string }
@@ -820,6 +823,15 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
+      }
+      submit_verified_review: {
+        Args: {
+          p_booking_id: string
+          p_rating: number
+          p_review_text: string
+          p_token: string
+        }
+        Returns: string
       }
     }
     Enums: {
