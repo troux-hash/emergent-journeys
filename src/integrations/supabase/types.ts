@@ -431,6 +431,16 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      get_chat_session_messages: {
+        Args: { p_session_id: string }
+        Returns: {
+          created_at: string
+          id: string
+          message: string
+          sender_type: string
+          visitor_name: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
