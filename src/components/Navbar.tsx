@@ -14,6 +14,11 @@ const rawNavItems = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const onHome = location.pathname === "/";
+  const navItems = rawNavItems.map((item) =>
+    item.href.startsWith("#") && !onHome ? { ...item, href: `/${item.href}` } : item
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
