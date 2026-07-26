@@ -1,9 +1,12 @@
 import { useState } from "react";
 import RevealSection from "./RevealSection";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const OperatorSignupSection = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     property: "",
@@ -11,9 +14,26 @@ const OperatorSignupSection = () => {
     phone: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, just show success state
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    const { error } = await supabase.from("operator_leads").insert({
+      name: formData.name.trim(),
+      property_name: formData.property.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim() || null,
+    });
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.error("Failed to submit operator lead:", error);
+      toast.error("Something went wrong sending that. Please try again, or reach us directly.");
+      return;
+    }
+
     setSubmitted(true);
   };
 
@@ -118,10 +138,15 @@ const OperatorSignupSection = () => {
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 font-label text-xs tracking-[0.2em] uppercase bg-gold text-earth-dark px-6 py-4 hover:opacity-90 transition-opacity mt-2"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 font-label text-xs tracking-[0.2em] uppercase bg-gold text-earth-dark px-6 py-4 hover:opacity-90 transition-opacity mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" strokeWidth={1.5} />
-                  Make me visible
+                  {isSubmitting ? (
+                    <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
+                  ) : (
+                    <Send className="w-4 h-4" strokeWidth={1.5} />
+                  )}
+                  {isSubmitting ? "Sending..." : "Make me visible"}
                 </button>
 
                 <p className="font-body text-[11px] text-earth-dark-foreground/40 text-center">
