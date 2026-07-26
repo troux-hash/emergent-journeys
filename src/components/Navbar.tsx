@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-const navItems = [
+const rawNavItems = [
   { label: "The Problem", href: "#problem" },
   { label: "The Solution", href: "#solution" },
   { label: "How It Works", href: "#how-it-works" },
