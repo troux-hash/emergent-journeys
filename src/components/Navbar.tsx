@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-const navItems = [
+const rawNavItems = [
   { label: "The Problem", href: "#problem" },
   { label: "The Solution", href: "#solution" },
   { label: "How It Works", href: "#how-it-works" },
@@ -13,6 +14,11 @@ const navItems = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const onHome = location.pathname === "/";
+  const navItems = rawNavItems.map((item) =>
+    item.href.startsWith("#") && !onHome ? { ...item, href: `/${item.href}` } : item
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -52,7 +58,7 @@ const Navbar = () => {
             ))}
             <LanguageSwitcher />
             <a
-              href="#contact"
+              href={onHome ? "#contact" : "/#contact"}
               className="font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-5 py-2 hover:opacity-90 transition-opacity"
             >
               Make me visible
@@ -100,7 +106,7 @@ const Navbar = () => {
               <span className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground">Language</span>
             </div>
             <motion.a
-              href="#contact"
+              href={onHome ? "#contact" : "/#contact"}
               onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
