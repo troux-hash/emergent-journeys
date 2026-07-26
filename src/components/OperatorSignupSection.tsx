@@ -25,7 +25,7 @@ const OperatorSignupSection = () => {
           <RevealSection>
             <div>
               <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
-                Get Listed
+                Make me visible
               </p>
               <h2 className="font-display text-2xl md:text-4xl font-medium leading-tight text-earth-light mb-6">
                 Ready? <em className="text-gold">It takes 2 minutes.</em>
@@ -54,7 +54,7 @@ const OperatorSignupSection = () => {
             ) : (
               <form onSubmit={handleSubmit} className="bg-earth-dark-foreground/5 border border-earth-dark-foreground/10 p-8 md:p-10 space-y-5">
                 <h3 className="font-display text-lg font-medium text-earth-light mb-2">
-                  Get started — it takes 2 minutes
+                  Make me visible — it takes 2 minutes
                 </h3>
 
                 <div>
@@ -121,7 +121,7 @@ const OperatorSignupSection = () => {
                   className="w-full flex items-center justify-center gap-2 font-label text-xs tracking-[0.2em] uppercase bg-gold text-earth-dark px-6 py-4 hover:opacity-90 transition-opacity mt-2"
                 >
                   <Send className="w-4 h-4" strokeWidth={1.5} />
-                  Get Listed
+                  Make me visible
                 </button>
 
                 <p className="font-body text-[11px] text-earth-dark-foreground/40 text-center">
