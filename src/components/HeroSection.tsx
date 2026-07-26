@@ -44,7 +44,7 @@ const HeroSection = () => {
             href="#contact"
             className="inline-block font-label text-xs tracking-[0.2em] uppercase bg-primary text-primary-foreground px-8 py-4 hover:opacity-90 transition-opacity"
           >
-            Make me visible — It takes 2 minutes
+            Make me visible
           </a>
         </motion.div>
       </div>

@@ -62,7 +62,7 @@ const OperatorSignupSection = () => {
                 Make me visible
               </p>
               <h2 className="font-display text-2xl md:text-4xl font-medium leading-tight text-earth-light mb-6">
-                Ready? <em className="text-gold">It takes 2 minutes.</em>
+                Ready? <em className="text-gold">Tell us about your place.</em>
               </h2>
               <p className="font-body text-sm md:text-base text-earth-dark-foreground/70 leading-relaxed mb-4">
                 Tell us about your place. We'll reach out on WhatsApp within 24 hours to set up your Fichua page.
@@ -88,7 +88,7 @@ const OperatorSignupSection = () => {
             ) : (
               <form onSubmit={handleSubmit} className="bg-earth-dark-foreground/5 border border-earth-dark-foreground/10 p-8 md:p-10 space-y-5">
                 <h3 className="font-display text-lg font-medium text-earth-light mb-2">
-                  Make me visible — it takes 2 minutes
+                  Make me visible
                 </h3>
 
                 <div>
