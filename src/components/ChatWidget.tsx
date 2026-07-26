@@ -35,7 +35,7 @@ interface ChatWidgetProps {
 
 const ChatWidget = ({ operatorId, operatorName }: ChatWidgetProps = {}) => {
   // A distinct session per property being discussed, so switching between
-  // lodge pages doesn't mix conversations together.
+  // operator pages doesn't mix conversations together.
   const sessionKey = operatorId ? `fichua_chat_session_${operatorId}` : "fichua_chat_session";
   const [open, setOpen] = useState(false);
   const [langCode, setLangCode] = useState("en");

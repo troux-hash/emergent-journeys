@@ -23,7 +23,7 @@ interface OperatorListItem {
 
 const AFRICA_CENTER: [number, number] = [1.5, 20];
 
-const BrowseLodges = () => {
+const Discover = () => {
   const [operators, setOperators] = useState<OperatorListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -45,22 +45,22 @@ const BrowseLodges = () => {
   return (
     <>
       <Helmet>
-        <title>Browse Lodges — Fichua</title>
-        <meta name="description" content="Explore independent, Fichua-verified lodges and stays you can book direct." />
+        <title>Discover — Fichua</title>
+        <meta name="description" content="Explore independent, Fichua-verified operators you can book direct." />
       </Helmet>
       <div className="grain-overlay bg-parchment min-h-screen">
         <Navbar />
         <div className="pt-24 pb-16 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
-          <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-3">Browse Lodges</p>
+          <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-3">Discover</p>
           <h1 className="font-display text-3xl md:text-5xl font-medium text-foreground mb-10">
-            Independent stays, verified by Fichua.
+            Verified operators, ready to book direct.
           </h1>
 
           {loading ? (
             <p className="font-body text-sm text-muted-foreground">Loading...</p>
           ) : operators.length === 0 ? (
             <p className="font-body text-sm text-muted-foreground">
-              No listings published yet — check back soon.
+              Nothing published yet — check back soon.
             </p>
           ) : (
             <>
@@ -79,7 +79,7 @@ const BrowseLodges = () => {
                           {[op.city, op.country].filter(Boolean).join(", ")}
                           <br />
                           <Link to={`/operators/${op.slug}`} className="text-gold underline">
-                            View listing
+                            View profile
                           </Link>
                         </Popup>
                       </Marker>
@@ -131,4 +131,4 @@ const BrowseLodges = () => {
   );
 };
 
-export default BrowseLodges;
+export default Discover;

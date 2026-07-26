@@ -10,7 +10,7 @@ const testimonials = [
   {
     quote: "Fichua changed everything for us. We went from invisible to fully booked in three months.",
     name: "Grace M.",
-    role: "Lodge Owner, Kenya",
+    role: "Owner, Kenya",
   },
   {
     quote: "For the first time, international guests find us directly — no middleman, no commission drain.",
@@ -20,7 +20,7 @@ const testimonials = [
   {
     quote: "The onboarding was effortless. My Fichua Buddy made sure I was never lost.",
     name: "Amara D.",
-    role: "Eco-Lodge, Tanzania",
+    role: "Independent Operator, Tanzania",
   },
 ];
 

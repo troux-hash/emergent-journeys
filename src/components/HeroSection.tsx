@@ -49,7 +49,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Right: Image panel with safari lodge */}
+      {/* Right: image panel */}
       <div className="hidden lg:block w-[40%] relative overflow-hidden">
         <div className="absolute inset-0 bg-earth-dark/20 z-10" />
         <img

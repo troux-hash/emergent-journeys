@@ -8,7 +8,7 @@ const rawNavItems = [
   { label: "The Problem", href: "#problem" },
   { label: "The Solution", href: "#solution" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Browse Lodges", href: "/lodges" },
+  { label: "Discover", href: "/discover" },
 ];
 
 const Navbar = () => {

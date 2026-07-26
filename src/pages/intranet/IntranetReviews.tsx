@@ -84,7 +84,7 @@ const IntranetReviews = () => {
         idempotencyKey: `review-request-${booking.id}`,
         templateData: {
           guestName: booking.guest_name,
-          operatorName: booking.operators?.name || "your lodge",
+          operatorName: booking.operators?.name || "the property",
           reviewUrl,
         },
       },

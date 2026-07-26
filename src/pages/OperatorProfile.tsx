@@ -130,7 +130,7 @@ const OperatorProfile = () => {
     return (
       <div className="min-h-screen bg-parchment flex items-center justify-center px-6">
         <div className="text-center">
-          <h1 className="font-display text-4xl text-foreground mb-4">Lodge not found</h1>
+          <h1 className="font-display text-4xl text-foreground mb-4">Page not found</h1>
           <p className="font-body text-muted-foreground mb-8">
             The operator you're looking for doesn't exist yet.
           </p>
@@ -527,7 +527,7 @@ const OperatorProfile = () => {
                     Stay at {operator.name}
                   </h2>
                   <p className="font-body text-muted-foreground">
-                    No middleman. No markup. Your booking goes straight to the lodge.
+                    No middleman markup — you're talking directly with the team. Your payment stays protected by Fichua until it's confirmed.
                   </p>
                 </div>
                 <BookDirectForm

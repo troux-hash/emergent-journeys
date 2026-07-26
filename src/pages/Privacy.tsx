@@ -28,7 +28,7 @@ const Privacy = () => {
           <div className="prose-fichua space-y-8 font-body text-sm text-muted-foreground leading-relaxed">
             <section>
               <h2 className="font-display text-lg font-medium text-foreground mb-3">1. Who we are</h2>
-              <p>Fichua ("we", "us", "our") is a platform that connects independent hotels, lodges, and camps in Africa with travelers and travel agencies worldwide. This policy explains how we handle your personal data.</p>
+              <p>Fichua ("we", "us", "our") is a platform that connects independent tourism operators with travelers and travel agencies worldwide. This policy explains how we handle your personal data.</p>
             </section>
 
             <section>

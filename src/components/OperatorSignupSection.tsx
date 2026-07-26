@@ -102,7 +102,7 @@ const OperatorSignupSection = () => {
                     value={formData.entityName}
                     onChange={handleChange("entityName")}
                     className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
-                    placeholder="e.g. Kilima Lodge"
+                    placeholder="e.g. Kilima Ridge"
                   />
                 </div>
 

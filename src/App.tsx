@@ -19,7 +19,7 @@ import IntranetProjects from "./pages/intranet/IntranetProjects.tsx";
 import IntranetOperators from "./pages/intranet/IntranetOperators.tsx";
 import IntranetReviews from "./pages/intranet/IntranetReviews.tsx";
 import LeaveReview from "./pages/LeaveReview.tsx";
-import BrowseLodges from "./pages/BrowseLodges.tsx";
+import Discover from "./pages/Discover.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -33,7 +33,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/lodges" element={<BrowseLodges />} />
+            <Route path="/discover" element={<Discover />} />
             <Route path="/operators/:slug" element={<OperatorProfile />} />
             <Route path="/review/:bookingId" element={<LeaveReview />} />
             <Route path="/privacy" element={<Privacy />} />
