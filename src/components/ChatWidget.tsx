@@ -8,6 +8,7 @@ const languages = [
   { code: "en", label: "English", placeholder: "Type your message...", namePlaceholder: "Your name", emailPlaceholder: "Your email (optional)", sendLabel: "Send", successMsg: "Message sent!", titleLabel: "Chat with us", waitingMsg: "We'll reply shortly..." },
   { code: "fr", label: "Français", placeholder: "Écrivez votre message...", namePlaceholder: "Votre nom", emailPlaceholder: "Votre email (optionnel)", sendLabel: "Envoyer", successMsg: "Message envoyé !", titleLabel: "Discutons", waitingMsg: "Nous répondrons bientôt..." },
   { code: "zh", label: "中文", placeholder: "输入您的消息...", namePlaceholder: "您的姓名", emailPlaceholder: "您的邮箱（可选）", sendLabel: "发送", successMsg: "消息已发送！", titleLabel: "在线咨询", waitingMsg: "我们会尽快回复..." },
+  { code: "rw", label: "Kinyarwanda", placeholder: "Andika ubutumwa bwawe...", namePlaceholder: "Izina ryawe", emailPlaceholder: "Imeli yawe (bidategetswe)", sendLabel: "Ohereza", successMsg: "Ubutumwa bwoherejwe!", titleLabel: "Ganira natwe", waitingMsg: "Tuzagusubiza vuba..." },
 ];
 
 interface ChatMessage {
