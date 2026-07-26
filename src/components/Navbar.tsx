@@ -54,7 +54,7 @@ const Navbar = () => {
               href="#contact"
               className="font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-5 py-2 hover:opacity-90 transition-opacity"
             >
-              Get Listed
+              Make me visible
             </a>
           </div>
 
@@ -106,7 +106,7 @@ const Navbar = () => {
               transition={{ delay: 0.4, duration: 0.3 }}
               className="mt-6 font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-6 py-4 text-center hover:opacity-90 transition-opacity"
             >
-              Get Listed
+              Make me visible
             </motion.a>
           </motion.div>
         )}
