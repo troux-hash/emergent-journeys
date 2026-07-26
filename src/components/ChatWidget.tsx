@@ -56,13 +56,13 @@ const ChatWidget = () => {
     }
   }, []);
 
-  // Load existing messages for session
+  // Load existing messages for session. Visitors don't have table-level
+  // SELECT access (that would leak every session's chat) — this RPC returns
+  // only rows matching this exact (effectively unguessable) session_id.
   const loadMessages = useCallback(async () => {
-    const { data } = await supabase
-      .from("chat_messages")
-      .select("id, message, sender_type, created_at, visitor_name")
-      .eq("session_id", sessionId.current)
-      .order("created_at", { ascending: true });
+    const { data } = await supabase.rpc("get_chat_session_messages", {
+      p_session_id: sessionId.current,
+    });
     if (data && data.length > 0) {
       setMessages(data);
       setHasIntroduced(true);
@@ -73,33 +73,29 @@ const ChatWidget = () => {
     if (open) loadMessages();
   }, [open, loadMessages]);
 
-  // Realtime subscription
+  // Poll for new messages (admin/agent replies) while the widget is open.
+  // Realtime Postgres Changes can't be used here without granting visitors
+  // broad table SELECT, which is exactly the leak this was fixed to avoid.
   useEffect(() => {
     if (!open) return;
 
-    const channel = supabase
-      .channel(`chat-${sessionId.current}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "chat_messages",
-          filter: `session_id=eq.${sessionId.current}`,
-        },
-        (payload) => {
-          const newMsg = payload.new as ChatMessage;
-          setMessages((prev) => {
-            if (prev.some((m) => m.id === newMsg.id)) return prev;
-            return [...prev, newMsg];
-          });
-        }
-      )
-      .subscribe();
+    const interval = setInterval(async () => {
+      const { data } = await supabase.rpc("get_chat_session_messages", {
+        p_session_id: sessionId.current,
+      });
+      if (data) {
+        setMessages((prev) => {
+          const existingIds = new Set(prev.map((m) => m.id));
+          const merged = [...prev];
+          for (const m of data) {
+            if (!existingIds.has(m.id)) merged.push(m);
+          }
+          return merged.length !== prev.length ? merged : prev;
+        });
+      }
+    }, 3000);
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    return () => clearInterval(interval);
   }, [open]);
 
   // Auto-scroll to bottom
@@ -172,6 +168,12 @@ const ChatWidget = () => {
             language: langCode,
           },
         },
+      }).catch(() => {});
+
+      // Fire-and-forget AI first-responder. It re-reads the session from
+      // the database itself and stays silent if an admin already replied.
+      supabase.functions.invoke("chat-agent-reply", {
+        body: { session_id: sessionId.current },
       }).catch(() => {});
     }
 
@@ -285,8 +287,10 @@ const ChatWidget = () => {
                             : "bg-muted text-foreground rounded-tl-lg rounded-tr-lg rounded-br-lg"
                         }`}
                       >
-                        {msg.sender_type === "admin" && (
-                          <span className="block text-xs font-semibold text-muted-foreground mb-1">Fichua</span>
+                        {(msg.sender_type === "admin" || msg.sender_type === "agent") && (
+                          <span className="block text-xs font-semibold text-muted-foreground mb-1">
+                            {msg.sender_type === "agent" ? "Fichua Assistant" : "Fichua"}
+                          </span>
                         )}
                         <p className="whitespace-pre-wrap break-words">{msg.message}</p>
                         <span className="block text-[10px] opacity-60 mt-1">

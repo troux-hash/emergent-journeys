@@ -43,22 +43,28 @@ const AdminChatThread = ({ messages, visitorName, reply, sending, onReplyChange,
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
-        {messages.map((msg) => (
-          <div key={msg.id} className={`flex ${msg.sender_type === "admin" ? "justify-end" : "justify-start"}`}>
+        {messages.map((msg) => {
+          const isFichuaSide = msg.sender_type === "admin" || msg.sender_type === "agent";
+          return (
+          <div key={msg.id} className={`flex ${isFichuaSide ? "justify-end" : "justify-start"}`}>
             <div
               className={`max-w-[75%] px-3 py-2 text-sm ${
-                msg.sender_type === "admin"
+                isFichuaSide
                   ? "bg-primary text-primary-foreground rounded-tl-lg rounded-tr-lg rounded-bl-lg"
                   : "bg-muted text-foreground rounded-tl-lg rounded-tr-lg rounded-br-lg"
               }`}
             >
+              {msg.sender_type === "agent" && (
+                <span className="block text-xs font-semibold opacity-70 mb-1">Agent (auto-reply)</span>
+              )}
               <p className="whitespace-pre-wrap break-words">{msg.message}</p>
               <span className="block text-[10px] opacity-60 mt-1">
                 {new Date(msg.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               </span>
             </div>
           </div>
-        ))}
+          );
+        })}
         <div ref={messagesEndRef} />
       </div>
 
