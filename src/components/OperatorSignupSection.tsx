@@ -25,30 +25,17 @@ const OperatorSignupSection = () => {
           <RevealSection>
             <div>
               <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
-                For Operators
+                List My Lodge
               </p>
               <h2 className="font-display text-2xl md:text-4xl font-medium leading-tight text-earth-light mb-6">
-                Ready to be <em className="text-gold">found?</em>
+                Ready? <em className="text-gold">It takes 2 minutes.</em>
               </h2>
-              <p className="font-body text-sm md:text-base text-earth-dark-foreground/70 leading-relaxed mb-8">
-                Join Fichua and get your property in front of international travellers 
-                and AI search engines — in under 20 minutes. No contracts. No upfront fees. 
-                Just more bookings, more revenue, and a partner who shows up.
+              <p className="font-body text-sm md:text-base text-earth-dark-foreground/70 leading-relaxed mb-4">
+                Fill in four fields. We'll call you within 24 hours to set up your Fichua page — together, on WhatsApp or Zoom, whichever you prefer.
               </p>
-
-              <div className="space-y-4">
-                {[
-                  "AI-powered visibility on ChatGPT, Google & more",
-                  "Direct bookings — no 20% OTA commissions",
-                  "Dedicated Fichua Buddy on WhatsApp",
-                  "Secure payments via Visa",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                    <p className="font-body text-sm text-earth-dark-foreground/60">{item}</p>
-                  </div>
-                ))}
-              </div>
+              <p className="font-body text-sm text-earth-dark-foreground/60 leading-relaxed">
+                No contracts. No upfront fees. No obligation.
+              </p>
             </div>
           </RevealSection>
 
@@ -134,7 +121,7 @@ const OperatorSignupSection = () => {
                   className="w-full flex items-center justify-center gap-2 font-label text-xs tracking-[0.2em] uppercase bg-gold text-earth-dark px-6 py-4 hover:opacity-90 transition-opacity mt-2"
                 >
                   <Send className="w-4 h-4" strokeWidth={1.5} />
-                  Request Onboarding Call
+                  Get My Lodge Listed
                 </button>
 
                 <p className="font-body text-[11px] text-earth-dark-foreground/40 text-center">

@@ -4,12 +4,9 @@ import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const navItems = [
-  { label: "Africa Time", href: "#opportunity" },
   { label: "The Problem", href: "#problem" },
-  { label: "Increase Your Revenues", href: "#solution" },
+  { label: "The Solution", href: "#solution" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Who We Are", href: "#who-we-are" },
-  { label: "They Trust Us", href: "#trust" },
 ];
 
 const Navbar = () => {
@@ -57,7 +54,7 @@ const Navbar = () => {
               href="#contact"
               className="font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-5 py-2 hover:opacity-90 transition-opacity"
             >
-              For Operators
+              List My Lodge
             </a>
           </div>
 
@@ -109,7 +106,7 @@ const Navbar = () => {
               transition={{ delay: 0.4, duration: 0.3 }}
               className="mt-6 font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-6 py-4 text-center hover:opacity-90 transition-opacity"
             >
-              For Operators
+              List My Lodge
             </motion.a>
           </motion.div>
         )}

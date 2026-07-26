@@ -1,33 +1,32 @@
 import RevealSection from "./RevealSection";
-import safariLodge from "@/assets/safari-lodge.jpg";
 
 const problems = [
   {
     number: "01",
-    title: "Not visible",
-    description: "AI search engines can't find you. When travellers ask ChatGPT or Google for lodges — you don't exist.",
+    title: "You're invisible on AI search",
+    description: "When travellers ask ChatGPT or Google for lodges in your region, your name never comes up. The chain hotel down the road does.",
   },
   {
     number: "02",
-    title: "Losing guests",
-    description: "They discover you on social media, DM you on WhatsApp — then book a chain hotel because you have no way to close.",
+    title: "You're losing guests on WhatsApp",
+    description: "They find you on Instagram, DM you, ask about rates — then book a chain hotel because you have no way to close the sale.",
   },
   {
     number: "03",
-    title: "Losing money",
-    description: "OTAs take 20% of every booking. You're paying to be invisible while middlemen profit from your property.",
+    title: "You're paying OTAs 20% to be found",
+    description: "Booking.com and Expedia take a fifth of every reservation. You're renting visibility from middlemen who own your guest relationship.",
   },
 ];
 
 const ProblemSection = () => {
   return (
-    <section id="problem" className="bg-earth-dark text-earth-light py-8 md:py-12 px-6 md:px-12 lg:px-20">
+    <section id="problem" className="bg-earth-dark text-earth-light py-16 md:py-24 px-6 md:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto text-center">
         <RevealSection>
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">The Problem</p>
           <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight mb-10">
-            Extraordinary places exist.<br />
-            <em className="text-gold">They are simply unfindable.</em>
+            You're invisible.<br />
+            <em className="text-gold">That's not your fault — but it is costing you.</em>
           </h2>
         </RevealSection>
 

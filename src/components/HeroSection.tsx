@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-lodge.jpg";
 import safariLodge from "@/assets/safari-lodge.jpg";
 
 const HeroSection = () => {
@@ -13,7 +12,7 @@ const HeroSection = () => {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-8"
         >
-          From Swahili · Bantu root
+          For Independent African Lodges
         </motion.p>
 
         <motion.h1
@@ -22,10 +21,9 @@ const HeroSection = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="font-display text-4xl md:text-5xl lg:text-7xl font-medium leading-[1.1] text-foreground mb-6"
         >
-          What is hidden<br />
-          is not absent —<br />
-          <em className="text-gold">it is simply<br />
-          not yet revealed.</em>
+          Your lodge deserves<br />
+          to be found.<br />
+          <em className="text-gold">We make sure it is.</em>
         </motion.h1>
 
         <motion.p
@@ -34,10 +32,22 @@ const HeroSection = () => {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="font-body text-base md:text-lg text-muted-foreground max-w-lg mb-10 leading-relaxed"
         >
-          Independent lodges are invisible to AI travel search.
-          Fichua makes them findable, bookable, and profitable.
+          You lose bookings every day — to chain hotels, to OTAs, to invisibility on AI search.
+          Fichua puts you back in front of travellers, and keeps 100% of your revenue in your pocket.
         </motion.p>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+        >
+          <a
+            href="#contact"
+            className="inline-block font-label text-xs tracking-[0.2em] uppercase bg-primary text-primary-foreground px-8 py-4 hover:opacity-90 transition-opacity"
+          >
+            List My Lodge — It Takes 2 Minutes
+          </a>
+        </motion.div>
       </div>
 
       {/* Right: Image panel with safari lodge */}
@@ -50,14 +60,6 @@ const HeroSection = () => {
           width={1280}
           height={720}
         />
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.06 }}
-          transition={{ delay: 0.5, duration: 1.5 }}
-          className="absolute bottom-20 right-8 font-display text-[12rem] font-bold leading-none text-primary-foreground select-none pointer-events-none z-20"
-        >
-          ficha
-        </motion.span>
       </div>
     </section>
   );
