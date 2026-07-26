@@ -32,12 +32,11 @@ const Footer = () => {
       <div className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto text-center">
           <RevealSection>
-            <p className="font-display text-2xl md:text-4xl italic text-gold/80 mb-8 leading-relaxed">
-              "What is hidden is not absent —<br />
-              it is simply not yet revealed."
-            </p>
-            <p className="font-body text-sm text-earth-dark-foreground/50 mb-12">
-              From Swahili · Bantu root: ficha (to hide) → fichua (to reveal)
+            <h2 className="font-display text-2xl md:text-4xl font-medium text-earth-light mb-4 leading-relaxed">
+              Prefer to talk it through first?
+            </h2>
+            <p className="font-body text-sm text-earth-dark-foreground/60 mb-12">
+              Email us directly — no form, no pressure.
             </p>
             <a
               href="mailto:teddy225@mit.edu"

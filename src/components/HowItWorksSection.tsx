@@ -20,7 +20,7 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section id="how-it-works" className="bg-parchment py-16 md:py-24 px-6 md:px-12 lg:px-20">
+    <section id="how-it-works" className="bg-parchment-dark py-16 md:py-24 px-6 md:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto">
         <RevealSection>
           <div className="text-center mb-14">
@@ -36,7 +36,7 @@ const HowItWorksSection = () => {
         <div className="grid md:grid-cols-3 gap-6">
           {steps.map((step, i) => (
             <RevealSection key={step.num} delay={i * 0.1}>
-              <div className="bg-parchment-dark border border-border p-8 h-full">
+              <div className="bg-parchment border border-border p-8 h-full">
                 <span className="font-display text-4xl font-semibold text-gold/40">{step.num}</span>
                 <h3 className="font-display text-xl font-medium text-foreground mt-3 mb-3">{step.title}</h3>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">{step.body}</p>
