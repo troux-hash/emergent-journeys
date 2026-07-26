@@ -16,6 +16,7 @@ import IntranetDashboard from "./pages/intranet/IntranetDashboard.tsx";
 import IntranetDocuments from "./pages/intranet/IntranetDocuments.tsx";
 import IntranetTasks from "./pages/intranet/IntranetTasks.tsx";
 import IntranetProjects from "./pages/intranet/IntranetProjects.tsx";
+import IntranetOperators from "./pages/intranet/IntranetOperators.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
               <Route path="documents" element={<IntranetDocuments />} />
               <Route path="tasks" element={<IntranetTasks />} />
               <Route path="projects" element={<IntranetProjects />} />
+              <Route path="operators" element={<IntranetOperators />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -1,4 +1,4 @@
-import { LayoutDashboard, FileText, CheckSquare, FolderKanban, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, CheckSquare, FolderKanban, LogOut, Building2 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,6 +17,7 @@ import {
 
 const navItems = [
   { title: "Dashboard", url: "/intranet", icon: LayoutDashboard },
+  { title: "Operators", url: "/intranet/operators", icon: Building2 },
   { title: "Documents", url: "/intranet/documents", icon: FileText },
   { title: "Tasks", url: "/intranet/tasks", icon: CheckSquare },
   { title: "Projects", url: "/intranet/projects", icon: FolderKanban },

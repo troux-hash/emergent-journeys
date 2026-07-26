@@ -348,6 +348,137 @@ export type Database = {
         }
         Relationships: []
       }
+      operators: {
+        Row: {
+          address: string | null
+          amenities: string[]
+          check_in: string | null
+          check_out: string | null
+          city: string | null
+          community_percent: number | null
+          country: string | null
+          created_at: string
+          currencies_accepted: string[]
+          description: string | null
+          email: string | null
+          hero_image: string | null
+          id: string
+          identity_verified: boolean
+          images: string[]
+          instagram_url: string | null
+          is_verified: boolean | null
+          lat: number | null
+          lead_id: string | null
+          local_hire_percent: number | null
+          lng: number | null
+          name: string
+          payment_accepted: string[]
+          payout_verified: boolean
+          phone: string | null
+          photo_gps_verified: boolean
+          price_range: string | null
+          slug: string
+          solar_powered: boolean
+          star_rating: number | null
+          status: string
+          tagline: string | null
+          tripadvisor_url: string | null
+          updated_at: string
+          water_conservation: boolean
+          website: string | null
+          whatsapp_verified: boolean
+          years_operating: number | null
+        }
+        Insert: {
+          address?: string | null
+          amenities?: string[]
+          check_in?: string | null
+          check_out?: string | null
+          city?: string | null
+          community_percent?: number | null
+          country?: string | null
+          created_at?: string
+          currencies_accepted?: string[]
+          description?: string | null
+          email?: string | null
+          hero_image?: string | null
+          id?: string
+          identity_verified?: boolean
+          images?: string[]
+          instagram_url?: string | null
+          is_verified?: boolean | null
+          lat?: number | null
+          lead_id?: string | null
+          local_hire_percent?: number | null
+          lng?: number | null
+          name: string
+          payment_accepted?: string[]
+          payout_verified?: boolean
+          phone?: string | null
+          photo_gps_verified?: boolean
+          price_range?: string | null
+          slug: string
+          solar_powered?: boolean
+          star_rating?: number | null
+          status?: string
+          tagline?: string | null
+          tripadvisor_url?: string | null
+          updated_at?: string
+          water_conservation?: boolean
+          website?: string | null
+          whatsapp_verified?: boolean
+          years_operating?: number | null
+        }
+        Update: {
+          address?: string | null
+          amenities?: string[]
+          check_in?: string | null
+          check_out?: string | null
+          city?: string | null
+          community_percent?: number | null
+          country?: string | null
+          created_at?: string
+          currencies_accepted?: string[]
+          description?: string | null
+          email?: string | null
+          hero_image?: string | null
+          id?: string
+          identity_verified?: boolean
+          images?: string[]
+          instagram_url?: string | null
+          is_verified?: boolean | null
+          lat?: number | null
+          lead_id?: string | null
+          local_hire_percent?: number | null
+          lng?: number | null
+          name?: string
+          payment_accepted?: string[]
+          payout_verified?: boolean
+          phone?: string | null
+          photo_gps_verified?: boolean
+          price_range?: string | null
+          slug?: string
+          solar_powered?: boolean
+          star_rating?: number | null
+          status?: string
+          tagline?: string | null
+          tripadvisor_url?: string | null
+          updated_at?: string
+          water_conservation?: boolean
+          website?: string | null
+          whatsapp_verified?: boolean
+          years_operating?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operators_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "operator_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -374,6 +505,53 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      room_types: {
+        Row: {
+          created_at: string
+          currency: string
+          description: string | null
+          id: string
+          max_guests: number
+          name: string
+          operator_id: string
+          price_per_night: number
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          max_guests?: number
+          name: string
+          operator_id: string
+          price_per_night: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          max_guests?: number
+          name?: string
+          operator_id?: string
+          price_per_night?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "room_types_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "operators"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       suppressed_emails: {
         Row: {

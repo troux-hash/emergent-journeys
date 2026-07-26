@@ -1,13 +1,107 @@
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { getOperatorBySlug } from "@/data/operators";
+import { supabase } from "@/integrations/supabase/client";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 import BookDirectForm from "@/components/BookDirectForm";
 import RevealSection from "@/components/RevealSection";
-import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft } from "lucide-react";
+import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft, ShieldCheck } from "lucide-react";
+
+interface OperatorRow {
+  id: string;
+  slug: string;
+  name: string;
+  tagline: string | null;
+  description: string | null;
+  address: string | null;
+  city: string | null;
+  country: string | null;
+  lat: number | null;
+  lng: number | null;
+  phone: string | null;
+  email: string | null;
+  website: string | null;
+  price_range: string | null;
+  star_rating: number | null;
+  years_operating: number | null;
+  hero_image: string | null;
+  images: string[];
+  check_in: string | null;
+  check_out: string | null;
+  currencies_accepted: string[];
+  payment_accepted: string[];
+  solar_powered: boolean;
+  local_hire_percent: number | null;
+  community_percent: number | null;
+  water_conservation: boolean;
+  amenities: string[];
+  instagram_url: string | null;
+  tripadvisor_url: string | null;
+  is_verified: boolean | null;
+}
+
+interface RoomTypeRow {
+  id: string;
+  name: string;
+  description: string | null;
+  price_per_night: number;
+  currency: string;
+  max_guests: number;
+}
+
+const VERIFICATION_CHECKLIST = [
+  "Identity & ownership confirmed against ID / business registration",
+  "Property photos cross-checked against its GPS location",
+  "WhatsApp contact confirmed live with a real reply",
+  "Payout account on file with the payment processor",
+];
 
 const OperatorProfile = () => {
   const { slug } = useParams<{ slug: string }>();
-  const operator = slug ? getOperatorBySlug(slug) : undefined;
+  const [operator, setOperator] = useState<OperatorRow | null>(null);
+  const [rooms, setRooms] = useState<RoomTypeRow[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    const load = async () => {
+      if (!slug) {
+        setLoading(false);
+        return;
+      }
+      const { data: op } = await supabase
+        .from("operators")
+        .select("*")
+        .eq("slug", slug)
+        .maybeSingle();
+
+      if (!active) return;
+
+      if (op) {
+        setOperator(op as OperatorRow);
+        const { data: roomData } = await supabase
+          .from("room_types")
+          .select("id, name, description, price_per_night, currency, max_guests")
+          .eq("operator_id", op.id)
+          .order("sort_order", { ascending: true });
+        if (active) setRooms((roomData as RoomTypeRow[]) || []);
+      }
+      if (active) setLoading(false);
+    };
+    load();
+    return () => {
+      active = false;
+    };
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-parchment flex items-center justify-center">
+        <p className="font-body text-muted-foreground text-sm">Loading...</p>
+      </div>
+    );
+  }
 
   if (!operator) {
     return (
@@ -34,61 +128,63 @@ const OperatorProfile = () => {
     name: operator.name,
     description: operator.description,
     url: operator.website,
-    image: [operator.heroImage, ...operator.images],
+    image: [operator.hero_image, ...(operator.images || [])].filter(Boolean),
     address: {
       "@type": "PostalAddress",
-      streetAddress: operator.location.address,
-      addressLocality: operator.location.city,
-      addressCountry: operator.location.country,
+      streetAddress: operator.address,
+      addressLocality: operator.city,
+      addressCountry: operator.country,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: operator.location.lat,
-      longitude: operator.location.lng,
-    },
+    ...(operator.lat && operator.lng
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: operator.lat,
+            longitude: operator.lng,
+          },
+        }
+      : {}),
     telephone: operator.phone,
-    priceRange: operator.priceRange,
-    starRating: {
-      "@type": "Rating",
-      ratingValue: operator.starRating,
-    },
-    checkinTime: operator.checkIn,
-    checkoutTime: operator.checkOut,
-    currenciesAccepted: operator.currenciesAccepted.join(", "),
-    paymentAccepted: operator.paymentAccepted.join(", "),
-    amenityFeature: operator.amenities.map((a) => ({
+    priceRange: operator.price_range,
+    ...(operator.star_rating
+      ? { starRating: { "@type": "Rating", ratingValue: operator.star_rating } }
+      : {}),
+    checkinTime: operator.check_in,
+    checkoutTime: operator.check_out,
+    currenciesAccepted: (operator.currencies_accepted || []).join(", "),
+    paymentAccepted: (operator.payment_accepted || []).join(", "),
+    amenityFeature: (operator.amenities || []).map((a) => ({
       "@type": "LocationFeatureSpecification",
       name: a,
       value: true,
     })),
-    numberOfRooms: operator.rooms.length,
-    ...(operator.socialLinks.instagram || operator.socialLinks.tripadvisor
-      ? {
-          sameAs: [operator.socialLinks.instagram, operator.socialLinks.tripadvisor].filter(
-            Boolean
-          ),
-        }
+    numberOfRooms: rooms.length,
+    ...(operator.instagram_url || operator.tripadvisor_url
+      ? { sameAs: [operator.instagram_url, operator.tripadvisor_url].filter(Boolean) }
       : {}),
   };
 
   const sustainabilitySignals = [
-    operator.sustainability.solarPowered && {
-      icon: Sun,
-      label: "Solar Powered",
-    },
-    {
+    operator.solar_powered && { icon: Sun, label: "Solar Powered" },
+    operator.local_hire_percent != null && {
       icon: Users,
-      label: `${operator.sustainability.localHirePercent}% Local Hires`,
+      label: `${operator.local_hire_percent}% Local Hires`,
     },
-    {
+    operator.community_percent != null && {
       icon: Heart,
-      label: `${operator.sustainability.communityPercent}% to Community`,
+      label: `${operator.community_percent}% to Community`,
     },
-    operator.sustainability.waterConservation && {
-      icon: Droplets,
-      label: "Water Conservation",
-    },
+    operator.water_conservation && { icon: Droplets, label: "Water Conservation" },
   ].filter(Boolean) as { icon: typeof Sun; label: string }[];
+
+  // BookDirectForm expects the original static-data Room shape.
+  const roomsForForm = rooms.map((r) => ({
+    name: r.name,
+    description: r.description || "",
+    pricePerNight: r.price_per_night,
+    currency: r.currency,
+    maxGuests: r.max_guests,
+  }));
 
   return (
     <>
@@ -96,7 +192,7 @@ const OperatorProfile = () => {
         <title>{operator.name} — Fichua</title>
         <meta
           name="description"
-          content={`Book ${operator.name} direct. ${operator.tagline}. ${operator.location.city}, ${operator.location.country}.`}
+          content={`Book ${operator.name} direct. ${operator.tagline || ""} ${operator.city || ""}, ${operator.country || ""}.`}
         />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
@@ -124,22 +220,46 @@ const OperatorProfile = () => {
         {/* Hero */}
         <section className="relative pt-16">
           <div className="relative h-[50vh] md:h-[65vh] overflow-hidden">
-            <img
-              src={operator.heroImage}
-              alt={`${operator.name} — ${operator.location.city}, ${operator.location.country}`}
-              className="w-full h-full object-cover"
-            />
+            {operator.hero_image && (
+              <img
+                src={operator.hero_image}
+                alt={`${operator.name} — ${operator.city}, ${operator.country}`}
+                className="w-full h-full object-cover"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-earth-dark/80 via-earth-dark/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 lg:p-20">
               <p className="font-label text-[10px] tracking-[0.3em] uppercase text-gold mb-2">
-                {operator.location.city}, {operator.location.country}
+                {operator.city}, {operator.country}
               </p>
-              <h1 className="font-display text-4xl md:text-6xl font-medium text-primary-foreground mb-2">
-                {operator.name}
-              </h1>
-              <p className="font-display text-lg md:text-xl italic text-gold/80">
-                {operator.tagline}
-              </p>
+              <div className="flex items-center gap-3 flex-wrap mb-2">
+                <h1 className="font-display text-4xl md:text-6xl font-medium text-primary-foreground">
+                  {operator.name}
+                </h1>
+                {operator.is_verified && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Badge className="gap-1 cursor-help">
+                        <ShieldCheck size={12} />
+                        Fichua Verified
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs">
+                      <p className="font-medium mb-1">What this means:</p>
+                      <ul className="list-disc pl-4 space-y-0.5">
+                        {VERIFICATION_CHECKLIST.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+              </div>
+              {operator.tagline && (
+                <p className="font-display text-lg md:text-xl italic text-gold/80">
+                  {operator.tagline}
+                </p>
+              )}
             </div>
           </div>
         </section>
@@ -151,25 +271,32 @@ const OperatorProfile = () => {
               <div className="flex items-center gap-2 text-muted-foreground">
                 <MapPin size={14} className="text-gold" />
                 <span className="font-label text-xs tracking-wider">
-                  {operator.location.city}, {operator.location.country}
+                  {operator.city}, {operator.country}
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Star size={14} className="text-gold" />
-                <span className="font-label text-xs tracking-wider">
-                  {operator.starRating} Star · {operator.yearsOperating} Years
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Clock size={14} className="text-gold" />
-                <span className="font-label text-xs tracking-wider">
-                  Check-in {operator.checkIn} · Out {operator.checkOut}
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Phone size={14} className="text-gold" />
-                <span className="font-label text-xs tracking-wider">{operator.phone}</span>
-              </div>
+              {operator.star_rating != null && (
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Star size={14} className="text-gold" />
+                  <span className="font-label text-xs tracking-wider">
+                    {operator.star_rating} Star
+                    {operator.years_operating ? ` · ${operator.years_operating} Years` : ""}
+                  </span>
+                </div>
+              )}
+              {(operator.check_in || operator.check_out) && (
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Clock size={14} className="text-gold" />
+                  <span className="font-label text-xs tracking-wider">
+                    Check-in {operator.check_in} · Out {operator.check_out}
+                  </span>
+                </div>
+              )}
+              {operator.phone && (
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Phone size={14} className="text-gold" />
+                  <span className="font-label text-xs tracking-wider">{operator.phone}</span>
+                </div>
+              )}
             </div>
           </div>
         </RevealSection>
@@ -182,66 +309,72 @@ const OperatorProfile = () => {
                 {operator.description}
               </p>
             </RevealSection>
-            <RevealSection delay={0.15}>
+            {sustainabilitySignals.length > 0 && (
+              <RevealSection delay={0.15}>
+                <div className="space-y-4">
+                  <p className="font-label text-[10px] tracking-[0.3em] uppercase text-gold mb-2">
+                    Sustainability
+                  </p>
+                  {sustainabilitySignals.map((signal) => (
+                    <div key={signal.label} className="flex items-center gap-3">
+                      <signal.icon size={16} className="text-gold" />
+                      <span className="font-body text-sm text-foreground">{signal.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </RevealSection>
+            )}
+          </div>
+
+          {/* Gallery */}
+          {operator.images.length > 0 && (
+            <RevealSection className="mb-20">
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
+                {operator.images.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt={`${operator.name} — photo ${i + 1}`}
+                    className="w-full h-48 md:h-64 object-cover"
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            </RevealSection>
+          )}
+
+          {/* Rooms */}
+          {rooms.length > 0 && (
+            <RevealSection className="mb-20">
+              <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Rooms</p>
               <div className="space-y-4">
-                <p className="font-label text-[10px] tracking-[0.3em] uppercase text-gold mb-2">
-                  Sustainability
-                </p>
-                {sustainabilitySignals.map((signal) => (
-                  <div key={signal.label} className="flex items-center gap-3">
-                    <signal.icon size={16} className="text-gold" />
-                    <span className="font-body text-sm text-foreground">{signal.label}</span>
+                {rooms.map((room) => (
+                  <div
+                    key={room.id}
+                    className="flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 bg-parchment-dark border border-border gap-4"
+                  >
+                    <div>
+                      <h3 className="font-display text-xl font-medium text-foreground mb-1">
+                        {room.name}
+                      </h3>
+                      <p className="font-body text-sm text-muted-foreground">{room.description}</p>
+                      <p className="font-label text-[10px] tracking-wider uppercase text-muted-foreground mt-2">
+                        Up to {room.max_guests} guests · Contact for availability
+                      </p>
+                    </div>
+                    <div className="text-left md:text-right shrink-0">
+                      <p className="font-display text-2xl font-semibold text-foreground">
+                        {room.currency}{room.price_per_night}
+                      </p>
+                      <p className="font-label text-[10px] tracking-wider uppercase text-muted-foreground">
+                        per night
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
             </RevealSection>
-          </div>
-
-          {/* Gallery */}
-          <RevealSection className="mb-20">
-            <div className="grid grid-cols-3 gap-3 md:gap-4">
-              {operator.images.map((img, i) => (
-                <img
-                  key={i}
-                  src={img}
-                  alt={`${operator.name} — photo ${i + 1}`}
-                  className="w-full h-48 md:h-64 object-cover"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-          </RevealSection>
-
-          {/* Rooms */}
-          <RevealSection className="mb-20">
-            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Rooms</p>
-            <div className="space-y-4">
-              {operator.rooms.map((room) => (
-                <div
-                  key={room.name}
-                  className="flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 bg-parchment-dark border border-border gap-4"
-                >
-                  <div>
-                    <h3 className="font-display text-xl font-medium text-foreground mb-1">
-                      {room.name}
-                    </h3>
-                    <p className="font-body text-sm text-muted-foreground">{room.description}</p>
-                    <p className="font-label text-[10px] tracking-wider uppercase text-muted-foreground mt-2">
-                      Up to {room.maxGuests} guests · Contact for availability
-                    </p>
-                  </div>
-                  <div className="text-left md:text-right shrink-0">
-                    <p className="font-display text-2xl font-semibold text-foreground">
-                      ${room.pricePerNight}
-                    </p>
-                    <p className="font-label text-[10px] tracking-wider uppercase text-muted-foreground">
-                      per night
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </RevealSection>
+          )}
 
           {/* Book Direct Form */}
           <section id="book">
@@ -259,7 +392,7 @@ const OperatorProfile = () => {
                   </p>
                 </div>
                 <BookDirectForm
-                  rooms={operator.rooms}
+                  rooms={roomsForForm}
                   operatorName={operator.name}
                   operatorSlug={operator.slug}
                 />
@@ -274,20 +407,24 @@ const OperatorProfile = () => {
                 Questions?
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a
-                  href={`mailto:${operator.email}`}
-                  className="flex items-center gap-2 font-body text-sm text-foreground hover:text-gold transition-colors"
-                >
-                  <Mail size={14} />
-                  {operator.email}
-                </a>
-                <a
-                  href={`tel:${operator.phone}`}
-                  className="flex items-center gap-2 font-body text-sm text-foreground hover:text-gold transition-colors"
-                >
-                  <Phone size={14} />
-                  {operator.phone}
-                </a>
+                {operator.email && (
+                  <a
+                    href={`mailto:${operator.email}`}
+                    className="flex items-center gap-2 font-body text-sm text-foreground hover:text-gold transition-colors"
+                  >
+                    <Mail size={14} />
+                    {operator.email}
+                  </a>
+                )}
+                {operator.phone && (
+                  <a
+                    href={`tel:${operator.phone}`}
+                    className="flex items-center gap-2 font-body text-sm text-foreground hover:text-gold transition-colors"
+                  >
+                    <Phone size={14} />
+                    {operator.phone}
+                  </a>
+                )}
               </div>
             </div>
           </RevealSection>
