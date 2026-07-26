@@ -878,6 +878,7 @@ export type Database = {
           read_ct: number
         }[]
       }
+      send_pending_review_requests: { Args: never; Returns: undefined }
       submit_verified_review: {
         Args: {
           p_booking_id: string
