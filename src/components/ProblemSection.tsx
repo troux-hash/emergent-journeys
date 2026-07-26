@@ -3,18 +3,18 @@ import RevealSection from "./RevealSection";
 const problems = [
   {
     number: "01",
-    title: "You're invisible on AI search",
-    description: "When travellers ask ChatGPT or Google for lodges in your region, your name never comes up. The chain hotel down the road does.",
+    title: "You're invisible",
+    description: "Guests search, but your name doesn't show up. Bigger brands take the attention you deserve.",
   },
   {
     number: "02",
-    title: "You're losing guests on WhatsApp",
-    description: "They find you on Instagram, DM you, ask about rates — then book a chain hotel because you have no way to close the sale.",
+    title: "You're losing guests",
+    description: "Inquiries come in, but you have no simple way to turn interest into confirmed bookings.",
   },
   {
     number: "03",
-    title: "You're paying OTAs 20% to be found",
-    description: "Booking.com and Expedia take a fifth of every reservation. You're renting visibility from middlemen who own your guest relationship.",
+    title: "You're overpaying",
+    description: "OTAs and middlemen take a cut of every reservation — just for showing you to guests you should already own.",
   },
 ];
 
@@ -25,8 +25,8 @@ const ProblemSection = () => {
         <RevealSection>
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">The Problem</p>
           <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight mb-10">
-            You're invisible.<br />
-            <em className="text-gold">That's not your fault — but it is costing you.</em>
+            Invisible, losing guests<br />
+            <em className="text-gold">and overpaying.</em>
           </h2>
         </RevealSection>
 
