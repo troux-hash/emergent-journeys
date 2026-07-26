@@ -759,57 +759,6 @@ export type Database = {
         }
         Relationships: []
       }
-      support_requests: {
-        Row: {
-          booking_id: string | null
-          created_at: string
-          id: string
-          message: string
-          operator_id: string | null
-          reporter_contact: string
-          reporter_name: string | null
-          resolved_at: string | null
-          status: string
-        }
-        Insert: {
-          booking_id?: string | null
-          created_at?: string
-          id?: string
-          message: string
-          operator_id?: string | null
-          reporter_contact: string
-          reporter_name?: string | null
-          resolved_at?: string | null
-          status?: string
-        }
-        Update: {
-          booking_id?: string | null
-          created_at?: string
-          id?: string
-          message?: string
-          operator_id?: string | null
-          reporter_contact?: string
-          reporter_name?: string | null
-          resolved_at?: string | null
-          status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "support_requests_booking_id_fkey"
-            columns: ["booking_id"]
-            isOneToOne: false
-            referencedRelation: "bookings"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "support_requests_operator_id_fkey"
-            columns: ["operator_id"]
-            isOneToOne: false
-            referencedRelation: "operators"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
     }
     Views: {
       [_ in never]: never
