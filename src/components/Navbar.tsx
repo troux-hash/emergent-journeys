@@ -58,7 +58,7 @@ const Navbar = () => {
             ))}
             <LanguageSwitcher />
             <a
-              href="#contact"
+              href={onHome ? "#contact" : "/#contact"}
               className="font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-5 py-2 hover:opacity-90 transition-opacity"
             >
               Make me visible
@@ -106,7 +106,7 @@ const Navbar = () => {
               <span className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground">Language</span>
             </div>
             <motion.a
-              href="#contact"
+              href={onHome ? "#contact" : "/#contact"}
               onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
