@@ -294,56 +294,38 @@ export type Database = {
       operator_leads: {
         Row: {
           created_at: string
-          email: string | null
-          facebook_handle: string | null
+          email: string
           id: string
-          instagram_handle: string | null
-          name: string | null
+          name: string
           notes: string | null
-          num_rooms: number | null
           phone: string | null
-          price_max: number | null
-          price_min: number | null
           property_name: string
           source: string | null
           status: string
-          tiktok_handle: string | null
           updated_at: string
         }
         Insert: {
           created_at?: string
-          email?: string | null
-          facebook_handle?: string | null
+          email: string
           id?: string
-          instagram_handle?: string | null
-          name?: string | null
+          name: string
           notes?: string | null
-          num_rooms?: number | null
           phone?: string | null
-          price_max?: number | null
-          price_min?: number | null
           property_name: string
           source?: string | null
           status?: string
-          tiktok_handle?: string | null
           updated_at?: string
         }
         Update: {
           created_at?: string
-          email?: string | null
-          facebook_handle?: string | null
+          email?: string
           id?: string
-          instagram_handle?: string | null
-          name?: string | null
+          name?: string
           notes?: string | null
-          num_rooms?: number | null
           phone?: string | null
-          price_max?: number | null
-          price_min?: number | null
           property_name?: string
           source?: string | null
           status?: string
-          tiktok_handle?: string | null
           updated_at?: string
         }
         Relationships: []
