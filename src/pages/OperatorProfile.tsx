@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Badge } from "@/components/ui/badge";
 import BookDirectForm from "@/components/BookDirectForm";
 import PropertyMap from "@/components/PropertyMap";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import RevealSection from "@/components/RevealSection";
 import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft, ShieldCheck } from "lucide-react";
 
@@ -147,6 +148,41 @@ const OperatorProfile = () => {
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
     : null;
 
+  const faqs = [
+    operator.price_range && {
+      q: `What's the price range at ${operator.name}?`,
+      a: `${operator.name} typically ranges ${operator.price_range} per night, depending on room type and season.`,
+    },
+    (operator.check_in || operator.check_out) && {
+      q: "What are the check-in and check-out times?",
+      a: `Check-in is at ${operator.check_in || "flexible times"}, and check-out is at ${operator.check_out || "flexible times"}.`,
+    },
+    operator.amenities.length > 0 && {
+      q: `What amenities does ${operator.name} offer?`,
+      a: `${operator.name} offers: ${operator.amenities.join(", ")}.`,
+    },
+    {
+      q: "How do I book, and is there a fee?",
+      a: `You book directly with ${operator.name} through this page — no OTA middleman, no markup. ${operator.name} will confirm your stay via WhatsApp within 24 hours.`,
+    },
+    operator.is_verified && {
+      q: "What does the Fichua Verified badge mean?",
+      a: "It means the operator's identity and ownership were confirmed, the property's photos were checked against its GPS location, its WhatsApp contact was confirmed live, and it has a verified payout account on file.",
+    },
+  ].filter(Boolean) as { q: string; a: string }[];
+
+  const faqJsonLd = faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
@@ -229,6 +265,7 @@ const OperatorProfile = () => {
           content={`Book ${operator.name} direct. ${operator.tagline || ""} ${operator.city || ""}, ${operator.country || ""}.`}
         />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        {faqJsonLd && <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>}
       </Helmet>
 
       <div className="grain-overlay bg-parchment">
@@ -500,6 +537,27 @@ const OperatorProfile = () => {
               </div>
             </RevealSection>
           </section>
+
+          {/* FAQ */}
+          {faqs.length > 0 && (
+            <RevealSection className="mb-20">
+              <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
+                Frequently Asked
+              </p>
+              <Accordion type="single" collapsible className="border-t border-border">
+                {faqs.map((f, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`}>
+                    <AccordionTrigger className="font-body text-sm text-foreground text-left">
+                      {f.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="font-body text-sm text-muted-foreground">
+                      {f.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </RevealSection>
+          )}
 
           {/* Contact footer */}
           <RevealSection className="mt-20">
