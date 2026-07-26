@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import BookDirectForm from "@/components/BookDirectForm";
+import PropertyMap from "@/components/PropertyMap";
 import RevealSection from "@/components/RevealSection";
 import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft, ShieldCheck } from "lucide-react";
 
@@ -358,6 +359,20 @@ const OperatorProfile = () => {
               </RevealSection>
             )}
           </div>
+
+          {/* Map */}
+          {operator.lat != null && operator.lng != null && (
+            <RevealSection className="mb-20">
+              <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Location</p>
+              <PropertyMap
+                lat={operator.lat}
+                lng={operator.lng}
+                name={operator.name}
+                city={operator.city}
+                country={operator.country}
+              />
+            </RevealSection>
+          )}
 
           {/* Gallery */}
           {operator.images.length > 0 && (
