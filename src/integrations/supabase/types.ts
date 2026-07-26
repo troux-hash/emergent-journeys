@@ -14,93 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      bookings: {
-        Row: {
-          check_in: string
-          check_out: string
-          created_at: string
-          currency_snapshot: string
-          guest_email: string
-          guest_name: string
-          guest_whatsapp: string
-          guests: number
-          id: string
-          operator_id: string
-          price_per_night_snapshot: number
-          review_requested_at: string | null
-          review_token: string
-          room_type_id: string
-          special_requests: string | null
-          status: string
-          total_price: number
-          updated_at: string
-          utm_campaign: string | null
-          utm_medium: string | null
-          utm_source: string | null
-        }
-        Insert: {
-          check_in: string
-          check_out: string
-          created_at?: string
-          currency_snapshot: string
-          guest_email: string
-          guest_name: string
-          guest_whatsapp: string
-          guests: number
-          id?: string
-          operator_id: string
-          price_per_night_snapshot: number
-          review_requested_at?: string | null
-          review_token?: string
-          room_type_id: string
-          special_requests?: string | null
-          status?: string
-          total_price: number
-          updated_at?: string
-          utm_campaign?: string | null
-          utm_medium?: string | null
-          utm_source?: string | null
-        }
-        Update: {
-          check_in?: string
-          check_out?: string
-          created_at?: string
-          currency_snapshot?: string
-          guest_email?: string
-          guest_name?: string
-          guest_whatsapp?: string
-          guests?: number
-          id?: string
-          operator_id?: string
-          price_per_night_snapshot?: number
-          review_requested_at?: string | null
-          review_token?: string
-          room_type_id?: string
-          special_requests?: string | null
-          status?: string
-          total_price?: number
-          updated_at?: string
-          utm_campaign?: string | null
-          utm_medium?: string | null
-          utm_source?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "bookings_operator_id_fkey"
-            columns: ["operator_id"]
-            isOneToOne: false
-            referencedRelation: "operators"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "bookings_room_type_id_fkey"
-            columns: ["room_type_id"]
-            isOneToOne: false
-            referencedRelation: "room_types"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       chat_messages: {
         Row: {
           created_at: string
@@ -108,7 +21,6 @@ export type Database = {
           is_read: boolean
           language: string
           message: string
-          operator_id: string | null
           sender_type: string
           session_id: string
           visitor_email: string | null
@@ -120,7 +32,6 @@ export type Database = {
           is_read?: boolean
           language?: string
           message: string
-          operator_id?: string | null
           sender_type?: string
           session_id?: string
           visitor_email?: string | null
@@ -132,21 +43,12 @@ export type Database = {
           is_read?: boolean
           language?: string
           message?: string
-          operator_id?: string | null
           sender_type?: string
           session_id?: string
           visitor_email?: string | null
           visitor_name?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "chat_messages_operator_id_fkey"
-            columns: ["operator_id"]
-            isOneToOne: false
-            referencedRelation: "operators"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       email_send_log: {
         Row: {
@@ -446,137 +348,6 @@ export type Database = {
         }
         Relationships: []
       }
-      operators: {
-        Row: {
-          address: string | null
-          amenities: string[]
-          check_in: string | null
-          check_out: string | null
-          city: string | null
-          community_percent: number | null
-          country: string | null
-          created_at: string
-          currencies_accepted: string[]
-          description: string | null
-          email: string | null
-          hero_image: string | null
-          id: string
-          identity_verified: boolean
-          images: string[]
-          instagram_url: string | null
-          is_verified: boolean | null
-          lat: number | null
-          lead_id: string | null
-          local_hire_percent: number | null
-          lng: number | null
-          name: string
-          payment_accepted: string[]
-          payout_verified: boolean
-          phone: string | null
-          photo_gps_verified: boolean
-          price_range: string | null
-          slug: string
-          solar_powered: boolean
-          star_rating: number | null
-          status: string
-          tagline: string | null
-          tripadvisor_url: string | null
-          updated_at: string
-          water_conservation: boolean
-          website: string | null
-          whatsapp_verified: boolean
-          years_operating: number | null
-        }
-        Insert: {
-          address?: string | null
-          amenities?: string[]
-          check_in?: string | null
-          check_out?: string | null
-          city?: string | null
-          community_percent?: number | null
-          country?: string | null
-          created_at?: string
-          currencies_accepted?: string[]
-          description?: string | null
-          email?: string | null
-          hero_image?: string | null
-          id?: string
-          identity_verified?: boolean
-          images?: string[]
-          instagram_url?: string | null
-          is_verified?: boolean | null
-          lat?: number | null
-          lead_id?: string | null
-          local_hire_percent?: number | null
-          lng?: number | null
-          name: string
-          payment_accepted?: string[]
-          payout_verified?: boolean
-          phone?: string | null
-          photo_gps_verified?: boolean
-          price_range?: string | null
-          slug: string
-          solar_powered?: boolean
-          star_rating?: number | null
-          status?: string
-          tagline?: string | null
-          tripadvisor_url?: string | null
-          updated_at?: string
-          water_conservation?: boolean
-          website?: string | null
-          whatsapp_verified?: boolean
-          years_operating?: number | null
-        }
-        Update: {
-          address?: string | null
-          amenities?: string[]
-          check_in?: string | null
-          check_out?: string | null
-          city?: string | null
-          community_percent?: number | null
-          country?: string | null
-          created_at?: string
-          currencies_accepted?: string[]
-          description?: string | null
-          email?: string | null
-          hero_image?: string | null
-          id?: string
-          identity_verified?: boolean
-          images?: string[]
-          instagram_url?: string | null
-          is_verified?: boolean | null
-          lat?: number | null
-          lead_id?: string | null
-          local_hire_percent?: number | null
-          lng?: number | null
-          name?: string
-          payment_accepted?: string[]
-          payout_verified?: boolean
-          phone?: string | null
-          photo_gps_verified?: boolean
-          price_range?: string | null
-          slug?: string
-          solar_powered?: boolean
-          star_rating?: number | null
-          status?: string
-          tagline?: string | null
-          tripadvisor_url?: string | null
-          updated_at?: string
-          water_conservation?: boolean
-          website?: string | null
-          whatsapp_verified?: boolean
-          years_operating?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "operators_lead_id_fkey"
-            columns: ["lead_id"]
-            isOneToOne: false
-            referencedRelation: "operator_leads"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -603,116 +374,6 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
-      }
-      reviews: {
-        Row: {
-          booking_id: string | null
-          created_at: string
-          external_url: string | null
-          id: string
-          language: string
-          moderation_status: string
-          operator_id: string
-          rating: number
-          review_date: string
-          review_text: string | null
-          reviewer_name: string
-          source: string
-          updated_at: string
-        }
-        Insert: {
-          booking_id?: string | null
-          created_at?: string
-          external_url?: string | null
-          id?: string
-          language?: string
-          moderation_status?: string
-          operator_id: string
-          rating: number
-          review_date?: string
-          review_text?: string | null
-          reviewer_name: string
-          source: string
-          updated_at?: string
-        }
-        Update: {
-          booking_id?: string | null
-          created_at?: string
-          external_url?: string | null
-          id?: string
-          language?: string
-          moderation_status?: string
-          operator_id?: string
-          rating?: number
-          review_date?: string
-          review_text?: string | null
-          reviewer_name?: string
-          source?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "reviews_booking_id_fkey"
-            columns: ["booking_id"]
-            isOneToOne: false
-            referencedRelation: "bookings"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "reviews_operator_id_fkey"
-            columns: ["operator_id"]
-            isOneToOne: false
-            referencedRelation: "operators"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      room_types: {
-        Row: {
-          created_at: string
-          currency: string
-          description: string | null
-          id: string
-          max_guests: number
-          name: string
-          operator_id: string
-          price_per_night: number
-          sort_order: number
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          currency?: string
-          description?: string | null
-          id?: string
-          max_guests?: number
-          name: string
-          operator_id: string
-          price_per_night: number
-          sort_order?: number
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          currency?: string
-          description?: string | null
-          id?: string
-          max_guests?: number
-          name?: string
-          operator_id?: string
-          price_per_night?: number
-          sort_order?: number
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "room_types_operator_id_fkey"
-            columns: ["operator_id"]
-            isOneToOne: false
-            referencedRelation: "operators"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       suppressed_emails: {
         Row: {
@@ -761,23 +422,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      check_room_availability: {
-        Args: { p_check_in: string; p_check_out: string; p_room_type_id: string }
-        Returns: boolean
-      }
-      get_booking_for_review: {
-        Args: { p_booking_id: string; p_token: string }
-        Returns: {
-          already_reviewed: boolean
-          check_in: string
-          check_out: string
-          operator_name: string
-        }[]
-      }
-      submit_verified_review: {
-        Args: { p_booking_id: string; p_rating: number; p_review_text: string; p_token: string }
-        Returns: string
-      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
