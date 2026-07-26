@@ -3,18 +3,18 @@ import RevealSection from "./RevealSection";
 const steps = [
   {
     num: "01",
-    title: "Tell us about your lodge",
-    body: "A short call or WhatsApp chat. We gather what we need — no forms, no jargon.",
+    title: "Tell us about your place",
+    body: "A quick call or chat. We gather what we need — no forms, no jargon.",
   },
   {
     num: "02",
-    title: "We build your Fichua page in 20 minutes",
-    body: "Live, mobile-ready, AI-optimised. You review it before it goes public.",
+    title: "We build your Fichua page",
+    body: "Mobile-ready and search-friendly. You review it before it goes live.",
   },
   {
     num: "03",
-    title: "Start taking direct bookings",
-    body: "Payments hit your account. Your Fichua Buddy stays on WhatsApp — always.",
+    title: "Take direct bookings",
+    body: "Guests find you, book you, and pay you — directly.",
   },
 ];
 
@@ -51,7 +51,7 @@ const HowItWorksSection = () => {
               href="#contact"
               className="inline-block font-label text-xs tracking-[0.2em] uppercase bg-primary text-primary-foreground px-8 py-4 hover:opacity-90 transition-opacity"
             >
-              List My Lodge
+              Get Listed
             </a>
           </div>
         </RevealSection>

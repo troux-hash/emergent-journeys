@@ -4,18 +4,18 @@ import { Search, CreditCard, Users } from "lucide-react";
 const outcomes = [
   {
     icon: Search,
-    title: "Get found on ChatGPT & Google",
-    body: "We structure your lodge the way AI search engines read the web. When travellers ask, your name comes up — by name.",
+    title: "Get found",
+    body: "Your own Fichua page, built so guests can find you on search and AI — by name.",
   },
   {
     icon: CreditCard,
-    title: "Take bookings directly",
-    body: "Guests book you through your own Fichua page. Secure payments via Visa. No OTA middleman standing between you and your guest.",
+    title: "Book direct",
+    body: "Guests reserve and pay on your page. No middleman, no commission, no lost messages.",
   },
   {
     icon: Users,
-    title: "Keep 100% of your revenue",
-    body: "No 20% commission. No hidden fees. The relationship with your guest — and every shilling they pay — stays with you.",
+    title: "Keep every guest",
+    body: "You own the relationship and the revenue. Every inquiry becomes a direct booking.",
   },
 ];
 
@@ -32,7 +32,7 @@ const SolutionSection = () => {
             <em className="text-gold">Every booking direct.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-xl mx-auto mb-14 leading-relaxed">
-            Fichua gives your lodge a home on the internet that AI can find, travellers trust, and you fully own.
+            Fichua gives you a simple, professional presence that turns attention into direct bookings.
           </p>
         </RevealSection>
 
