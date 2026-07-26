@@ -8,11 +8,21 @@ const OperatorSignupSection = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    property: "",
-    email: "",
-    phone: "",
+    entityName: "",
+    whatsapp: "",
+    instagram: "",
+    tiktok: "",
+    facebook: "",
+    numRooms: "",
+    priceMin: "",
+    priceMax: "",
   });
+
+  const handleChange = (field: keyof typeof formData) => (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,10 +30,14 @@ const OperatorSignupSection = () => {
     setIsSubmitting(true);
 
     const { error } = await supabase.from("operator_leads").insert({
-      name: formData.name.trim(),
-      property_name: formData.property.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim() || null,
+      property_name: formData.entityName.trim(),
+      phone: formData.whatsapp.trim(),
+      instagram_handle: formData.instagram.trim() || null,
+      tiktok_handle: formData.tiktok.trim() || null,
+      facebook_handle: formData.facebook.trim() || null,
+      num_rooms: formData.numRooms ? parseInt(formData.numRooms, 10) : null,
+      price_min: formData.priceMin ? parseFloat(formData.priceMin) : null,
+      price_max: formData.priceMax ? parseFloat(formData.priceMax) : null,
     });
 
     setIsSubmitting(false);
@@ -51,7 +65,7 @@ const OperatorSignupSection = () => {
                 Ready? <em className="text-gold">It takes 2 minutes.</em>
               </h2>
               <p className="font-body text-sm md:text-base text-earth-dark-foreground/70 leading-relaxed mb-4">
-                Fill in four fields. We'll reach out within 24 hours to set up your Fichua page — on WhatsApp, call, or email, whatever suits you.
+                Tell us about your place. We'll reach out on WhatsApp within 24 hours to set up your Fichua page.
               </p>
               <p className="font-body text-sm text-earth-dark-foreground/60 leading-relaxed">
                 No contracts. No upfront fees. No obligation.
@@ -68,7 +82,7 @@ const OperatorSignupSection = () => {
                   We'll be in touch!
                 </h3>
                 <p className="font-body text-sm text-earth-dark-foreground/60">
-                  A member of the Fichua team will reach out within 24 hours to schedule your onboarding call.
+                  A member of the Fichua team will message you on WhatsApp within 24 hours to schedule your onboarding call.
                 </p>
               </div>
             ) : (
@@ -79,29 +93,14 @@ const OperatorSignupSection = () => {
 
                 <div>
                   <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    maxLength={100}
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
-                    placeholder="e.g. Sarah Njeri"
-                  />
-                </div>
-
-                <div>
-                  <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
-                    Property or Business Name
+                    Name of Entity
                   </label>
                   <input
                     type="text"
                     required
                     maxLength={150}
-                    value={formData.property}
-                    onChange={(e) => setFormData({ ...formData, property: e.target.value })}
+                    value={formData.entityName}
+                    onChange={handleChange("entityName")}
                     className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
                     placeholder="e.g. Kilima Lodge"
                   />
@@ -109,31 +108,105 @@ const OperatorSignupSection = () => {
 
                 <div>
                   <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
-                    Email
+                    WhatsApp Number
                   </label>
                   <input
-                    type="email"
+                    type="tel"
                     required
-                    maxLength={255}
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    maxLength={40}
+                    value={formData.whatsapp}
+                    onChange={handleChange("whatsapp")}
                     className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
-                    placeholder="sarah@kilimalodge.com"
+                    placeholder="+254 700 000 000"
                   />
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                      Instagram
+                    </label>
+                    <input
+                      type="text"
+                      maxLength={100}
+                      value={formData.instagram}
+                      onChange={handleChange("instagram")}
+                      className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                      placeholder="@handle"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                      TikTok
+                    </label>
+                    <input
+                      type="text"
+                      maxLength={100}
+                      value={formData.tiktok}
+                      onChange={handleChange("tiktok")}
+                      className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                      placeholder="@handle"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                      Facebook
+                    </label>
+                    <input
+                      type="text"
+                      maxLength={100}
+                      value={formData.facebook}
+                      onChange={handleChange("facebook")}
+                      className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                      placeholder="@handle"
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
-                    WhatsApp / Phone
+                    Number of Rooms
                   </label>
                   <input
-                    type="tel"
-                    maxLength={20}
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    type="number"
+                    min={0}
+                    max={10000}
+                    value={formData.numRooms}
+                    onChange={handleChange("numRooms")}
                     className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
-                    placeholder="+254 700 000 000"
+                    placeholder="e.g. 12"
                   />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                      Min Price / Night
+                    </label>
+                    <input
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={formData.priceMin}
+                      onChange={handleChange("priceMin")}
+                      className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                      placeholder="e.g. 80"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                      Max Price / Night
+                    </label>
+                    <input
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={formData.priceMax}
+                      onChange={handleChange("priceMax")}
+                      className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                      placeholder="e.g. 250"
+                    />
+                  </div>
                 </div>
 
                 <button
