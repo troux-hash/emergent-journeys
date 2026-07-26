@@ -50,6 +50,15 @@ interface RoomTypeRow {
   max_guests: number;
 }
 
+interface ReviewRow {
+  id: string;
+  source: string;
+  reviewer_name: string;
+  rating: number;
+  review_text: string | null;
+  review_date: string;
+}
+
 const VERIFICATION_CHECKLIST = [
   "Identity & ownership confirmed against ID / business registration",
   "Property photos cross-checked against its GPS location",
@@ -61,6 +70,7 @@ const OperatorProfile = () => {
   const { slug } = useParams<{ slug: string }>();
   const [operator, setOperator] = useState<OperatorRow | null>(null);
   const [rooms, setRooms] = useState<RoomTypeRow[]>([]);
+  const [reviews, setReviews] = useState<ReviewRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -80,12 +90,22 @@ const OperatorProfile = () => {
 
       if (op) {
         setOperator(op as OperatorRow);
-        const { data: roomData } = await supabase
-          .from("room_types")
-          .select("id, name, description, price_per_night, currency, max_guests")
-          .eq("operator_id", op.id)
-          .order("sort_order", { ascending: true });
-        if (active) setRooms((roomData as RoomTypeRow[]) || []);
+        const [{ data: roomData }, { data: reviewData }] = await Promise.all([
+          supabase
+            .from("room_types")
+            .select("id, name, description, price_per_night, currency, max_guests")
+            .eq("operator_id", op.id)
+            .order("sort_order", { ascending: true }),
+          supabase
+            .from("reviews")
+            .select("id, source, reviewer_name, rating, review_text, review_date")
+            .eq("operator_id", op.id)
+            .order("review_date", { ascending: false }),
+        ]);
+        if (active) {
+          setRooms((roomData as RoomTypeRow[]) || []);
+          setReviews((reviewData as ReviewRow[]) || []);
+        }
       }
       if (active) setLoading(false);
     };
@@ -121,6 +141,10 @@ const OperatorProfile = () => {
       </div>
     );
   }
+
+  const avgRating = reviews.length > 0
+    ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+    : null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -159,6 +183,15 @@ const OperatorProfile = () => {
       value: true,
     })),
     numberOfRooms: rooms.length,
+    ...(avgRating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: avgRating.toFixed(1),
+            reviewCount: reviews.length,
+          },
+        }
+      : {}),
     ...(operator.instagram_url || operator.tripadvisor_url
       ? { sameAs: [operator.instagram_url, operator.tripadvisor_url].filter(Boolean) }
       : {}),
@@ -375,6 +408,59 @@ const OperatorProfile = () => {
               </div>
             </RevealSection>
           )}
+
+          {/* Reviews */}
+          {reviews.length > 0 && (() => {
+            const verified = reviews.filter((r) => r.source === "fichua_verified");
+            const imported = reviews.filter((r) => r.source !== "fichua_verified");
+            const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+            return (
+              <RevealSection className="mb-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <p className="font-label text-xs tracking-[0.3em] uppercase text-gold">Reviews</p>
+                </div>
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="font-display text-3xl font-semibold text-foreground">{avg.toFixed(1)}</span>
+                  <div>
+                    <div className="flex gap-0.5">
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <Star key={n} size={14} className={n <= Math.round(avg) ? "text-gold fill-gold" : "text-muted-foreground"} />
+                      ))}
+                    </div>
+                    <p className="font-body text-xs text-muted-foreground">
+                      {reviews.length} review{reviews.length !== 1 ? "s" : ""}
+                      {verified.length > 0 && ` · ${verified.length} Verified Fichua ${verified.length !== 1 ? "Stays" : "Stay"}`}
+                      {imported.length > 0 && ` · ${imported.length} from other platforms`}
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  {reviews.slice(0, 6).map((r) => (
+                    <div key={r.id} className="border border-border p-5 bg-parchment-dark">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-medium text-sm text-foreground">{r.reviewer_name}</span>
+                        {r.source === "fichua_verified" ? (
+                          <span className="font-label text-[9px] tracking-wider uppercase text-gold border border-gold/40 px-2 py-0.5 rounded-full">
+                            Verified Stay
+                          </span>
+                        ) : (
+                          <span className="font-label text-[9px] tracking-wider uppercase text-muted-foreground">
+                            via {r.source.replace("_", " ")}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {[1, 2, 3, 4, 5].map((n) => (
+                          <Star key={n} size={11} className={n <= r.rating ? "text-gold fill-gold" : "text-muted-foreground"} />
+                        ))}
+                      </div>
+                      {r.review_text && <p className="font-body text-sm text-muted-foreground">{r.review_text}</p>}
+                    </div>
+                  ))}
+                </div>
+              </RevealSection>
+            );
+          })()}
 
           {/* Book Direct Form */}
           <section id="book">

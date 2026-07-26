@@ -10,6 +10,7 @@ export interface TemplateEntry {
 }
 
 import { template as chatNotification } from './chat-notification.tsx'
+import { template as reviewRequest } from './review-request.tsx'
 
 const CHAT_NOTIFICATION_EMAIL = Deno.env.get('CHAT_NOTIFICATION_EMAIL') || ''
 
@@ -18,4 +19,5 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
     ...chatNotification,
     to: CHAT_NOTIFICATION_EMAIL,
   },
+  'review-request': reviewRequest,
 }

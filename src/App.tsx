@@ -17,6 +17,8 @@ import IntranetDocuments from "./pages/intranet/IntranetDocuments.tsx";
 import IntranetTasks from "./pages/intranet/IntranetTasks.tsx";
 import IntranetProjects from "./pages/intranet/IntranetProjects.tsx";
 import IntranetOperators from "./pages/intranet/IntranetOperators.tsx";
+import IntranetReviews from "./pages/intranet/IntranetReviews.tsx";
+import LeaveReview from "./pages/LeaveReview.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -31,6 +33,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/operators/:slug" element={<OperatorProfile />} />
+            <Route path="/review/:bookingId" element={<LeaveReview />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
@@ -42,6 +45,7 @@ const App = () => (
               <Route path="tasks" element={<IntranetTasks />} />
               <Route path="projects" element={<IntranetProjects />} />
               <Route path="operators" element={<IntranetOperators />} />
+              <Route path="reviews" element={<IntranetReviews />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

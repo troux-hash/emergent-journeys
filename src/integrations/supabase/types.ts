@@ -593,6 +593,69 @@ export type Database = {
         }
         Relationships: []
       }
+      reviews: {
+        Row: {
+          booking_id: string | null
+          created_at: string
+          external_url: string | null
+          id: string
+          language: string
+          moderation_status: string
+          operator_id: string
+          rating: number
+          review_date: string
+          review_text: string | null
+          reviewer_name: string
+          source: string
+          updated_at: string
+        }
+        Insert: {
+          booking_id?: string | null
+          created_at?: string
+          external_url?: string | null
+          id?: string
+          language?: string
+          moderation_status?: string
+          operator_id: string
+          rating: number
+          review_date?: string
+          review_text?: string | null
+          reviewer_name: string
+          source: string
+          updated_at?: string
+        }
+        Update: {
+          booking_id?: string | null
+          created_at?: string
+          external_url?: string | null
+          id?: string
+          language?: string
+          moderation_status?: string
+          operator_id?: string
+          rating?: number
+          review_date?: string
+          review_text?: string | null
+          reviewer_name?: string
+          source?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "operators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       room_types: {
         Row: {
           created_at: string
@@ -690,6 +753,19 @@ export type Database = {
       check_room_availability: {
         Args: { p_check_in: string; p_check_out: string; p_room_type_id: string }
         Returns: boolean
+      }
+      get_booking_for_review: {
+        Args: { p_booking_id: string; p_token: string }
+        Returns: {
+          already_reviewed: boolean
+          check_in: string
+          check_out: string
+          operator_name: string
+        }[]
+      }
+      submit_verified_review: {
+        Args: { p_booking_id: string; p_rating: number; p_review_text: string; p_token: string }
+        Returns: string
       }
       delete_email: {
         Args: { message_id: number; queue_name: string }
