@@ -13,6 +13,7 @@ const languages = [
   { code: "fr", label: "Français" },
   { code: "zh-CN", label: "中文" },
   { code: "pt", label: "Português" },
+  { code: "rw", label: "Kinyarwanda" },
 ];
 
 const LanguageSwitcher = () => {
@@ -31,7 +32,7 @@ const LanguageSwitcher = () => {
       new window.google.translate.TranslateElement(
         {
           pageLanguage: "en",
-          includedLanguages: "en,fr,zh-CN,pt",
+          includedLanguages: "en,fr,zh-CN,pt,rw",
           autoDisplay: false,
         },
         "google_translate_element"
