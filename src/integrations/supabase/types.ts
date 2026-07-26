@@ -14,6 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          check_in: string
+          check_out: string
+          created_at: string
+          currency_snapshot: string
+          guest_email: string
+          guest_name: string
+          guest_whatsapp: string
+          guests: number
+          id: string
+          operator_id: string
+          price_per_night_snapshot: number
+          review_requested_at: string | null
+          review_token: string
+          room_type_id: string
+          special_requests: string | null
+          status: string
+          total_price: number
+          updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          check_in: string
+          check_out: string
+          created_at?: string
+          currency_snapshot: string
+          guest_email: string
+          guest_name: string
+          guest_whatsapp: string
+          guests: number
+          id?: string
+          operator_id: string
+          price_per_night_snapshot: number
+          review_requested_at?: string | null
+          review_token?: string
+          room_type_id: string
+          special_requests?: string | null
+          status?: string
+          total_price: number
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          check_in?: string
+          check_out?: string
+          created_at?: string
+          currency_snapshot?: string
+          guest_email?: string
+          guest_name?: string
+          guest_whatsapp?: string
+          guests?: number
+          id?: string
+          operator_id?: string
+          price_per_night_snapshot?: number
+          review_requested_at?: string | null
+          review_token?: string
+          room_type_id?: string
+          special_requests?: string | null
+          status?: string
+          total_price?: number
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "operators"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_room_type_id_fkey"
+            columns: ["room_type_id"]
+            isOneToOne: false
+            referencedRelation: "room_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chat_messages: {
         Row: {
           created_at: string
@@ -600,6 +687,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_room_availability: {
+        Args: { p_check_in: string; p_check_out: string; p_room_type_id: string }
+        Returns: boolean
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean

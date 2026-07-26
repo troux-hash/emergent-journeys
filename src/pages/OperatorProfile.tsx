@@ -177,8 +177,8 @@ const OperatorProfile = () => {
     operator.water_conservation && { icon: Droplets, label: "Water Conservation" },
   ].filter(Boolean) as { icon: typeof Sun; label: string }[];
 
-  // BookDirectForm expects the original static-data Room shape.
   const roomsForForm = rooms.map((r) => ({
+    id: r.id,
     name: r.name,
     description: r.description || "",
     pricePerNight: r.price_per_night,
@@ -394,7 +394,7 @@ const OperatorProfile = () => {
                 <BookDirectForm
                   rooms={roomsForForm}
                   operatorName={operator.name}
-                  operatorSlug={operator.slug}
+                  operatorId={operator.id}
                 />
               </div>
             </RevealSection>

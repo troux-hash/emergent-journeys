@@ -2,7 +2,16 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
-import type { Room } from "@/data/operators";
+import { supabase } from "@/integrations/supabase/client";
+
+export interface BookableRoom {
+  id: string;
+  name: string;
+  description: string;
+  pricePerNight: number;
+  currency: string;
+  maxGuests: number;
+}
 
 const bookingSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -10,7 +19,7 @@ const bookingSchema = z.object({
   whatsapp: z.string().trim().min(1, "WhatsApp number is required").max(20),
   checkIn: z.string().min(1, "Check-in date is required"),
   checkOut: z.string().min(1, "Check-out date is required"),
-  roomType: z.string().min(1, "Please select a room"),
+  roomId: z.string().min(1, "Please select a room"),
   guests: z.coerce.number().min(1).max(20),
   specialRequests: z.string().max(1000).optional(),
 });
@@ -20,17 +29,18 @@ type BookingData = z.infer<typeof bookingSchema>;
 const BookDirectForm = ({
   rooms,
   operatorName,
-  operatorSlug,
+  operatorId,
 }: {
-  rooms: Room[];
+  rooms: BookableRoom[];
   operatorName: string;
-  operatorSlug: string;
+  operatorId: string;
 }) => {
   const [searchParams] = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof BookingData, string>>>({});
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
@@ -40,7 +50,7 @@ const BookDirectForm = ({
       whatsapp: formData.get("whatsapp") as string,
       checkIn: formData.get("checkIn") as string,
       checkOut: formData.get("checkOut") as string,
-      roomType: formData.get("roomType") as string,
+      roomId: formData.get("roomId") as string,
       guests: formData.get("guests") as string,
       specialRequests: (formData.get("specialRequests") as string) || "",
     };
@@ -56,36 +66,77 @@ const BookDirectForm = ({
       return;
     }
 
+    if (new Date(result.data.checkOut) <= new Date(result.data.checkIn)) {
+      setErrors({ checkOut: "Check-out must be after check-in" });
+      return;
+    }
+
+    const room = rooms.find((r) => r.id === result.data.roomId);
+    if (!room) {
+      toast.error("Please select a valid room");
+      return;
+    }
+
     setErrors({});
     setIsSubmitting(true);
 
-    // Capture UTM parameters
-    const utmData = {
+    const nights = Math.round(
+      (new Date(result.data.checkOut).getTime() - new Date(result.data.checkIn).getTime()) / 86400000
+    );
+
+    const { error } = await supabase.from("bookings").insert({
+      operator_id: operatorId,
+      room_type_id: room.id,
+      guest_name: result.data.name,
+      guest_email: result.data.email,
+      guest_whatsapp: result.data.whatsapp,
+      guests: result.data.guests,
+      special_requests: result.data.specialRequests || null,
+      check_in: result.data.checkIn,
+      check_out: result.data.checkOut,
+      price_per_night_snapshot: room.pricePerNight,
+      currency_snapshot: room.currency,
+      total_price: room.pricePerNight * nights,
       utm_source: searchParams.get("utm_source") || "direct",
       utm_medium: searchParams.get("utm_medium") || "",
       utm_campaign: searchParams.get("utm_campaign") || "",
-    };
-
-    // Log booking data (in production this goes to Airtable/Sheets)
-    console.log("Booking submission:", {
-      ...result.data,
-      operator: operatorSlug,
-      ...utmData,
-      timestamp: new Date().toISOString(),
     });
 
-    // Simulate submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast.success("Booking request sent!", {
-        description: `${operatorName} will confirm your stay via WhatsApp within 24 hours.`,
-      });
-      (e.target as HTMLFormElement).reset();
-    }, 1000);
+    setIsSubmitting(false);
+
+    if (error) {
+      // 23P01 = Postgres exclusion_violation — someone else already has
+      // this room booked for an overlapping date range.
+      if (error.code === "23P01") {
+        toast.error("Those dates just got booked", {
+          description: "Please try different dates for this room.",
+        });
+      } else {
+        toast.error("Failed to send booking request", { description: error.message });
+      }
+      return;
+    }
+
+    setSubmitted(true);
+    toast.success("Booking request sent!", {
+      description: `${operatorName} will confirm your stay via WhatsApp within 24 hours.`,
+    });
+    (e.target as HTMLFormElement).reset();
   };
 
   const inputClass =
     "w-full bg-parchment border border-border px-4 py-3 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold transition-colors";
+
+  if (submitted) {
+    return (
+      <div className="text-center py-10 border border-border bg-parchment-dark">
+        <p className="font-display text-xl text-foreground mb-2">Request sent!</p>
+        <p className="font-body text-sm text-muted-foreground">
+          {operatorName} will confirm your stay via WhatsApp within 24 hours.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -110,7 +161,7 @@ const BookDirectForm = ({
         <label className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
           WhatsApp Number
         </label>
-        <input name="whatsapp" type="tel" placeholder="+221 77 123 4567" className={inputClass} />
+        <input name="whatsapp" type="tel" placeholder="+250 700 000 000" className={inputClass} />
         {errors.whatsapp && <p className="text-destructive text-xs mt-1">{errors.whatsapp}</p>}
       </div>
 
@@ -136,17 +187,17 @@ const BookDirectForm = ({
           <label className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
             Room Type
           </label>
-          <select name="roomType" className={inputClass} defaultValue="">
+          <select name="roomId" className={inputClass} defaultValue="">
             <option value="" disabled>
               Select a room
             </option>
             {rooms.map((room) => (
-              <option key={room.name} value={room.name}>
-                {room.name} — ${room.pricePerNight}/night
+              <option key={room.id} value={room.id}>
+                {room.name} — {room.currency}{room.pricePerNight}/night
               </option>
             ))}
           </select>
-          {errors.roomType && <p className="text-destructive text-xs mt-1">{errors.roomType}</p>}
+          {errors.roomId && <p className="text-destructive text-xs mt-1">{errors.roomId}</p>}
         </div>
         <div>
           <label className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
@@ -171,7 +222,7 @@ const BookDirectForm = ({
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || rooms.length === 0}
         className="w-full font-label text-sm tracking-[0.2em] uppercase bg-gold text-earth-dark py-4 hover:opacity-90 transition-opacity disabled:opacity-50"
       >
         {isSubmitting ? "Sending..." : "Book Direct"}
