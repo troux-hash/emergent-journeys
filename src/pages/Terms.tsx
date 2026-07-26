@@ -33,7 +33,7 @@ const Terms = () => {
 
             <section>
               <h2 className="font-display text-lg font-medium text-foreground mb-3">2. The Service</h2>
-              <p>Fichua provides a platform connecting independent accommodation operators in Africa with travelers and travel agencies. We facilitate discovery, communication, and booking — but we are not a party to the accommodation contract between operator and guest.</p>
+              <p>Fichua provides a platform connecting independent tourism operators with travelers and travel agencies worldwide. We facilitate discovery, direct communication, and booking — but we are not a party to the accommodation contract between operator and guest.</p>
             </section>
 
             <section>
@@ -69,36 +69,41 @@ const Terms = () => {
 
             <section>
               <h2 className="font-display text-lg font-medium text-foreground mb-3">6. Payments</h2>
-              <p>Payments are processed securely through our payment partners. Fichua facilitates the transaction but funds are directed to the operator. Fichua may charge a service fee, which will be clearly disclosed before any transaction is completed.</p>
+              <p>Payments are processed through a licensed third-party payment processor. Fichua holds your payment as an intermediary and releases it to the operator according to a disclosed release policy — funds are not released blind or automatically upon payment. Fichua may charge a service fee (commission), disclosed before any transaction is completed. Fichua does not directly handle or store your card details; these are processed exclusively by our payment processor.</p>
             </section>
 
             <section>
               <h2 className="font-display text-lg font-medium text-foreground mb-3">7. Cancellations and refunds</h2>
-              <p>Cancellation policies are set by individual operators and displayed on their profile. Refund eligibility is determined by the operator's stated policy at the time of booking. Fichua will assist in resolving disputes but is not liable for refunds.</p>
+              <p>Cancellation policies are set by individual operators and displayed on their profile. Refund eligibility is determined by the operator's stated policy at the time of booking. Where a refund is due, Fichua processes it through the payment processor, since Fichua holds the funds. Fichua does not guarantee refunds beyond what the operator's stated policy allows, but will assist in resolving disputes raised through our support channel.</p>
             </section>
 
             <section>
-              <h2 className="font-display text-lg font-medium text-foreground mb-3">8. Intellectual property</h2>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">8. Reporting a problem</h2>
+              <p>If something goes wrong with a booking, either the traveler or the operator can report it directly to Fichua at <Link to="/report" className="text-gold hover:underline">fichua.co/report</Link>, independent of any conversation between the two parties. We review every report and follow up directly with the person who filed it.</p>
+            </section>
+
+            <section>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">9. Intellectual property</h2>
               <p>All content, design, and code on the Fichua platform is owned by Fichua or its licensors. Operators retain ownership of their property photos and descriptions but grant Fichua a licence to display them on the platform.</p>
             </section>
 
             <section>
-              <h2 className="font-display text-lg font-medium text-foreground mb-3">9. Limitation of liability</h2>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">10. Limitation of liability</h2>
               <p>Fichua is a platform, not an accommodation provider. We are not liable for the quality, safety, or legality of listed properties, the accuracy of listings, or the ability of operators to provide accommodation. Our liability is limited to the fees paid to Fichua for the Service.</p>
             </section>
 
             <section>
-              <h2 className="font-display text-lg font-medium text-foreground mb-3">10. Termination</h2>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">11. Termination</h2>
               <p>We may suspend or terminate your access to the Service at our discretion if you violate these terms. You may close your account at any time by contacting us.</p>
             </section>
 
             <section>
-              <h2 className="font-display text-lg font-medium text-foreground mb-3">11. Changes to these terms</h2>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">12. Changes to these terms</h2>
               <p>We may update these terms from time to time. Continued use of the Service after changes constitutes acceptance of the revised terms.</p>
             </section>
 
             <section>
-              <h2 className="font-display text-lg font-medium text-foreground mb-3">12. Contact</h2>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">13. Contact</h2>
               <p>Questions about these terms? Reach us at <a href="mailto:teddy225@mit.edu" className="text-gold hover:underline">teddy225@mit.edu</a>.</p>
             </section>
           </div>

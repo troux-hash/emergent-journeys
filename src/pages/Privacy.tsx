@@ -35,10 +35,12 @@ const Privacy = () => {
               <h2 className="font-display text-lg font-medium text-foreground mb-3">2. Information we collect</h2>
               <p className="mb-2">We collect information you provide directly:</p>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Name, email address, and phone number when you create an account or submit a booking enquiry.</li>
-                <li>Property details, photos, and pricing if you register as an operator.</li>
-                <li>Payment information processed securely through our payment partners — we do not store card details on our servers.</li>
-                <li>Messages exchanged through the platform or with your Fichua Buddy via WhatsApp.</li>
+                <li>Entity name, WhatsApp number, and social media handles when you register as an operator, plus GPS location, photos, room types, and pricing added during onboarding and verification.</li>
+                <li>Name, email address, WhatsApp number, and stay details when you make a booking as a traveler.</li>
+                <li>Messages you exchange through our chat widget or WhatsApp, including with our AI assistant, which we retain to keep conversations continuous and for support purposes.</li>
+                <li>Reviews and ratings you submit, including the booking reference for reviews tied to a verified stay.</li>
+                <li>Reports you submit through our support/dispute channel, including your contact details and the content of your report.</li>
+                <li>Payment information processed securely through our licensed payment processor — Fichua does not store your card details.</li>
               </ul>
               <p className="mt-3">We also collect limited technical data automatically, including device type, browser, IP address, and pages visited, to improve our service.</p>
             </section>
@@ -81,7 +83,12 @@ const Privacy = () => {
             </section>
 
             <section>
-              <h2 className="font-display text-lg font-medium text-foreground mb-3">9. Contact</h2>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">9. Rwanda pilot</h2>
+              <p>For our pilot operating in Rwanda, we process personal data in line with Law N°058/2021 of 13/10/2021 relating to the protection of personal data and privacy, in addition to the commitments in this policy.</p>
+            </section>
+
+            <section>
+              <h2 className="font-display text-lg font-medium text-foreground mb-3">10. Contact</h2>
               <p>Questions about this policy? Reach us at <a href="mailto:teddy225@mit.edu" className="text-gold hover:underline">teddy225@mit.edu</a>.</p>
             </section>
           </div>
