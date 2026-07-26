@@ -32,7 +32,7 @@ const LanguageSwitcher = () => {
       new window.google.translate.TranslateElement(
         {
           pageLanguage: "en",
-          includedLanguages: "en,fr,zh-CN,pt",
+          includedLanguages: "en,fr,zh-CN,pt,rw",
           autoDisplay: false,
         },
         "google_translate_element"
