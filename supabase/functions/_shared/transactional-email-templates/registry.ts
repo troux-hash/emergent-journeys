@@ -5,6 +5,7 @@ export interface TemplateEntry {
   component: React.ComponentType<any>
   subject: string | ((data: Record<string, any>) => string)
   to?: string
+  fromOverride?: string
   displayName?: string
   previewData?: Record<string, any>
 }
@@ -12,6 +13,7 @@ export interface TemplateEntry {
 import { template as chatNotification } from './chat-notification.tsx'
 import { template as reviewRequest } from './review-request.tsx'
 import { template as supportRequest } from './support-request.tsx'
+import { template as chatReply } from './chat-reply.tsx'
 
 const CHAT_NOTIFICATION_EMAIL = Deno.env.get('CHAT_NOTIFICATION_EMAIL') || ''
 
@@ -27,4 +29,5 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
     // this needs zero new Supabase secrets to work.
     to: CHAT_NOTIFICATION_EMAIL,
   },
+  'chat-reply': chatReply,
 }
