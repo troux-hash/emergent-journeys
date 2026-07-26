@@ -427,19 +427,19 @@ export type Database = {
         Returns: boolean
       }
       email_queue_dispatch: { Args: never; Returns: undefined }
-      get_chat_session_messages: {
-        Args: { p_session_id: string }
-        Returns: {
-          id: string
-          message: string
-          sender_type: string
-          created_at: string
-          visitor_name: string
-        }[]
-      }
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      get_chat_session_messages: {
+        Args: { p_session_id: string }
+        Returns: {
+          created_at: string
+          id: string
+          message: string
+          sender_type: string
+          visitor_name: string
+        }[]
       }
       has_role: {
         Args: {
