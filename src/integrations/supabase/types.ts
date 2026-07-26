@@ -106,7 +106,6 @@ export type Database = {
       }
       chat_messages: {
         Row: {
-          channel: string
           created_at: string
           id: string
           is_read: boolean
@@ -119,7 +118,6 @@ export type Database = {
           visitor_name: string
         }
         Insert: {
-          channel?: string
           created_at?: string
           id?: string
           is_read?: boolean
@@ -132,7 +130,6 @@ export type Database = {
           visitor_name?: string
         }
         Update: {
-          channel?: string
           created_at?: string
           id?: string
           is_read?: boolean
