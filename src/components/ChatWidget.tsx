@@ -19,18 +19,24 @@ interface ChatMessage {
   visitor_name: string;
 }
 
-const SESSION_KEY = "fichua_chat_session";
-
-function getOrCreateSession(): string {
-  let session = localStorage.getItem(SESSION_KEY);
+function getOrCreateSession(sessionKey: string): string {
+  let session = localStorage.getItem(sessionKey);
   if (!session) {
     session = crypto.randomUUID();
-    localStorage.setItem(SESSION_KEY, session);
+    localStorage.setItem(sessionKey, session);
   }
   return session;
 }
 
-const ChatWidget = () => {
+interface ChatWidgetProps {
+  operatorId?: string;
+  operatorName?: string;
+}
+
+const ChatWidget = ({ operatorId, operatorName }: ChatWidgetProps = {}) => {
+  // A distinct session per property being discussed, so switching between
+  // lodge pages doesn't mix conversations together.
+  const sessionKey = operatorId ? `fichua_chat_session_${operatorId}` : "fichua_chat_session";
   const [open, setOpen] = useState(false);
   const [langCode, setLangCode] = useState("en");
   const [langMenuOpen, setLangMenuOpen] = useState(false);
@@ -43,7 +49,7 @@ const ChatWidget = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const sessionId = useRef(getOrCreateSession());
+  const sessionId = useRef(getOrCreateSession(sessionKey));
 
   const lang = languages.find((l) => l.code === langCode) || languages[0];
 
@@ -149,6 +155,7 @@ const ChatWidget = () => {
       language: langCode,
       session_id: sessionId.current,
       sender_type: "visitor",
+      operator_id: operatorId || null,
     });
 
     if (error) {
@@ -213,7 +220,9 @@ const ChatWidget = () => {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 bg-primary text-primary-foreground shrink-0">
-              <span className="font-label text-sm tracking-wider uppercase">{lang.titleLabel}</span>
+              <span className="font-label text-sm tracking-wider uppercase">
+                {operatorName ? `Chat about ${operatorName}` : lang.titleLabel}
+              </span>
               <div className="flex items-center gap-1">
                 <div ref={langRef} className="relative">
                   <button onClick={() => setLangMenuOpen(!langMenuOpen)} className="p-1.5 hover:opacity-80" aria-label="Change language">

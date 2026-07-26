@@ -108,6 +108,7 @@ export type Database = {
           is_read: boolean
           language: string
           message: string
+          operator_id: string | null
           sender_type: string
           session_id: string
           visitor_email: string | null
@@ -119,6 +120,7 @@ export type Database = {
           is_read?: boolean
           language?: string
           message: string
+          operator_id?: string | null
           sender_type?: string
           session_id?: string
           visitor_email?: string | null
@@ -130,12 +132,21 @@ export type Database = {
           is_read?: boolean
           language?: string
           message?: string
+          operator_id?: string | null
           sender_type?: string
           session_id?: string
           visitor_email?: string | null
           visitor_name?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "operators"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       email_send_log: {
         Row: {

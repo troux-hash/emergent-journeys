@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Badge } from "@/components/ui/badge";
 import BookDirectForm from "@/components/BookDirectForm";
 import PropertyMap from "@/components/PropertyMap";
+import ChatWidget from "@/components/ChatWidget";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import RevealSection from "@/components/RevealSection";
 import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft, ShieldCheck } from "lucide-react";
@@ -589,6 +590,7 @@ const OperatorProfile = () => {
           </RevealSection>
         </div>
       </div>
+      <ChatWidget operatorId={operator.id} operatorName={operator.name} />
     </>
   );
 };

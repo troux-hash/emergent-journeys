@@ -1,6 +1,8 @@
 import { createClient } from 'npm:@supabase/supabase-js@2'
 
-// AI first-responder for the marketing site chat widget.
+// AI first-responder for the site chat widget — both the generic homepage
+// funnel chat and, when operator_id is set on the conversation, a
+// property-aware concierge grounded in that operator's real data.
 //
 // Flow: ChatWidget inserts a visitor message, then fire-and-forget invokes
 // this function with the session_id. This function re-reads the full
@@ -28,7 +30,7 @@ const LANGUAGE_NAMES: Record<string, string> = {
   rw: 'Kinyarwanda',
 }
 
-const SYSTEM_PROMPT = `You are the Fichua chat assistant, replying on the Fichua marketing website to independent tourism operators (lodges, camps, small hotels, tour operators) who are considering signing up.
+const GENERIC_SYSTEM_PROMPT = `You are the Fichua chat assistant, replying on the Fichua marketing website to independent tourism operators (lodges, camps, small hotels, tour operators) who are considering signing up.
 
 What Fichua does: gives independent operators their own page so they get found by travelers and AI/Google search, take bookings directly (no OTA middleman), and keep their revenue. No upfront fees, no long contracts.
 
@@ -37,6 +39,20 @@ Your job:
 - Do NOT invent or confirm specific prices, exact onboarding timelines, or contract terms — the site does not publish exact pricing. If asked for exact numbers or commitments, say a team member will confirm the details with them directly.
 - Actively but gently steer operators toward filling in the sign-up form on the page (name of entity, WhatsApp number, socials, rooms, price range) or sharing their WhatsApp number here, so the team can follow up within 24 hours.
 - Never claim to be a human. If asked, say you're the Fichua assistant, and a team member can join the conversation.
+- Reply in {LANGUAGE}, matching the visitor.
+- Keep replies short — this is a chat widget, not an essay.`
+
+const PROPERTY_SYSTEM_PROMPT = `You are the Fichua chat assistant, replying to a traveler on the Fichua page for a specific property. You are NOT the generic Fichua sign-up bot right now — this visitor is asking about a real place they might book.
+
+Below is the real, current data for this property. Answer only from these facts — never invent a price, room, amenity, or availability detail that isn't listed here.
+
+{PROPERTY_CONTEXT}
+
+Your job:
+- Answer questions about this property warmly and concisely (2-4 short sentences, plain language).
+- If asked something not covered by the facts above (e.g. exact availability for specific dates, something not listed), say you don't have that detail and point them to the "Book Direct" form on this page — submitting it lets the property confirm directly.
+- Gently encourage booking through the form on this page when relevant, since it goes straight to the property with no markup.
+- Never claim to be human. If asked, say you're the Fichua assistant for this listing.
 - Reply in {LANGUAGE}, matching the visitor.
 - Keep replies short — this is a chat widget, not an essay.`
 
@@ -54,6 +70,59 @@ interface ChatRow {
   created_at: string
   visitor_name: string
   language?: string
+  operator_id?: string | null
+}
+
+interface RoomTypeRow {
+  name: string
+  description: string | null
+  price_per_night: number
+  currency: string
+  max_guests: number
+}
+
+async function buildPropertyContext(
+  supabase: ReturnType<typeof createClient>,
+  operatorId: string
+): Promise<string | null> {
+  const { data: operator, error: opError } = await supabase
+    .from('operators')
+    .select(
+      'name, tagline, description, city, country, price_range, check_in, check_out, amenities, is_verified'
+    )
+    .eq('id', operatorId)
+    .eq('status', 'published')
+    .maybeSingle()
+
+  if (opError || !operator) {
+    console.error('Failed to load operator for chat context', { operatorId, error: opError })
+    return null
+  }
+
+  const { data: rooms } = await supabase
+    .from('room_types')
+    .select('name, description, price_per_night, currency, max_guests')
+    .eq('operator_id', operatorId)
+    .order('sort_order', { ascending: true })
+
+  const roomLines = ((rooms ?? []) as RoomTypeRow[])
+    .map(
+      (r) =>
+        `  - ${r.name}: ${r.currency}${r.price_per_night}/night, up to ${r.max_guests} guests${
+          r.description ? ` — ${r.description}` : ''
+        }`
+    )
+    .join('\n')
+
+  return `Property: ${operator.name}${operator.tagline ? ` — ${operator.tagline}` : ''}
+Location: ${[operator.city, operator.country].filter(Boolean).join(', ') || 'not specified'}
+Description: ${operator.description || 'not provided'}
+Price range: ${operator.price_range || 'not specified'}
+Check-in: ${operator.check_in || 'not specified'} · Check-out: ${operator.check_out || 'not specified'}
+Amenities: ${(operator.amenities ?? []).length > 0 ? operator.amenities.join(', ') : 'not listed'}
+Fichua Verified: ${operator.is_verified ? 'yes' : 'not yet'}
+Rooms:
+${roomLines || '  (no room types listed yet)'}`
 }
 
 Deno.serve(async (req) => {
@@ -93,13 +162,13 @@ Deno.serve(async (req) => {
 
   const { data: history, error: historyError } = await supabase
     .from('chat_messages')
-    .select('id, message, sender_type, created_at, visitor_name, language')
+    .select('id, message, sender_type, created_at, visitor_name, language, operator_id')
     .eq('session_id', sessionId)
     .order('created_at', { ascending: true })
 
   if (historyError) {
     console.error('Failed to load session history', { error: historyError })
-    return jsonResponse({ error: 'Failed to load history' }, 500 )
+    return jsonResponse({ error: 'Failed to load history' }, 500)
   }
 
   const messages = (history ?? []) as ChatRow[]
@@ -125,6 +194,21 @@ Deno.serve(async (req) => {
   const visitorName = lastMessage.visitor_name || 'there'
   const languageCode = lastMessage.language || 'en'
   const languageName = LANGUAGE_NAMES[languageCode] || 'English'
+  const operatorId = lastMessage.operator_id || null
+
+  let systemPrompt = GENERIC_SYSTEM_PROMPT.replace('{LANGUAGE}', languageName)
+
+  if (operatorId) {
+    const propertyContext = await buildPropertyContext(supabase, operatorId)
+    if (propertyContext) {
+      systemPrompt = PROPERTY_SYSTEM_PROMPT.replace('{LANGUAGE}', languageName).replace(
+        '{PROPERTY_CONTEXT}',
+        propertyContext
+      )
+    }
+    // If the operator lookup fails for some reason, fall back to the
+    // generic prompt rather than answering with no grounding at all.
+  }
 
   const recentHistory = messages.slice(-MAX_HISTORY_MESSAGES)
   const anthropicMessages = recentHistory.map((m) => ({
@@ -144,7 +228,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         model: ANTHROPIC_MODEL,
         max_tokens: 300,
-        system: SYSTEM_PROMPT.replace('{LANGUAGE}', languageName),
+        system: systemPrompt,
         messages: anthropicMessages,
       }),
     })
@@ -180,6 +264,7 @@ Deno.serve(async (req) => {
     session_id: sessionId,
     sender_type: 'agent',
     language: languageCode,
+    operator_id: operatorId,
   })
 
   if (insertError) {
@@ -191,6 +276,7 @@ Deno.serve(async (req) => {
     session_id: sessionId,
     visitor_name: visitorName,
     language: languageCode,
+    operator_id: operatorId,
     reply_length: replyText.length,
   })
 
