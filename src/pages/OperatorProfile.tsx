@@ -535,6 +535,14 @@ const OperatorProfile = () => {
                   operatorName={operator.name}
                   operatorId={operator.id}
                 />
+                <p className="text-center mt-6">
+                  <Link
+                    to={`/report?operatorId=${operator.id}&operatorName=${encodeURIComponent(operator.name)}`}
+                    className="font-label text-[11px] tracking-[0.15em] uppercase text-muted-foreground hover:text-gold transition-colors underline underline-offset-4"
+                  >
+                    Something not right? Report it to Fichua directly
+                  </Link>
+                </p>
               </div>
             </RevealSection>
           </section>

@@ -1,36 +1,22 @@
 import RevealSection from "./RevealSection";
+import { ShieldCheck, Lock, Star } from "lucide-react";
 
-const metrics = [
-  { value: "50+", label: "Operators Onboarded" },
-  { value: "1,200+", label: "Bookings Completed" },
-  { value: "$320K+", label: "Revenue Distributed to Operators" },
-];
-
-const testimonials = [
+const pillars = [
   {
-    quote: "Fichua changed everything for us. We went from invisible to fully booked in three months.",
-    name: "Grace M.",
-    role: "Owner, Kenya",
+    icon: ShieldCheck,
+    title: "Every listing verified",
+    body: "Identity, property location, WhatsApp reachability, and payout details are all confirmed before anything goes live — not a self-reported checkbox.",
   },
   {
-    quote: "For the first time, international guests find us directly — no middleman, no commission drain.",
-    name: "Jean-Pierre K.",
-    role: "Boutique Hotel, Rwanda",
+    icon: Lock,
+    title: "Payments protected",
+    body: "Fichua holds your payment through a licensed processor and only releases it to the operator per a clear policy — never blind, never upfront to a stranger.",
   },
   {
-    quote: "The onboarding was effortless. My Fichua Buddy made sure I was never lost.",
-    name: "Amara D.",
-    role: "Independent Operator, Tanzania",
+    icon: Star,
+    title: "Reviews you can trust",
+    body: "Verified Stay reviews are tied to a real, paid booking. They can't be bought, faked, or imported — that's what makes them worth reading.",
   },
-];
-
-const partnerLogos = [
-  "Safari Connect",
-  "AfriStay",
-  "Kilimanjaro Tours",
-  "Ubuntu Travel",
-  "Savanna Hotels",
-  "Baobab Ventures",
 ];
 
 const TrustSection = () => {
@@ -40,62 +26,25 @@ const TrustSection = () => {
         <RevealSection>
           <div className="text-center mb-16">
             <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
-              They Trust Us
+              Built On Trust
             </p>
-            <h2 className="font-display text-2xl md:text-4xl font-medium leading-tight text-foreground">
-              Trusted across the continent.
+            <h2 className="font-display text-2xl md:text-4xl font-medium leading-tight text-foreground mb-4">
+              Trust isn't a badge. It's how we're built.
             </h2>
+            <p className="font-body text-sm text-muted-foreground max-w-lg mx-auto">
+              We're onboarding our first verified operators now, starting with a pilot in Rwanda. Here's what
+              protects you from day one.
+            </p>
           </div>
         </RevealSection>
 
-        {/* Metrics */}
-        <RevealSection delay={0.05}>
-          <div className="grid grid-cols-3 gap-6 md:gap-12 mb-16">
-            {metrics.map((m) => (
-              <div key={m.label} className="text-center">
-                <p className="font-display text-3xl md:text-5xl font-semibold text-gold">
-                  {m.value}
-                </p>
-                <p className="font-label text-[10px] md:text-xs tracking-[0.15em] uppercase text-muted-foreground mt-2">
-                  {m.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </RevealSection>
-
-        {/* Partner logos */}
-        <RevealSection delay={0.1}>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-6 mb-16">
-            {partnerLogos.map((name) => (
-              <div
-                key={name}
-                className="h-16 md:h-20 bg-parchment-dark border border-border flex items-center justify-center"
-              >
-                <span className="font-label text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-muted-foreground/60">
-                  {name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </RevealSection>
-
-        {/* Testimonials */}
         <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <RevealSection key={t.name} delay={0.12 + i * 0.06}>
-              <div className="bg-parchment-dark border border-border p-6 md:p-8">
-                <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6 italic">
-                  "{t.quote}"
-                </p>
-                <div>
-                  <p className="font-display text-sm font-medium text-foreground">
-                    {t.name}
-                  </p>
-                  <p className="font-label text-[10px] tracking-[0.15em] uppercase text-muted-foreground/60 mt-1">
-                    {t.role}
-                  </p>
-                </div>
+          {pillars.map((p, i) => (
+            <RevealSection key={p.title} delay={0.08 + i * 0.06}>
+              <div className="bg-parchment-dark border border-border p-6 md:p-8 h-full">
+                <p.icon className="w-6 h-6 text-gold mb-4" strokeWidth={1.5} />
+                <h3 className="font-display text-lg font-medium text-foreground mb-2">{p.title}</h3>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">{p.body}</p>
               </div>
             </RevealSection>
           ))}

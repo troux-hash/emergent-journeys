@@ -11,6 +11,7 @@ export interface TemplateEntry {
 
 import { template as chatNotification } from './chat-notification.tsx'
 import { template as reviewRequest } from './review-request.tsx'
+import { template as supportRequest } from './support-request.tsx'
 
 const CHAT_NOTIFICATION_EMAIL = Deno.env.get('CHAT_NOTIFICATION_EMAIL') || ''
 
@@ -20,4 +21,10 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
     to: CHAT_NOTIFICATION_EMAIL,
   },
   'review-request': reviewRequest,
+  'support-request': {
+    ...supportRequest,
+    // Reuses the same admin inbox already configured for chat pings, so
+    // this needs zero new Supabase secrets to work.
+    to: CHAT_NOTIFICATION_EMAIL,
+  },
 }
