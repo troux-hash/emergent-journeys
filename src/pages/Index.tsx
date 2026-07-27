@@ -4,6 +4,7 @@ import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import TrustSection from "@/components/TrustSection";
+import PricingSection from "@/components/PricingSection";
 import OperatorSignupSection from "@/components/OperatorSignupSection";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
@@ -17,6 +18,7 @@ const Index = () => {
       <SolutionSection />
       <HowItWorksSection />
       <TrustSection />
+      <PricingSection />
       <OperatorSignupSection />
       <Footer />
       <ChatWidget />

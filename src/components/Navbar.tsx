@@ -9,6 +9,7 @@ const rawNavItems = [
   { label: "The Solution", href: "#solution" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Discover", href: "/discover" },
+  { label: "Pricing", href: "/#pricing" },
   { label: "Trust & Safety", href: "/trust" },
 ];
 
