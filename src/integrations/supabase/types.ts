@@ -519,6 +519,12 @@ export type Database = {
       }
       operators: {
         Row: {
+          lifecycle_stage: Database["public"]["Enums"]["operator_lifecycle_stage"]
+          lifecycle_changed_at: string
+          subscription_price: number | null
+          subscription_currency: string | null
+          price_snapshot_at: string | null
+          billing_started_at: string | null
           address: string | null
           amenities: string[]
           check_in: string | null
@@ -943,6 +949,49 @@ export type Database = {
           read_ct: number
         }[]
       }
+      delivered_booking_count: { Args: { p_operator_id: string }; Returns: number }
+      delivered_bookings_detail: {
+        Args: { p_operator_id: string }
+        Returns: {
+          booking_id: string
+          guest_name: string
+          check_in: string
+          check_out: string
+          total_price: number
+          currency: string
+          counted_at: string
+        }[]
+      }
+      calculate_subscription_price: {
+        Args: { p_operator_id: string }
+        Returns: { price: number; currency: string; room_type_count: number }[]
+      }
+      evaluate_operator_lifecycle: {
+        Args: { p_operator_id: string }
+        Returns: Database["public"]["Enums"]["operator_lifecycle_stage"]
+      }
+      operator_lifecycle_overview: {
+        Args: never
+        Returns: {
+          operator_id: string
+          name: string
+          slug: string
+          status: string
+          lifecycle_stage: Database["public"]["Enums"]["operator_lifecycle_stage"]
+          lifecycle_changed_at: string
+          days_in_stage: number
+          delivered_bookings: number
+          bookings_until_billing: number
+          subscription_price: number | null
+          subscription_currency: string | null
+          projected_price: number | null
+          projected_currency: string | null
+          room_type_count: number
+          billing_started_at: string | null
+          last_booking_at: string | null
+          is_verified: boolean | null
+        }[]
+      }
       send_pending_review_requests: { Args: never; Returns: undefined }
       submit_verified_review: {
         Args: {
@@ -956,6 +1005,14 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      operator_lifecycle_stage:
+        | "lead"
+        | "verifying"
+        | "ready"
+        | "live_free"
+        | "live_subscribed"
+        | "dormant"
+        | "paused"
     }
     CompositeTypes: {
       [_ in never]: never
