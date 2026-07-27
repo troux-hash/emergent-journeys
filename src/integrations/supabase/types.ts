@@ -904,6 +904,7 @@ export type Database = {
       calculate_subscription_price: {
         Args: { p_operator_id: string }
         Returns: {
+          cheapest_room_rate: number
           currency: string
           price: number
           room_type_count: number
@@ -986,6 +987,7 @@ export type Database = {
         Returns: {
           billing_started_at: string
           bookings_until_billing: number
+          cheapest_room_rate: number
           days_in_stage: number
           delivered_bookings: number
           is_verified: boolean
