@@ -28,7 +28,10 @@ interface Row {
   subscription_price: number | null;
   subscription_currency: string | null;
   projected_price: number | null;
+  projected_uncapped: number | null;
   projected_currency: string | null;
+  cap_amount: number | null;
+  cap_applied: boolean;
   room_type_count: number;
   billing_started_at: string | null;
   last_booking_at: string | null;
@@ -191,6 +194,11 @@ const IntranetLifecycle = () => {
                 <p className="text-sm text-foreground">
                   Will pay <strong>{money(r.projected_price, r.projected_currency)}</strong> / month
                 </p>
+                {r.cap_applied && (
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    capped — 3 nights would be {money(r.projected_uncapped, r.projected_currency)}
+                  </p>
+                )}
                 <Button variant="outline" size="sm" className="mt-3" onClick={() => openDetail(r)}>
                   See the {r.delivered_bookings} bookings
                 </Button>
@@ -265,7 +273,7 @@ const IntranetLifecycle = () => {
                     ) : (
                       <span className="text-muted-foreground">
                         {money(r.projected_price, r.projected_currency)}
-                        <span className="text-[10px] ml-1">(est.)</span>
+                        <span className="text-[10px] ml-1">{r.cap_applied ? "(capped)" : "(est.)"}</span>
                       </span>
                     )}
                   </td>

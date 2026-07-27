@@ -40,12 +40,12 @@ const PricingSection = () => {
             <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Pricing</p>
             <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-5">
               Three nights a month, plus 7%.<br />
-              <em className="text-gold">And nothing until we've earned it.</em>
+              <em className="text-gold">Never more than $350.</em>
             </h2>
             <p className="font-body text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Two parts, both stated plainly: a monthly subscription to be visible, and 7% on the bookings we
-              bring you — against the 15–20% the large platforms take. You pay neither until Fichua has
-              delivered you ten bookings.
+              Two parts, both stated plainly: a monthly subscription to be visible — never more than $350 —
+              and 7% on the bookings we bring you, against the 15–20% the large platforms take. You pay
+              neither until Fichua has delivered you ten bookings.
             </p>
           </div>
         </RevealSection>
@@ -62,13 +62,16 @@ const PricingSection = () => {
                   The price of<br />3 nights
                 </p>
                 <p className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground mb-5">
-                  per month — to be found and stay visible
+                  per month — capped at $350
                 </p>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">
                   Your subscription is the average value of three nights at your property. A small guesthouse pays
                   less than a safari lodge, because a fixed fee that's fair to one is unfair to the other. It
-                  scales with you — and it's the same simple number whether you take twelve bookings that month
-                  or eighty.
+                  scales with you — and it's the same number whether you take twelve bookings that month or eighty.
+                </p>
+                <p className="font-body text-sm text-foreground border-l-2 border-gold pl-3">
+                  <strong>And it never exceeds $350 a month</strong>, however high your rates are — so you always
+                  know your ceiling before you start.
                 </p>
               </div>
 
