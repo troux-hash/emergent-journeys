@@ -201,11 +201,22 @@ GRANT EXECUTE ON FUNCTION public.evaluate_operator_lifecycle(UUID) TO authentica
 -- Only ever LOWERS an existing price. Cheapest-room x3 is by definition
 -- <= average x3, so this is a reduction for everyone -- but the guard
 -- makes that explicit rather than assumed.
+-- NOTE: this cannot be written as `UPDATE operators o ... FROM LATERAL
+-- calculate_subscription_price(o.id)` -- a LATERAL item in the FROM
+-- clause may not reference the UPDATE target table, and Postgres rejects
+-- it with "invalid reference to FROM-clause entry". The LATERAL is
+-- therefore nested inside a subquery over a second alias (o2), which is
+-- a legal reference, and the result is joined back by id.
 UPDATE public.operators o
-   SET subscription_price = p.price,
-       subscription_currency = p.currency,
+   SET subscription_price = sub.price,
+       subscription_currency = sub.currency,
        price_snapshot_at = now()
-  FROM LATERAL public.calculate_subscription_price(o.id) p
- WHERE o.subscription_price IS NOT NULL
-   AND p.price IS NOT NULL
-   AND p.price < o.subscription_price;
+  FROM (
+    SELECT o2.id AS operator_id, p.price, p.currency
+      FROM public.operators o2
+      CROSS JOIN LATERAL public.calculate_subscription_price(o2.id) p
+  ) sub
+ WHERE o.id = sub.operator_id
+   AND o.subscription_price IS NOT NULL
+   AND sub.price IS NOT NULL
+   AND sub.price < o.subscription_price;
