@@ -21,6 +21,7 @@ const navItems = [
   { title: "Reviews", url: "/intranet/reviews", icon: Star },
   { title: "Support", url: "/intranet/support", icon: LifeBuoy },
   { title: "Discoverability", url: "/intranet/discoverability", icon: TrendingUp },
+  { title: "DNS Status", url: "/intranet/dns", icon: Globe },
   { title: "Documents", url: "/intranet/documents", icon: FileText },
   { title: "Tasks", url: "/intranet/tasks", icon: CheckSquare },
   { title: "Projects", url: "/intranet/projects", icon: FolderKanban },
