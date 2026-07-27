@@ -28,13 +28,8 @@ interface Row {
   subscription_price: number | null;
   subscription_currency: string | null;
   projected_price: number | null;
-  projected_uncapped: number | null;
   projected_currency: string | null;
-  cap_amount: number | null;
-  cap_applied: boolean;
-  mtd_delivered_value: number | null;
-  mtd_amount_due: number | null;
-  mtd_capped_by: string | null;
+  cheapest_room_rate: number | null;
   room_type_count: number;
   billing_started_at: string | null;
   last_booking_at: string | null;
@@ -197,9 +192,9 @@ const IntranetLifecycle = () => {
                 <p className="text-sm text-foreground">
                   Will pay <strong>{money(r.projected_price, r.projected_currency)}</strong> / month
                 </p>
-                {r.cap_applied && (
+                {r.cheapest_room_rate != null && (
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    capped — 3 nights would be {money(r.projected_uncapped, r.projected_currency)}
+                    3 × {money(r.cheapest_room_rate, r.projected_currency)} (cheapest room)
                   </p>
                 )}
                 <Button variant="outline" size="sm" className="mt-3" onClick={() => openDetail(r)}>
@@ -249,7 +244,7 @@ const IntranetLifecycle = () => {
                 <th className="p-3 font-medium">Stage</th>
                 <th className="p-3 font-medium text-right">Bookings</th>
                 <th className="p-3 font-medium text-right">Monthly</th>
-                <th className="p-3 font-medium text-right">Due this month</th>
+                <th className="p-3 font-medium">Since</th>
                 <th className="p-3"></th>
               </tr>
             </thead>
@@ -276,27 +271,11 @@ const IntranetLifecycle = () => {
                     ) : (
                       <span className="text-muted-foreground">
                         {money(r.projected_price, r.projected_currency)}
-                        <span className="text-[10px] ml-1">{r.cap_applied ? "(capped)" : "(est.)"}</span>
+                        <span className="text-[10px] ml-1">(est.)</span>
                       </span>
                     )}
                   </td>
-                  <td className="p-3 text-right">
-                    {r.lifecycle_stage === "live_subscribed" ? (
-                      <>
-                        <span className="tabular-nums text-foreground">
-                          {money(r.mtd_amount_due, r.subscription_currency)}
-                        </span>
-                        {r.mtd_capped_by === "no_delivery" && (
-                          <span className="block text-[10px] text-muted-foreground">nothing delivered</span>
-                        )}
-                        {r.mtd_capped_by === "delivery" && (
-                          <span className="block text-[10px] text-muted-foreground">delivery-capped</span>
-                        )}
-                      </>
-                    ) : (
-                      <span className="text-muted-foreground text-xs">—</span>
-                    )}
-                  </td>
+                  <td className="p-3 text-muted-foreground text-xs">{r.days_in_stage}d</td>
                   <td className="p-3 text-right">
                     <div className="flex items-center justify-end gap-1">
                       <Button variant="ghost" size="sm" onClick={() => openDetail(r)}>

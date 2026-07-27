@@ -11,9 +11,8 @@
 ## Pricing for operators
 
 Fichua's operator pricing has two parts:
-- A monthly subscription for visibility, equal to the value of three nights at that operator's own property, so it scales with their own rates rather than being a flat fee. This subscription is capped at USD 350 per month regardless of how high their rates are.
+- A monthly subscription for visibility, equal to three nights at the nightly rate of that operator's cheapest room, so it scales with their own rates rather than being a flat fee.
 - A 7% commission on bookings made through Fichua, compared with the 15-20% typically charged by large online travel agencies.
-- The subscription is additionally capped at 20% of the booking value Fichua actually delivered that month. If Fichua delivers no bookings in a month, no subscription is charged for that month at all.
 - Operators pay neither until Fichua has delivered them 10 bookings. There is no setup fee and no card required to list.
 - No lock-in and no exclusivity.
 

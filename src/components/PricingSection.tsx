@@ -40,12 +40,12 @@ const PricingSection = () => {
             <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Pricing</p>
             <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-5">
               Three nights a month, plus 7%.<br />
-              <em className="text-gold">Never more than $350.</em>
+              <em className="text-gold">And nothing until we've earned it.</em>
             </h2>
             <p className="font-body text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Two parts, both stated plainly: a monthly subscription to be visible — never more than $350 —
-              and 7% on the bookings we bring you, against the 15–20% the large platforms take. You pay
-              neither until Fichua has delivered you ten bookings.
+              Two parts, both stated plainly: a monthly subscription to be visible — three nights in your
+              cheapest room — and 7% on the bookings we bring you, against the 15–20% the large platforms
+              take. You pay neither until Fichua has delivered you ten bookings.
             </p>
           </div>
         </RevealSection>
@@ -59,19 +59,19 @@ const PricingSection = () => {
                   What it costs
                 </p>
                 <p className="font-display text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-3">
-                  The price of<br />3 nights
+                  3 nights in your<br />cheapest room
                 </p>
                 <p className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground mb-5">
-                  per month — capped at $350
+                  per month, to be found and stay visible
                 </p>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">
-                  Your subscription is the average value of three nights at your property. A small guesthouse pays
-                  less than a safari lodge, because a fixed fee that's fair to one is unfair to the other. It
-                  scales with you — and it's the same number whether you take twelve bookings that month or eighty.
+                  Take your least expensive room, multiply its nightly rate by three — that's your month. A small
+                  guesthouse pays less than a safari lodge, because a flat fee that's fair to one is unfair to the
+                  other.
                 </p>
                 <p className="font-body text-sm text-foreground border-l-2 border-gold pl-3">
-                  <strong>And it never exceeds $350 a month</strong>, however high your rates are — so you always
-                  know your ceiling before you start.
+                  <strong>You can work it out in your head</strong>, and it's the same number whether you take
+                  twelve bookings that month or eighty.
                 </p>
               </div>
 
@@ -91,9 +91,8 @@ const PricingSection = () => {
                 <div className="flex items-start gap-2 border-t border-border pt-5">
                   <HandCoins className="w-4 h-4 text-gold mt-0.5 shrink-0" strokeWidth={1.5} />
                   <p className="font-body text-sm text-foreground">
-                    <strong>You pay only when we deliver.</strong> Your subscription never exceeds 20% of the
-                    booking value we brought you that month — and in a month we bring you nothing, you owe
-                    nothing at all.
+                    <strong>You pay only when we deliver.</strong> That's the whole model — the risk sits with us,
+                    not with you.
                   </p>
                 </div>
               </div>
