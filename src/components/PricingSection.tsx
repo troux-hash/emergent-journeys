@@ -91,8 +91,9 @@ const PricingSection = () => {
                 <div className="flex items-start gap-2 border-t border-border pt-5">
                   <HandCoins className="w-4 h-4 text-gold mt-0.5 shrink-0" strokeWidth={1.5} />
                   <p className="font-body text-sm text-foreground">
-                    <strong>You pay only when we deliver.</strong> That's the whole model — the risk sits with us,
-                    not with you.
+                    <strong>You pay only when we deliver.</strong> Your subscription never exceeds 20% of the
+                    booking value we brought you that month — and in a month we bring you nothing, you owe
+                    nothing at all.
                   </p>
                 </div>
               </div>

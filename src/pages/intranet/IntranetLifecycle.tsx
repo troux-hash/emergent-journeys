@@ -32,6 +32,9 @@ interface Row {
   projected_currency: string | null;
   cap_amount: number | null;
   cap_applied: boolean;
+  mtd_delivered_value: number | null;
+  mtd_amount_due: number | null;
+  mtd_capped_by: string | null;
   room_type_count: number;
   billing_started_at: string | null;
   last_booking_at: string | null;
@@ -246,7 +249,7 @@ const IntranetLifecycle = () => {
                 <th className="p-3 font-medium">Stage</th>
                 <th className="p-3 font-medium text-right">Bookings</th>
                 <th className="p-3 font-medium text-right">Monthly</th>
-                <th className="p-3 font-medium">Since</th>
+                <th className="p-3 font-medium text-right">Due this month</th>
                 <th className="p-3"></th>
               </tr>
             </thead>
@@ -277,7 +280,23 @@ const IntranetLifecycle = () => {
                       </span>
                     )}
                   </td>
-                  <td className="p-3 text-muted-foreground text-xs">{r.days_in_stage}d</td>
+                  <td className="p-3 text-right">
+                    {r.lifecycle_stage === "live_subscribed" ? (
+                      <>
+                        <span className="tabular-nums text-foreground">
+                          {money(r.mtd_amount_due, r.subscription_currency)}
+                        </span>
+                        {r.mtd_capped_by === "no_delivery" && (
+                          <span className="block text-[10px] text-muted-foreground">nothing delivered</span>
+                        )}
+                        {r.mtd_capped_by === "delivery" && (
+                          <span className="block text-[10px] text-muted-foreground">delivery-capped</span>
+                        )}
+                      </>
+                    ) : (
+                      <span className="text-muted-foreground text-xs">—</span>
+                    )}
+                  </td>
                   <td className="p-3 text-right">
                     <div className="flex items-center justify-end gap-1">
                       <Button variant="ghost" size="sm" onClick={() => openDetail(r)}>
