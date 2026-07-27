@@ -10,6 +10,7 @@ const OperatorSignupSection = () => {
   const [formData, setFormData] = useState({
     entityName: "",
     whatsapp: "",
+    email: "",
     instagram: "",
     tiktok: "",
     facebook: "",
@@ -32,6 +33,7 @@ const OperatorSignupSection = () => {
     const { error } = await supabase.from("operator_leads").insert({
       property_name: formData.entityName.trim(),
       phone: formData.whatsapp.trim(),
+      email: formData.email.trim() || null,
       instagram_handle: formData.instagram.trim() || null,
       tiktok_handle: formData.tiktok.trim() || null,
       facebook_handle: formData.facebook.trim() || null,
@@ -79,10 +81,11 @@ const OperatorSignupSection = () => {
               <div className="bg-earth-dark-foreground/5 border border-earth-dark-foreground/10 p-8 md:p-10 text-center">
                 <CheckCircle className="w-10 h-10 text-gold mx-auto mb-4" strokeWidth={1.5} />
                 <h3 className="font-display text-xl font-medium text-earth-light mb-2">
-                  We'll be in touch!
+                  We've got your details.
                 </h3>
                 <p className="font-body text-sm text-earth-dark-foreground/60">
-                  A member of the Fichua team will message you on WhatsApp within 24 hours to schedule your onboarding call.
+                  A member of the Fichua team will message you on WhatsApp within one working day. Next comes
+                  verification — four quick checks — and then your page goes live.
                 </p>
               </div>
             ) : (
@@ -118,6 +121,20 @@ const OperatorSignupSection = () => {
                     onChange={handleChange("whatsapp")}
                     className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
                     placeholder="+254 700 000 000"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-label text-[10px] tracking-[0.2em] uppercase text-earth-dark-foreground/50 block mb-2">
+                    Email <span className="normal-case tracking-normal opacity-60">(optional — so we can confirm in writing)</span>
+                  </label>
+                  <input
+                    type="email"
+                    maxLength={320}
+                    value={formData.email}
+                    onChange={handleChange("email")}
+                    className="w-full bg-transparent border border-earth-dark-foreground/20 px-4 py-3 font-body text-sm text-earth-light placeholder:text-earth-dark-foreground/30 focus:border-gold focus:outline-none transition-colors"
+                    placeholder="you@yourproperty.com"
                   />
                 </div>
 
