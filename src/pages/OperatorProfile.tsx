@@ -44,6 +44,11 @@ interface OperatorRow {
   is_verified: boolean | null;
 }
 
+// Canonical public origin, used to build absolute URLs inside JSON-LD.
+// Structured data must use absolute URLs -- crawlers resolve these
+// independently of the page they were found on.
+const SITE_ORIGIN = "https://fichua.co";
+
 interface RoomTypeRow {
   id: string;
   name: string;
@@ -232,6 +237,39 @@ const OperatorProfile = () => {
       : {}),
     ...(operator.instagram_url || operator.tripadvisor_url
       ? { sameAs: [operator.instagram_url, operator.tripadvisor_url].filter(Boolean) }
+      : {}),
+    // Machine-readable per-room pricing. Without concrete Offer objects
+    // carrying a real price + currency, AI answer engines and shopping
+    // surfaces have no citable price to quote and tend to fall back on
+    // sources that do (large OTAs). priceRange alone is not enough --
+    // it's a string, not a queryable offer.
+    ...(rooms.length > 0
+      ? {
+          makesOffer: rooms.map((r) => ({
+            "@type": "Offer",
+            name: r.name,
+            ...(r.description ? { description: r.description } : {}),
+            price: r.price_per_night,
+            priceCurrency: r.currency,
+            availability: "https://schema.org/InStock",
+            url: `${SITE_ORIGIN}/operators/${operator.slug}#book`,
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: r.price_per_night,
+              priceCurrency: r.currency,
+              unitCode: "DAY",
+            },
+            itemOffered: {
+              "@type": "HotelRoom",
+              name: r.name,
+              occupancy: {
+                "@type": "QuantitativeValue",
+                maxValue: r.max_guests,
+                unitCode: "C62",
+              },
+            },
+          })),
+        }
       : {}),
   };
 

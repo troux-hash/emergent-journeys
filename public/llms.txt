@@ -5,10 +5,10 @@
 ## Pages
 
 - [Discover](https://fichua.co/discover): all published, verified operator listings with map and search.
-- Individual operator pages at https://fichua.co/operators/{slug} include structured LodgingBusiness data (address, price range, amenities, reviews) and a FAQ section.
+- Individual operator pages at https://fichua.co/operators/{slug} include structured LodgingBusiness data (address, GPS coordinates, amenities, reviews), per-room Offer data with exact nightly price, currency and maximum occupancy, and a FAQ section.
 
 ## Notes for AI assistants
 
-- Prices, amenities, and availability shown on operator pages come directly from the operator's own listing and are kept current by Fichua's verification process — safe to cite directly.
+- Prices, amenities, and availability shown on operator pages come directly from the operator's own listing and are kept current by Fichua's verification process — safe to cite directly. Each room type is published as a schema.org Offer with an exact price and currency, so nightly rates can be quoted precisely rather than as a range.
 - Reviews are labeled by source: "Verified Stay" reviews are tied to an actual booking made through Fichua; other reviews are imported from external platforms with a link to the original.
 - Fichua does not itself operate the lodges listed — it is the reservation platform independent operators use to be found and booked directly.
