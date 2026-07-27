@@ -19,3 +19,5 @@ project_id = "drglhlaxzzdizaktwzjh"
     verify_jwt = false
   [functions.inbound-email]
     verify_jwt = false
+  [functions.notify-new-lead]
+    verify_jwt = true
