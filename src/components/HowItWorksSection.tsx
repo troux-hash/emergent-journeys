@@ -4,17 +4,17 @@ const steps = [
   {
     num: "01",
     title: "Tell us about your place",
-    body: "A quick call or chat. We gather what we need — no forms, no jargon.",
+    body: "Your name, WhatsApp, rooms and prices. A few minutes, in plain language — no jargon.",
   },
   {
     num: "02",
-    title: "We build your Fichua page",
-    body: "Mobile-ready and search-friendly. You review it before it goes live.",
+    title: "We verify you",
+    body: "We confirm your identity and ownership, check your photos against your real GPS location, message your WhatsApp to make sure it reaches a real person, and set up your payout account. Only then do you get the Fichua Verified badge.",
   },
   {
     num: "03",
-    title: "Take direct bookings",
-    body: "Guests find you, book you, and pay you — directly.",
+    title: "You go live and take direct bookings",
+    body: "Your verified page is published for travellers, Google and AI assistants. Guests book and pay through Fichua, and the money reaches you.",
   },
 ];
 
@@ -28,7 +28,7 @@ const HowItWorksSection = () => {
               How It Works
             </p>
             <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground">
-              Three steps. <em className="text-gold">You're live today.</em>
+              Three steps. <em className="text-gold">Verified before you're live.</em>
             </h2>
           </div>
         </RevealSection>

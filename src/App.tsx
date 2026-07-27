@@ -19,6 +19,7 @@ import IntranetProjects from "./pages/intranet/IntranetProjects.tsx";
 import IntranetOperators from "./pages/intranet/IntranetOperators.tsx";
 import IntranetReviews from "./pages/intranet/IntranetReviews.tsx";
 import IntranetSupport from "./pages/intranet/IntranetSupport.tsx";
+import IntranetDiscoverability from "./pages/intranet/IntranetDiscoverability.tsx";
 import ReportIssue from "./pages/ReportIssue.tsx";
 import LeaveReview from "./pages/LeaveReview.tsx";
 import Discover from "./pages/Discover.tsx";
@@ -52,6 +53,7 @@ const App = () => (
               <Route path="operators" element={<IntranetOperators />} />
               <Route path="reviews" element={<IntranetReviews />} />
               <Route path="support" element={<IntranetSupport />} />
+              <Route path="discoverability" element={<IntranetDiscoverability />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

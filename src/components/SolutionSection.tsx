@@ -5,12 +5,12 @@ const outcomes = [
   {
     icon: Search,
     title: "Get found",
-    body: "Your own Fichua page, built so guests can find you on search and AI — by name.",
+    body: "A verified page built to be read by Google and AI assistants — with your real rooms, prices and location published as structured data they can actually cite.",
   },
   {
     icon: CreditCard,
-    title: "Book direct",
-    body: "Guests reserve and pay on your page. No middleman, no commission, no lost messages.",
+    title: "Book direct, paid safely",
+    body: "Guests reserve and pay on your page. Fichua holds the payment until the booking is confirmed, then passes it to you — one low commission, shown upfront, no OTA markup.",
   },
   {
     icon: Users,
@@ -32,7 +32,7 @@ const SolutionSection = () => {
             <em className="text-gold">Every booking direct.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-xl mx-auto mb-14 leading-relaxed">
-            Fichua gives you a simple, professional presence that turns attention into direct bookings.
+            Fichua is the trust layer between you and your guests: we verify who you are, publish your details where travellers and AI assistants can find them, and protect the payment on both sides.
           </p>
         </RevealSection>
 

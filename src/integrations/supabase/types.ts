@@ -720,6 +720,68 @@ export type Database = {
           },
         ]
       }
+      discoverability_tests: {
+        Row: {
+          competitors_mentioned: string[] | null
+          created_at: string
+          engine: string
+          fichua_cited: boolean
+          id: string
+          notes: string | null
+          operator_id: string | null
+          operator_mentioned: boolean
+          phase: string
+          position: number | null
+          price_quoted_correctly: boolean | null
+          query_text: string
+          response_excerpt: string | null
+          screenshot_url: string | null
+          tested_at: string
+        }
+        Insert: {
+          competitors_mentioned?: string[] | null
+          created_at?: string
+          engine: string
+          fichua_cited?: boolean
+          id?: string
+          notes?: string | null
+          operator_id?: string | null
+          operator_mentioned?: boolean
+          phase: string
+          position?: number | null
+          price_quoted_correctly?: boolean | null
+          query_text: string
+          response_excerpt?: string | null
+          screenshot_url?: string | null
+          tested_at?: string
+        }
+        Update: {
+          competitors_mentioned?: string[] | null
+          created_at?: string
+          engine?: string
+          fichua_cited?: boolean
+          id?: string
+          notes?: string | null
+          operator_id?: string | null
+          operator_mentioned?: boolean
+          phase?: string
+          position?: number | null
+          price_quoted_correctly?: boolean | null
+          query_text?: string
+          response_excerpt?: string | null
+          screenshot_url?: string | null
+          tested_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discoverability_tests_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "operators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       support_requests: {
         Row: {
           booking_id: string | null
