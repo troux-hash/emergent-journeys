@@ -11,7 +11,8 @@ declare global {
 const languages = [
   { code: "en", label: "English" },
   { code: "fr", label: "Français" },
-  { code: "zh-CN", label: "中文" },
+  { code: "de", label: "Deutsch" },
+  { code: "it", label: "Italiano" },
   { code: "pt", label: "Português" },
   { code: "rw", label: "Kinyarwanda" },
 ];
@@ -32,7 +33,7 @@ const LanguageSwitcher = () => {
       new window.google.translate.TranslateElement(
         {
           pageLanguage: "en",
-          includedLanguages: "en,fr,zh-CN,pt,rw",
+          includedLanguages: "en,fr,de,it,pt,rw",
           autoDisplay: false,
         },
         "google_translate_element"

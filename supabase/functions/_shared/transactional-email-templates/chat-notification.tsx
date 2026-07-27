@@ -35,7 +35,7 @@ const ChatNotificationEmail = ({ visitorName, visitorEmail, message, language }:
           {language && (
             <>
               <Text style={label}>Language</Text>
-              <Text style={value}>{language === 'en' ? 'English' : language === 'fr' ? 'Français' : language === 'zh' ? '中文' : language}</Text>
+              <Text style={value}>{({ en: 'English', fr: 'Français', de: 'Deutsch', it: 'Italiano', pt: 'Português', rw: 'Kinyarwanda' } as Record<string, string>)[language ?? ''] ?? language}</Text>
             </>
           )}
           <Hr style={hr} />

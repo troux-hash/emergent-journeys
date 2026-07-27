@@ -26,7 +26,9 @@ const MAX_HISTORY_MESSAGES = 20
 const LANGUAGE_NAMES: Record<string, string> = {
   en: 'English',
   fr: 'French',
-  zh: 'Chinese',
+  de: 'German',
+  it: 'Italian',
+  pt: 'Portuguese',
   rw: 'Kinyarwanda',
 }
 

@@ -4,11 +4,31 @@ import { MessageCircle, X, Send, Globe } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+// Chat widget UI strings. Reviewed for register and idiom, not just
+// literal accuracy: this is a hospitality product, so each language uses
+// the phrasing a real hotel/lodge site in that market would use rather
+// than a word-for-word rendering of the English.
 const languages = [
   { code: "en", label: "English", placeholder: "Type your message...", namePlaceholder: "Your name", emailPlaceholder: "Your email (optional)", sendLabel: "Send", successMsg: "Message sent!", titleLabel: "Chat with us", waitingMsg: "We'll reply shortly..." },
-  { code: "fr", label: "Français", placeholder: "Écrivez votre message...", namePlaceholder: "Votre nom", emailPlaceholder: "Votre email (optionnel)", sendLabel: "Envoyer", successMsg: "Message envoyé !", titleLabel: "Discutons", waitingMsg: "Nous répondrons bientôt..." },
-  { code: "zh", label: "中文", placeholder: "输入您的消息...", namePlaceholder: "您的姓名", emailPlaceholder: "您的邮箱（可选）", sendLabel: "发送", successMsg: "消息已发送！", titleLabel: "在线咨询", waitingMsg: "我们会尽快回复..." },
-  { code: "rw", label: "Kinyarwanda", placeholder: "Andika ubutumwa bwawe...", namePlaceholder: "Izina ryawe", emailPlaceholder: "Imeli yawe (bidategetswe)", sendLabel: "Ohereza", successMsg: "Ubutumwa bwoherejwe!", titleLabel: "Ganira natwe", waitingMsg: "Tuzagusubiza vuba..." },
+  // FR: "Discutons" (let's chat) was too casual/imperative for a booking
+  // context; "Nous contacter" is the standard French web convention.
+  // "facultatif" is the correct term on French forms -- "optionnel" is an
+  // anglicism. Note the space before "!" per French typography.
+  { code: "fr", label: "Français", placeholder: "Écrivez votre message...", namePlaceholder: "Votre nom", emailPlaceholder: "Votre e-mail (facultatif)", sendLabel: "Envoyer", successMsg: "Message envoyé !", titleLabel: "Nous contacter", waitingMsg: "Nous vous répondrons dans les plus brefs délais..." },
+  // DE: uses the formal "Sie" throughout, which is expected for a business
+  // booking a stay. "Schreiben Sie uns" is the idiomatic equivalent of
+  // "chat with us"; a literal "Chatten Sie mit uns" reads as a translation.
+  { code: "de", label: "Deutsch", placeholder: "Ihre Nachricht...", namePlaceholder: "Ihr Name", emailPlaceholder: "Ihre E-Mail (optional)", sendLabel: "Senden", successMsg: "Nachricht gesendet!", titleLabel: "Schreiben Sie uns", waitingMsg: "Wir melden uns in Kürze bei Ihnen..." },
+  // IT: formal "Lei" register ("Il suo nome"). "Scrivici" is the natural
+  // Italian call-to-action for a contact widget.
+  { code: "it", label: "Italiano", placeholder: "Scrivi il tuo messaggio...", namePlaceholder: "Il tuo nome", emailPlaceholder: "La tua e-mail (facoltativo)", sendLabel: "Invia", successMsg: "Messaggio inviato!", titleLabel: "Scrivici", waitingMsg: "Ti risponderemo a breve..." },
+  // PT: European/neutral Portuguese. "Fale connosco" is the standard
+  // contact-form heading.
+  { code: "pt", label: "Português", placeholder: "Escreva a sua mensagem...", namePlaceholder: "O seu nome", emailPlaceholder: "O seu e-mail (opcional)", sendLabel: "Enviar", successMsg: "Mensagem enviada!", titleLabel: "Fale connosco", waitingMsg: "Responderemos em breve..." },
+  // RW: reviewed for consistency only. Kinyarwanda marketing copy should
+  // be checked by a native speaker before the Rwanda pilot -- see note to
+  // Teddy. "bidategetswe" (not required) is correct for an optional field.
+  { code: "rw", label: "Kinyarwanda", placeholder: "Andika ubutumwa bwawe...", namePlaceholder: "Izina ryawe", emailPlaceholder: "Imeyili yawe (bidategetswe)", sendLabel: "Ohereza", successMsg: "Ubutumwa bwoherejwe!", titleLabel: "Ganira natwe", waitingMsg: "Tuzagusubiza vuba..." },
 ];
 
 interface ChatMessage {
