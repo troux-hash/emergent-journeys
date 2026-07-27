@@ -20,6 +20,7 @@ import IntranetOperators from "./pages/intranet/IntranetOperators.tsx";
 import IntranetReviews from "./pages/intranet/IntranetReviews.tsx";
 import IntranetSupport from "./pages/intranet/IntranetSupport.tsx";
 import IntranetDiscoverability from "./pages/intranet/IntranetDiscoverability.tsx";
+import IntranetDns from "./pages/intranet/IntranetDns.tsx";
 import ReportIssue from "./pages/ReportIssue.tsx";
 import LeaveReview from "./pages/LeaveReview.tsx";
 import Discover from "./pages/Discover.tsx";
