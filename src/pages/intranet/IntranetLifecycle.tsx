@@ -36,6 +36,13 @@ interface Row {
   is_verified: boolean | null;
 }
 
+interface SystemAlert {
+  id: string;
+  created_at: string;
+  kind: string;
+  detail: string;
+}
+
 interface BookingDetail {
   booking_id: string;
   guest_name: string;
@@ -72,6 +79,7 @@ const money = (amount: number | null, currency: string | null) =>
 const IntranetLifecycle = () => {
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
+  const [alerts, setAlerts] = useState<SystemAlert[]>([]);
   const [detailFor, setDetailFor] = useState<Row | null>(null);
   const [details, setDetails] = useState<BookingDetail[]>([]);
 
@@ -83,7 +91,19 @@ const IntranetLifecycle = () => {
       return;
     }
     setRows((data as unknown as Row[]) || []);
+
+    const { data: alertData } = await supabase.rpc("open_system_alerts");
+    setAlerts((alertData as unknown as SystemAlert[]) || []);
     setLoading(false);
+  };
+
+  const resolveAlert = async (id: string) => {
+    const { error } = await supabase
+      .from("system_alerts")
+      .update({ resolved_at: new Date().toISOString() })
+      .eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    fetchAll();
   };
 
   useEffect(() => {
@@ -130,6 +150,33 @@ const IntranetLifecycle = () => {
           Tracking only — no payments are taken or sent from this page.
         </p>
       </div>
+
+      {/* Open system alerts -- things that would otherwise fail silently */}
+      {alerts.length > 0 && (
+        <div className="space-y-2">
+          {alerts.map((a) => (
+            <Card key={a.id} className="border-destructive">
+              <CardContent className="p-4 flex items-start justify-between gap-4">
+                <div className="flex gap-2">
+                  <AlertTriangle className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium text-sm text-destructive">
+                      {a.kind.replace(/_/g, " ")}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{a.detail}</p>
+                    <p className="text-[10px] text-muted-foreground mt-1">
+                      {new Date(a.created_at).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+                <Button size="sm" variant="outline" onClick={() => resolveAlert(a.id)}>
+                  Dismiss
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
 
       {/* Summary */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
