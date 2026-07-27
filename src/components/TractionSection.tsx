@@ -11,7 +11,7 @@ const compRows = [
   { need: "AI Profile (Schema.org)", booking: "Partial", channel: "—", little: "—", fichua: "✓" },
   { need: "LLM Discoverability", booking: "Partial", channel: "—", little: "—", fichua: "✓" },
   { need: "Direct Booking Engine", booking: "—", channel: "Partial", little: "—", fichua: "✓" },
-  { need: "Commission Rate", booking: "18%", channel: "Varies", little: "Low", fichua: "8%" },
+  { need: "Commission Rate", booking: "18%", channel: "Varies", little: "Low", fichua: "7%" },
   { need: "Guest Data Ownership", booking: "—", channel: "Partial", little: "—", fichua: "✓" },
   { need: "Africa-Native Rails", booking: "—", channel: "—", little: "—", fichua: "✓" },
 ];

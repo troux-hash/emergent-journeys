@@ -40,7 +40,7 @@ const BusinessModelSection = () => {
               <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-6">02 — Marketplace Commission</p>
               <div className="flex items-end gap-4 mb-8">
                 <div>
-                  <p className="font-display text-5xl md:text-6xl font-semibold text-foreground">8%</p>
+                  <p className="font-display text-5xl md:text-6xl font-semibold text-foreground">7%</p>
                   <p className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground">Fichua</p>
                 </div>
                 <p className="font-display text-2xl text-muted-foreground/40 mb-2">vs</p>
@@ -63,7 +63,7 @@ const BusinessModelSection = () => {
                 <div>
                   <p className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">Fichua takes</p>
                   <div className="h-8 bg-gold/10 flex">
-                    <div className="h-full bg-gold flex items-center justify-center" style={{ width: "8%" }}>
+                    <div className="h-full bg-gold flex items-center justify-center" style={{ width: "7%" }}>
                     </div>
                     <div className="flex items-center ml-3">
                       <span className="font-label text-[10px] text-foreground">$240 — <strong>$360 stays with the operator</strong></span>

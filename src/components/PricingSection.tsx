@@ -17,7 +17,7 @@ const PROMISES = [
   {
     icon: TrendingUp,
     title: "We grow your revenue",
-    body: "Direct bookings at your own rates. No auction to win, no commission draining every reservation.",
+    body: "Direct bookings at your own rates, on 7% commission instead of the 15–20% large platforms charge. No auction to win, no bidding for your own guests.",
   },
   {
     icon: EyeIcon,
@@ -39,12 +39,13 @@ const PricingSection = () => {
           <div className="text-center mb-14">
             <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Pricing</p>
             <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-5">
-              Three nights a month.<br />
+              Three nights a month, plus 7%.<br />
               <em className="text-gold">And nothing until we've earned it.</em>
             </h2>
             <p className="font-body text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              We don't think you should pay for a promise. So you don't pay us anything until Fichua has brought
-              you ten bookings — and after that, the price is set in your own currency, at your own rates.
+              Two parts, both stated plainly: a monthly subscription to be visible, and 7% on the bookings we
+              bring you — against the 15–20% the large platforms take. You pay neither until Fichua has
+              delivered you ten bookings.
             </p>
           </div>
         </RevealSection>
@@ -61,7 +62,7 @@ const PricingSection = () => {
                   The price of<br />3 nights
                 </p>
                 <p className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground mb-5">
-                  per month, at your own rates
+                  per month — to be found and stay visible
                 </p>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
                   Your subscription is the average value of three nights at your property. A small guesthouse pays
@@ -91,6 +92,35 @@ const PricingSection = () => {
                     not with you.
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </RevealSection>
+
+        <RevealSection delay={0.12}>
+          <div className="border border-border bg-parchment-dark p-8 md:p-10 mb-6">
+            <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              And on each booking
+            </p>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="flex items-end gap-4 mb-3">
+                  <div>
+                    <p className="font-display text-4xl md:text-5xl font-semibold text-foreground">7%</p>
+                    <p className="font-label text-[10px] tracking-[0.15em] uppercase text-muted-foreground">Fichua</p>
+                  </div>
+                  <p className="font-display text-xl text-muted-foreground/40 mb-2">vs</p>
+                  <div>
+                    <p className="font-display text-4xl md:text-5xl font-semibold text-muted-foreground/40">15–20%</p>
+                    <p className="font-label text-[10px] tracking-[0.15em] uppercase text-muted-foreground/40">Large platforms</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                  On a $3,000 booking, a 20% platform takes $600. Fichua takes $210 — leaving{" "}
+                  <strong className="text-foreground">$390 more with you</strong>, on that booking alone.
+                </p>
               </div>
             </div>
           </div>
