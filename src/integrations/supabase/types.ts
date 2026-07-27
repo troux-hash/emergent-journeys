@@ -519,14 +519,9 @@ export type Database = {
       }
       operators: {
         Row: {
-          lifecycle_stage: Database["public"]["Enums"]["operator_lifecycle_stage"]
-          lifecycle_changed_at: string
-          subscription_price: number | null
-          subscription_currency: string | null
-          price_snapshot_at: string | null
-          billing_started_at: string | null
           address: string | null
           amenities: string[]
+          billing_started_at: string | null
           check_in: string | null
           check_out: string | null
           city: string | null
@@ -544,6 +539,8 @@ export type Database = {
           is_verified: boolean | null
           lat: number | null
           lead_id: string | null
+          lifecycle_changed_at: string
+          lifecycle_stage: Database["public"]["Enums"]["operator_lifecycle_stage"]
           lng: number | null
           local_hire_percent: number | null
           name: string
@@ -552,10 +549,13 @@ export type Database = {
           phone: string | null
           photo_gps_verified: boolean
           price_range: string | null
+          price_snapshot_at: string | null
           slug: string
           solar_powered: boolean
           star_rating: number | null
           status: string
+          subscription_currency: string | null
+          subscription_price: number | null
           tagline: string | null
           tripadvisor_url: string | null
           updated_at: string
@@ -567,6 +567,7 @@ export type Database = {
         Insert: {
           address?: string | null
           amenities?: string[]
+          billing_started_at?: string | null
           check_in?: string | null
           check_out?: string | null
           city?: string | null
@@ -584,6 +585,8 @@ export type Database = {
           is_verified?: boolean | null
           lat?: number | null
           lead_id?: string | null
+          lifecycle_changed_at?: string
+          lifecycle_stage?: Database["public"]["Enums"]["operator_lifecycle_stage"]
           lng?: number | null
           local_hire_percent?: number | null
           name: string
@@ -592,10 +595,13 @@ export type Database = {
           phone?: string | null
           photo_gps_verified?: boolean
           price_range?: string | null
+          price_snapshot_at?: string | null
           slug: string
           solar_powered?: boolean
           star_rating?: number | null
           status?: string
+          subscription_currency?: string | null
+          subscription_price?: number | null
           tagline?: string | null
           tripadvisor_url?: string | null
           updated_at?: string
@@ -607,6 +613,7 @@ export type Database = {
         Update: {
           address?: string | null
           amenities?: string[]
+          billing_started_at?: string | null
           check_in?: string | null
           check_out?: string | null
           city?: string | null
@@ -624,6 +631,8 @@ export type Database = {
           is_verified?: boolean | null
           lat?: number | null
           lead_id?: string | null
+          lifecycle_changed_at?: string
+          lifecycle_stage?: Database["public"]["Enums"]["operator_lifecycle_stage"]
           lng?: number | null
           local_hire_percent?: number | null
           name?: string
@@ -632,10 +641,13 @@ export type Database = {
           phone?: string | null
           photo_gps_verified?: boolean
           price_range?: string | null
+          price_snapshot_at?: string | null
           slug?: string
           solar_powered?: boolean
           star_rating?: number | null
           status?: string
+          subscription_currency?: string | null
+          subscription_price?: number | null
           tagline?: string | null
           tripadvisor_url?: string | null
           updated_at?: string
@@ -889,6 +901,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_subscription_price: {
+        Args: { p_operator_id: string }
+        Returns: {
+          currency: string
+          price: number
+          room_type_count: number
+        }[]
+      }
       check_room_availability: {
         Args: {
           p_check_in: string
@@ -901,10 +921,30 @@ export type Database = {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
       }
+      delivered_booking_count: {
+        Args: { p_operator_id: string }
+        Returns: number
+      }
+      delivered_bookings_detail: {
+        Args: { p_operator_id: string }
+        Returns: {
+          booking_id: string
+          check_in: string
+          check_out: string
+          counted_at: string
+          currency: string
+          guest_name: string
+          total_price: number
+        }[]
+      }
       email_queue_dispatch: { Args: never; Returns: undefined }
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      evaluate_operator_lifecycle: {
+        Args: { p_operator_id: string }
+        Returns: Database["public"]["Enums"]["operator_lifecycle_stage"]
       }
       get_booking_for_review: {
         Args: { p_booking_id: string; p_token: string }
@@ -941,55 +981,34 @@ export type Database = {
         }
         Returns: number
       }
+      operator_lifecycle_overview: {
+        Args: never
+        Returns: {
+          billing_started_at: string
+          bookings_until_billing: number
+          days_in_stage: number
+          delivered_bookings: number
+          is_verified: boolean
+          last_booking_at: string
+          lifecycle_changed_at: string
+          lifecycle_stage: Database["public"]["Enums"]["operator_lifecycle_stage"]
+          name: string
+          operator_id: string
+          projected_currency: string
+          projected_price: number
+          room_type_count: number
+          slug: string
+          status: string
+          subscription_currency: string
+          subscription_price: number
+        }[]
+      }
       read_email_batch: {
         Args: { batch_size: number; queue_name: string; vt: number }
         Returns: {
           message: Json
           msg_id: number
           read_ct: number
-        }[]
-      }
-      delivered_booking_count: { Args: { p_operator_id: string }; Returns: number }
-      delivered_bookings_detail: {
-        Args: { p_operator_id: string }
-        Returns: {
-          booking_id: string
-          guest_name: string
-          check_in: string
-          check_out: string
-          total_price: number
-          currency: string
-          counted_at: string
-        }[]
-      }
-      calculate_subscription_price: {
-        Args: { p_operator_id: string }
-        Returns: { price: number; currency: string; room_type_count: number }[]
-      }
-      evaluate_operator_lifecycle: {
-        Args: { p_operator_id: string }
-        Returns: Database["public"]["Enums"]["operator_lifecycle_stage"]
-      }
-      operator_lifecycle_overview: {
-        Args: never
-        Returns: {
-          operator_id: string
-          name: string
-          slug: string
-          status: string
-          lifecycle_stage: Database["public"]["Enums"]["operator_lifecycle_stage"]
-          lifecycle_changed_at: string
-          days_in_stage: number
-          delivered_bookings: number
-          bookings_until_billing: number
-          subscription_price: number | null
-          subscription_currency: string | null
-          projected_price: number | null
-          projected_currency: string | null
-          room_type_count: number
-          billing_started_at: string | null
-          last_booking_at: string | null
-          is_verified: boolean | null
         }[]
       }
       send_pending_review_requests: { Args: never; Returns: undefined }
@@ -1141,6 +1160,15 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      operator_lifecycle_stage: [
+        "lead",
+        "verifying",
+        "ready",
+        "live_free",
+        "live_subscribed",
+        "dormant",
+        "paused",
+      ],
     },
   },
 } as const
