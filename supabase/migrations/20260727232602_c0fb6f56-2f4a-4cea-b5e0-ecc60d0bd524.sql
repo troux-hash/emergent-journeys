@@ -1,0 +1,1 @@
+SELECT vault.create_secret('https://drglhlaxzzdizaktwzjh.supabase.co/functions/v1', 'project_functions_base_url', 'Base URL for edge functions');
