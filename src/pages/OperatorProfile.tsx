@@ -9,7 +9,7 @@ import PropertyMap from "@/components/PropertyMap";
 import ChatWidget from "@/components/ChatWidget";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import RevealSection from "@/components/RevealSection";
-import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft, ShieldCheck } from "lucide-react";
+import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft, ShieldCheck, Lock } from "lucide-react";
 
 interface OperatorRow {
   id: string;
@@ -573,7 +573,15 @@ const OperatorProfile = () => {
                   operatorName={operator.name}
                   operatorId={operator.id}
                 />
-                <p className="text-center mt-6">
+                <p className="text-center mt-6 font-body text-xs text-muted-foreground">
+                  <Lock size={11} className="inline mr-1 -mt-0.5" />
+                  Your payment is held by Fichua and released to the property per our stated policy — card details
+                  are handled by a licensed processor, never stored by Fichua.{" "}
+                  <Link to="/trust" className="text-gold hover:underline">
+                    How we protect your booking
+                  </Link>
+                </p>
+                <p className="text-center mt-3">
                   <Link
                     to={`/report?operatorId=${operator.id}&operatorName=${encodeURIComponent(operator.name)}`}
                     className="font-label text-[11px] tracking-[0.15em] uppercase text-muted-foreground hover:text-gold transition-colors underline underline-offset-4"

@@ -23,6 +23,7 @@ import IntranetDiscoverability from "./pages/intranet/IntranetDiscoverability.ts
 import ReportIssue from "./pages/ReportIssue.tsx";
 import LeaveReview from "./pages/LeaveReview.tsx";
 import Discover from "./pages/Discover.tsx";
+import Trust from "./pages/Trust.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/discover" element={<Discover />} />
+            <Route path="/trust" element={<Trust />} />
             <Route path="/report" element={<ReportIssue />} />
             <Route path="/operators/:slug" element={<OperatorProfile />} />
             <Route path="/review/:bookingId" element={<LeaveReview />} />

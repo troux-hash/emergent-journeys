@@ -9,6 +9,7 @@ const rawNavItems = [
   { label: "The Solution", href: "#solution" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Discover", href: "/discover" },
+  { label: "Trust & Safety", href: "/trust" },
 ];
 
 const Navbar = () => {

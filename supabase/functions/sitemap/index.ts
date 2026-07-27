@@ -57,6 +57,7 @@ Deno.serve(async (req) => {
   const staticUrls = [
     { loc: `${SITE_URL}/`, priority: '1.0' },
     { loc: `${SITE_URL}/discover`, priority: '0.9' },
+    { loc: `${SITE_URL}/trust`, priority: '0.8' },
   ]
 
   const operatorUrls = (operators ?? []).map((op) => ({

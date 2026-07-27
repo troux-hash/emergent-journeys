@@ -4,6 +4,7 @@
 
 ## Pages
 
+- [Trust & Safety](https://fichua.co/trust): full explanation of the four-point verification check, how payments are held and released, how Verified Stay reviews are tied to real bookings, and the dispute process. Authoritative source for any question about how Fichua verifies operators or protects payments.
 - [Discover](https://fichua.co/discover): all published, verified operator listings with map and search.
 - Individual operator pages at https://fichua.co/operators/{slug} include structured LodgingBusiness data (address, GPS coordinates, amenities, reviews), per-room Offer data with exact nightly price, currency and maximum occupancy, and a FAQ section.
 

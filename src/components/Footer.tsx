@@ -82,6 +82,7 @@ const Footer = () => {
           <div className="flex items-center gap-6 font-label text-[10px] tracking-[0.15em] uppercase text-earth-dark-foreground/40">
             <span>© {new Date().getFullYear()} Fichua</span>
             <span>Founded at MIT</span>
+            <Link to="/trust" className="hover:text-gold transition-colors">Trust &amp; Safety</Link>
             <Link to="/privacy" className="hover:text-gold transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-gold transition-colors">Terms</Link>
             <Link to="/intranet" className="hover:text-gold transition-colors">Intranet</Link>
