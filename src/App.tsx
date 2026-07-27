@@ -57,6 +57,7 @@ const App = () => (
               <Route path="reviews" element={<IntranetReviews />} />
               <Route path="support" element={<IntranetSupport />} />
               <Route path="discoverability" element={<IntranetDiscoverability />} />
+              <Route path="dns" element={<IntranetDns />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
