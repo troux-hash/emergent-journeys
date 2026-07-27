@@ -169,6 +169,7 @@ export type Database = {
           price_quoted_correctly: boolean | null
           query_text: string
           response_excerpt: string | null
+          screenshot_url: string | null
           tested_at: string
           updated_at: string
         }
@@ -186,6 +187,7 @@ export type Database = {
           price_quoted_correctly?: boolean | null
           query_text: string
           response_excerpt?: string | null
+          screenshot_url?: string | null
           tested_at?: string
           updated_at?: string
         }
@@ -203,6 +205,7 @@ export type Database = {
           price_quoted_correctly?: boolean | null
           query_text?: string
           response_excerpt?: string | null
+          screenshot_url?: string | null
           tested_at?: string
           updated_at?: string
         }
