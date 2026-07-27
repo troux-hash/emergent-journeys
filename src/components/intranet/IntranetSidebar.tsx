@@ -1,4 +1,4 @@
-import { LayoutDashboard, FileText, CheckSquare, FolderKanban, LogOut, Building2, Star, LifeBuoy, TrendingUp } from "lucide-react";
+import { LayoutDashboard, FileText, CheckSquare, FolderKanban, LogOut, Building2, Star, LifeBuoy, TrendingUp, Globe } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
