@@ -803,12 +803,6 @@ export type Database = {
           },
         ]
       }
-      system_alerts: {
-        Row: { id: string; created_at: string; kind: string; detail: string; context: Json | null; resolved_at: string | null }
-        Insert: { id?: string; created_at?: string; kind: string; detail: string; context?: Json | null; resolved_at?: string | null }
-        Update: { id?: string; created_at?: string; kind?: string; detail?: string; context?: Json | null; resolved_at?: string | null }
-        Relationships: []
-      }
       support_requests: {
         Row: {
           booking_id: string | null
@@ -881,6 +875,33 @@ export type Database = {
           id?: string
           metadata?: Json | null
           reason?: string
+        }
+        Relationships: []
+      }
+      system_alerts: {
+        Row: {
+          context: Json | null
+          created_at: string
+          detail: string
+          id: string
+          kind: string
+          resolved_at: string | null
+        }
+        Insert: {
+          context?: Json | null
+          created_at?: string
+          detail: string
+          id?: string
+          kind: string
+          resolved_at?: string | null
+        }
+        Update: {
+          context?: Json | null
+          created_at?: string
+          detail?: string
+          id?: string
+          kind?: string
+          resolved_at?: string | null
         }
         Relationships: []
       }
@@ -979,6 +1000,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      log_system_alert: {
+        Args: { p_context?: Json; p_detail: string; p_kind: string }
+        Returns: undefined
+      }
       move_to_dlq: {
         Args: {
           dlq_name: string
@@ -987,6 +1012,16 @@ export type Database = {
           source_queue: string
         }
         Returns: number
+      }
+      open_system_alerts: {
+        Args: never
+        Returns: {
+          context: Json
+          created_at: string
+          detail: string
+          id: string
+          kind: string
+        }[]
       }
       operator_lifecycle_overview: {
         Args: never
@@ -1018,10 +1053,6 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
-      }
-      open_system_alerts: {
-        Args: never
-        Returns: { id: string; created_at: string; kind: string; detail: string; context: Json | null }[]
       }
       send_pending_review_requests: { Args: never; Returns: undefined }
       submit_verified_review: {
