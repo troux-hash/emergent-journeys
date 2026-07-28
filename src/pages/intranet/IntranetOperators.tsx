@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Plus, Trash2, ExternalLink, MapPin, Sparkles, AlertTriangle } from "lucide-react";
+import { Plus, Trash2, ExternalLink, MapPin, Sparkles, AlertTriangle, ShieldAlert } from "lucide-react";
 import { toast } from "sonner";
 
 interface Lead {
@@ -60,6 +60,13 @@ interface RoomType {
   max_guests: number;
 }
 
+interface PublishReadiness {
+  all_checks_passed: boolean;
+  baseline_count: number;
+  has_baselines: boolean;
+  blocking_reasons: string[] | null;
+}
+
 interface PhotoAnalysisEntry {
   index: number;
   url: string;
@@ -102,6 +109,7 @@ const IntranetOperators = () => {
   const [geocoding, setGeocoding] = useState(false);
   const [analyzingPhotos, setAnalyzingPhotos] = useState(false);
   const [photoAnalysis, setPhotoAnalysis] = useState<PhotoAnalysis | null>(null);
+  const [readiness, setReadiness] = useState<PublishReadiness | null>(null);
 
   const fetchAll = async () => {
     const [leadsRes, opsRes] = await Promise.all([
@@ -163,9 +171,25 @@ const IntranetOperators = () => {
     fetchAll();
   };
 
+  const loadReadiness = async (operatorId: string) => {
+    const { data } = await supabase.rpc("publish_readiness", { p_operator_id: operatorId });
+    const row = (data as unknown as PublishReadiness[] | null)?.[0] ?? null;
+    setReadiness(row);
+  };
+
+  const handleSeedBaselines = async () => {
+    if (!editing) return;
+    const { data, error } = await supabase.rpc("seed_baseline_tests", { p_operator_id: editing.id });
+    if (error) { toast.error(error.message); return; }
+    toast.success(`Created ${data ?? 0} baseline test(s) — fill them in at /intranet/discoverability`);
+    loadReadiness(editing.id);
+  };
+
   const openEdit = (op: Operator) => {
     setEditing({ ...op });
     setPhotoAnalysis(null);
+    setReadiness(null);
+    loadReadiness(op.id);
     setDialogOpen(true);
   };
 
@@ -505,6 +529,29 @@ const IntranetOperators = () => {
                   </label>
                 ))}
               </div>
+
+              {editing.status !== "published" && readiness && !readiness.all_checks_passed && (
+                <div className="border border-destructive rounded p-3 space-y-2">
+                  <p className="flex items-center gap-2 text-sm font-medium text-destructive">
+                    <ShieldAlert className="h-4 w-4" />
+                    Not ready to publish
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Publishing makes this page crawlable by search engines and AI assistants. That step is
+                    effectively irreversible — once a listing is read by machines, a mistake is already out there.
+                  </p>
+                  <ul className="text-xs text-foreground space-y-1 list-disc pl-4">
+                    {(readiness.blocking_reasons || []).map((r) => (
+                      <li key={r}>{r}</li>
+                    ))}
+                  </ul>
+                  {!readiness.has_baselines && (
+                    <Button size="sm" variant="outline" onClick={handleSeedBaselines}>
+                      Create baseline tests now
+                    </Button>
+                  )}
+                </div>
+              )}
 
               <div className="flex gap-2 pt-2">
                 <Button className="flex-1" onClick={handleSave}>Save</Button>
