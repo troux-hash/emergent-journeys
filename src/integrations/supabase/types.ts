@@ -878,6 +878,33 @@ export type Database = {
         }
         Relationships: []
       }
+      system_alerts: {
+        Row: {
+          context: Json | null
+          created_at: string
+          detail: string
+          id: string
+          kind: string
+          resolved_at: string | null
+        }
+        Insert: {
+          context?: Json | null
+          created_at?: string
+          detail: string
+          id?: string
+          kind: string
+          resolved_at?: string | null
+        }
+        Update: {
+          context?: Json | null
+          created_at?: string
+          detail?: string
+          id?: string
+          kind?: string
+          resolved_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -973,6 +1000,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      log_system_alert: {
+        Args: { p_context?: Json; p_detail: string; p_kind: string }
+        Returns: undefined
+      }
       move_to_dlq: {
         Args: {
           dlq_name: string
@@ -981,6 +1012,16 @@ export type Database = {
           source_queue: string
         }
         Returns: number
+      }
+      open_system_alerts: {
+        Args: never
+        Returns: {
+          context: Json
+          created_at: string
+          detail: string
+          id: string
+          kind: string
+        }[]
       }
       operator_lifecycle_overview: {
         Args: never
