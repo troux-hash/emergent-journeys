@@ -1013,26 +1013,6 @@ export type Database = {
         }
         Returns: number
       }
-      generate_baseline_queries: {
-        Args: { p_operator_id: string }
-        Returns: { engine: string; query_text: string }[]
-      }
-      seed_baseline_tests: { Args: { p_operator_id: string }; Returns: number }
-      publish_readiness: {
-        Args: { p_operator_id: string }
-        Returns: {
-          all_checks_passed: boolean
-          identity_verified: boolean
-          photo_gps_verified: boolean
-          whatsapp_verified: boolean
-          payout_verified: boolean
-          has_room_types: boolean
-          has_gps: boolean
-          baseline_count: number
-          has_baselines: boolean
-          blocking_reasons: string[] | null
-        }[]
-      }
       open_system_alerts: {
         Args: never
         Returns: {
