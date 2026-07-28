@@ -974,6 +974,13 @@ export type Database = {
         Args: { p_operator_id: string }
         Returns: Database["public"]["Enums"]["operator_lifecycle_stage"]
       }
+      generate_baseline_queries: {
+        Args: { p_operator_id: string }
+        Returns: {
+          engine: string
+          query_text: string
+        }[]
+      }
       get_booking_for_review: {
         Args: { p_booking_id: string; p_token: string }
         Returns: {
@@ -1046,6 +1053,21 @@ export type Database = {
           subscription_price: number
         }[]
       }
+      publish_readiness: {
+        Args: { p_operator_id: string }
+        Returns: {
+          all_checks_passed: boolean
+          baseline_count: number
+          blocking_reasons: string[]
+          has_baselines: boolean
+          has_gps: boolean
+          has_room_types: boolean
+          identity_verified: boolean
+          payout_verified: boolean
+          photo_gps_verified: boolean
+          whatsapp_verified: boolean
+        }[]
+      }
       read_email_batch: {
         Args: { batch_size: number; queue_name: string; vt: number }
         Returns: {
@@ -1054,6 +1076,7 @@ export type Database = {
           read_ct: number
         }[]
       }
+      seed_baseline_tests: { Args: { p_operator_id: string }; Returns: number }
       send_pending_review_requests: { Args: never; Returns: undefined }
       submit_verified_review: {
         Args: {
