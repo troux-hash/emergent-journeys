@@ -803,6 +803,12 @@ export type Database = {
           },
         ]
       }
+      system_alerts: {
+        Row: { id: string; created_at: string; kind: string; detail: string; context: Json | null; resolved_at: string | null }
+        Insert: { id?: string; created_at?: string; kind: string; detail: string; context?: Json | null; resolved_at?: string | null }
+        Update: { id?: string; created_at?: string; kind?: string; detail?: string; context?: Json | null; resolved_at?: string | null }
+        Relationships: []
+      }
       support_requests: {
         Row: {
           booking_id: string | null
@@ -1012,6 +1018,10 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
+      }
+      open_system_alerts: {
+        Args: never
+        Returns: { id: string; created_at: string; kind: string; detail: string; context: Json | null }[]
       }
       send_pending_review_requests: { Args: never; Returns: undefined }
       submit_verified_review: {
