@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Check, Loader2, HelpCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import Navigation from "@/components/Navigation";
+import Navbar from "@/components/Navbar";
 
 // One-tap "I've replied", for the operator.
 //
@@ -44,7 +44,7 @@ const EnquiryAcknowledge = () => {
 
   return (
     <>
-      <Navigation />
+      <Navbar />
       <div className="min-h-screen bg-background pt-32 pb-24">
         <div className="max-w-lg mx-auto px-6 text-center">
           {state === "working" && (
