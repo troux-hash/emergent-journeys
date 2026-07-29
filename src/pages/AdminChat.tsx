@@ -84,30 +84,16 @@ const AdminChat = () => {
     if (activeSession) loadSessionMessages(activeSession);
   }, [activeSession, loadSessionMessages]);
 
-  // Realtime
+  // Poll for new messages (chat_messages is intentionally NOT in the realtime
+  // publication — see migration guard_chat_messages_not_in_realtime).
   useEffect(() => {
     if (!user || !isAdmin) return;
-
-    const channel = supabase
-      .channel("admin-chat-all")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "chat_messages" },
-        (payload) => {
-          const newMsg = payload.new as ChatMessage & { session_id: string };
-          if (newMsg.session_id === activeSession) {
-            setMessages((prev) => {
-              if (prev.some((m) => m.id === newMsg.id)) return prev;
-              return [...prev, newMsg];
-            });
-          }
-          loadSessions();
-        }
-      )
-      .subscribe();
-
-    return () => { supabase.removeChannel(channel); };
-  }, [user, isAdmin, activeSession, loadSessions]);
+    const interval = setInterval(() => {
+      loadSessions();
+      if (activeSession) loadSessionMessages(activeSession);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [user, isAdmin, activeSession, loadSessions, loadSessionMessages]);
 
   const handleSendReply = async () => {
     const trimmed = reply.trim();
