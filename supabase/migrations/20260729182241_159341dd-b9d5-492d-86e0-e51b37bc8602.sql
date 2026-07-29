@@ -1,0 +1,1 @@
+REVOKE INSERT ON public.enquiries FROM anon;
