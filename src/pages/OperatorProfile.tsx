@@ -6,10 +6,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Badge } from "@/components/ui/badge";
 import BookDirectForm from "@/components/BookDirectForm";
 import PropertyMap from "@/components/PropertyMap";
+import ContactOperator from "@/components/ContactOperator";
 import ChatWidget from "@/components/ChatWidget";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import RevealSection from "@/components/RevealSection";
-import { Sun, Users, Heart, Droplets, MapPin, Phone, Mail, Star, Clock, ArrowLeft, ShieldCheck, Lock } from "lucide-react";
+import { Sun, Users, Heart, Droplets, MapPin, Phone, Star, Clock, ArrowLeft, ShieldCheck, Lock } from "lucide-react";
 
 interface OperatorRow {
   id: string;
@@ -614,34 +615,25 @@ const OperatorProfile = () => {
             </RevealSection>
           )}
 
-          {/* Contact footer */}
-          <RevealSection className="mt-20">
-            <div className="text-center border-t border-border pt-12">
-              <p className="font-label text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
-                Questions?
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                {operator.email && (
-                  <a
-                    href={`mailto:${operator.email}`}
-                    className="flex items-center gap-2 font-body text-sm text-foreground hover:text-gold transition-colors"
-                  >
-                    <Mail size={14} />
-                    {operator.email}
-                  </a>
-                )}
+          {/* Contact the operator directly, with an attribution reference */}
+          {(operator.phone || operator.email) && (
+            <RevealSection className="mt-20">
+              <div className="border-t border-border pt-12">
+                <ContactOperator
+                  operatorId={operator.id}
+                  operatorName={operator.name}
+                  phone={operator.phone}
+                  email={operator.email}
+                />
                 {operator.phone && (
-                  <a
-                    href={`tel:${operator.phone}`}
-                    className="flex items-center gap-2 font-body text-sm text-foreground hover:text-gold transition-colors"
-                  >
-                    <Phone size={14} />
-                    {operator.phone}
-                  </a>
+                  <p className="font-body text-xs text-muted-foreground text-center mt-6 flex items-center justify-center gap-2">
+                    <Phone size={12} />
+                    Prefer to call? {operator.phone}
+                  </p>
                 )}
               </div>
-            </div>
-          </RevealSection>
+            </RevealSection>
+          )}
         </div>
       </div>
       <ChatWidget operatorId={operator.id} operatorName={operator.name} />
