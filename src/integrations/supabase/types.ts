@@ -945,6 +945,26 @@ export type Database = {
         }
         Returns: boolean
       }
+      create_booking: {
+        Args: {
+          p_check_in: string
+          p_check_out: string
+          p_guest_email: string
+          p_guest_name: string
+          p_guest_whatsapp: string
+          p_guests: number
+          p_operator_id: string
+          p_room_type_id: string
+          p_special_requests?: string
+          p_utm_campaign?: string
+          p_utm_medium?: string
+          p_utm_source?: string
+        }
+        Returns: {
+          booking_id: string
+          review_token: string
+        }[]
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
