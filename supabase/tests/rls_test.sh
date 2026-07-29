@@ -295,6 +295,18 @@ must_see "admin can see pending reviews" authenticated "$ADMIN_UID" 2 \
   "SELECT id FROM public.reviews"
 must_succeed "admin can call enquiry_queue()" authenticated "$ADMIN_UID" \
   "SELECT count(*) FROM public.enquiry_queue();"
+must_succeed "admin can trigger guarded enquiry escalation wrapper" authenticated "$ADMIN_UID" \
+  "SELECT * FROM public.run_enquiry_escalation();"
+must_succeed "admin can call operator_lifecycle_overview()" authenticated "$ADMIN_UID" \
+  "SELECT count(*) FROM public.operator_lifecycle_overview();"
+must_succeed "admin can inspect delivered booking detail" authenticated "$ADMIN_UID" \
+  "SELECT count(*) FROM public.delivered_bookings_detail('11111111-1111-1111-1111-111111111111');"
+must_succeed "admin can call open_system_alerts()" authenticated "$ADMIN_UID" \
+  "SELECT count(*) FROM public.open_system_alerts();"
+must_succeed "admin can call publish_readiness()" authenticated "$ADMIN_UID" \
+  "SELECT count(*) FROM public.publish_readiness('11111111-1111-1111-1111-111111111111');"
+must_succeed "admin can seed baseline tests" authenticated "$ADMIN_UID" \
+  "SELECT public.seed_baseline_tests('11111111-1111-1111-1111-111111111111');"
 
 echo
 echo "--- 8. Probes: weaker than they look? ---"
