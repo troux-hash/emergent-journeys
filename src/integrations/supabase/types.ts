@@ -994,6 +994,7 @@ export type Database = {
         Args: { p_operator_id: string }
         Returns: Database["public"]["Enums"]["operator_lifecycle_stage"]
       }
+      expire_stale_pending_bookings: { Args: never; Returns: number }
       generate_baseline_queries: {
         Args: { p_operator_id: string }
         Returns: {
