@@ -80,26 +80,23 @@ const BookDirectForm = ({
     setErrors({});
     setIsSubmitting(true);
 
-    const nights = Math.round(
-      (new Date(result.data.checkOut).getTime() - new Date(result.data.checkIn).getTime()) / 86400000
-    );
-
-    const { error } = await supabase.from("bookings").insert({
-      operator_id: operatorId,
-      room_type_id: room.id,
-      guest_name: result.data.name,
-      guest_email: result.data.email,
-      guest_whatsapp: result.data.whatsapp,
-      guests: result.data.guests,
-      special_requests: result.data.specialRequests || null,
-      check_in: result.data.checkIn,
-      check_out: result.data.checkOut,
-      price_per_night_snapshot: room.pricePerNight,
-      currency_snapshot: room.currency,
-      total_price: room.pricePerNight * nights,
-      utm_source: searchParams.get("utm_source") || "direct",
-      utm_medium: searchParams.get("utm_medium") || "",
-      utm_campaign: searchParams.get("utm_campaign") || "",
+    // Price + total are computed server-side inside create_booking().
+    // We never send total_price from the browser — the RPC recomputes it
+    // from room_types so a tampered client cannot book at total_price = 0
+    // or against an unpublished/draft operator.
+    const { error } = await supabase.rpc("create_booking", {
+      p_operator_id: operatorId,
+      p_room_type_id: room.id,
+      p_guest_name: result.data.name,
+      p_guest_email: result.data.email,
+      p_guest_whatsapp: result.data.whatsapp,
+      p_guests: result.data.guests,
+      p_check_in: result.data.checkIn,
+      p_check_out: result.data.checkOut,
+      p_special_requests: result.data.specialRequests || null,
+      p_utm_source: searchParams.get("utm_source") || "direct",
+      p_utm_medium: searchParams.get("utm_medium") || null,
+      p_utm_campaign: searchParams.get("utm_campaign") || null,
     });
 
     setIsSubmitting(false);
