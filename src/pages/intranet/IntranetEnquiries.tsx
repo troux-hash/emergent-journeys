@@ -81,7 +81,7 @@ const IntranetEnquiries = () => {
   // a stalled enquiry and wants to push now.
   const runEscalation = async () => {
     setRunning(true);
-    const { data, error } = await supabase.rpc("run_enquiry_escalation", {});
+    const { data, error } = await supabase.rpc("run_enquiry_escalation");
     setRunning(false);
     if (error) {
       toast.error("Escalation run failed", { description: error.message });
