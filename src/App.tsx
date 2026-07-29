@@ -21,11 +21,13 @@ import IntranetReviews from "./pages/intranet/IntranetReviews.tsx";
 import IntranetSupport from "./pages/intranet/IntranetSupport.tsx";
 import IntranetDiscoverability from "./pages/intranet/IntranetDiscoverability.tsx";
 import IntranetLifecycle from "./pages/intranet/IntranetLifecycle.tsx";
+import IntranetEnquiries from "./pages/intranet/IntranetEnquiries.tsx";
 import IntranetDns from "./pages/intranet/IntranetDns.tsx";
 import ReportIssue from "./pages/ReportIssue.tsx";
 import LeaveReview from "./pages/LeaveReview.tsx";
 import Discover from "./pages/Discover.tsx";
 import Trust from "./pages/Trust.tsx";
+import EnquiryAcknowledge from "./pages/EnquiryAcknowledge.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -44,6 +46,7 @@ const App = () => (
             <Route path="/report" element={<ReportIssue />} />
             <Route path="/operators/:slug" element={<OperatorProfile />} />
             <Route path="/review/:bookingId" element={<LeaveReview />} />
+            <Route path="/enquiry/:reference" element={<EnquiryAcknowledge />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
@@ -59,6 +62,7 @@ const App = () => (
               <Route path="support" element={<IntranetSupport />} />
               <Route path="discoverability" element={<IntranetDiscoverability />} />
               <Route path="lifecycle" element={<IntranetLifecycle />} />
+              <Route path="enquiries" element={<IntranetEnquiries />} />
               <Route path="dns" element={<IntranetDns />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

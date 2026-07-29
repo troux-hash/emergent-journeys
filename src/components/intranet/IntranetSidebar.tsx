@@ -1,4 +1,4 @@
-import { LayoutDashboard, FileText, CheckSquare, FolderKanban, LogOut, Building2, Star, LifeBuoy, TrendingUp, Globe, GitBranch } from "lucide-react";
+import { LayoutDashboard, FileText, CheckSquare, FolderKanban, LogOut, Building2, Star, LifeBuoy, TrendingUp, Globe, GitBranch, Inbox } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -22,6 +22,7 @@ const navItems = [
   { title: "Support", url: "/intranet/support", icon: LifeBuoy },
   { title: "Discoverability", url: "/intranet/discoverability", icon: TrendingUp },
   { title: "Lifecycle", url: "/intranet/lifecycle", icon: GitBranch },
+  { title: "Enquiries", url: "/intranet/enquiries", icon: Inbox },
   { title: "DNS Status", url: "/intranet/dns", icon: Globe },
   { title: "Documents", url: "/intranet/documents", icon: FileText },
   { title: "Tasks", url: "/intranet/tasks", icon: CheckSquare },

@@ -29,3 +29,6 @@ verify_jwt = false
 
 [functions.notify-new-lead]
 verify_jwt = true
+
+[functions.enquiry-nudge]
+verify_jwt = true

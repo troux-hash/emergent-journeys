@@ -154,6 +154,62 @@ export type Database = {
           },
         ]
       }
+      enquiries: {
+        Row: {
+          channel: string
+          created_at: string
+          id: string
+          initial_message: string | null
+          operator_id: string
+          operator_nudged_at: string | null
+          outcome: string
+          reference: string
+          responded_at: string | null
+          responded_via: string | null
+          team_escalated_at: string | null
+          traveller_contact: string | null
+          traveller_name: string | null
+        }
+        Insert: {
+          channel: string
+          created_at?: string
+          id?: string
+          initial_message?: string | null
+          operator_id: string
+          operator_nudged_at?: string | null
+          outcome?: string
+          reference?: string
+          responded_at?: string | null
+          responded_via?: string | null
+          team_escalated_at?: string | null
+          traveller_contact?: string | null
+          traveller_name?: string | null
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          id?: string
+          initial_message?: string | null
+          operator_id?: string
+          operator_nudged_at?: string | null
+          outcome?: string
+          reference?: string
+          responded_at?: string | null
+          responded_via?: string | null
+          team_escalated_at?: string | null
+          traveller_contact?: string | null
+          traveller_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enquiries_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "operators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       discoverability_tests: {
         Row: {
           competitors_mentioned: string[] | null
@@ -1019,6 +1075,49 @@ export type Database = {
           message: string
           sender_type: string
           visitor_name: string
+        }[]
+      }
+      create_enquiry: {
+        Args: { p_channel: string; p_initial_message?: string; p_operator_id: string }
+        Returns: string
+      }
+      acknowledge_enquiry: {
+        Args: { p_reference: string; p_via?: string }
+        Returns: boolean
+      }
+      escalate_unanswered_enquiries: {
+        Args: { p_escalate_after_minutes?: number; p_nudge_after_minutes?: number }
+        Returns: { escalated: number; nudged: number }[]
+      }
+      run_enquiry_escalation: {
+        Args: never
+        Returns: { escalated: number; nudged: number }[]
+      }
+      operator_responsiveness: {
+        Args: { p_operator_id: string }
+        Returns: {
+          answered_count: number
+          answered_within_hour_pct: number
+          is_publishable: boolean
+          median_minutes: number
+          total_count: number
+        }[]
+      }
+      enquiry_queue: {
+        Args: never
+        Returns: {
+          channel: string
+          created_at: string
+          id: string
+          initial_message: string
+          minutes_waiting: number
+          operator_id: string
+          operator_name: string
+          operator_nudged_at: string
+          outcome: string
+          reference: string
+          responded_at: string
+          team_escalated_at: string
         }[]
       }
       has_role: {
