@@ -16,6 +16,7 @@ import { template as supportRequest } from './support-request.tsx'
 import { template as chatReply } from './chat-reply.tsx'
 import { template as newLeadAdmin } from './new-lead-admin.tsx'
 import { template as leadAcknowledgement } from './lead-acknowledgement.tsx'
+import { template as bookingExpired } from './booking-expired.tsx'
 
 const CHAT_NOTIFICATION_EMAIL = Deno.env.get('CHAT_NOTIFICATION_EMAIL') || ''
 
@@ -38,4 +39,5 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
     to: CHAT_NOTIFICATION_EMAIL,
   },
   'lead-acknowledgement': leadAcknowledgement,
+  'booking-expired': bookingExpired,
 }
