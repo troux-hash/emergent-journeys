@@ -116,6 +116,7 @@ DECLARE
   required TEXT[] := ARRAY[
     'enquiry_queue',                -- IntranetEnquiries
     'run_enquiry_escalation',       -- IntranetEnquiries
+    'confirm_booking',              -- IntranetBookings
     'operator_lifecycle_overview',  -- IntranetLifecycle
     'delivered_bookings_detail',    -- IntranetLifecycle
     'open_system_alerts',           -- IntranetLifecycle
