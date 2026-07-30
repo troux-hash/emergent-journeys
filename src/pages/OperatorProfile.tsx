@@ -89,11 +89,16 @@ const OperatorProfile = () => {
         setLoading(false);
         return;
       }
+      // Only published operators resolve. Draft / archived / deleted slugs
+      // must behave as "gone" so they drop out of search indexes rather than
+      // lingering as a soft 404 on the generic SPA shell.
       const { data: op } = await supabase
         .from("operators")
         .select("*")
         .eq("slug", slug)
+        .eq("status", "published")
         .maybeSingle();
+
 
       if (!active) return;
 
