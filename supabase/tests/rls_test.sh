@@ -161,6 +161,18 @@ VALUES ('11111111-1111-1111-1111-111111111111', '33333333-3333-3333-3333-3333333
         'Real Guest', 'guest@private.test', '+250700000009', 2,
         '2026-09-01', '2026-09-04', 150, 'USD', 450, 'confirmed');
 
+-- A booking still waiting on the operator, so the Confirm action has
+-- something real to act on. Dates deliberately clear of the confirmed one.
+INSERT INTO public.bookings (id, operator_id, room_type_id, guest_name, guest_email,
+  guest_whatsapp, guests, check_in, check_out, price_per_night_snapshot,
+  currency_snapshot, total_price, status)
+VALUES ('77777777-7777-7777-7777-777777777777',
+        '11111111-1111-1111-1111-111111111111', '33333333-3333-3333-3333-333333333333',
+        'Pending Guest', 'pending@private.test', '+250700000010', 2,
+        '2026-10-01', '2026-10-04', 150, 'USD', 450, 'pending_operator');
+
+
+
 INSERT INTO public.reviews (operator_id, booking_id, source, rating, review_text, moderation_status, reviewer_name)
 SELECT '11111111-1111-1111-1111-111111111111', b.id, 'fichua_verified', 5,
        'Approved and visible', 'approved', 'A'
