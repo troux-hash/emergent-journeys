@@ -66,6 +66,7 @@ DECLARE
     'operator_responsiveness',
     'submit_verified_review',
     -- admin UI: grant lets the request arrive, in-body guard is the control
+    'confirm_booking',
     'delivered_bookings_detail',
     'enquiry_queue',
     'has_role',
