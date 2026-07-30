@@ -43,6 +43,7 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
   },
   'lead-acknowledgement': leadAcknowledgement,
   'booking-expired': bookingExpired,
+  'booking-confirmation': bookingConfirmation,
   'enquiry-nudge': enquiryNudge,
   'enquiry-escalation': {
     ...enquiryEscalation,
