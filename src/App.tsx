@@ -22,6 +22,7 @@ import IntranetSupport from "./pages/intranet/IntranetSupport.tsx";
 import IntranetDiscoverability from "./pages/intranet/IntranetDiscoverability.tsx";
 import IntranetLifecycle from "./pages/intranet/IntranetLifecycle.tsx";
 import IntranetEnquiries from "./pages/intranet/IntranetEnquiries.tsx";
+import IntranetBookings from "./pages/intranet/IntranetBookings.tsx";
 import IntranetDns from "./pages/intranet/IntranetDns.tsx";
 import ReportIssue from "./pages/ReportIssue.tsx";
 import LeaveReview from "./pages/LeaveReview.tsx";
@@ -63,6 +64,7 @@ const App = () => (
               <Route path="discoverability" element={<IntranetDiscoverability />} />
               <Route path="lifecycle" element={<IntranetLifecycle />} />
               <Route path="enquiries" element={<IntranetEnquiries />} />
+              <Route path="bookings" element={<IntranetBookings />} />
               <Route path="dns" element={<IntranetDns />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

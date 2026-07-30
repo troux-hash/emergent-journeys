@@ -988,6 +988,7 @@ export type Database = {
         Args: { p_reference: string; p_via?: string }
         Returns: boolean
       }
+      booking_reference: { Args: { p_booking_id: string }; Returns: string }
       calculate_subscription_price: {
         Args: { p_operator_id: string }
         Returns: {
@@ -1004,6 +1005,16 @@ export type Database = {
           p_room_type_id: string
         }
         Returns: boolean
+      }
+      confirm_booking: {
+        Args: { p_booking_id: string }
+        Returns: {
+          booking_id: string
+          new_status: string
+          notified_operator: boolean
+          notified_traveller: boolean
+          reference: string
+        }[]
       }
       create_booking: {
         Args: {

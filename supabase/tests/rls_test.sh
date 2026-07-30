@@ -161,6 +161,18 @@ VALUES ('11111111-1111-1111-1111-111111111111', '33333333-3333-3333-3333-3333333
         'Real Guest', 'guest@private.test', '+250700000009', 2,
         '2026-09-01', '2026-09-04', 150, 'USD', 450, 'confirmed');
 
+-- A booking still waiting on the operator, so the Confirm action has
+-- something real to act on. Dates deliberately clear of the confirmed one.
+INSERT INTO public.bookings (id, operator_id, room_type_id, guest_name, guest_email,
+  guest_whatsapp, guests, check_in, check_out, price_per_night_snapshot,
+  currency_snapshot, total_price, status)
+VALUES ('77777777-7777-7777-7777-777777777777',
+        '11111111-1111-1111-1111-111111111111', '33333333-3333-3333-3333-333333333333',
+        'Pending Guest', 'pending@private.test', '+250700000010', 2,
+        '2026-10-01', '2026-10-04', 150, 'USD', 450, 'pending_operator');
+
+
+
 INSERT INTO public.reviews (operator_id, booking_id, source, rating, review_text, moderation_status, reviewer_name)
 SELECT '11111111-1111-1111-1111-111111111111', b.id, 'fichua_verified', 5,
        'Approved and visible', 'approved', 'A'
@@ -284,10 +296,14 @@ must_fail "non-admin cannot seed baseline tests" authenticated "$USER_UID" \
   "SELECT public.seed_baseline_tests('11111111-1111-1111-1111-111111111111');"
 must_fail "non-admin cannot trigger the escalation job" authenticated "$USER_UID" \
   "SELECT public.run_enquiry_escalation();"
+must_fail "anon cannot confirm a booking via confirm_booking()" anon "" \
+  "SELECT public.confirm_booking('77777777-7777-7777-7777-777777777777');"
+must_fail "non-admin cannot confirm a booking via confirm_booking()" authenticated "$USER_UID" \
+  "SELECT public.confirm_booking('77777777-7777-7777-7777-777777777777');"
 
 echo
 echo "--- 7. Admin can do its job (guards are not over-tight) ---"
-must_see "admin can read bookings" authenticated "$ADMIN_UID" 1 \
+must_see "admin can read bookings" authenticated "$ADMIN_UID" 2 \
   "SELECT id FROM public.bookings"
 must_see "admin can see both operators" authenticated "$ADMIN_UID" 2 \
   "SELECT id FROM public.operators"
@@ -307,6 +323,24 @@ must_succeed "admin can call publish_readiness()" authenticated "$ADMIN_UID" \
   "SELECT count(*) FROM public.publish_readiness('11111111-1111-1111-1111-111111111111');"
 must_succeed "admin can seed baseline tests" authenticated "$ADMIN_UID" \
   "SELECT public.seed_baseline_tests('11111111-1111-1111-1111-111111111111');"
+must_succeed "admin can confirm a pending booking" authenticated "$ADMIN_UID" \
+  "SELECT reference FROM public.confirm_booking('77777777-7777-7777-7777-777777777777');"
+# Confirming twice must not silently succeed -- the second call has nothing in
+# a confirmable state, and a no-op that reports success would tell an admin a
+# record was re-sent when it was not.
+must_fail "confirming an already-confirmed booking is refused" authenticated "$ADMIN_UID" \
+  "SELECT public.confirm_booking('77777777-7777-7777-7777-777777777777');
+   SELECT public.confirm_booking('77777777-7777-7777-7777-777777777777');"
+# The one that matters: confirming must never double-sell the calendar.
+must_fail "confirming dates already confirmed for the room is refused" authenticated "$ADMIN_UID" \
+  "INSERT INTO public.bookings (id, operator_id, room_type_id, guest_name, guest_email,
+     guest_whatsapp, guests, check_in, check_out, price_per_night_snapshot,
+     currency_snapshot, total_price, status)
+   VALUES ('88888888-8888-8888-8888-888888888888',
+     '11111111-1111-1111-1111-111111111111','33333333-3333-3333-3333-333333333333',
+     'Clash','clash@x.test','+250700000012',1,'2026-09-02','2026-09-03',150,'USD',150,
+     'pending_operator');
+   SELECT public.confirm_booking('88888888-8888-8888-8888-888888888888');"
 
 echo
 echo "--- 8. Probes: weaker than they look? ---"

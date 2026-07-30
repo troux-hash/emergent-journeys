@@ -66,6 +66,7 @@ DECLARE
     'operator_responsiveness',
     'submit_verified_review',
     -- admin UI: grant lets the request arrive, in-body guard is the control
+    'confirm_booking',
     'delivered_bookings_detail',
     'enquiry_queue',
     'has_role',
@@ -115,6 +116,7 @@ DECLARE
   required TEXT[] := ARRAY[
     'enquiry_queue',                -- IntranetEnquiries
     'run_enquiry_escalation',       -- IntranetEnquiries
+    'confirm_booking',              -- IntranetBookings
     'operator_lifecycle_overview',  -- IntranetLifecycle
     'delivered_bookings_detail',    -- IntranetLifecycle
     'open_system_alerts',           -- IntranetLifecycle
