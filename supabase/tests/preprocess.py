@@ -80,6 +80,15 @@ EXCLUDE_RE = re.compile(
     re.MULTILINE,
 )
 
+# Extensions the local build does not ship. Neutralised rather than stubbed
+# per-migration, because a failed CREATE EXTENSION aborts the whole file and
+# every later object in it silently never gets created -- which is how
+# suppressed_emails went missing locally while existing in production.
+MISSING_EXT_RE = re.compile(
+    r"CREATE EXTENSION (?:IF NOT EXISTS )?\"?(pg_net|pgmq|pg_cron|http)\"?[^;]*;",
+    re.IGNORECASE,
+)
+
 
 def main() -> None:
     src, dst = sys.argv[1], sys.argv[2]
@@ -93,8 +102,13 @@ def main() -> None:
         n = 0
     else:
         text, n = EXCLUDE_RE.subn(TRIGGER_SUB, text)
-    if "CREATE EXTENSION IF NOT EXISTS pgmq" in text:
+    text = MISSING_EXT_RE.sub(
+        lambda m: "-- HARNESS: extension unavailable locally -- " + " ".join(m.group(0).split()),
+        text,
+    )
+    if "pgmq" in text:
         text += PGMQ_STUB
+
 
     with open(dst, "w") as fh:
         fh.write(text)
