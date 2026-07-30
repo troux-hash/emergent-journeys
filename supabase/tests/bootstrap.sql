@@ -72,6 +72,30 @@ $$;
 CREATE OR REPLACE FUNCTION cron.unschedule(job_name text) RETURNS boolean LANGUAGE sql AS $$
   DELETE FROM cron.job WHERE jobname = job_name; SELECT true
 $$;
+CREATE OR REPLACE FUNCTION cron.unschedule(job_id bigint) RETURNS boolean LANGUAGE sql AS $$
+  DELETE FROM cron.job WHERE jobid = job_id; SELECT true
+$$;
+
+-- HARNESS: pgmq is unavailable locally. These inert helpers exist from the
+-- start so every migration that references them applies. Queue semantics
+-- (visibility timeout, DLQ, retries) are NOT exercised locally.
+CREATE TABLE IF NOT EXISTS public._harness_email_queue (
+  msg_id bigserial PRIMARY KEY, queue_name text, message jsonb,
+  enqueued_at timestamptz DEFAULT now());
+CREATE OR REPLACE FUNCTION public.enqueue_email(queue_name text, payload jsonb)
+RETURNS bigint LANGUAGE sql AS $$
+  INSERT INTO public._harness_email_queue(queue_name, message)
+  VALUES ($1, $2) RETURNING msg_id $$;
+CREATE OR REPLACE FUNCTION public.read_email_batch(queue_name text, batch_size integer, vt integer)
+RETURNS TABLE (msg_id bigint, read_ct integer, message jsonb) LANGUAGE sql AS $$
+  SELECT q.msg_id, 0, q.message FROM public._harness_email_queue q
+   WHERE q.queue_name = $1 LIMIT $2 $$;
+CREATE OR REPLACE FUNCTION public.delete_email(queue_name text, message_id bigint)
+RETURNS boolean LANGUAGE sql AS $$
+  DELETE FROM public._harness_email_queue WHERE msg_id = $2; SELECT true $$;
+CREATE OR REPLACE FUNCTION public.move_to_dlq(source_queue text, dlq_name text,
+  message_id bigint, payload jsonb)
+RETURNS bigint LANGUAGE sql AS $$ SELECT $3 $$;
 
 CREATE TABLE IF NOT EXISTS storage.buckets (id text PRIMARY KEY, name text, public boolean DEFAULT false);
 CREATE TABLE IF NOT EXISTS storage.objects (
