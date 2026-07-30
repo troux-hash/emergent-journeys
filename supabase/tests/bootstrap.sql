@@ -124,3 +124,13 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
 DO $$ BEGIN
   CREATE PUBLICATION supabase_realtime;
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+-- HARNESS: the queue dispatcher/wake pair live in the email-infra migration,
+-- which cannot apply locally (pgmq/pg_net absent). Stubbing them here keeps
+-- later migrations -- including the ones that REVOKE EXECUTE on has_role and
+-- handle_new_user -- from aborting, which previously made the allowlist
+-- assertion fail locally for a reason that did not exist in production.
+CREATE OR REPLACE FUNCTION public.email_queue_dispatch() RETURNS void
+  LANGUAGE plpgsql AS $$ BEGIN END $$;
+CREATE OR REPLACE FUNCTION public.email_queue_wake() RETURNS trigger
+  LANGUAGE plpgsql AS $$ BEGIN RETURN NEW; END $$;
