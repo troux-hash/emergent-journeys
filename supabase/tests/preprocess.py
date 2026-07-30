@@ -106,8 +106,6 @@ def main() -> None:
         lambda m: "-- HARNESS: extension unavailable locally -- " + " ".join(m.group(0).split()),
         text,
     )
-    if "pgmq" in text:
-        text += PGMQ_STUB
 
 
     with open(dst, "w") as fh:
