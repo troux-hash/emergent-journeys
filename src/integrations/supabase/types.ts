@@ -1010,10 +1010,10 @@ export type Database = {
         Args: { p_booking_id: string }
         Returns: {
           booking_id: string
+          new_status: string
           notified_operator: boolean
           notified_traveller: boolean
           reference: string
-          status: string
         }[]
       }
       create_booking: {
