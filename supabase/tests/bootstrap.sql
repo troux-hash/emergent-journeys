@@ -86,6 +86,16 @@ CREATE OR REPLACE FUNCTION extensions.pgrst_ddl_watch() RETURNS event_trigger LA
 -- Supabase runs migrations as a superuser-ish owner; mirror that default.
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO postgres;
 
+-- Fidelity fix, and the single most important line in this file.
+-- Supabase grants EXECUTE on every newly created public function to
+-- anon/authenticated/service_role by default. Without reproducing that, a
+-- migration writing only `REVOKE ... FROM PUBLIC` looks clean locally while
+-- remaining fully reachable in production -- which is exactly how two real
+-- exposures reached prod. The allowlists are near-useless without this.
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+  GRANT EXECUTE ON FUNCTIONS TO anon, authenticated, service_role;
+
+
 -- Realtime publication that migrations add tables to.
 DO $$ BEGIN
   CREATE PUBLICATION supabase_realtime;

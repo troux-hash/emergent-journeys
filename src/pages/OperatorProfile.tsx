@@ -89,11 +89,16 @@ const OperatorProfile = () => {
         setLoading(false);
         return;
       }
+      // Only published operators resolve. Draft / archived / deleted slugs
+      // must behave as "gone" so they drop out of search indexes rather than
+      // lingering as a soft 404 on the generic SPA shell.
       const { data: op } = await supabase
         .from("operators")
         .select("*")
         .eq("slug", slug)
+        .eq("status", "published")
         .maybeSingle();
+
 
       if (!active) return;
 
@@ -135,10 +140,20 @@ const OperatorProfile = () => {
   if (!operator) {
     return (
       <div className="min-h-screen bg-parchment flex items-center justify-center px-6">
+        <Helmet>
+          {/* Static hosting cannot emit a 404 status for an SPA route, so the
+              indexing signal has to be explicit: noindex tells crawlers to drop
+              the URL, which is what actually removes stale operator pages. */}
+          <title>Page not found | Fichua</title>
+          <meta name="robots" content="noindex, nofollow" />
+          <meta name="googlebot" content="noindex, nofollow" />
+          <meta http-equiv="status" content="404" />
+          <link rel="canonical" href={`${SITE_ORIGIN}/`} />
+        </Helmet>
         <div className="text-center">
-          <h1 className="font-display text-4xl text-foreground mb-4">Page not found</h1>
+          <h1 className="font-display text-4xl text-foreground mb-4">404 — Page not found</h1>
           <p className="font-body text-muted-foreground mb-8">
-            The operator you're looking for doesn't exist yet.
+            This property is not listed on Fichua.
           </p>
           <Link
             to="/"
@@ -150,6 +165,7 @@ const OperatorProfile = () => {
       </div>
     );
   }
+
 
   const avgRating = reviews.length > 0
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
