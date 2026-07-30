@@ -22,6 +22,7 @@ local test for a verified production constraint.
 
 Everything else is applied byte-for-byte.
 """
+import os
 import re
 import sys
 
@@ -85,7 +86,13 @@ def main() -> None:
     with open(src) as fh:
         text = fh.read()
 
-    text, n = EXCLUDE_RE.subn(TRIGGER_SUB, text)
+    # HARNESS_REAL_GIST=1 keeps the production EXCLUDE USING gist constraint
+    # verbatim. Only set it when the local Postgres actually has btree_gist --
+    # then, and only then, the concurrency behaviour matches production.
+    if os.environ.get("HARNESS_REAL_GIST") == "1":
+        n = 0
+    else:
+        text, n = EXCLUDE_RE.subn(TRIGGER_SUB, text)
     if "CREATE EXTENSION IF NOT EXISTS pgmq" in text:
         text += PGMQ_STUB
 
