@@ -63,6 +63,7 @@ const App = () => (
               <Route path="discoverability" element={<IntranetDiscoverability />} />
               <Route path="lifecycle" element={<IntranetLifecycle />} />
               <Route path="enquiries" element={<IntranetEnquiries />} />
+              <Route path="bookings" element={<IntranetBookings />} />
               <Route path="dns" element={<IntranetDns />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
