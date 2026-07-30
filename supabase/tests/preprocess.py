@@ -85,7 +85,7 @@ EXCLUDE_RE = re.compile(
 # every later object in it silently never gets created -- which is how
 # suppressed_emails went missing locally while existing in production.
 MISSING_EXT_RE = re.compile(
-    r"CREATE EXTENSION (?:IF NOT EXISTS )?\"?(pg_net|pgmq|pg_cron|http)\"?[^;]*;",
+    r"CREATE EXTENSION (?:IF NOT EXISTS )?\"?(pg_net|pgmq|pg_cron|http|supabase_vault|vault)\"?[^;]*;",
     re.IGNORECASE,
 )
 
