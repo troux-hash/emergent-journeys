@@ -22,6 +22,7 @@ import IntranetSupport from "./pages/intranet/IntranetSupport.tsx";
 import IntranetDiscoverability from "./pages/intranet/IntranetDiscoverability.tsx";
 import IntranetLifecycle from "./pages/intranet/IntranetLifecycle.tsx";
 import IntranetEnquiries from "./pages/intranet/IntranetEnquiries.tsx";
+import IntranetBookings from "./pages/intranet/IntranetBookings.tsx";
 import IntranetDns from "./pages/intranet/IntranetDns.tsx";
 import ReportIssue from "./pages/ReportIssue.tsx";
 import LeaveReview from "./pages/LeaveReview.tsx";
