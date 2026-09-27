@@ -104,7 +104,7 @@ const Terms = () => {
 
             <section>
               <h2 className="font-display text-lg font-medium text-foreground mb-3">13. Contact</h2>
-              <p>Questions about these terms? Reach us at <a href="mailto:teddy225@mit.edu" className="text-gold hover:underline">teddy225@mit.edu</a>.</p>
+              <p>Questions about these terms? Reach us at <a href="mailto:tr@fichua.co" className="text-gold hover:underline">tr@fichua.co</a>.</p>
             </section>
           </div>
         </div>

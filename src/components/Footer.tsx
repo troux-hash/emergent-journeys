@@ -39,7 +39,7 @@ const Footer = () => {
               Email us directly — no form, no pressure.
             </p>
             <a
-              href="mailto:teddy225@mit.edu"
+              href="mailto:tr@fichua.co"
               className="inline-block font-label text-sm tracking-[0.2em] uppercase bg-gold text-earth-dark px-10 py-4 hover:opacity-90 transition-opacity"
             >
               Get in Touch
@@ -55,10 +55,10 @@ const Footer = () => {
           <div className="flex items-center gap-2 text-sm">
             <Mail className="w-4 h-4 text-gold" />
             <a
-              href="mailto:teddy225@mit.edu"
+              href="mailto:tr@fichua.co"
               className="font-body hover:text-gold transition-colors"
             >
-              teddy225@mit.edu
+              tr@fichua.co
             </a>
           </div>
 
