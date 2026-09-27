@@ -1,0 +1,1 @@
+DELETE FROM public.operator_leads WHERE property_name = 'Test Property (Fichua QA)' AND email = 'qa@example.com';
