@@ -69,7 +69,7 @@ const Privacy = () => {
 
             <section>
               <h2 className="font-display text-lg font-medium text-foreground mb-3">6. Your rights</h2>
-              <p>Depending on your jurisdiction, you may have the right to access, correct, delete, or port your personal data. To exercise any of these rights, contact us at <a href="mailto:teddy225@mit.edu" className="text-gold hover:underline">teddy225@mit.edu</a>.</p>
+              <p>Depending on your jurisdiction, you may have the right to access, correct, delete, or port your personal data. To exercise any of these rights, contact us at <a href="mailto:tr@fichua.co" className="text-gold hover:underline">tr@fichua.co</a>.</p>
             </section>
 
             <section>
@@ -89,7 +89,7 @@ const Privacy = () => {
 
             <section>
               <h2 className="font-display text-lg font-medium text-foreground mb-3">10. Contact</h2>
-              <p>Questions about this policy? Reach us at <a href="mailto:teddy225@mit.edu" className="text-gold hover:underline">teddy225@mit.edu</a>.</p>
+              <p>Questions about this policy? Reach us at <a href="mailto:tr@fichua.co" className="text-gold hover:underline">tr@fichua.co</a>.</p>
             </section>
           </div>
         </div>

@@ -13,7 +13,7 @@ const FooterCTA = () => {
             From Swahili · Bantu root: ficha (to hide) → fichua (to reveal)
           </p>
           <a
-            href="mailto:teddy225@mit.edu"
+            href="mailto:tr@fichua.co"
             className="inline-block font-label text-sm tracking-[0.2em] uppercase bg-gold text-earth-dark px-10 py-4 hover:opacity-90 transition-opacity mb-6"
           >
             Get in Touch
