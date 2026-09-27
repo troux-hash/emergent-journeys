@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import RevealSection from "./RevealSection";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const OperatorSignupSection = () => {
+  const [searchParams] = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -30,6 +32,10 @@ const OperatorSignupSection = () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
 
+    // UTM tags captured from the page URL so each signup is attributable
+    // to the group/campaign link the visitor arrived from.
+    const utm = (key: string) => searchParams.get(key)?.slice(0, 200) || null;
+
     const { error } = await supabase.from("operator_leads").insert({
       property_name: formData.entityName.trim(),
       phone: formData.whatsapp.trim(),
@@ -40,6 +46,10 @@ const OperatorSignupSection = () => {
       num_rooms: formData.numRooms ? parseInt(formData.numRooms, 10) : null,
       price_min: formData.priceMin ? parseFloat(formData.priceMin) : null,
       price_max: formData.priceMax ? parseFloat(formData.priceMax) : null,
+      utm_source: utm("utm_source"),
+      utm_medium: utm("utm_medium"),
+      utm_campaign: utm("utm_campaign"),
+      utm_content: utm("utm_content"),
     });
 
     setIsSubmitting(false);
