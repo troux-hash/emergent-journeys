@@ -11,7 +11,7 @@ const BusinessModelSection = () => {
             <em className="text-gold">For the operator.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-md mb-16">
-            Fichua costs less per month than one night's booking — and keeps up to $390 more on every $3,000 booking.
+            Fichua costs less per month than one night's booking — and keeps up to $65 more on every $500 booking.
           </p>
         </RevealSection>
 
