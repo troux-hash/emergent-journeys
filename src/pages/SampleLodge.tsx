@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { ArrowLeft, BedDouble, Check, MapPin, ShieldCheck, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import sampleLodge from "@/assets/safari-lodge.jpg";
+import sampleLodge from "@/assets/hero-lodge.jpg";
 
 const SampleLodge = () => (
   <main className="min-h-screen bg-parchment text-foreground">

@@ -14,5 +14,6 @@
 - [x] FAQ: payouts/mobile money, time to go live, countries, and verification
 - [x] Share preview descriptions include $130
 - [x] Clearly fictional sample lodge page (no production seed)
-- [ ] Rich Results Test + phone form test
+- [x] Phone form test at 390px with visible fields, button, and UTM capture
+- [ ] Rich Results Test against the published update
 - [x] Render tracked UTM fields in both live and prerendered form HTML
