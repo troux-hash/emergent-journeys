@@ -22,7 +22,7 @@ const BusinessModelSection = () => {
               <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-6">01 — SaaS Subscription</p>
               <p className="font-display text-5xl md:text-6xl font-semibold text-foreground mb-2">$99</p>
               <p className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8">/ month</p>
-              <p className="font-body text-sm text-muted-foreground mb-6">Less than one night's booking. Pays for itself on Day 1.</p>
+              <p className="font-body text-sm text-muted-foreground mb-6">One flat rate. Pays for itself after a single booking.</p>
               <ul className="space-y-3 font-body text-sm text-muted-foreground">
                 {["Schema.org AI profile — live in 48h", "Direct booking engine", "WhatsApp CRM integration", "Guest intelligence dashboard"].map((item) => (
                   <li key={item} className="flex items-start gap-2">
