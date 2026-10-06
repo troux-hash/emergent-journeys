@@ -5,12 +5,10 @@ import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const rawNavItems = [
-  { label: "The Problem", href: "#problem" },
-  { label: "The Solution", href: "#solution" },
+  { label: "Compare", href: "#comparison" },
+  { label: "What You Get", href: "#solution" },
+  { label: "Pricing", href: "#pricing" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Discover", href: "/discover" },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "Trust & Safety", href: "/trust" },
 ];
 
 const Navbar = () => {
