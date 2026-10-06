@@ -91,8 +91,8 @@ function buildHomepageJsonLd() {
 function buildHomepageBody() {
   const faqs = HOME_FAQS.map(([question, answer]) => `<h3>${esc(question)}</h3><p>${esc(answer)}</p>`).join('')
   return `<main>
-      <section><p>For independent lodges in East & West Africa</p><h1>Keep up to $130 more on every $1,000 booking.</h1><p>Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.</p><a href="#contact">Make me visible</a><p>Nothing to pay until Fichua has delivered 10 bookings.</p></section>
-      <section><h2>Your subscription pays for itself after three to four bookings.</h2><p>On a $1,000 booking, Fichua saves $80–$130 compared with a platform charging 15%–20%. The exact break-even point depends on your lowest room rate.</p><table><thead><tr><th>Month</th><th>Bookings</th><th>Savings</th><th>Subscription</th><th>Kept</th></tr></thead><tbody><tr><th>Modest</th><td>4 × $1,000</td><td>$320–$520</td><td>$300</td><td>$20–$220</td></tr><tr><th>Busy</th><td>10 × $1,000</td><td>$800–$1,300</td><td>$300</td><td>$500–$1,000</td></tr></tbody></table><p>These examples use a $100 lowest room rate. Your subscription is three times your own lowest nightly rate. Use the on-page calculator for your lodge.</p><p><a href="/sample-lodge">See a fictional sample lodge page</a>.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $1,000 booking</th><td>$70</td><td>$150 (15%) – $200 (20%)</td></tr><tr><th>Revenue you keep</th><td>$930</td><td>$800–$850</td></tr><tr><th>Saving with Fichua</th><td>$80–$130</td><td>—</td></tr></tbody></table></section>
+      <section><p>Now onboarding in Rwanda</p><p>For independent lodges in East & West Africa</p><h1>Keep up to $130 more on every $1,000 booking.</h1><p>Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.</p><a href="#contact">Make me visible</a><p>Nothing to pay until Fichua has delivered 10 bookings.</p></section>
+      <section><h2>Your subscription pays for itself after three to four bookings.</h2><p>On a $1,000 booking, Fichua saves $80–$130 compared with a platform charging 15%–20%. The exact break-even point depends on your lowest room rate.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $1,000 booking</th><td>$70</td><td>$150 (15%) – $200 (20%)</td></tr><tr><th>Revenue you keep</th><td>$930</td><td>$800–$850</td></tr><tr><th>Saving with Fichua</th><td>$80–$130</td><td>—</td></tr></tbody></table><table><thead><tr><th>Month</th><th>Bookings</th><th>Savings</th><th>Subscription</th><th>Kept</th></tr></thead><tbody><tr><th>Modest</th><td>4 × $1,000</td><td>$320–$520</td><td>$300</td><td>$20–$220</td></tr><tr><th>Busy</th><td>10 × $1,000</td><td>$800–$1,300</td><td>$300</td><td>$500–$1,000</td></tr></tbody></table><p>These examples use a $100 lowest room rate. Your subscription is three times your own lowest nightly rate.</p><form aria-label="Savings calculator"><h3>What would you keep?</h3><label for="prerender-calc-room">Lowest nightly room rate ($)</label><input id="prerender-calc-room" name="room_rate" type="number" min="0" value="100"><label for="prerender-calc-value">Average booking value ($)</label><input id="prerender-calc-value" name="booking_value" type="number" min="0" value="1000"><label for="prerender-calc-count">Fichua bookings per month</label><input id="prerender-calc-count" name="bookings" type="number" min="0" value="4"><p>At these example values: save $320–$520 versus a 15%–20% platform; $300 subscription; keep $20–$220 each month.</p></form><p><a href="/sample-lodge">See a fictional sample lodge page</a>.</p></section>
       <section><h2>Get found. Book direct. Keep more.</h2><p>Fichua publishes your verified rooms, prices and location as structured information search engines and AI assistants can understand, then gives guests a direct path to book.</p></section>
       <section id="pricing"><h2>Three nights a month, plus 7%.</h2><p>Your monthly subscription equals three nights in your least expensive room. You pay nothing until Fichua has delivered ten bookings.</p></section>
       <section><h2>How Fichua works</h2><ol><li>Tell us about your lodge.</li><li>We verify your identity, location and payout details.</li><li>Your page goes live for direct bookings.</li></ol></section>
@@ -103,11 +103,33 @@ function buildHomepageBody() {
 
 function renderSampleLodge(shell) {
   const canonical = `${SITE_URL}/sample-lodge`
+  const title = 'Imara Hills Lodge — Fictional Fichua Demo'
+  const desc = 'See how Fichua presents a verified lodge to travellers, search engines and AI assistants.'
+  const image = `${SITE_URL}/sample-lodge.jpg`
+  const sampleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: 'Imara Hills Lodge',
+    address: { '@type': 'PostalAddress', addressLocality: 'Musanze', addressCountry: 'Rwanda' },
+    priceRange: '$120–$210',
+    amenityFeature: ['Breakfast included', 'Private terrace', 'Mountain view'],
+    makesOffer: [
+      { '@type': 'Offer', name: 'Garden Room', price: 120, priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Family Cottage', price: 210, priceCurrency: 'USD' },
+    ],
+  }
   let html = shell
-    .replace(/<title>[^<]*<\/title>/, '<title>Fictional sample lodge page | Fichua</title>')
-    .replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="A fictional demonstration of the verified lodge pages Fichua creates for independent operators.">')
-    .replace('</head>', `  <meta name="robots" content="noindex, nofollow">\n  <link rel="canonical" href="${canonical}">\n</head>`)
-  html = html.replace('<div id="root"></div>', `<div id="root"><main><p>Fictional demonstration — not a real property and not available to book</p><h1>Imara Hills Lodge</h1><p>Musanze, Rwanda</p><p>Fichua Verified: identity and ownership, property location, WhatsApp reachability and payout account checked.</p><h2>Rooms and real prices</h2><article><h3>Garden Room</h3><p>$120 per night. Breakfast included. Private terrace.</p></article><article><h3>Family Cottage</h3><p>$210 per night. Sleeps four. Mountain view.</p></article><p><a href="/#contact">Build my lodge page</a></p></main></div>`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${desc}">`)
+    .replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${title}">`)
+    .replace(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${title}">`)
+    .replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${desc}">`)
+    .replace(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${desc}">`)
+    .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}">`)
+    .replace(/<meta property="og:image"[^>]*>/, `<meta property="og:image" content="${image}">`)
+    .replace(/<meta name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${image}">`)
+    .replace('</head>', `  <meta name="robots" content="noindex, nofollow">\n  <link rel="canonical" href="${canonical}">\n  <script type="application/ld+json">${jsonLdSafe(sampleSchema)}</script>\n</head>`)
+  html = html.replace('<div id="root"></div>', `<div id="root"><main><p>Fictional demonstration — not a real property and not available to book</p><h1>Imara Hills Lodge</h1><p>Musanze, Rwanda</p><figure><img src="/sample-lodge.jpg" alt="Fictional lodge among green hills"><figcaption>Demo property photo</figcaption></figure><p>Fichua Verified: identity and ownership, property location, WhatsApp reachability and payout account checked.</p><h2>Rooms and real prices</h2><article><h3>Garden Room</h3><p>$120 per night. Breakfast included. Private terrace.</p></article><article><h3>Family Cottage</h3><p>$210 per night. Sleeps four. Mountain view.</p></article><section><h2>What AI assistants read</h2><p>Fichua publishes the property type, verified location, room names, prices and amenities in Schema.org format.</p><pre><code>${esc(JSON.stringify(sampleSchema, null, 2))}</code></pre></section><button type="button" disabled>Book on WhatsApp · Demo</button><p><a href="/#contact">Build my lodge page</a></p></main></div>`)
   return html
 }
 
@@ -407,12 +429,14 @@ async function main() {
     ['FAQ schema', /"@type":"FAQPage"/],
     ['lead form fields', /<input id="prerender-property"/],
     ['UTM fields', /name="utm_campaign"/],
+    ['Rwanda onboarding', /Now onboarding in Rwanda/],
+    ['calculator fields', /id="prerender-calc-room"/],
   ]
   for (const [label, pattern] of homepageChecks) {
     if (!pattern.test(homepage)) throw new Error(`[prerender] Homepage check failed: ${label}`)
   }
   console.log(`[prerender] Homepage — ${homepageChecks.length} checks passed.`)
-  if (!/<h1>Imara Hills Lodge<\/h1>/.test(samplePage) || !/noindex, nofollow/.test(samplePage)) {
+  if (!/<h1>Imara Hills Lodge<\/h1>/.test(samplePage) || !/noindex, nofollow/.test(samplePage) || !/What AI assistants read/.test(samplePage) || !/Book on WhatsApp · Demo/.test(samplePage) || !/<meta property="og:url" content="https:\/\/fichua\.co\/sample-lodge">/.test(samplePage)) {
     throw new Error('[prerender] Sample lodge page check failed')
   }
   console.log('[prerender] Fictional sample lodge page — checks passed.')
