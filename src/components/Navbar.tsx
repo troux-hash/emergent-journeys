@@ -5,12 +5,10 @@ import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const rawNavItems = [
-  { label: "The Problem", href: "#problem" },
-  { label: "The Solution", href: "#solution" },
+  { label: "Compare", href: "#comparison" },
+  { label: "What You Get", href: "#solution" },
+  { label: "Pricing", href: "#pricing" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Discover", href: "/discover" },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "Trust & Safety", href: "/trust" },
 ];
 
 const Navbar = () => {
@@ -46,14 +44,15 @@ const Navbar = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-center h-16">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:px-12">
+          <a href="/" className={`font-display text-2xl font-semibold ${scrolled || mobileOpen ? "text-foreground" : "text-earth-light"}`} aria-label="Fichua home">Fichua<span className="text-gold">.</span></a>
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="font-label text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+                className={`font-label text-xs uppercase tracking-[0.2em] transition-colors ${scrolled ? "text-muted-foreground hover:text-foreground" : "text-earth-dark-foreground/70 hover:text-earth-light"}`}
               >
                 {item.label}
               </a>
@@ -70,7 +69,7 @@ const Navbar = () => {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-foreground absolute right-6"
+            className={`absolute right-6 p-2 md:hidden ${scrolled || mobileOpen ? "text-foreground" : "text-earth-light"}`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}

@@ -1,4 +1,4 @@
-// Build-time prerender for operator pages.
+// Build-time prerender for the homepage and operator pages.
 //
 // WHY THIS EXISTS
 // This project is a client-rendered Vite SPA: every URL returns the same
@@ -34,6 +34,75 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 const DIST = path.join(ROOT, 'dist')
 const SITE_URL = 'https://fichua.co'
+
+const HOME_FAQS = [
+  ['Who is Fichua for?', 'Fichua is for independent lodges, guesthouses, camps and distinctive stays in East and West Africa that want to be found online and take more bookings directly.'],
+  ['What does Fichua cost?', 'The monthly subscription is equal to three nights in your least expensive room, plus 7% on bookings Fichua brings. You pay nothing until Fichua has delivered ten bookings.'],
+  ['How does Fichua help guests find my lodge?', 'Fichua publishes a verified, structured property page with your rooms, prices, location and contact details so travellers, search engines and AI assistants can understand and cite your lodge.'],
+  ['Do I keep the guest relationship?', 'Yes. Your lodge owns the guest relationship. There is no exclusivity or lock-in, and your real price is shown clearly to the traveller.'],
+]
+
+function buildHomepageJsonLd() {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Fichua',
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/og-image.jpg`,
+      email: 'tr@fichua.co',
+      description: 'Fichua helps independent lodges in East and West Africa get found and take more direct bookings.',
+      sameAs: ['https://instagram.com/fichua', 'https://linkedin.com/company/fichua', 'https://x.com/fichua'],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      '@id': `${SITE_URL}/#product`,
+      name: 'Fichua for Independent Lodges',
+      brand: { '@id': `${SITE_URL}/#organization` },
+      audience: { '@type': 'BusinessAudience', audienceType: 'Independent lodges in East and West Africa' },
+      description: 'A verified property page, AI-search visibility and direct booking service for independent African lodges.',
+      url: `${SITE_URL}/`,
+      offers: {
+        '@type': 'Offer',
+        url: `${SITE_URL}/#pricing`,
+        description: 'Monthly subscription equal to three nights in the lodge’s least expensive room, plus 7% on bookings delivered by Fichua. Nothing due until ten bookings are delivered.',
+        availability: 'https://schema.org/InStock',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: HOME_FAQS.map(([question, answer]) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: answer },
+      })),
+    },
+  ]
+}
+
+function buildHomepageBody() {
+  const faqs = HOME_FAQS.map(([question, answer]) => `<h3>${esc(question)}</h3><p>${esc(answer)}</p>`).join('')
+  return `<main>
+      <section><p>For independent lodges in East &amp; West Africa</p><h1>Keep $360 more on every $3,000 booking.</h1><p>Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.</p><a href="#contact">Make me visible</a></section>
+      <section><h2>One booking pays the difference.</h2><p>At a typical 20% OTA commission, a $3,000 reservation costs you $600. Fichua’s 7% costs $210. The remaining $390 stays with your lodge.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $3,000 booking</th><td>$210</td><td>$450–$600</td></tr><tr><th>Revenue you keep</th><td>$2,790</td><td>$2,400–$2,550</td></tr></tbody></table></section>
+      <section><h2>Get found. Book direct. Keep more.</h2><p>Fichua publishes your verified rooms, prices and location as structured information search engines and AI assistants can understand, then gives guests a direct path to book.</p></section>
+      <section id="pricing"><h2>Three nights a month, plus 7%.</h2><p>Your monthly subscription equals three nights in your least expensive room. You pay nothing until Fichua has delivered ten bookings.</p></section>
+      <section><h2>How Fichua works</h2><ol><li>Tell us about your lodge.</li><li>We verify your identity, location and payout details.</li><li>Your page goes live for direct bookings.</li></ol></section>
+      <section><h2>What lodge owners ask first.</h2>${faqs}</section>
+      <section id="contact"><h2>Put your lodge where guests can find it.</h2><p>Submit your property name and WhatsApp number to start. No upfront fee. No contract.</p></section>
+    </main>`
+}
+
+function renderHomepage(shell) {
+  const canonical = `${SITE_URL}/`
+  const schema = buildHomepageJsonLd().map((item) => `<script type="application/ld+json">${jsonLdSafe(item)}</script>`).join('\n  ')
+  let html = shell.replace('</head>', `  <link rel="canonical" href="${canonical}">\n  ${schema}\n</head>`)
+  html = html.replace('<div id="root"></div>', `<div id="root">${buildHomepageBody()}</div>`)
+  return html
+}
 
 function loadEnv() {
   const envPath = path.join(ROOT, '.env')
@@ -304,18 +373,30 @@ function selftest() {
 
 async function main() {
   if (process.argv.includes('--selftest')) return selftest()
+  const shellPath = path.join(DIST, 'index.html')
+  if (!existsSync(shellPath)) {
+    console.warn('[prerender] dist/index.html not found -- did vite build run? Skipping prerender.')
+    return
+  }
+  const shell = readFileSync(shellPath, 'utf-8')
+  const homepage = renderHomepage(shell)
+  writeFileSync(shellPath, homepage)
+  const homepageChecks = [
+    ['visible homepage h1', /<h1>Keep \$360 more on every \$3,000 booking\.<\/h1>/],
+    ['Organization schema', /"@type":"Organization"/],
+    ['Product schema', /"@type":"Product"/],
+    ['FAQ schema', /"@type":"FAQPage"/],
+  ]
+  for (const [label, pattern] of homepageChecks) {
+    if (!pattern.test(homepage)) throw new Error(`[prerender] Homepage check failed: ${label}`)
+  }
+  console.log(`[prerender] Homepage — ${homepageChecks.length} checks passed.`)
+
   const env = loadEnv()
   if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_PUBLISHABLE_KEY) {
     console.warn('[prerender] Supabase env vars missing in .env -- skipping operator prerender.')
     return
   }
-
-  const shellPath = path.join(DIST, 'index.html')
-  if (!existsSync(shellPath)) {
-    console.warn('[prerender] dist/index.html not found -- did vite build run? Skipping.')
-    return
-  }
-  const shell = readFileSync(shellPath, 'utf-8')
 
   let operators, rooms, reviews
   try {

@@ -2,10 +2,11 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
+import ComparisonSection from "@/components/ComparisonSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
-import TrustSection from "@/components/TrustSection";
 import PricingSection from "@/components/PricingSection";
 import OperatorSignupSection from "@/components/OperatorSignupSection";
+import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 
@@ -14,11 +15,12 @@ const Index = () => {
     <div className="grain-overlay">
       <Navbar />
       <HeroSection />
+      <ComparisonSection />
       <ProblemSection />
       <SolutionSection />
-      <HowItWorksSection />
-      <TrustSection />
       <PricingSection />
+      <HowItWorksSection />
+      <FaqSection />
       <OperatorSignupSection />
       <Footer />
       <ChatWidget />
