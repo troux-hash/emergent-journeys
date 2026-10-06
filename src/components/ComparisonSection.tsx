@@ -1,5 +1,6 @@
 import { Check, Minus } from "lucide-react";
 import RevealSection from "./RevealSection";
+import SavingsCalculator from "./SavingsCalculator";
 
 const rows = [
   ["Commission on a $1,000 booking", "$70", "$150 (15%) – $200 (20%)"],
@@ -15,8 +16,13 @@ const ComparisonSection = () => (
       <RevealSection>
         <div className="mb-12 max-w-3xl">
           <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The margin difference</p>
-          <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">One booking pays the difference.</h2>
-          <p className="mt-5 max-w-2xl font-body text-muted-foreground">At a typical 20% OTA commission, a $1,000 reservation costs you $200. Fichua’s 7% costs $70. Up to $130 stays with your lodge.</p><p className="mt-3 max-w-2xl border-l-2 border-gold pl-3 font-body text-sm text-foreground">Net of the subscription: ten $1,000 bookings a month with a $100 lowest room rate saves $1,300, minus a $300 subscription — <strong>$1,000 kept</strong>.</p>
+          <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">Your subscription pays for itself after three bookings.</h2>
+          <p className="mt-5 max-w-2xl font-body text-muted-foreground">At a typical 20% OTA commission, a $1,000 reservation costs you $200. Fichua’s 7% costs $70. Up to $130 stays with your lodge — three bookings save $390 against a $300 subscription.</p>
+          <div className="mt-5 grid max-w-2xl gap-3 sm:grid-cols-2">
+            <p className="border-l-2 border-gold pl-3 font-body text-sm text-foreground">A modest month: four $1,000 bookings save $520, minus a $300 subscription — <strong>$220 kept</strong>.</p>
+            <p className="border-l-2 border-gold pl-3 font-body text-sm text-foreground">A busy month: ten $1,000 bookings save $1,300, minus a $300 subscription — <strong>$1,000 kept</strong>.</p>
+          </div>
+          <p className="mt-3 font-body text-xs text-muted-foreground">Examples assume a $100 lowest room rate, so the subscription is $300 a month.</p>
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
@@ -27,6 +33,7 @@ const ComparisonSection = () => (
           </table>
         </div>
       </RevealSection>
+      <RevealSection delay={0.15}><SavingsCalculator /></RevealSection>
     </div>
   </section>
 );
