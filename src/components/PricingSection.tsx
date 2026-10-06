@@ -121,8 +121,8 @@ const PricingSection = () => {
               </div>
               <div>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                  On a $500 booking, a 20% platform takes $100. Fichua takes $35 — leaving{" "}
-                  <strong className="text-foreground">$65 more with you</strong>, on that booking alone.
+                  On a $1,000 booking, a 20% platform takes $200. Fichua takes $70 — leaving{" "}
+                  <strong className="text-foreground">$130 more with you</strong>, on that booking alone.
                 </p>
               </div>
             </div>
