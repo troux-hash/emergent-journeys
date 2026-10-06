@@ -39,13 +39,12 @@ const PricingSection = () => {
           <div className="text-center mb-14">
             <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Pricing</p>
             <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-5">
-              Three nights a month, plus 7%.<br />
-              <em className="text-gold">And nothing until we've earned it.</em>
+              $99 a month. Plus 7% on<br />
+              <em className="text-gold">the bookings we bring you.</em>
             </h2>
             <p className="font-body text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Two parts, both stated plainly: a monthly subscription to be visible — three nights in your
-              cheapest room — and 7% on the bookings we bring you, against the 15–20% the large platforms
-              take. You pay neither until Fichua has delivered you ten bookings.
+              Two parts, both stated plainly: $99 a month to be visible, and 7% on the bookings we deliver —
+              against the 15–20% the large platforms take. You pay neither until Fichua has delivered you ten bookings.
             </p>
           </div>
         </RevealSection>
@@ -59,19 +58,18 @@ const PricingSection = () => {
                   What it costs
                 </p>
                 <p className="font-display text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-3">
-                  3 nights in your<br />cheapest room
+                  $99<span className="text-2xl md:text-3xl">/month</span>
                 </p>
                 <p className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground mb-5">
-                  per month, to be found and stay visible
+                  flat rate, to be found and stay visible
                 </p>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">
-                  Take your least expensive room, multiply its nightly rate by three — that's your month. A small
-                  guesthouse pays less than a safari lodge, because a flat fee that's fair to one is unfair to the
-                  other.
+                  One number, the same for everyone: a verified page, direct bookings, and your guests' details —
+                  published where travellers and AI assistants can find you.
                 </p>
                 <p className="font-body text-sm text-foreground border-l-2 border-gold pl-3">
-                  <strong>You can work it out in your head</strong>, and it's the same number whether you take
-                  twelve bookings that month or eighty.
+                  <strong>No tiers, no maths</strong>, and it's the same whether you take twelve bookings that month
+                  or eighty.
                 </p>
               </div>
 

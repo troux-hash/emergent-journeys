@@ -11,7 +11,7 @@ const BusinessModelSection = () => {
             <em className="text-gold">For the operator.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-md mb-16">
-            Fichua costs less per month than one night's booking — and keeps up to $130 more on every $1,000 booking.
+            Fichua costs $99 a month — and keeps up to $130 more on every $1,000 booking.
           </p>
         </RevealSection>
 
@@ -20,7 +20,7 @@ const BusinessModelSection = () => {
           <RevealSection>
             <div className="border border-border bg-parchment p-8 md:p-10 h-full">
               <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-6">01 — SaaS Subscription</p>
-              <p className="font-display text-5xl md:text-6xl font-semibold text-foreground mb-2">$150</p>
+              <p className="font-display text-5xl md:text-6xl font-semibold text-foreground mb-2">$99</p>
               <p className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8">/ month</p>
               <p className="font-body text-sm text-muted-foreground mb-6">Less than one night's booking. Pays for itself on Day 1.</p>
               <ul className="space-y-3 font-body text-sm text-muted-foreground">
