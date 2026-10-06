@@ -8,10 +8,12 @@
 - [x] Verify generated source, form behavior, responsive layout, and live share image.
 - [x] Publish the completed rebuild.
 ## Oct 6 feedback
-- [x] Break-even heading (3 bookings)
+- [x] Break-even heading (3–4 bookings) and scannable monthly table
 - [x] Modest-month example + savings calculator
 - [x] FAQ: staying on Booking.com
-- [ ] FAQ: payouts/mobile money, time to go live, countries — needs real facts from owner
+- [x] FAQ: payouts/mobile money, time to go live, countries, and verification
 - [x] Share preview descriptions include $130
-- [ ] Live sample lodge page — needs a real lodge to agree
-- [ ] Rich Results Test + phone form test — after publish
+- [x] Clearly fictional sample lodge page (no production seed)
+- [x] Phone form test at 390px with visible fields, button, and UTM capture
+- [ ] Rich Results Test against the published update — blocked until next publish
+- [x] Render tracked UTM fields in both live and prerendered form HTML

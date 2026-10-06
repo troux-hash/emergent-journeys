@@ -31,6 +31,7 @@ import Discover from "./pages/Discover.tsx";
 import Trust from "./pages/Trust.tsx";
 import EnquiryAcknowledge from "./pages/EnquiryAcknowledge.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import SampleLodge from "./pages/SampleLodge.tsx";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/trust" element={<Trust />} />
             <Route path="/report" element={<ReportIssue />} />
             <Route path="/operators/:slug" element={<OperatorProfile />} />
+            <Route path="/sample-lodge" element={<SampleLodge />} />
             <Route path="/review/:bookingId" element={<LeaveReview />} />
             <Route path="/enquiry/:reference" element={<EnquiryAcknowledge />} />
             <Route path="/privacy" element={<Privacy />} />

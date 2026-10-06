@@ -22,10 +22,13 @@ const SavingsCalculator = () => {
   const [bookingValue, setBookingValue] = useState(1000);
   const [bookings, setBookings] = useState(4);
 
-  const saving = bookings * bookingValue * 0.13; // 20% OTA − 7% Fichua
+  const savingLow = bookings * bookingValue * 0.08; // 15% OTA − 7% Fichua
+  const savingHigh = bookings * bookingValue * 0.13; // 20% OTA − 7% Fichua
   const subscription = roomRate * 3;
-  const net = saving - subscription;
-  const breakEven = bookingValue > 0 ? Math.ceil(subscription / (bookingValue * 0.13)) : 0;
+  const netLow = savingLow - subscription;
+  const netHigh = savingHigh - subscription;
+  const breakEvenBest = bookingValue > 0 ? Math.ceil(subscription / (bookingValue * 0.13)) : 0;
+  const breakEvenConservative = bookingValue > 0 ? Math.ceil(subscription / (bookingValue * 0.08)) : 0;
 
   return (
     <div className="mt-12 border border-border bg-parchment-dark p-6 md:p-8">
@@ -37,12 +40,12 @@ const SavingsCalculator = () => {
         <Field id="calc-count" label="Fichua bookings per month" value={bookings} onChange={setBookings} />
       </div>
       <div className="mt-6 grid gap-4 border-t border-border pt-6 md:grid-cols-3">
-        <div><p className="font-body text-xs text-muted-foreground">Saved vs a 20% platform</p><p className="font-display text-2xl text-foreground">{fmt(saving)}</p></div>
+        <div><p className="font-body text-xs text-muted-foreground">Saved vs a 15%–20% platform</p><p className="font-display text-2xl text-foreground">{fmt(savingLow)}–{fmt(savingHigh)}</p></div>
         <div><p className="font-body text-xs text-muted-foreground">Subscription (3 nights)</p><p className="font-display text-2xl text-foreground">{fmt(subscription)}</p></div>
-        <div><p className="font-body text-xs text-muted-foreground">Kept each month</p><p className="font-display text-2xl text-gold">{fmt(net)}</p></div>
+        <div><p className="font-body text-xs text-muted-foreground">Kept each month</p><p className="font-display text-2xl text-gold">{fmt(netLow)}–{fmt(netHigh)}</p></div>
       </div>
       <p className="mt-4 font-body text-sm text-muted-foreground">
-        {breakEven > 0 ? `Your subscription pays for itself after ${breakEven} booking${breakEven === 1 ? "" : "s"} a month.` : "Enter your booking value to see your break-even point."}
+        {breakEvenBest > 0 ? `Your subscription pays for itself after ${breakEvenBest}${breakEvenConservative !== breakEvenBest ? `–${breakEvenConservative}` : ""} booking${breakEvenConservative === 1 ? "" : "s"}, depending on the platform commission you compare.` : "Enter your booking value to see your break-even point."}
       </p>
     </div>
   );
