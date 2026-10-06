@@ -26,3 +26,4 @@
 - [x] Merge the Rwanda and regional audience line in the homepage opening
 - [x] Remove the redundant monthly examples table in favour of the calculator
 - [x] Re-verify calculator updates and numeric keypads at phone width
+- [x] Review and improve the calculator's wording, hierarchy, and result explanations

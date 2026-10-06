@@ -29,12 +29,12 @@ const ComparisonSection = () => (
           </table>
         </div>
       </RevealSection>
+      <RevealSection delay={0.15}><SavingsCalculator /></RevealSection>
       <RevealSection delay={0.12}>
         <Link to="/sample-lodge" className="mt-6 inline-flex items-center gap-2 font-label text-xs uppercase tracking-[0.15em] text-foreground underline decoration-gold underline-offset-4">
           See a fictional sample lodge page <ArrowUpRight className="h-4 w-4" />
         </Link>
       </RevealSection>
-      <RevealSection delay={0.15}><SavingsCalculator /></RevealSection>
     </div>
   </section>
 );
