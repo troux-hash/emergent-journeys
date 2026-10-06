@@ -430,7 +430,7 @@ async function main() {
     ['lead form fields', /<input id="prerender-property"/],
     ['UTM fields', /name="utm_campaign"/],
     ['Rwanda onboarding', /Now onboarding in Rwanda/],
-    ['calculator fields', /id="prerender-calc-room"/],
+    ['calculator fields', /id="prerender-calc-value"/],
   ]
   for (const [label, pattern] of homepageChecks) {
     if (!pattern.test(homepage)) throw new Error(`[prerender] Homepage check failed: ${label}`)

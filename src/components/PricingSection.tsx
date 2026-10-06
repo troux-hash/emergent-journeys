@@ -1,11 +1,9 @@
 import RevealSection from "./RevealSection";
 import { Eye, TrendingUp, Eye as EyeIcon, ShieldCheck, HandCoins } from "lucide-react";
 
-// Pricing + value section. The pricing model is deliberately stated in the
-// operator's own terms -- three nights at their own rate -- rather than a
-// flat dollar figure, because a number that's trivial for a lodge in one
-// market can be a month's margin in another. The "nothing until ten
-// bookings" term is the actual proof point behind every other claim on
+// Pricing + value section. One flat monthly rate -- simple, memorable, and the
+// same for every property -- plus 7% on delivered bookings. The "nothing until
+// ten bookings" term is the actual proof point behind every other claim on
 // this page, so it's given the most visual weight.
 
 const PROMISES = [

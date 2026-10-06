@@ -45,7 +45,7 @@ const HeroSection = () => {
           <div className="hidden max-w-lg grid-cols-3 border-y border-earth-dark-foreground/20 py-5 sm:grid">
             <div><strong className="block font-display text-3xl text-gold">7%</strong><span className="font-body text-xs text-earth-dark-foreground/60">Fichua booking fee</span></div>
             <div className="border-x border-earth-dark-foreground/20 px-4"><strong className="block font-display text-3xl text-earth-light">10</strong><span className="font-body text-xs text-earth-dark-foreground/60">bookings before fees</span></div>
-            <div className="pl-4"><strong className="block font-display text-3xl text-earth-light">3×</strong><span className="font-body text-xs text-earth-dark-foreground/60">lowest nightly rate monthly</span></div>
+            <div className="pl-4"><strong className="block font-display text-3xl text-earth-light">$99</strong><span className="font-body text-xs text-earth-dark-foreground/60">flat monthly rate</span></div>
           </div>
         </motion.div>
         </div>
