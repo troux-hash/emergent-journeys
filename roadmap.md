@@ -15,5 +15,5 @@
 - [x] Share preview descriptions include $130
 - [x] Clearly fictional sample lodge page (no production seed)
 - [x] Phone form test at 390px with visible fields, button, and UTM capture
-- [ ] Rich Results Test against the published update
+- [ ] Rich Results Test against the published update — blocked until next publish
 - [x] Render tracked UTM fields in both live and prerendered form HTML
