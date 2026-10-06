@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import safariLodge from "@/assets/safari-lodge.jpg";
+import rwandaHills from "@/assets/rwanda-hills.jpg";
 import OperatorLeadForm from "./OperatorLeadForm";
 
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden bg-earth-dark text-earth-light">
-      <img src={safariLodge} alt="Independent safari lodge in the African landscape" className="absolute inset-0 h-full w-full object-cover opacity-25" width={1280} height={720} />
+      <img src={rwandaHills} alt="Lodge among Rwanda's terraced hills with misty volcano peaks" className="absolute inset-0 h-full w-full object-cover opacity-25" width={1920} height={1024} />
       <div className="absolute inset-0 bg-earth-dark/70" />
       <div className="relative z-10 mx-auto grid min-h-[92vh] max-w-7xl items-center gap-6 px-6 pb-10 pt-20 md:gap-10 md:px-12 md:pb-16 md:pt-24 lg:grid-cols-[1.08fr_0.92fr] lg:px-20">
         <div>
