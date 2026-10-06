@@ -23,3 +23,6 @@
 - [x] Strengthen the fictional sample with photo, AI-readable data, WhatsApp demo, and route-specific sharing tags
 - [ ] Replace the go-live answer with a typical range — blocked until the Rwanda pilot provides measured data
 - [ ] Add a real pilot lodge page and owner quote — blocked until the first operator agrees to be featured
+- [x] Merge the Rwanda and regional audience line in the homepage opening
+- [x] Remove the redundant monthly examples table in favour of the calculator
+- [x] Re-verify calculator updates and numeric keypads at phone width
