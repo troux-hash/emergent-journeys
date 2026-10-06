@@ -1,5 +1,4 @@
-import { ArrowUpRight, Check, Minus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Check, Minus } from "lucide-react";
 import RevealSection from "./RevealSection";
 import SavingsCalculator from "./SavingsCalculator";
 
