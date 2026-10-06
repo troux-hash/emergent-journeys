@@ -28,8 +28,8 @@ const SolutionSection = () => {
             The Solution
           </p>
           <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight text-foreground mb-6">
-            One page. One link.<br />
-            <em className="text-gold">Every booking direct.</em>
+            Be visible. Be bookable.<br />
+            <em className="text-gold">Increase your revenue. Keep more.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-xl mx-auto mb-14 leading-relaxed">
             Fichua is the trust layer between you and your guests: we verify who you are, publish your details where travellers and AI assistants can find them, and protect the payment on both sides.
