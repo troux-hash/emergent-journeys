@@ -86,8 +86,8 @@ function buildHomepageJsonLd() {
 function buildHomepageBody() {
   const faqs = HOME_FAQS.map(([question, answer]) => `<h3>${esc(question)}</h3><p>${esc(answer)}</p>`).join('')
   return `<main>
-      <section><p>For independent lodges in East & West Africa</p><h1>Keep up to $65 more on every $500 booking.</h1><p>Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.</p><a href="#contact">Make me visible</a><p>Nothing to pay until Fichua has delivered 10 bookings.</p></section>
-      <section><h2>One booking pays the difference.</h2><p>At a typical 20% OTA commission, a $500 reservation costs you $100. Fichua’s 7% costs $35. Up to $65 stays with your lodge. Example: ten $500 bookings a month with a $50 lowest room rate — $650 saved minus a $150 subscription leaves $500 net.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $500 booking</th><td>$35</td><td>$75 (15%) – $100 (20%)</td></tr><tr><th>Revenue you keep</th><td>$465</td><td>$400–$425</td></tr><tr><th>Saving with Fichua</th><td>$40–$65</td><td>—</td></tr></tbody></table></section>
+      <section><p>For independent lodges in East & West Africa</p><h1>Keep up to $130 more on every $1,000 booking.</h1><p>Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.</p><a href="#contact">Make me visible</a><p>Nothing to pay until Fichua has delivered 10 bookings.</p></section>
+      <section><h2>One booking pays the difference.</h2><p>At a typical 20% OTA commission, a $1,000 reservation costs you $200. Fichua’s 7% costs $70. Up to $130 stays with your lodge. Example: ten $1,000 bookings a month with a $100 lowest room rate — $1,300 saved minus a $300 subscription leaves $1,000 net.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $1,000 booking</th><td>$70</td><td>$150 (15%) – $200 (20%)</td></tr><tr><th>Revenue you keep</th><td>$930</td><td>$800–$850</td></tr><tr><th>Saving with Fichua</th><td>$80–$130</td><td>—</td></tr></tbody></table></section>
       <section><h2>Get found. Book direct. Keep more.</h2><p>Fichua publishes your verified rooms, prices and location as structured information search engines and AI assistants can understand, then gives guests a direct path to book.</p></section>
       <section id="pricing"><h2>Three nights a month, plus 7%.</h2><p>Your monthly subscription equals three nights in your least expensive room. You pay nothing until Fichua has delivered ten bookings.</p></section>
       <section><h2>How Fichua works</h2><ol><li>Tell us about your lodge.</li><li>We verify your identity, location and payout details.</li><li>Your page goes live for direct bookings.</li></ol></section>
@@ -382,7 +382,7 @@ async function main() {
   const homepage = renderHomepage(shell)
   writeFileSync(shellPath, homepage)
   const homepageChecks = [
-    ['visible homepage h1', /<h1>Keep up to \$65 more on every \$500 booking\.<\/h1>/],
+    ['visible homepage h1', /<h1>Keep up to \$130 more on every \$1,000 booking\.<\/h1>/],
     ['Organization schema', /"@type":"Organization"/],
     ['Product schema', /"@type":"Product"/],
     ['FAQ schema', /"@type":"FAQPage"/],

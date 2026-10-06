@@ -24,8 +24,8 @@ const HeroSection = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="mb-5 max-w-3xl font-display text-4xl font-medium leading-[0.98] text-earth-light sm:text-5xl md:mb-6 md:text-6xl lg:text-7xl"
         >
-          Keep <em className="text-gold">up to $65 more</em><br />
-          on every $500 booking.
+          Keep <em className="text-gold">up to $130 more</em><br />
+          on every $1,000 booking.
         </motion.h1>
 
         <motion.p
