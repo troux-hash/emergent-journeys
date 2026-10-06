@@ -41,6 +41,10 @@ const HOME_FAQS = [
   ['How does Fichua help guests find my lodge?', 'Fichua publishes a verified, structured property page with your rooms, prices, location and contact details so travellers, search engines and AI assistants can understand and cite your lodge.'],
   ['Do I keep the guest relationship?', 'Yes. Your lodge owns the guest relationship. There is no exclusivity or lock-in, and your real price is shown clearly to the traveller.'],
   ['Can I stay on Booking.com and other platforms?', 'Yes. Fichua has no exclusivity, so you can keep every listing you have today. Fichua adds a direct channel alongside them, and each direct booking costs you 7% instead of 15–20%.'],
+  ['How and when do I get paid? Can I use mobile money?', 'Fichua confirms your payout method before your page goes live. Available bank or mobile-money options, payout timing and any processor fees depend on your country and are confirmed with you during onboarding.'],
+  ['How long does it take to go live?', 'There is no fixed promise because verification time depends on how quickly we can confirm your identity, ownership, photos, GPS location, WhatsApp number and payout details. We tell you what is still needed at each step.'],
+  ['Which countries does Fichua cover?', 'Fichua is starting with a pilot in Rwanda and is recruiting independent stays across East and West Africa. Outside Rwanda, contact us and we will confirm whether onboarding and payouts are ready in your country.'],
+  ['What does Fichua Verified mean for guests?', 'It means Fichua has confirmed the operator’s identity and ownership, checked property photos against its GPS location, reached a real person on WhatsApp, and confirmed a payout account before publishing the listing.'],
 ]
 
 function buildHomepageJsonLd() {
@@ -88,13 +92,23 @@ function buildHomepageBody() {
   const faqs = HOME_FAQS.map(([question, answer]) => `<h3>${esc(question)}</h3><p>${esc(answer)}</p>`).join('')
   return `<main>
       <section><p>For independent lodges in East & West Africa</p><h1>Keep up to $130 more on every $1,000 booking.</h1><p>Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.</p><a href="#contact">Make me visible</a><p>Nothing to pay until Fichua has delivered 10 bookings.</p></section>
-      <section><h2>Your subscription pays for itself after three bookings.</h2><p>At a typical 20% OTA commission, a $1,000 reservation costs you $200. Fichua’s 7% costs $70. Up to $130 stays with your lodge — three bookings save $390 against a $300 subscription. A modest month: four $1,000 bookings save $520, minus a $300 subscription — $220 kept. A busy month: ten $1,000 bookings save $1,300, minus $300 — $1,000 kept. Examples assume a $100 lowest room rate.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $1,000 booking</th><td>$70</td><td>$150 (15%) – $200 (20%)</td></tr><tr><th>Revenue you keep</th><td>$930</td><td>$800–$850</td></tr><tr><th>Saving with Fichua</th><td>$80–$130</td><td>—</td></tr></tbody></table></section>
+      <section><h2>Your subscription pays for itself after three to four bookings.</h2><p>On a $1,000 booking, Fichua saves $80–$130 compared with a platform charging 15%–20%. The exact break-even point depends on your lowest room rate.</p><table><thead><tr><th>Month</th><th>Bookings</th><th>Savings</th><th>Subscription</th><th>Kept</th></tr></thead><tbody><tr><th>Modest</th><td>4 × $1,000</td><td>$320–$520</td><td>$300</td><td>$20–$220</td></tr><tr><th>Busy</th><td>10 × $1,000</td><td>$800–$1,300</td><td>$300</td><td>$500–$1,000</td></tr></tbody></table><p>These examples use a $100 lowest room rate. Your subscription is three times your own lowest nightly rate. Use the on-page calculator for your lodge.</p><p><a href="/sample-lodge">See a fictional sample lodge page</a>.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $1,000 booking</th><td>$70</td><td>$150 (15%) – $200 (20%)</td></tr><tr><th>Revenue you keep</th><td>$930</td><td>$800–$850</td></tr><tr><th>Saving with Fichua</th><td>$80–$130</td><td>—</td></tr></tbody></table></section>
       <section><h2>Get found. Book direct. Keep more.</h2><p>Fichua publishes your verified rooms, prices and location as structured information search engines and AI assistants can understand, then gives guests a direct path to book.</p></section>
       <section id="pricing"><h2>Three nights a month, plus 7%.</h2><p>Your monthly subscription equals three nights in your least expensive room. You pay nothing until Fichua has delivered ten bookings.</p></section>
       <section><h2>How Fichua works</h2><ol><li>Tell us about your lodge.</li><li>We verify your identity, location and payout details.</li><li>Your page goes live for direct bookings.</li></ol></section>
       <section><h2>What lodge owners ask first.</h2>${faqs}</section>
-      <section id="contact"><h2>Put your lodge where guests can find it.</h2><p>Submit your property name and WhatsApp number to start. No upfront fee. No contract.</p></section>
+      <section id="contact"><h2>Put your lodge where guests can find it.</h2><p>Submit your property name and WhatsApp number to start. No upfront fee. No contract.</p><form aria-label="List your lodge with Fichua"><label for="prerender-property">Lodge or property name</label><input id="prerender-property" name="property_name" type="text" required><label for="prerender-whatsapp">WhatsApp number</label><input id="prerender-whatsapp" name="phone" type="tel" required><label for="prerender-email">Email (optional)</label><input id="prerender-email" name="email" type="email"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content"><button type="submit">Make me visible</button></form></section>
     </main>`
+}
+
+function renderSampleLodge(shell) {
+  const canonical = `${SITE_URL}/sample-lodge`
+  let html = shell
+    .replace(/<title>[^<]*<\/title>/, '<title>Fictional sample lodge page | Fichua</title>')
+    .replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="A fictional demonstration of the verified lodge pages Fichua creates for independent operators.">')
+    .replace('</head>', `  <meta name="robots" content="noindex, nofollow">\n  <link rel="canonical" href="${canonical}">\n</head>`)
+  html = html.replace('<div id="root"></div>', `<div id="root"><main><p>Fictional demonstration — not a real property and not available to book</p><h1>Imara Hills Lodge</h1><p>Musanze, Rwanda</p><p>Fichua Verified: identity and ownership, property location, WhatsApp reachability and payout account checked.</p><h2>Rooms and real prices</h2><article><h3>Garden Room</h3><p>$120 per night. Breakfast included. Private terrace.</p></article><article><h3>Family Cottage</h3><p>$210 per night. Sleeps four. Mountain view.</p></article><p><a href="/#contact">Build my lodge page</a></p></main></div>`)
+  return html
 }
 
 function renderHomepage(shell) {
@@ -382,16 +396,26 @@ async function main() {
   const shell = readFileSync(shellPath, 'utf-8')
   const homepage = renderHomepage(shell)
   writeFileSync(shellPath, homepage)
+  const sampleDir = path.join(DIST, 'sample-lodge')
+  mkdirSync(sampleDir, { recursive: true })
+  const samplePage = renderSampleLodge(shell)
+  writeFileSync(path.join(sampleDir, 'index.html'), samplePage)
   const homepageChecks = [
     ['visible homepage h1', /<h1>Keep up to \$130 more on every \$1,000 booking\.<\/h1>/],
     ['Organization schema', /"@type":"Organization"/],
     ['Product schema', /"@type":"Product"/],
     ['FAQ schema', /"@type":"FAQPage"/],
+    ['lead form fields', /<input id="prerender-property"/],
+    ['UTM fields', /name="utm_campaign"/],
   ]
   for (const [label, pattern] of homepageChecks) {
     if (!pattern.test(homepage)) throw new Error(`[prerender] Homepage check failed: ${label}`)
   }
   console.log(`[prerender] Homepage — ${homepageChecks.length} checks passed.`)
+  if (!/<h1>Imara Hills Lodge<\/h1>/.test(samplePage) || !/noindex, nofollow/.test(samplePage)) {
+    throw new Error('[prerender] Sample lodge page check failed')
+  }
+  console.log('[prerender] Fictional sample lodge page — checks passed.')
 
   const env = loadEnv()
   if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_PUBLISHABLE_KEY) {
