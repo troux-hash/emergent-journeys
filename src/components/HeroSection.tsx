@@ -18,6 +18,15 @@ const HeroSection = () => {
           <span className="inline-flex border border-gold/60 px-3 py-2 text-earth-light">Now onboarding in Rwanda · For independent lodges across East &amp; West Africa</span>
         </motion.p>
 
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="mb-3 font-display text-xl text-earth-light md:text-2xl"
+        >
+          Be visible. Be bookable. <span className="text-gold">Increase your revenue.</span>
+        </motion.p>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
