@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const fmt = (n: number) => `${n < 0 ? "−" : ""}$${Math.abs(Math.round(n)).toLocaleString("en-US")}`;
 
-const Field = ({ id, label, value, onChange }: { id: string; label: string; value: number; onChange: (v: number) => void }) => (
+const Field = ({ id, label, value, inputMode = "decimal", onChange }: { id: string; label: string; value: number; inputMode?: "decimal" | "numeric"; onChange: (v: number) => void }) => (
   <label htmlFor={id} className="block">
     <span className="mb-2 block font-label text-xs uppercase tracking-[0.15em] text-muted-foreground">{label}</span>
     <input
       id={id}
       type="number"
-      inputMode="decimal"
+      inputMode={inputMode}
       min={0}
       value={Number.isFinite(value) ? value : ""}
       onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))}
@@ -37,7 +37,7 @@ const SavingsCalculator = () => {
       <div className="grid gap-4 md:grid-cols-3">
         <Field id="calc-room" label="Lowest nightly room rate ($)" value={roomRate} onChange={setRoomRate} />
         <Field id="calc-value" label="Average booking value ($)" value={bookingValue} onChange={setBookingValue} />
-        <Field id="calc-count" label="Fichua bookings per month" value={bookings} onChange={setBookings} />
+        <Field id="calc-count" label="Fichua bookings per month" value={bookings} inputMode="numeric" onChange={setBookings} />
       </div>
       <div className="mt-6 grid gap-4 border-t border-border pt-6 md:grid-cols-3">
         <div><p className="font-body text-xs text-muted-foreground">Saved vs a 15%–20% platform</p><p className="font-display text-2xl text-foreground">{fmt(savingLow)}–{fmt(savingHigh)}</p></div>
