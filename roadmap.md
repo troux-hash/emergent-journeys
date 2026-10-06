@@ -6,4 +6,4 @@
 - [x] Add Organization, Product, and FAQPage JSON-LD.
 - [x] Add build-time homepage body prerendering.
 - [x] Verify generated source, form behavior, responsive layout, and live share image.
-- [ ] Publish the completed rebuild.
+- [x] Publish the completed rebuild.
