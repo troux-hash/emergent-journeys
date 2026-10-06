@@ -7,3 +7,11 @@
 - [x] Add build-time homepage body prerendering.
 - [x] Verify generated source, form behavior, responsive layout, and live share image.
 - [x] Publish the completed rebuild.
+## Oct 6 feedback
+- [x] Break-even heading (3 bookings)
+- [x] Modest-month example + savings calculator
+- [x] FAQ: staying on Booking.com
+- [ ] FAQ: payouts/mobile money, time to go live, countries — needs real facts from owner
+- [x] Share preview descriptions include $130
+- [ ] Live sample lodge page — needs a real lodge to agree
+- [ ] Rich Results Test + phone form test — after publish

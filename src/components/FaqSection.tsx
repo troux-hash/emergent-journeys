@@ -5,6 +5,7 @@ export const faqItems = [
   { question: "What does Fichua cost?", answer: "The monthly subscription is equal to three nights in your least expensive room, plus 7% on bookings Fichua brings. You pay nothing until Fichua has delivered ten bookings." },
   { question: "How does Fichua help guests find my lodge?", answer: "Fichua publishes a verified, structured property page with your rooms, prices, location and contact details so travellers, search engines and AI assistants can understand and cite your lodge." },
   { question: "Do I keep the guest relationship?", answer: "Yes. Your lodge owns the guest relationship. There is no exclusivity or lock-in, and your real price is shown clearly to the traveller." },
+  { question: "Can I stay on Booking.com and other platforms?", answer: "Yes. Fichua has no exclusivity, so you can keep every listing you have today. Fichua adds a direct channel alongside them, and each direct booking costs you 7% instead of 15–20%." },
 ];
 
 const FaqSection = () => (
