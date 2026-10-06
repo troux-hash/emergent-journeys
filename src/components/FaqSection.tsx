@@ -6,6 +6,10 @@ export const faqItems = [
   { question: "How does Fichua help guests find my lodge?", answer: "Fichua publishes a verified, structured property page with your rooms, prices, location and contact details so travellers, search engines and AI assistants can understand and cite your lodge." },
   { question: "Do I keep the guest relationship?", answer: "Yes. Your lodge owns the guest relationship. There is no exclusivity or lock-in, and your real price is shown clearly to the traveller." },
   { question: "Can I stay on Booking.com and other platforms?", answer: "Yes. Fichua has no exclusivity, so you can keep every listing you have today. Fichua adds a direct channel alongside them, and each direct booking costs you 7% instead of 15–20%." },
+  { question: "How and when do I get paid? Can I use mobile money?", answer: "Fichua confirms your payout method before your page goes live. Available bank or mobile-money options, payout timing and any processor fees depend on your country and are confirmed with you during onboarding." },
+  { question: "How long does it take to go live?", answer: "There is no fixed promise because verification time depends on how quickly we can confirm your identity, ownership, photos, GPS location, WhatsApp number and payout details. We tell you what is still needed at each step." },
+  { question: "Which countries does Fichua cover?", answer: "Fichua is starting with a pilot in Rwanda and is recruiting independent stays across East and West Africa. Outside Rwanda, contact us and we will confirm whether onboarding and payouts are ready in your country." },
+  { question: "What does Fichua Verified mean for guests?", answer: "It means Fichua has confirmed the operator’s identity and ownership, checked property photos against its GPS location, reached a real person on WhatsApp, and confirmed a payout account before publishing the listing." },
 ];
 
 const FaqSection = () => (
