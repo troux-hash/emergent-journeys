@@ -17,8 +17,8 @@ const ComparisonSection = () => (
       <RevealSection>
         <div className="mb-12 max-w-3xl">
           <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The margin difference</p>
-          <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">Your subscription pays for itself after three to four bookings.</h2>
-          <p className="mt-5 max-w-2xl font-body text-muted-foreground">On a $1,000 booking, Fichua saves $80–$130 compared with a platform charging 15%–20%. The exact break-even point depends on your lowest room rate.</p>
+          <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">Be visible. Be bookable. Increase your revenue.</h2>
+          <p className="mt-5 max-w-2xl font-body text-muted-foreground">And keep more when you do. On a $1,000 booking, Fichua saves $80–$130 compared with a platform charging 15%–20% — so your $99 subscription pays for itself after one or two bookings.</p>
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
