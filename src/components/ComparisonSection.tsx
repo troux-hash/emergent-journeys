@@ -19,16 +19,6 @@ const ComparisonSection = () => (
           <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The margin difference</p>
           <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">Your subscription pays for itself after three to four bookings.</h2>
           <p className="mt-5 max-w-2xl font-body text-muted-foreground">On a $1,000 booking, Fichua saves $80–$130 compared with a platform charging 15%–20%. The exact break-even point depends on your lowest room rate.</p>
-          <div className="mt-6 max-w-2xl overflow-x-auto border border-border">
-            <table className="w-full min-w-[520px] border-collapse text-left font-body text-sm">
-              <thead className="bg-earth-dark text-earth-light"><tr><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Month</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Bookings</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Savings</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Subscription</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em] text-gold">Kept</th></tr></thead>
-              <tbody>
-                <tr className="bg-parchment"><th className="border-t border-border p-3 font-normal">Modest</th><td className="border-t border-border p-3">4 × $1,000</td><td className="border-t border-border p-3">$320–$520</td><td className="border-t border-border p-3">$300</td><td className="border-t border-border p-3 font-semibold">$20–$220</td></tr>
-                <tr className="bg-parchment-dark"><th className="border-t border-border p-3 font-normal">Busy</th><td className="border-t border-border p-3">10 × $1,000</td><td className="border-t border-border p-3">$800–$1,300</td><td className="border-t border-border p-3">$300</td><td className="border-t border-border p-3 font-semibold">$500–$1,000</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-3 font-body text-xs text-muted-foreground">These examples use a $100 lowest room rate. Your subscription is three times your own lowest nightly rate; use the calculator below for your lodge.</p>
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
@@ -38,6 +28,18 @@ const ComparisonSection = () => (
             <tbody>{rows.map(([label, fichua, ota], index) => <tr key={label} className={index % 2 ? "bg-parchment-dark" : "bg-parchment"}><th className="border-t border-border p-5 font-body text-sm font-normal text-muted-foreground">{label}</th><td className="border-t border-border p-5 font-display text-xl text-foreground"><span className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-gold" />{fichua}</span></td><td className="border-t border-border p-5 font-body text-sm text-muted-foreground"><span className="inline-flex items-center gap-2"><Minus className="h-4 w-4" />{ota}</span></td></tr>)}</tbody>
           </table>
         </div>
+      </RevealSection>
+      <RevealSection delay={0.12}>
+        <div className="mt-8 max-w-3xl overflow-x-auto border border-border">
+          <table className="w-full min-w-[520px] border-collapse text-left font-body text-sm">
+            <thead className="bg-earth-dark text-earth-light"><tr><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Month</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Bookings</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Savings</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em]">Subscription</th><th className="p-3 font-label text-[10px] uppercase tracking-[0.15em] text-gold">Kept</th></tr></thead>
+            <tbody>
+              <tr className="bg-parchment"><th className="border-t border-border p-3 font-normal">Modest</th><td className="border-t border-border p-3">4 × $1,000</td><td className="border-t border-border p-3">$320–$520</td><td className="border-t border-border p-3">$300</td><td className="border-t border-border p-3 font-semibold">$20–$220</td></tr>
+              <tr className="bg-parchment-dark"><th className="border-t border-border p-3 font-normal">Busy</th><td className="border-t border-border p-3">10 × $1,000</td><td className="border-t border-border p-3">$800–$1,300</td><td className="border-t border-border p-3">$300</td><td className="border-t border-border p-3 font-semibold">$500–$1,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 max-w-2xl font-body text-xs text-muted-foreground">These examples use a $100 lowest room rate. Your subscription is three times your own lowest nightly rate; use the calculator below for your lodge.</p>
       </RevealSection>
       <RevealSection delay={0.12}>
         <Link to="/sample-lodge" className="mt-6 inline-flex items-center gap-2 font-label text-xs uppercase tracking-[0.15em] text-foreground underline decoration-gold underline-offset-4">

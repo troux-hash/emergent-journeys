@@ -15,7 +15,8 @@ const HeroSection = () => {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="mb-6 font-label text-xs uppercase tracking-[0.3em] text-gold"
         >
-          For independent lodges in East &amp; West Africa
+          <span className="inline-flex border border-gold/60 px-3 py-2 text-earth-light">Now onboarding in Rwanda</span>
+          <span className="mt-3 block">For independent lodges in East &amp; West Africa</span>
         </motion.p>
 
         <motion.h1
