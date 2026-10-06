@@ -53,10 +53,10 @@ const BusinessModelSection = () => {
               {/* Visual bar comparison */}
               <div className="space-y-4">
                 <div>
-                  <p className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">On a $3,000 booking — OTA takes</p>
+                  <p className="font-label text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">On a $500 booking — OTA takes</p>
                   <div className="h-8 bg-muted-foreground/20 flex">
                     <div className="h-full bg-muted-foreground/40 flex items-center justify-center" style={{ width: "20%" }}>
-                      <span className="font-label text-[10px] text-parchment">$600</span>
+                      <span className="font-label text-[10px] text-parchment">$100</span>
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,7 @@ const BusinessModelSection = () => {
                     <div className="h-full bg-gold flex items-center justify-center" style={{ width: "7%" }}>
                     </div>
                     <div className="flex items-center ml-3">
-                      <span className="font-label text-[10px] text-foreground">$210 — <strong>$390 stays with the operator</strong></span>
+                      <span className="font-label text-[10px] text-foreground">$35 — <strong>$65 stays with the operator</strong></span>
                     </div>
                   </div>
                 </div>

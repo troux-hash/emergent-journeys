@@ -2,9 +2,9 @@ import { Check, Minus } from "lucide-react";
 import RevealSection from "./RevealSection";
 
 const rows = [
-  ["Commission on a $3,000 booking", "$210", "$450 (15%) – $600 (20%)"],
-  ["Revenue you keep", "$2,790", "$2,400–$2,550"],
-  ["Saving with Fichua", "$240–$390", "—"],
+  ["Commission on a $500 booking", "$35", "$75 (15%) – $100 (20%)"],
+  ["Revenue you keep", "$465", "$400–$425"],
+  ["Saving with Fichua", "$40–$65", "—"],
   ["Guest relationship", "Yours", "Platform controlled"],
   ["AI-search visibility", "Included", "Not built for you"],
 ];
@@ -16,7 +16,7 @@ const ComparisonSection = () => (
         <div className="mb-12 max-w-3xl">
           <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The margin difference</p>
           <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">One booking pays the difference.</h2>
-          <p className="mt-5 max-w-2xl font-body text-muted-foreground">At a typical 20% OTA commission, a $3,000 reservation costs you $600. Fichua’s 7% costs $210. Up to $390 stays with your lodge.</p><p className="mt-3 max-w-2xl border-l-2 border-gold pl-3 font-body text-sm text-foreground">Net of the subscription: four $3,000 bookings a month with a $150 lowest room rate saves $1,560, minus a $450 subscription — <strong>$1,110 kept</strong>.</p>
+          <p className="mt-5 max-w-2xl font-body text-muted-foreground">At a typical 20% OTA commission, a $500 reservation costs you $100. Fichua’s 7% costs $35. Up to $65 stays with your lodge.</p><p className="mt-3 max-w-2xl border-l-2 border-gold pl-3 font-body text-sm text-foreground">Net of the subscription: ten $500 bookings a month with a $50 lowest room rate saves $650, minus a $150 subscription — <strong>$500 kept</strong>.</p>
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
