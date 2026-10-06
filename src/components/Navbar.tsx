@@ -44,9 +44,10 @@ const Navbar = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-center h-16">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:px-12">
+          <a href="/" className="font-display text-2xl font-semibold text-foreground" aria-label="Fichua home">Fichua<span className="text-gold">.</span></a>
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.label}
