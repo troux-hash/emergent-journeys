@@ -5,5 +5,5 @@
 - [x] Add OTA comparison, margin-first pricing, setup path, and FAQ.
 - [x] Add Organization, Product, and FAQPage JSON-LD.
 - [x] Add build-time homepage body prerendering.
-- [ ] Verify generated source, form behavior, responsive layout, and live share image.
+- [x] Verify generated source, form behavior, responsive layout, and live share image.
 - [ ] Publish the completed rebuild.
