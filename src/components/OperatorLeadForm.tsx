@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { CheckCircle, Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 
 type OperatorLeadFormProps = {
   compact?: boolean;
@@ -67,9 +68,14 @@ const OperatorLeadForm = ({ compact = false }: OperatorLeadFormProps) => {
 
   const inputClass = "w-full border border-earth-dark-foreground/20 bg-transparent px-4 py-3 font-body text-sm text-earth-light outline-none placeholder:text-earth-dark-foreground/35 focus:border-gold";
   const labelClass = "mb-2 block font-label text-[10px] uppercase tracking-[0.2em] text-earth-dark-foreground/60";
+  const utmValue = (key: string) => searchParams.get(key)?.slice(0, 200) || "";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" aria-label="List your lodge with Fichua">
+      <input type="hidden" name="utm_source" value={utmValue("utm_source")} readOnly />
+      <input type="hidden" name="utm_medium" value={utmValue("utm_medium")} readOnly />
+      <input type="hidden" name="utm_campaign" value={utmValue("utm_campaign")} readOnly />
+      <input type="hidden" name="utm_content" value={utmValue("utm_content")} readOnly />
       <div>
         <label htmlFor={`${compact ? "hero" : "signup"}-entity`} className={labelClass}>Lodge or property name</label>
         <input id={`${compact ? "hero" : "signup"}-entity`} required maxLength={150} value={formData.entityName} onChange={handleChange("entityName")} className={inputClass} placeholder="Your property name" />
@@ -100,10 +106,10 @@ const OperatorLeadForm = ({ compact = false }: OperatorLeadFormProps) => {
           </div>
         </div>
       )}
-      <button type="submit" disabled={isSubmitting} className="flex w-full items-center justify-center gap-2 bg-gold px-6 py-4 font-label text-xs uppercase tracking-[0.2em] text-earth-dark transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
+      <Button type="submit" disabled={isSubmitting} className="h-auto w-full rounded-none bg-gold px-6 py-4 font-label text-xs uppercase tracking-[0.2em] text-earth-dark hover:bg-gold/90">
         {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" strokeWidth={1.5} />}
         {isSubmitting ? "Sending…" : "Make me visible"}
-      </button>
+      </Button>
       <p className="text-center font-body text-[11px] text-earth-dark-foreground/50">No upfront fee. No contract. Nothing to pay until 10 bookings.</p>
     </form>
   );
