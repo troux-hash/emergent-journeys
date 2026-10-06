@@ -11,7 +11,7 @@ const BusinessModelSection = () => {
             <em className="text-gold">For the operator.</em>
           </h2>
           <p className="font-body text-muted-foreground max-w-md mb-16">
-            Fichua costs less per month than one night's booking — and keeps $360 more on every $3,000 booking.
+            Fichua costs less per month than one night's booking — and keeps up to $390 more on every $3,000 booking.
           </p>
         </RevealSection>
 
@@ -66,7 +66,7 @@ const BusinessModelSection = () => {
                     <div className="h-full bg-gold flex items-center justify-center" style={{ width: "7%" }}>
                     </div>
                     <div className="flex items-center ml-3">
-                      <span className="font-label text-[10px] text-foreground">$240 — <strong>$360 stays with the operator</strong></span>
+                      <span className="font-label text-[10px] text-foreground">$210 — <strong>$390 stays with the operator</strong></span>
                     </div>
                   </div>
                 </div>
