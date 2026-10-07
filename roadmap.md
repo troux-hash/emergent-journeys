@@ -29,3 +29,5 @@
 - [x] Review and improve the calculator's wording, hierarchy, and result explanations
 ## Oct 7
 - [x] OTA comparison table (top 5 platforms) with logos, indicative commissions, and registration steps — live section + crawlable prerender HTML
+- [x] Drop Agoda and Airbnb from the OTA table; add a "Direct guest access" column marked with a cross for every platform
+- [x] Add a stacked phone layout for the OTA table so the new column is visible without sideways scrolling
