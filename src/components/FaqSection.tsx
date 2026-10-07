@@ -10,6 +10,7 @@ export const faqItems = [
   { question: "How long does it take to go live?", answer: "There is no fixed promise because verification time depends on how quickly we can confirm your identity, ownership, photos, GPS location, WhatsApp number and payout details. We tell you what is still needed at each step." },
   { question: "Which countries does Fichua cover?", answer: "Fichua is starting with a pilot in Rwanda and is recruiting independent stays across East and West Africa. Outside Rwanda, contact us and we will confirm whether onboarding and payouts are ready in your country." },
   { question: "What does Fichua Verified mean for guests?", answer: "It means Fichua has confirmed the operator’s identity and ownership, checked property photos against its GPS location, reached a real person on WhatsApp, and confirmed a payout account before publishing the listing." },
+  { question: "How does Fichua keep guest and lodge data safe?", answer: "Every listing is verified before it goes live: identity, ownership, photos checked against GPS, a WhatsApp number a real person answered, and a payout account. Guest details are used to confirm the booking, and promotional messages go only to guests who agreed. Fichua never holds guest card details, and we never ask for your password by WhatsApp, email or SMS." },
 ];
 
 const FaqSection = () => (

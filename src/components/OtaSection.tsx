@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react";
+import { Check, ShieldCheck, X } from "lucide-react";
 import RevealSection from "./RevealSection";
 import bookingLogo from "@/assets/ota/booking.svg";
 import expediaLogo from "@/assets/ota/expedia.svg";
@@ -90,6 +90,19 @@ const otaRows: OtaRow[] = [
       "Guests book with you directly and their details come to you",
     ],
   },
+];
+
+const contactPoints = [
+  "Name, email and WhatsApp number on every booking — not a masked alias that expires after check-out",
+  "Your guest list stays yours: ask us for the full record whenever you want it",
+  "Promotional messages go only to guests who agreed to hear from you",
+];
+
+const securityPoints = [
+  "Every listing is verified before it goes live: identity, ownership, photos checked against GPS, a WhatsApp number a real person answered, and a payout account",
+  "Fichua never holds guest card details. Payment requests come from us directly during onboarding — never through a message asking you to click a link",
+  "We never ask for your password by WhatsApp, email or SMS",
+  "Guest details are used to confirm the booking, and marketing only happens with the guest's consent",
 ];
 
 const Brand = ({ row }: { row: OtaRow }) => (
@@ -220,6 +233,36 @@ const OtaSection = () => (
         </div>
       </RevealSection>
       <RevealSection delay={0.15}>
+        <div className="mt-8 border border-gold/50 bg-parchment p-6 md:p-8">
+          <p className="font-label text-xs uppercase tracking-[0.3em] text-gold">Real guest contact</p>
+          <h3 className="mt-3 font-display text-2xl leading-snug text-foreground md:text-3xl">The guest's real details reach you — and we keep them safe.</h3>
+          <div className="mt-6 grid gap-8 md:grid-cols-2">
+            <div>
+              <p className="font-label text-[10px] uppercase tracking-[0.15em] text-muted-foreground">What reaches you</p>
+              <ul className="mt-3 space-y-3">
+                {contactPoints.map((point) => (
+                  <li key={point} className="flex items-start gap-2 font-body text-sm leading-relaxed text-muted-foreground">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="font-label text-[10px] uppercase tracking-[0.15em] text-muted-foreground">How we keep it safe</p>
+              <ul className="mt-3 space-y-3">
+                {securityPoints.map((point) => (
+                  <li key={point} className="flex items-start gap-2 font-body text-sm leading-relaxed text-muted-foreground">
+                    <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </RevealSection>
+      <RevealSection delay={0.2}>
         <div className="mt-8 space-y-4 border-l-2 border-gold/60 pl-5">
           <p className="font-body text-sm leading-relaxed text-muted-foreground">
             <span className="font-medium text-foreground">Direct guest access</span> means the booking reaches you with the
