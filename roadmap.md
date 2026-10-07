@@ -34,4 +34,4 @@
 - [x] Move Fichua to the bottom of the OTA table
 - [x] Set the registration steps in the last column as bullet points
 - [x] Spell out what "direct guest access" means
-- [ ] Add a "Data sharing & management" column to the OTA comparison table
+- [x] Add a "Data sharing & management" column to the OTA comparison table
