@@ -71,10 +71,14 @@ const Brand = ({ row }: { row: OtaRow }) => (
         </span>
       )}
     </span>
-    <span className="font-body text-sm font-medium text-foreground">
-      {row.name}
-      {row.tag && <span className="ml-2 font-label text-[10px] uppercase tracking-[0.15em] text-gold">{row.tag}</span>}
-    </span>
+    {row.logo ? (
+      <span className="font-body text-sm font-medium text-foreground">
+        {row.name}
+        {row.tag && <span className="ml-2 font-label text-[10px] uppercase tracking-[0.15em] text-gold">{row.tag}</span>}
+      </span>
+    ) : (
+      row.tag && <span className="font-label text-[10px] uppercase tracking-[0.15em] text-gold">{row.tag}</span>
+    )}
   </span>
 );
 
