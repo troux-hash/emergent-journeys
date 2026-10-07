@@ -432,6 +432,8 @@ async function main() {
     ['UTM fields', /name="utm_campaign"/],
     ['Rwanda onboarding', /Now onboarding in Rwanda/],
     ['calculator fields', /id="prerender-calc-value"/],
+    ['OTA comparison table', /id="ota-comparison"/],
+    ['OTA booking.com row', /<th>Booking\.com<\/th><td>15% base/],
   ]
   for (const [label, pattern] of homepageChecks) {
     if (!pattern.test(homepage)) throw new Error(`[prerender] Homepage check failed: ${label}`)
