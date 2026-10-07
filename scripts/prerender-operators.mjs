@@ -434,6 +434,7 @@ async function main() {
     ['calculator fields', /id="prerender-calc-value"/],
     ['OTA comparison table', /id="ota-comparison"/],
     ['OTA booking.com row', /<th>Booking\.com<\/th><td>15% base/],
+    ['OTA Fichua row', /<th>Fichua \(Direct\)<\/th><td>7% on direct bookings<\/td><td>\u2713 Yours<\/td>/],
   ]
   for (const [label, pattern] of homepageChecks) {
     if (!pattern.test(homepage)) throw new Error(`[prerender] Homepage check failed: ${label}`)
