@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import OperatorProfile from "./pages/OperatorProfile.tsx";
 import Privacy from "./pages/Privacy.tsx";
+import GuestPrivacy from "./pages/GuestPrivacy.tsx";
 import Terms from "./pages/Terms.tsx";
 import Unsubscribe from "./pages/Unsubscribe.tsx";
 import AdminChat from "./pages/AdminChat.tsx";
