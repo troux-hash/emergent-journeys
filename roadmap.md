@@ -38,3 +38,4 @@
 - [x] Add the real guest contact point and security commitments (panel under the OTA table, FAQ answer, crawlable HTML)
 - [x] Add a mission and core values section (Swahili meaning, Science & Transparency, Trust & Integrity, Growth & Fairness) to the live page and crawlable HTML
 - [x] Stop the footer legal row from scrolling sideways on a phone
+- [x] Add "Be visible. Be bookable. Increase your revenue." as a gold banner strip at the very top of the site (all pages), mirrored in the crawlable HTML with a self-check
