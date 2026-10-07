@@ -47,7 +47,36 @@ const OtaSection = () => (
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
-        <div className="overflow-x-auto border border-border">
+        <div className="space-y-4 md:hidden">
+          {otaRows.map((row) => (
+            <div key={row.name} className="border border-border bg-parchment p-5">
+              <span className="flex items-center gap-3">
+                <span className="flex h-9 w-20 shrink-0 items-center justify-center rounded-sm bg-parchment-dark p-1.5">
+                  <img src={row.logo} alt={`${row.name} logo`} className="h-full w-full object-contain" loading="lazy" />
+                </span>
+                <span className="font-body text-sm font-medium text-foreground">{row.name}</span>
+              </span>
+              <dl className="mt-4 space-y-3">
+                <div>
+                  <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">Indicative commission</dt>
+                  <dd className="mt-1 font-display text-lg text-foreground">{row.commission}</dd>
+                </div>
+                <div>
+                  <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">Direct guest access</dt>
+                  <dd className="mt-1 inline-flex items-center gap-2 font-body text-sm text-muted-foreground">
+                    <X className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                    {row.guestAccess}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">How to register</dt>
+                  <dd className="mt-1 font-body text-sm text-muted-foreground">{row.process}</dd>
+                </div>
+              </dl>
+            </div>
+          ))}
+        </div>
+        <div className="hidden overflow-x-auto border border-border md:block">
           <table className="w-full min-w-[720px] border-collapse text-left">
             <thead className="bg-earth-dark text-earth-light">
               <tr>
