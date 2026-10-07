@@ -31,3 +31,7 @@
 - [x] OTA comparison table (top 5 platforms) with logos, indicative commissions, and registration steps — live section + crawlable prerender HTML
 - [x] Drop Agoda and Airbnb from the OTA table; add a "Direct guest access" column marked with a cross for every platform
 - [x] Add a stacked phone layout for the OTA table so the new column is visible without sideways scrolling
+- [x] Move Fichua to the bottom of the OTA table
+- [x] Set the registration steps in the last column as bullet points
+- [x] Spell out what "direct guest access" means
+- [x] Add a "Data sharing & management" column to the OTA comparison table
