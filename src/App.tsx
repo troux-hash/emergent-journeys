@@ -53,6 +53,7 @@ const App = () => (
             <Route path="/review/:bookingId" element={<LeaveReview />} />
             <Route path="/enquiry/:reference" element={<EnquiryAcknowledge />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/guest-privacy" element={<GuestPrivacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="/admin/chat" element={<AdminChat />} />
