@@ -35,3 +35,4 @@
 - [x] Set the registration steps in the last column as bullet points
 - [x] Spell out what "direct guest access" means
 - [x] Add a "Data sharing & management" column to the OTA comparison table
+- [x] Add the real guest contact point and security commitments (panel under the OTA table, FAQ answer, crawlable HTML)
