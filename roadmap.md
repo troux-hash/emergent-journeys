@@ -36,3 +36,5 @@
 - [x] Spell out what "direct guest access" means
 - [x] Add a "Data sharing & management" column to the OTA comparison table
 - [x] Add the real guest contact point and security commitments (panel under the OTA table, FAQ answer, crawlable HTML)
+- [x] Add a mission and core values section (Swahili meaning, Science & Transparency, Trust & Integrity, Growth & Fairness) to the live page and crawlable HTML
+- [x] Stop the footer legal row from scrolling sideways on a phone
