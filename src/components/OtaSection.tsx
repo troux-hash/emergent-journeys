@@ -4,6 +4,7 @@ import expediaLogo from "@/assets/ota/expedia.svg";
 import agodaLogo from "@/assets/ota/agoda.svg";
 import airbnbLogo from "@/assets/ota/airbnb.svg";
 import tripLogo from "@/assets/ota/trip.svg";
+import makemytripLogo from "@/assets/ota/makemytrip.svg";
 
 const otaRows = [
   {
@@ -31,10 +32,16 @@ const otaRows = [
     process: "Create a free host account, list the property with photos and amenities, set your pricing and cancellation rules, and go live almost immediately.",
   },
   {
-    name: "Trip.com",
+    name: "Trip.com (China)",
     logo: tripLogo,
     commission: "15–25% (set in your contract)",
     process: "Register free at the Trip.com partner hub: property registration and agreement, load rates and inventory, then verification before going live.",
+  },
+  {
+    name: "MakeMyTrip (India)",
+    logo: makemytripLogo,
+    commission: "15–20% (set in your contract)",
+    process: "Register free at the MakeMyTrip partner portal: submit your property with photos and amenities, sign the agreement, then load rates and inventory before going live.",
   },
 ];
 
@@ -44,8 +51,8 @@ const OtaSection = () => (
       <RevealSection>
         <div className="mb-12 max-w-3xl">
           <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The alternatives</p>
-          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">The five platforms most lodge owners list on.</h2>
-          <p className="mt-5 font-body text-muted-foreground">All five are free to join and take commission on completed bookings. Indicative rates for a small Rwanda property in 2026 — your exact rate is set in each platform's own agreement, and paid visibility programmes can add more.</p>
+          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">The biggest platforms lodge owners list on.</h2>
+          <p className="mt-5 font-body text-muted-foreground">All of them are free to join and take commission on completed bookings. Indicative rates for a small Rwanda property in 2026 — your exact rate is set in each platform's own agreement, and paid visibility programmes can add more.</p>
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
