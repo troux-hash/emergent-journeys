@@ -44,6 +44,11 @@ const Navbar = () => {
             : "bg-transparent"
         }`}
       >
+        <div className="bg-gold text-earth-dark">
+          <p className="mx-auto max-w-7xl px-4 py-1.5 text-center font-label text-[10px] uppercase leading-tight tracking-[0.14em] md:text-[11px] md:tracking-[0.2em]">
+            Be visible. Be bookable. <span className="font-semibold">Increase your revenue.</span>
+          </p>
+        </div>
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:px-12">
           <a href="/" className={`font-display text-2xl font-semibold ${scrolled || mobileOpen ? "text-foreground" : "text-earth-light"}`} aria-label="Fichua home">Fichua<span className="text-gold">.</span></a>
           {/* Desktop nav */}
@@ -85,7 +90,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-parchment pt-20 px-6 flex flex-col"
+            className="fixed inset-0 z-40 bg-parchment pt-28 px-6 flex flex-col"
           >
             <nav className="flex flex-col gap-1 mt-4">
               {navItems.map((item, i) => (

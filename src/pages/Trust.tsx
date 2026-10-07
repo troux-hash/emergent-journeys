@@ -91,7 +91,7 @@ const Trust = () => {
         <Navbar />
 
         {/* Hero */}
-        <section className="pt-28 pb-14 px-6 md:px-12 lg:px-20">
+        <section className="pt-32 pb-14 px-6 md:px-12 lg:px-20">
           <div className="max-w-3xl mx-auto text-center">
             <RevealSection>
               <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-4">Trust &amp; Safety</p>

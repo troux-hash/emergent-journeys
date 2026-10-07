@@ -50,7 +50,7 @@ const Discover = () => {
       </Helmet>
       <div className="grain-overlay bg-parchment min-h-screen">
         <Navbar />
-        <div className="pt-24 pb-16 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
+        <div className="pt-28 pb-16 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
           <p className="font-label text-xs tracking-[0.3em] uppercase text-gold mb-3">Discover</p>
           <h1 className="font-display text-3xl md:text-5xl font-medium text-foreground mb-10">
             Verified operators, ready to book direct.

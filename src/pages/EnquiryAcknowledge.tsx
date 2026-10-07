@@ -45,7 +45,7 @@ const EnquiryAcknowledge = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-background pt-32 pb-24">
+      <div className="min-h-screen bg-background pt-36 pb-24">
         <div className="max-w-lg mx-auto px-6 text-center">
           {state === "working" && (
             <>
