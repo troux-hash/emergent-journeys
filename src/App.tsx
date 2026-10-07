@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import OperatorProfile from "./pages/OperatorProfile.tsx";
 import Privacy from "./pages/Privacy.tsx";
+import GuestPrivacy from "./pages/GuestPrivacy.tsx";
 import Terms from "./pages/Terms.tsx";
 import Unsubscribe from "./pages/Unsubscribe.tsx";
 import AdminChat from "./pages/AdminChat.tsx";
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/review/:bookingId" element={<LeaveReview />} />
             <Route path="/enquiry/:reference" element={<EnquiryAcknowledge />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/guest-privacy" element={<GuestPrivacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="/admin/chat" element={<AdminChat />} />
