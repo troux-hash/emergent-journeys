@@ -10,24 +10,28 @@ const otaRows = [
     name: "Booking.com",
     logo: bookingLogo,
     commission: "15% base — 17–22% in practice",
+    guestAccess: "Platform controlled",
     process: "Free signup at the Partner Hub: submit your property, sign the agreement (this is where your rate is set), then load rooms, rates, photos and policies into the Extranet.",
   },
   {
     name: "Expedia",
     logo: expediaLogo,
     commission: "15–25% (typically 18–20%)",
+    guestAccess: "Platform controlled",
     process: "Free signup via Partner Central: property profile, room types, rates and cancellation policy, then choose your payment model and sign the contract.",
   },
   {
     name: "Trip.com (China)",
     logo: tripLogo,
     commission: "15–25% (set in your contract)",
+    guestAccess: "Platform controlled",
     process: "Register free at the Trip.com partner hub: property registration and agreement, load rates and inventory, then verification before going live.",
   },
   {
     name: "MakeMyTrip (India)",
     logo: makemytripLogo,
     commission: "15–20% (set in your contract)",
+    guestAccess: "Platform controlled",
     process: "Register free at the MakeMyTrip partner portal: submit your property with photos and amenities, sign the agreement, then load rates and inventory before going live.",
   },
 ];
