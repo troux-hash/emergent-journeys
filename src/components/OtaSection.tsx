@@ -19,18 +19,6 @@ const otaRows = [
     process: "Free signup via Partner Central: property profile, room types, rates and cancellation policy, then choose your payment model and sign the contract.",
   },
   {
-    name: "Agoda",
-    logo: agodaLogo,
-    commission: "15–25% (set in your contract)",
-    process: "Free signup through the Agoda partner portal: property submission and agreement, then manage everything in their Yield Control System (YCS).",
-  },
-  {
-    name: "Airbnb",
-    logo: airbnbLogo,
-    commission: "~15.5% flat host fee",
-    process: "Create a free host account, list the property with photos and amenities, set your pricing and cancellation rules, and go live almost immediately.",
-  },
-  {
     name: "Trip.com (China)",
     logo: tripLogo,
     commission: "15–25% (set in your contract)",
@@ -61,6 +49,7 @@ const OtaSection = () => (
               <tr>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Platform</th>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em] text-gold">Indicative commission</th>
+                <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Direct guest access</th>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">How to register</th>
               </tr>
             </thead>
@@ -76,6 +65,12 @@ const OtaSection = () => (
                     </span>
                   </th>
                   <td className="border-t border-border p-5 font-display text-lg text-foreground">{row.commission}</td>
+                  <td className="border-t border-border p-5 font-body text-sm text-muted-foreground">
+                    <span className="inline-flex items-center gap-2">
+                      <X className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                      {row.guestAccess}
+                    </span>
+                  </td>
                   <td className="border-t border-border p-5 font-body text-sm text-muted-foreground">{row.process}</td>
                 </tr>
               ))}
