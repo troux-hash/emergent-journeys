@@ -79,7 +79,7 @@ const Footer = () => {
           </div>
 
           {/* Legal */}
-          <div className="flex items-center gap-6 font-label text-[10px] tracking-[0.15em] uppercase text-earth-dark-foreground/40">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 font-label text-[10px] tracking-[0.15em] uppercase text-earth-dark-foreground/40">
             <span>© {new Date().getFullYear()} Fichua</span>
             <span>Founded at MIT</span>
             <Link to="/trust" className="hover:text-gold transition-colors">Trust &amp; Safety</Link>
