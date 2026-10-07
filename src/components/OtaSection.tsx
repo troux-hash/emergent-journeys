@@ -25,7 +25,7 @@ const otaRows: OtaRow[] = [
     commission: "15% base — 17–22% in practice",
     guestAccess: "Platform controlled",
     direct: false,
-    dataSharing: "Reservation record only",
+    dataSharing: "Masked email alias; replies through the extranet",
     dataOwned: false,
     steps: [
       "Sign up free at the Partner Hub",
@@ -39,7 +39,7 @@ const otaRows: OtaRow[] = [
     commission: "15–25% (typically 18–20%)",
     guestAccess: "Platform controlled",
     direct: false,
-    dataSharing: "Reservation record only",
+    dataSharing: "Masked contact; thread kept 45 days after check-out",
     dataOwned: false,
     steps: [
       "Sign up free via Partner Central",
@@ -53,7 +53,7 @@ const otaRows: OtaRow[] = [
     commission: "15–25% (set in your contract)",
     guestAccess: "Platform controlled",
     direct: false,
-    dataSharing: "Reservation record only",
+    dataSharing: "No guest email or phone shared",
     dataOwned: false,
     steps: [
       "Register free at the Trip.com partner hub",
@@ -67,7 +67,7 @@ const otaRows: OtaRow[] = [
     commission: "15–20% (set in your contract)",
     guestAccess: "Platform controlled",
     direct: false,
-    dataSharing: "Reservation record only",
+    dataSharing: "Not confirmed — check with MakeMyTrip",
     dataOwned: false,
     steps: [
       "Register free at the MakeMyTrip partner portal",
@@ -81,7 +81,7 @@ const otaRows: OtaRow[] = [
     commission: "7% on direct bookings",
     guestAccess: "Yours",
     direct: true,
-    dataSharing: "Guest list, rates and reports",
+    dataSharing: "Real email and phone, full export",
     dataOwned: true,
     highlight: true,
     steps: [
@@ -229,9 +229,10 @@ const OtaSection = () => (
           </p>
           <p className="font-body text-sm leading-relaxed text-muted-foreground">
             <span className="font-medium text-foreground">Data sharing &amp; management</span> is what you keep afterwards.
-            A platform hands you a reservation — dates, room, payment — while the guest profile, message history and stay
-            data stay in their system, under their terms, and cannot be rebuilt into a list you market to. With Fichua the
-            guest record, your rates and your booking reports are yours to keep and export.
+            Booking.com masks guest emails, Expedia can mask phone numbers and keeps messages for 45 days, and
+            Trip.com shares no guest contact details at all — so there is little you can export or market to later. With
+            Fichua you get the guest's real email and phone, and can export the full record, with marketing only where the
+            guest has agreed. Platform terms vary by market and change often, so treat their columns as directional.
           </p>
           <p className="font-body text-sm leading-relaxed text-muted-foreground">
             Every commission above is money a platform keeps from you. Fichua's 7% on direct bookings is less than half of
