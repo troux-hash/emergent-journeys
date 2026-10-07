@@ -12,6 +12,8 @@ type OtaRow = {
   commission: string;
   guestAccess: string;
   direct: boolean;
+  dataSharing: string;
+  dataOwned: boolean;
   steps: string[];
   highlight?: boolean;
 };
@@ -23,6 +25,8 @@ const otaRows: OtaRow[] = [
     commission: "15% base — 17–22% in practice",
     guestAccess: "Platform controlled",
     direct: false,
+    dataSharing: "Reservation record only",
+    dataOwned: false,
     steps: [
       "Sign up free at the Partner Hub",
       "Submit your property and sign the agreement — this is where your rate is set",
@@ -35,6 +39,8 @@ const otaRows: OtaRow[] = [
     commission: "15–25% (typically 18–20%)",
     guestAccess: "Platform controlled",
     direct: false,
+    dataSharing: "Reservation record only",
+    dataOwned: false,
     steps: [
       "Sign up free via Partner Central",
       "Add your property profile, room types, rates and cancellation policy",
@@ -47,6 +53,8 @@ const otaRows: OtaRow[] = [
     commission: "15–25% (set in your contract)",
     guestAccess: "Platform controlled",
     direct: false,
+    dataSharing: "Reservation record only",
+    dataOwned: false,
     steps: [
       "Register free at the Trip.com partner hub",
       "Submit your property registration and sign the agreement",
@@ -59,6 +67,8 @@ const otaRows: OtaRow[] = [
     commission: "15–20% (set in your contract)",
     guestAccess: "Platform controlled",
     direct: false,
+    dataSharing: "Reservation record only",
+    dataOwned: false,
     steps: [
       "Register free at the MakeMyTrip partner portal",
       "Submit your property with photos and amenities, then sign the agreement",
@@ -71,6 +81,8 @@ const otaRows: OtaRow[] = [
     commission: "7% on direct bookings",
     guestAccess: "Yours",
     direct: true,
+    dataSharing: "Guest list, rates and reports",
+    dataOwned: true,
     highlight: true,
     steps: [
       "Send the form on this page: your rooms, your prices, your WhatsApp",
@@ -113,6 +125,17 @@ const AccessMark = ({ row }: { row: OtaRow }) => (
   </span>
 );
 
+const DataMark = ({ row }: { row: OtaRow }) => (
+  <span className="inline-flex items-center gap-2">
+    {row.dataOwned ? (
+      <Check className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+    ) : (
+      <X className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+    )}
+    {row.dataSharing}
+  </span>
+);
+
 const Steps = ({ row, className }: { row: OtaRow; className: string }) => (
   <ul className={`list-disc space-y-1.5 pl-4 ${className}`}>
     {row.steps.map((step) => (
@@ -148,6 +171,12 @@ const OtaSection = () => (
                   </dd>
                 </div>
                 <div>
+                  <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">Data sharing &amp; management</dt>
+                  <dd className="mt-1 font-body text-sm text-muted-foreground">
+                    <DataMark row={row} />
+                  </dd>
+                </div>
+                <div>
                   <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">How to register</dt>
                   <dd className="mt-1">
                     <Steps row={row} className="font-body text-sm text-muted-foreground" />
@@ -158,26 +187,30 @@ const OtaSection = () => (
           ))}
         </div>
         <div className="hidden overflow-x-auto border border-border md:block">
-          <table className="w-full min-w-[760px] border-collapse text-left">
+          <table className="w-full min-w-[980px] border-collapse text-left">
             <thead className="bg-earth-dark text-earth-light">
               <tr>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Platform</th>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em] text-gold">Indicative commission</th>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Direct guest access</th>
+                <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Data sharing &amp; management</th>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">How to register</th>
               </tr>
             </thead>
             <tbody>
               {otaRows.map((row, index) => (
                 <tr key={row.name} className={row.highlight ? "bg-parchment" : index % 2 ? "bg-parchment" : "bg-parchment-dark"}>
-                  <th className={`border-t p-5 ${row.highlight ? "border-gold/60" : "border-border"}`}>
+                  <th className={`border-t p-5 align-top ${row.highlight ? "border-gold/60" : "border-border"}`}>
                     <Brand row={row} />
                   </th>
-                  <td className={`border-t p-5 font-display text-lg text-foreground ${row.highlight ? "border-gold/60" : "border-border"}`}>{row.commission}</td>
-                  <td className={`border-t p-5 font-body text-sm text-muted-foreground ${row.highlight ? "border-gold/60" : "border-border"}`}>
+                  <td className={`border-t p-5 align-top font-display text-lg text-foreground ${row.highlight ? "border-gold/60" : "border-border"}`}>{row.commission}</td>
+                  <td className={`border-t p-5 align-top font-body text-sm text-muted-foreground ${row.highlight ? "border-gold/60" : "border-border"}`}>
                     <AccessMark row={row} />
                   </td>
-                  <td className={`border-t p-5 ${row.highlight ? "border-gold/60" : "border-border"}`}>
+                  <td className={`border-t p-5 align-top font-body text-sm text-muted-foreground ${row.highlight ? "border-gold/60" : "border-border"}`}>
+                    <DataMark row={row} />
+                  </td>
+                  <td className={`border-t p-5 align-top ${row.highlight ? "border-gold/60" : "border-border"}`}>
                     <Steps row={row} className="font-body text-sm text-muted-foreground" />
                   </td>
                 </tr>
@@ -193,6 +226,12 @@ const OtaSection = () => (
             guest's name, email and WhatsApp, so you can confirm them, thank them and invite them back for their next stay.
             On the platforms above, the guest belongs to the platform: enquiries and messages run through them, and the
             contact details are not shared with you — so the next booking starts at zero again.
+          </p>
+          <p className="font-body text-sm leading-relaxed text-muted-foreground">
+            <span className="font-medium text-foreground">Data sharing &amp; management</span> is what you keep afterwards.
+            A platform hands you a reservation — dates, room, payment — while the guest profile, message history and stay
+            data stay in their system, under their terms, and cannot be rebuilt into a list you market to. With Fichua the
+            guest record, your rates and your booking reports are yours to keep and export.
           </p>
           <p className="font-body text-sm leading-relaxed text-muted-foreground">
             Every commission above is money a platform keeps from you. Fichua's 7% on direct bookings is less than half of
