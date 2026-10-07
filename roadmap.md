@@ -17,6 +17,7 @@
 - [x] Phone form test at 390px with visible fields, button, and UTM capture
 - [ ] Rich Results Test against the published update — blocked until next publish
 - [x] Render tracked UTM fields in both live and prerendered form HTML
+- [x] Put the per-booking explanation before the monthly savings table
 - [x] Render calculator fields in crawlable homepage HTML and verify them on a phone
 - [x] Add a Rwanda onboarding badge
 - [x] Strengthen the fictional sample with photo, AI-readable data, WhatsApp demo, and route-specific sharing tags
