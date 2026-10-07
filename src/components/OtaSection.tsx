@@ -1,8 +1,7 @@
+import { X } from "lucide-react";
 import RevealSection from "./RevealSection";
 import bookingLogo from "@/assets/ota/booking.svg";
 import expediaLogo from "@/assets/ota/expedia.svg";
-import agodaLogo from "@/assets/ota/agoda.svg";
-import airbnbLogo from "@/assets/ota/airbnb.svg";
 import tripLogo from "@/assets/ota/trip.svg";
 import makemytripLogo from "@/assets/ota/makemytrip.svg";
 
