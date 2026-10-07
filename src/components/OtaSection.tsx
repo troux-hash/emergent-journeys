@@ -1,0 +1,89 @@
+import RevealSection from "./RevealSection";
+import bookingLogo from "@/assets/ota/booking.svg";
+import expediaLogo from "@/assets/ota/expedia.svg";
+import agodaLogo from "@/assets/ota/agoda.svg";
+import airbnbLogo from "@/assets/ota/airbnb.svg";
+import tripLogo from "@/assets/ota/trip.svg";
+
+const otaRows = [
+  {
+    name: "Booking.com",
+    logo: bookingLogo,
+    commission: "15% base — 17–22% in practice",
+    process: "Free signup at the Partner Hub: submit your property, sign the agreement (this is where your rate is set), then load rooms, rates, photos and policies into the Extranet.",
+  },
+  {
+    name: "Expedia",
+    logo: expediaLogo,
+    commission: "15–25% (typically 18–20%)",
+    process: "Free signup via Partner Central: property profile, room types, rates and cancellation policy, then choose your payment model and sign the contract.",
+  },
+  {
+    name: "Agoda",
+    logo: agodaLogo,
+    commission: "15–25% (set in your contract)",
+    process: "Free signup through the Agoda partner portal: property submission and agreement, then manage everything in their Yield Control System (YCS).",
+  },
+  {
+    name: "Airbnb",
+    logo: airbnbLogo,
+    commission: "~15.5% flat host fee",
+    process: "Create a free host account, list the property with photos and amenities, set your pricing and cancellation rules, and go live almost immediately.",
+  },
+  {
+    name: "Trip.com",
+    logo: tripLogo,
+    commission: "15–25% (set in your contract)",
+    process: "Register free at the Trip.com partner hub: property registration and agreement, load rates and inventory, then verification before going live.",
+  },
+];
+
+const OtaSection = () => (
+  <section id="ota-comparison" className="bg-parchment-dark px-6 py-16 md:px-12 md:py-24 lg:px-20">
+    <div className="mx-auto max-w-5xl">
+      <RevealSection>
+        <div className="mb-12 max-w-3xl">
+          <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The alternatives</p>
+          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">The five platforms most lodge owners list on.</h2>
+          <p className="mt-5 font-body text-muted-foreground">All five are free to join and take commission on completed bookings. Indicative rates for a small Rwanda property in 2026 — your exact rate is set in each platform's own agreement, and paid visibility programmes can add more.</p>
+        </div>
+      </RevealSection>
+      <RevealSection delay={0.1}>
+        <div className="overflow-x-auto border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left">
+            <thead className="bg-earth-dark text-earth-light">
+              <tr>
+                <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Platform</th>
+                <th className="p-5 font-label text-xs uppercase tracking-[0.15em] text-gold">Indicative commission</th>
+                <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">How to register</th>
+              </tr>
+            </thead>
+            <tbody>
+              {otaRows.map((row, index) => (
+                <tr key={row.name} className={index % 2 ? "bg-parchment" : "bg-parchment-dark"}>
+                  <th className="border-t border-border p-5">
+                    <span className="flex items-center gap-3">
+                      <span className="flex h-9 w-20 shrink-0 items-center justify-center rounded-sm bg-parchment p-1.5">
+                        <img src={row.logo} alt={`${row.name} logo`} className="h-full w-full object-contain" loading="lazy" />
+                      </span>
+                      <span className="font-body text-sm font-medium text-foreground">{row.name}</span>
+                    </span>
+                  </th>
+                  <td className="border-t border-border p-5 font-display text-lg text-foreground">{row.commission}</td>
+                  <td className="border-t border-border p-5 font-body text-sm text-muted-foreground">{row.process}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </RevealSection>
+      <RevealSection delay={0.15}>
+        <p className="mt-8 font-body text-sm text-muted-foreground">
+          Fichua's 7% on direct bookings is less than half of every rate on this table — and the guest relationship stays yours.
+        </p>
+      </RevealSection>
+    </div>
+  </section>
+);
+
+export default OtaSection;

@@ -27,3 +27,5 @@
 - [x] Remove the redundant monthly examples table in favour of the calculator
 - [x] Re-verify calculator updates and numeric keypads at phone width
 - [x] Review and improve the calculator's wording, hierarchy, and result explanations
+## Oct 7
+- [x] OTA comparison table (top 5 platforms) with logos, indicative commissions, and registration steps — live section + crawlable prerender HTML
