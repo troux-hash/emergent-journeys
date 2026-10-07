@@ -63,7 +63,7 @@ const OtaSection = () => (
                 <tr key={row.name} className={index % 2 ? "bg-parchment" : "bg-parchment-dark"}>
                   <th className="border-t border-border p-5">
                     <span className="flex items-center gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-parchment p-1">
+                      <span className="flex h-9 w-20 shrink-0 items-center justify-center rounded-sm bg-parchment p-1.5">
                         <img src={row.logo} alt={`${row.name} logo`} className="h-full w-full object-contain" loading="lazy" />
                       </span>
                       <span className="font-body text-sm font-medium text-foreground">{row.name}</span>
