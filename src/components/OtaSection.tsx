@@ -1,8 +1,7 @@
+import { X } from "lucide-react";
 import RevealSection from "./RevealSection";
 import bookingLogo from "@/assets/ota/booking.svg";
 import expediaLogo from "@/assets/ota/expedia.svg";
-import agodaLogo from "@/assets/ota/agoda.svg";
-import airbnbLogo from "@/assets/ota/airbnb.svg";
 import tripLogo from "@/assets/ota/trip.svg";
 import makemytripLogo from "@/assets/ota/makemytrip.svg";
 
@@ -11,36 +10,28 @@ const otaRows = [
     name: "Booking.com",
     logo: bookingLogo,
     commission: "15% base — 17–22% in practice",
+    guestAccess: "Platform controlled",
     process: "Free signup at the Partner Hub: submit your property, sign the agreement (this is where your rate is set), then load rooms, rates, photos and policies into the Extranet.",
   },
   {
     name: "Expedia",
     logo: expediaLogo,
     commission: "15–25% (typically 18–20%)",
+    guestAccess: "Platform controlled",
     process: "Free signup via Partner Central: property profile, room types, rates and cancellation policy, then choose your payment model and sign the contract.",
-  },
-  {
-    name: "Agoda",
-    logo: agodaLogo,
-    commission: "15–25% (set in your contract)",
-    process: "Free signup through the Agoda partner portal: property submission and agreement, then manage everything in their Yield Control System (YCS).",
-  },
-  {
-    name: "Airbnb",
-    logo: airbnbLogo,
-    commission: "~15.5% flat host fee",
-    process: "Create a free host account, list the property with photos and amenities, set your pricing and cancellation rules, and go live almost immediately.",
   },
   {
     name: "Trip.com (China)",
     logo: tripLogo,
     commission: "15–25% (set in your contract)",
+    guestAccess: "Platform controlled",
     process: "Register free at the Trip.com partner hub: property registration and agreement, load rates and inventory, then verification before going live.",
   },
   {
     name: "MakeMyTrip (India)",
     logo: makemytripLogo,
     commission: "15–20% (set in your contract)",
+    guestAccess: "Platform controlled",
     process: "Register free at the MakeMyTrip partner portal: submit your property with photos and amenities, sign the agreement, then load rates and inventory before going live.",
   },
 ];
@@ -56,12 +47,42 @@ const OtaSection = () => (
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
-        <div className="overflow-x-auto border border-border">
+        <div className="space-y-4 md:hidden">
+          {otaRows.map((row) => (
+            <div key={row.name} className="border border-border bg-parchment p-5">
+              <span className="flex items-center gap-3">
+                <span className="flex h-9 w-20 shrink-0 items-center justify-center rounded-sm bg-parchment-dark p-1.5">
+                  <img src={row.logo} alt={`${row.name} logo`} className="h-full w-full object-contain" loading="lazy" />
+                </span>
+                <span className="font-body text-sm font-medium text-foreground">{row.name}</span>
+              </span>
+              <dl className="mt-4 space-y-3">
+                <div>
+                  <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">Indicative commission</dt>
+                  <dd className="mt-1 font-display text-lg text-foreground">{row.commission}</dd>
+                </div>
+                <div>
+                  <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">Direct guest access</dt>
+                  <dd className="mt-1 inline-flex items-center gap-2 font-body text-sm text-muted-foreground">
+                    <X className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                    {row.guestAccess}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-label text-xs uppercase tracking-[0.15em] text-gold">How to register</dt>
+                  <dd className="mt-1 font-body text-sm text-muted-foreground">{row.process}</dd>
+                </div>
+              </dl>
+            </div>
+          ))}
+        </div>
+        <div className="hidden overflow-x-auto border border-border md:block">
           <table className="w-full min-w-[720px] border-collapse text-left">
             <thead className="bg-earth-dark text-earth-light">
               <tr>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Platform</th>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em] text-gold">Indicative commission</th>
+                <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">Direct guest access</th>
                 <th className="p-5 font-label text-xs uppercase tracking-[0.15em]">How to register</th>
               </tr>
             </thead>
@@ -77,6 +98,12 @@ const OtaSection = () => (
                     </span>
                   </th>
                   <td className="border-t border-border p-5 font-display text-lg text-foreground">{row.commission}</td>
+                  <td className="border-t border-border p-5 font-body text-sm text-muted-foreground">
+                    <span className="inline-flex items-center gap-2">
+                      <X className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                      {row.guestAccess}
+                    </span>
+                  </td>
                   <td className="border-t border-border p-5 font-body text-sm text-muted-foreground">{row.process}</td>
                 </tr>
               ))}
