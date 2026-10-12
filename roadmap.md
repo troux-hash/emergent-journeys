@@ -39,3 +39,12 @@
 - [x] Add a mission and core values section (Swahili meaning, Science & Transparency, Trust & Integrity, Growth & Fairness) to the live page and crawlable HTML
 - [x] Stop the footer legal row from scrolling sideways on a phone
 - [x] Add "Be visible. Be bookable. Increase your revenue." as a gold banner strip at the very top of the site (all pages), mirrored in the crawlable HTML with a self-check
+
+## Oct 12 — Survey-driven homepage redesign
+- [x] Shorter homepage: hero "Up to 3x cheaper", trust strip, product mockup, AI visibility + traveller segments, why lodges stay, OTA table, honest pricing (10 free bookings, 3-month trial, USD/RWF/XOF calculator), short mission
+- [x] FAQ and How it works moved to /faq and /how-it-works (crawlable)
+- [x] Book a Call buttons; darker text, bigger body font, new hospitality photos
+- [ ] Real Book a Call link — waiting on user (currently emails tr@fichua.co)
+- [ ] WhatsApp button — waiting on user's number (hidden until set)
+- [ ] 3-month trial terms — waiting on user
+- [ ] French version — not requested yet
