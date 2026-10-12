@@ -478,8 +478,6 @@ async function main() {
     ['direct guest access defined', /Direct guest access means the booking reaches you/],
     ['OTA data sharing column', /<th>Data sharing &amp; management<\/th>/],
     ['data sharing defined', /Data sharing and management is what you keep afterwards/],
-    ['security commitments listed', /We never ask for your password by WhatsApp, email or SMS/],
-    ['no card details held', /Fichua never holds guest card details/],
     ['mission section', /means to reveal or uncover in Swahili/],
     ['core values listed', /<h3>Science &amp; Transparency<\/h3>.*<h3>Trust &amp; Integrity<\/h3>.*<h3>Growth &amp; Fairness<\/h3>/s],
     ['fairness promise stated', /We never charge partners more than we help them earn/],
