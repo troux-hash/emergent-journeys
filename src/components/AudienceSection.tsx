@@ -2,10 +2,10 @@ import { Repeat, Download, Search, ShieldCheck } from "lucide-react";
 import RevealSection from "./RevealSection";
 
 const keep = [
-  { icon: Repeat, title: "Repeat bookings", body: "When a guest wants to come back, they can book with you directly." },
-  { icon: Download, title: "Your guest list, exportable", body: "Keep your guests' names and contact details, ready for their next stay." },
-  { icon: Search, title: "Ongoing discovery", body: "Your verified page keeps getting found on Google and by AI." },
-  { icon: ShieldCheck, title: "Trust that travels", body: "Help a first-time guest feel confident about choosing your lodge." },
+  { icon: Repeat, title: "Guests come back", body: "Their next stay, booked directly with you." },
+  { icon: Download, title: "Your guest list", body: "Keep and export your guests’ contact details." },
+  { icon: Search, title: "Stay discoverable", body: "Found on Google and by AI." },
+  { icon: ShieldCheck, title: "Book with confidence", body: "A verified place. A real person to welcome them." },
 ];
 
 const AudienceSection = () => (

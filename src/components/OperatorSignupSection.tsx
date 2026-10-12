@@ -17,7 +17,7 @@ const OperatorSignupSection = () => {
                 Let's talk <em className="text-gold">about your place.</em>
               </h2>
               <p className="font-body text-sm md:text-base text-earth-light leading-relaxed mb-4">
-                Just the basics — we'll reach out on WhatsApp within 24 hours to set up your Fichua page.
+                Tell us the basics. We’ll reach out on WhatsApp within 24 hours.
               </p>
               <p className="font-body text-sm text-earth-light leading-relaxed">
                 No contracts. No upfront fees. No obligation.

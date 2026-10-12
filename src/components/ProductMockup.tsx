@@ -1,12 +1,13 @@
 import { BedDouble, Check, MapPin, MessageCircle, Search, ShieldCheck } from "lucide-react";
 import RevealSection from "./RevealSection";
 import lodgeRoom from "@/assets/lodge-room.jpg";
+import hostWelcome from "@/assets/host-welcome.jpg";
 
 const verified = ["Identity and ownership confirmed", "Photos checked against GPS location", "WhatsApp answered by a real person", "Payout account confirmed"];
 const journey = [
-  { icon: Search, title: "Traveller asks Google or an AI", body: "\u201CQuiet lodge near Musanze for four nights?\u201D" },
-  { icon: ShieldCheck, title: "Finds your verified page", body: "Real rooms, real prices, real location." },
-  { icon: MessageCircle, title: "Books with you directly", body: "On WhatsApp. The guest's details come to you." },
+  { icon: Search, title: "Guests find you", body: "On Google or through an AI assistant." },
+  { icon: ShieldCheck, title: "See your rooms", body: "Your photos, prices and verified location." },
+  { icon: MessageCircle, title: "Book directly", body: "On WhatsApp, with you." },
 ];
 
 const ProductMockup = () => (
@@ -14,8 +15,8 @@ const ProductMockup = () => (
     <div className="mx-auto max-w-6xl">
       <RevealSection>
         <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">Your lodge, online</p>
-        <h2 className="max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">Your verified lodge page — found by people and by AI.</h2>
-        <p className="mt-5 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">Give guests a feel for your place before they arrive — the rooms, the setting and the person ready to welcome them.</p>
+        <h2 className="max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">A feel for your place. A way to book.</h2>
+        <p className="mt-5 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">Your rooms, your setting, your welcome — all on one verified page.</p>
       </RevealSection>
       <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <RevealSection delay={0.1}>
@@ -33,6 +34,10 @@ const ProductMockup = () => (
         </RevealSection>
         <RevealSection delay={0.15}>
           <div className="space-y-6">
+            <figure>
+              <img src={hostWelcome} alt="Illustration of a lodge host welcoming two guests, with Rwanda’s green hills behind them" loading="lazy" width={1280} height={864} className="aspect-[3/2] w-full object-cover" />
+              <figcaption className="mt-2 font-body text-xs text-muted-foreground">Hospitality illustration.</figcaption>
+            </figure>
             <div className="border border-border p-6">
               <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-gold">What "Verified" means</p>
               <ul className="space-y-3">{verified.map((v) => <li key={v} className="flex gap-2 font-body text-base text-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-gold" />{v}</li>)}</ul>
