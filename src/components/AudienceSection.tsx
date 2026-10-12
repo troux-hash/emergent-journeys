@@ -35,7 +35,6 @@ const AudienceSection = () => (
         </div>
       </div>
     </section>
-  </>
 );
 
 export default AudienceSection;

@@ -20,6 +20,21 @@ type OtaRow = {
 
 const otaRows: OtaRow[] = [
   {
+    name: "Fichua",
+    tag: "Direct",
+    commission: "7% on direct bookings",
+    guestAccess: "Yours",
+    direct: true,
+    dataSharing: "Real email and phone, full export",
+    dataOwned: true,
+    highlight: true,
+    steps: [
+      "Send the form on this page: your rooms, your prices, your WhatsApp",
+      "We verify you and publish your booking page for travellers, Google and AI assistants",
+      "Guests book with you directly and their details come to you",
+    ],
+  },
+  {
     name: "Booking.com",
     logo: bookingLogo,
     commission: "15% base — 17–22% in practice",
