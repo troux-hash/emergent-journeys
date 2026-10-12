@@ -30,7 +30,7 @@ const HeroSection = () => (
           Up to 3x cheaper than Booking.com.
         </motion.p>
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="mb-8 max-w-xl font-body text-lg leading-relaxed text-earth-light md:text-xl">
-          Fichua takes 7% on direct bookings — not the 15–20% big platforms charge. We make your lodge visible to travellers, Google and AI assistants, and the guest stays yours.
+          You put care into every stay. We help more guests find you. Fichua takes 7% on direct bookings — not the 15–20% big platforms charge — and you keep the guest relationship.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.8 }}>
           <ContactButtons />

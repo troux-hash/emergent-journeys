@@ -14,7 +14,7 @@ const OperatorSignupSection = () => {
                 Make me visible
               </p>
               <h2 className="font-display text-2xl md:text-4xl font-medium leading-tight text-earth-light mb-6">
-                Ready? <em className="text-gold">Tell us about your place.</em>
+                Let's talk <em className="text-gold">about your place.</em>
               </h2>
               <p className="font-body text-sm md:text-base text-earth-light leading-relaxed mb-4">
                 Just the basics — we'll reach out on WhatsApp within 24 hours to set up your Fichua page.
