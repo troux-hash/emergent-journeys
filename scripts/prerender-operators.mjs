@@ -462,7 +462,7 @@ async function main() {
     ['Organization schema', /"@type":"Organization"/],
     ['Product schema', /"@type":"Product"/],
     ['product mockup', /id="product"/],
-    ['booking tracking stated', /tracked to its source/],
+    ['no MakeMyTrip row', /^((?!MakeMyTrip).)*$/s],
     ['why lodges stay', /Why lodges keep using Fichua/],
     ['AI visibility hook', /Will it name you\?/],
     ['honest break-even', /about 1–2 bookings at \$1,000, or 6–9 bookings at \$150/],
