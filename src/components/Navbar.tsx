@@ -3,12 +3,14 @@ import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { BOOK_CALL_URL } from "@/lib/contact";
 
 const rawNavItems = [
-  { label: "Compare", href: "#comparison" },
-  { label: "What You Get", href: "#solution" },
+  { label: "Product", href: "#product" },
+  { label: "Compare", href: "#ota-comparison" },
   { label: "Pricing", href: "#pricing" },
-  { label: "How It Works", href: "#how-it-works" },
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 const Navbar = () => {
@@ -57,17 +59,17 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className={`font-label text-xs uppercase tracking-[0.2em] transition-colors ${scrolled ? "text-muted-foreground hover:text-foreground" : "text-earth-dark-foreground/70 hover:text-earth-light"}`}
+                className={`font-label text-xs uppercase tracking-[0.2em] transition-colors ${scrolled ? "text-muted-foreground hover:text-foreground" : "text-earth-light hover:text-gold"}`}
               >
                 {item.label}
               </a>
             ))}
             <LanguageSwitcher />
             <a
-              href={onHome ? "#contact" : "/#contact"}
+              href={BOOK_CALL_URL}
               className="font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-5 py-2 hover:opacity-90 transition-opacity"
             >
-              Make me visible
+              Book a Call
             </a>
           </div>
 
@@ -112,14 +114,14 @@ const Navbar = () => {
               <span className="font-label text-xs tracking-[0.15em] uppercase text-muted-foreground">Language</span>
             </div>
             <motion.a
-              href={onHome ? "#contact" : "/#contact"}
+              href={BOOK_CALL_URL}
               onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.3 }}
               className="mt-6 font-label text-xs tracking-[0.15em] uppercase bg-primary text-primary-foreground px-6 py-4 text-center hover:opacity-90 transition-opacity"
             >
-              Make me visible
+              Book a Call
             </motion.a>
           </motion.div>
         )}
