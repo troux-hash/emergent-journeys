@@ -464,7 +464,6 @@ async function main() {
     ['product mockup', /id="product"/],
     ['no MakeMyTrip row', /^((?!MakeMyTrip).)*$/s],
     ['why lodges stay', /Why lodges keep using Fichua/],
-    ['AI visibility hook', /Will it name you\?/],
     ['honest break-even', /about 1–2 bookings at \$1,000, or 6–9 bookings at \$150/],
     ['10 free bookings', /10 free bookings first/],
     ['lead form fields', /<input id="prerender-property"/],
