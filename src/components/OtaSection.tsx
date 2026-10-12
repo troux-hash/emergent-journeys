@@ -28,9 +28,9 @@ const otaRows: OtaRow[] = [
     dataOwned: true,
     highlight: true,
     steps: [
-      "Send the form on this page: your rooms, your prices, your WhatsApp",
-      "We verify you and publish your booking page for travellers, Google and AI assistants",
-      "Guests book with you directly and their details come to you",
+      "Share rooms, prices and WhatsApp",
+      "Get verified and your page goes live",
+      "Receive direct bookings and guest details",
     ],
   },
   {
@@ -43,8 +43,8 @@ const otaRows: OtaRow[] = [
     dataOwned: false,
     steps: [
       "Sign up free at the Partner Hub",
-      "Submit your property and sign the agreement — this is where your rate is set",
-      "Load rooms, rates, photos and policies into the Extranet",
+      "Add your property; agree your commission",
+      "Add rooms, rates, photos and policies",
     ],
   },
   {
@@ -57,8 +57,8 @@ const otaRows: OtaRow[] = [
     dataOwned: false,
     steps: [
       "Sign up free via Partner Central",
-      "Add your property profile, room types, rates and cancellation policy",
-      "Choose your payment model and sign the contract",
+      "Add rooms, rates and cancellation policy",
+      "Choose payment terms; sign the contract",
     ],
   },
   {
@@ -70,9 +70,9 @@ const otaRows: OtaRow[] = [
     dataSharing: "No guest email or phone shared",
     dataOwned: false,
     steps: [
-      "Register free at the Trip.com partner hub",
-      "Submit your property registration and sign the agreement",
-      "Load rates and inventory, then pass verification before going live",
+      "Register free at the partner hub",
+      "Submit property details; sign the agreement",
+      "Add rates and availability; pass verification",
     ],
   },
 ];
@@ -135,8 +135,8 @@ const OtaSection = () => (
       <RevealSection>
         <div className="mb-12 max-w-3xl">
           <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The alternatives</p>
-          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">The biggest platforms lodge owners list on, side by side with Fichua.</h2>
-          <p className="mt-5 font-body text-muted-foreground">All of them are free to join and take commission on completed bookings. Indicative rates for a small Rwanda property in 2026 — your exact rate is set in each platform's own agreement, and paid visibility programmes can add more.</p>
+          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">Fichua and the alternatives.</h2>
+          <p className="mt-5 font-body text-muted-foreground">Free to join; commission on completed bookings. Indicative Rwanda rates (2026). Contracts and paid visibility can change the rate.</p>
         </div>
       </RevealSection>
       <RevealSection delay={0.1}>
@@ -207,21 +207,13 @@ const OtaSection = () => (
       <RevealSection delay={0.15}>
         <div className="mt-8 space-y-4 border-l-2 border-gold/60 pl-5">
           <p className="font-body text-sm leading-relaxed text-muted-foreground">
-            <span className="font-medium text-foreground">Direct guest access</span> means the booking reaches you with the
-            guest's name, email and WhatsApp, so you can confirm them, thank them and invite them back for their next stay.
-            On the platforms above, the guest belongs to the platform: enquiries and messages run through them, and the
-            contact details are not shared with you — so the next booking starts at zero again.
+            <span className="font-medium text-foreground">Direct guest access</span> means the booking reaches you with the guest’s name, email and WhatsApp — so you can arrange their stay directly.
           </p>
           <p className="font-body text-sm leading-relaxed text-muted-foreground">
-            <span className="font-medium text-foreground">Data sharing &amp; management</span> is what you keep afterwards.
-            Booking.com masks guest emails, Expedia can mask phone numbers and keeps messages for 45 days, and
-            Trip.com shares no guest contact details at all — so there is little you can export or market to later. With
-            Fichua you get the guest's real email and phone, and can export the full record, with marketing only where the
-            guest has agreed. Platform terms vary by market and change often, so treat their columns as directional.
+            <span className="font-medium text-foreground">Data sharing &amp; management</span> is what you keep afterwards. Fichua lets you export real guest details; platforms restrict them as shown above. Marketing needs guest consent. Platform terms vary.
           </p>
           <p className="font-body text-sm leading-relaxed text-muted-foreground">
-            Every commission above is money a platform keeps from you. Fichua's 7% on direct bookings is less than half of
-            all of them — and the guest relationship stays yours.
+            Fichua’s 7% is less than half these platform rates. The guest relationship stays yours.
           </p>
         </div>
       </RevealSection>
