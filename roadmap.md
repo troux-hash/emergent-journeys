@@ -41,6 +41,7 @@
 - [x] Add "Be visible. Be bookable. Increase your revenue." as a gold banner strip at the very top of the site (all pages), mirrored in the crawlable HTML with a self-check
 
 ## Oct 12 — Survey-driven homepage redesign
+- [ ] Reduce homepage text and strengthen the hotel, booking and human welcome feel; verify the live page and crawlable wording.
 - [x] Gently warm the homepage wording around owners' everyday hospitality, without changing the headline, pricing or layout; verify the page and crawlable copy.
 - [x] Shorter homepage: hero "Up to 3x cheaper", trust strip, product mockup, AI visibility + traveller segments, why lodges stay, OTA table, honest pricing (10 free bookings, 3-month trial, USD/RWF/XOF calculator), short mission
 - [x] FAQ and How it works moved to /faq and /how-it-works (crawlable)
