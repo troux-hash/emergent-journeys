@@ -1,4 +1,4 @@
-import { BedDouble, Check, MapPin, MessageCircle, Search, ShieldCheck, Sparkles } from "lucide-react";
+import { BedDouble, Check, MapPin, MessageCircle, Search, ShieldCheck } from "lucide-react";
 import RevealSection from "./RevealSection";
 import lodgeRoom from "@/assets/lodge-room.jpg";
 
@@ -35,17 +35,6 @@ const ProductMockup = () => (
             <div className="border border-border p-6">
               <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-gold">What "Verified" means</p>
               <ul className="space-y-3">{verified.map((v) => <li key={v} className="flex gap-2 font-body text-base text-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-gold" />{v}</li>)}</ul>
-            </div>
-            <div className="border border-border bg-earth-dark p-6 text-earth-light">
-              <p className="mb-3 flex items-center gap-2 font-label text-xs uppercase tracking-[0.2em] text-gold"><Sparkles className="h-4 w-4" /> What AI assistants read</p>
-              <pre className="overflow-x-auto font-mono text-xs leading-relaxed text-earth-light">{`{
-  "@type": "LodgingBusiness",
-  "name": "Your Lodge Name",
-  "address": "Musanze, Rwanda",
-  "makesOffer": [
-    { "name": "Garden Room", "price": 120 }
-  ]
-}`}</pre>
             </div>
           </div>
         </RevealSection>
