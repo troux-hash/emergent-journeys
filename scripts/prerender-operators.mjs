@@ -474,7 +474,7 @@ async function main() {
     ['OTA comparison table', /id="ota-comparison"/],
     ['OTA booking.com row', /<th>Booking\.com<\/th><td>15% base/],
     ['OTA Fichua row', /<th>Fichua \(Direct\)<\/th><td>7% on direct bookings<\/td><td>\u2713 Yours<\/td>/],
-    ['OTA Fichua is the last row', /<li>Guests book with you directly and their details come to you<\/li><\/ul><\/td><\/tr><\/tbody>/],
+    ['OTA Fichua is the first row', /<tbody><tr><th>Fichua \(Direct\)<\/th>/],
     ['OTA registration steps are bullets', /<td><ul><li>Sign up free at the Partner Hub<\/li>/],
     ['direct guest access defined', /Direct guest access means the booking reaches you/],
     ['OTA data sharing column', /<th>Data sharing &amp; management<\/th>/],
