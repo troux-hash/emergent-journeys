@@ -3,7 +3,6 @@ import RevealSection from "./RevealSection";
 import bookingLogo from "@/assets/ota/booking.svg";
 import expediaLogo from "@/assets/ota/expedia.svg";
 import tripLogo from "@/assets/ota/trip.svg";
-import makemytripLogo from "@/assets/ota/makemytrip.svg";
 
 type OtaRow = {
   name: string;
@@ -74,35 +73,6 @@ const otaRows: OtaRow[] = [
       "Register free at the Trip.com partner hub",
       "Submit your property registration and sign the agreement",
       "Load rates and inventory, then pass verification before going live",
-    ],
-  },
-  {
-    name: "MakeMyTrip (India)",
-    logo: makemytripLogo,
-    commission: "15–20% (set in your contract)",
-    guestAccess: "Platform controlled",
-    direct: false,
-    dataSharing: "Not confirmed — check with MakeMyTrip",
-    dataOwned: false,
-    steps: [
-      "Register free at the MakeMyTrip partner portal",
-      "Submit your property with photos and amenities, then sign the agreement",
-      "Load rates and inventory before going live",
-    ],
-  },
-  {
-    name: "Fichua",
-    tag: "Direct",
-    commission: "7% on direct bookings",
-    guestAccess: "Yours",
-    direct: true,
-    dataSharing: "Real email and phone, full export",
-    dataOwned: true,
-    highlight: true,
-    steps: [
-      "Send the form on this page: your rooms, your prices, your WhatsApp",
-      "We verify you and publish your booking page for travellers, Google and AI assistants",
-      "Guests book with you directly and their details come to you",
     ],
   },
 ];
