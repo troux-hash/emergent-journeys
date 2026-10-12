@@ -33,6 +33,8 @@ import Trust from "./pages/Trust.tsx";
 import EnquiryAcknowledge from "./pages/EnquiryAcknowledge.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import SampleLodge from "./pages/SampleLodge.tsx";
+import FaqPage from "./pages/FaqPage.tsx";
+import HowItWorksPage from "./pages/HowItWorksPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/how-it-works" element={<HowItWorksPage />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/trust" element={<Trust />} />
             <Route path="/report" element={<ReportIssue />} />

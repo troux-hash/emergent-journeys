@@ -1,72 +1,50 @@
 import { motion } from "framer-motion";
+import { MapPin, ShieldCheck, Sparkles, Users } from "lucide-react";
 import rwandaHills from "@/assets/rwanda-hills.jpg";
 import OperatorLeadForm from "./OperatorLeadForm";
+import ContactButtons from "./ContactButtons";
 
-const HeroSection = () => {
-  return (
-    <section className="relative overflow-hidden bg-earth-dark text-earth-light">
-      <img src={rwandaHills} alt="Lodge among Rwanda's rolling terraced green hills at sunrise" className="absolute inset-0 h-full w-full object-cover opacity-25" width={1920} height={1024} />
-      <div className="absolute inset-0 bg-earth-dark/70" />
-      <div className="relative z-10 mx-auto grid min-h-[92vh] max-w-7xl items-center gap-6 px-6 pb-10 pt-28 md:gap-10 md:px-12 md:pb-16 md:pt-32 lg:grid-cols-[1.08fr_0.92fr] lg:px-20">
-        <div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="mb-6 font-label text-xs uppercase tracking-[0.3em] text-gold"
-        >
-          <span className="inline-flex border border-gold/60 px-3 py-2 text-earth-light">Now onboarding in Rwanda · For independent lodges across East &amp; West Africa</span>
+const trust = [
+  { icon: MapPin, label: "Pilot live in Rwanda" },
+  { icon: ShieldCheck, label: "Every lodge verified before it goes live" },
+  { icon: Sparkles, label: "Built for Google and AI search" },
+  { icon: Users, label: "Recruiting across East & West Africa" },
+];
+
+const HeroSection = () => (
+  <section className="relative overflow-hidden bg-earth-dark text-earth-light">
+    <img src={rwandaHills} alt="Lodge among Rwanda's rolling terraced green hills at sunrise" className="absolute inset-0 h-full w-full object-cover opacity-30" width={1920} height={1024} />
+    <div className="absolute inset-0 bg-earth-dark/70" />
+    <div className="relative z-10 mx-auto grid min-h-[88vh] max-w-7xl items-center gap-8 px-6 pb-8 pt-32 md:gap-10 md:px-12 md:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:px-20">
+      <div>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="mb-6 font-label text-xs uppercase tracking-[0.25em] text-gold">
+          <span className="inline-flex border border-gold/60 px-3 py-2 text-earth-light">Not another booking platform · Direct bookings for independent lodges</span>
         </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="mb-3 font-display text-xl text-earth-light md:text-2xl"
-        >
-          Be visible. Be bookable. <span className="text-gold">Increase your revenue.</span>
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="mb-5 max-w-3xl font-display text-4xl font-medium leading-[0.98] text-earth-light sm:text-5xl md:mb-6 md:text-6xl lg:text-7xl"
-        >
-          Keep <em className="text-gold">up to $130 more</em><br />
-          on every $1,000 booking.
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }} className="mb-5 max-w-3xl font-display text-5xl font-medium leading-[0.98] text-earth-light md:text-6xl lg:text-7xl">
+          Up to <em className="text-gold">3x cheaper</em> than Booking.com.
         </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="mb-8 max-w-xl font-body text-base leading-relaxed text-earth-dark-foreground/80 md:text-lg"
-        >
-          Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="mb-8 max-w-xl font-body text-lg leading-relaxed text-earth-light md:text-xl">
+          Fichua takes 7% on direct bookings — not the 15–20% big platforms charge. We make your lodge visible to travellers, Google and AI assistants, and the guest stays yours.
         </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
-        >
-          <div className="hidden max-w-lg grid-cols-3 border-y border-earth-dark-foreground/20 py-5 sm:grid">
-            <div><strong className="block font-display text-3xl text-gold">7%</strong><span className="font-body text-xs text-earth-dark-foreground/60">Fichua booking fee</span></div>
-            <div className="border-x border-earth-dark-foreground/20 px-4"><strong className="block font-display text-3xl text-earth-light">10</strong><span className="font-body text-xs text-earth-dark-foreground/60">bookings before fees</span></div>
-            <div className="pl-4"><strong className="block font-display text-3xl text-earth-light">$99</strong><span className="font-body text-xs text-earth-dark-foreground/60">flat monthly rate</span></div>
-          </div>
-        </motion.div>
-        </div>
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="border border-earth-dark-foreground/15 bg-earth-dark/85 p-5 backdrop-blur-sm md:p-8">
-          <p className="mb-2 font-label text-xs uppercase tracking-[0.25em] text-gold">Start here</p>
-          <h2 className="mb-5 font-display text-2xl text-earth-light md:text-3xl">Put your lodge where guests can find it.</h2>
-          <OperatorLeadForm compact />
-          <p className="mt-4 text-center font-display text-lg text-gold">You pay nothing until Fichua has delivered 10 bookings.</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.8 }}>
+          <ContactButtons />
         </motion.div>
       </div>
-    </section>
-  );
-};
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="border border-earth-dark-foreground/20 bg-earth-dark/90 p-5 backdrop-blur-sm md:p-8">
+        <p className="mb-2 font-label text-xs uppercase tracking-[0.25em] text-gold">List your lodge</p>
+        <h2 className="mb-5 font-display text-2xl text-earth-light md:text-3xl">Put your lodge where guests can find it.</h2>
+        <OperatorLeadForm compact />
+        <p className="mt-4 text-center font-display text-lg text-gold">Your first 10 bookings are free.</p>
+      </motion.div>
+    </div>
+    <div className="relative z-10 border-t border-earth-dark-foreground/20 bg-earth-dark/80">
+      <ul aria-label="Why trust Fichua" className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-6 py-5 md:grid-cols-4 md:px-12 lg:px-20">
+        {trust.map(({ icon: Icon, label }) => (
+          <li key={label} className="flex items-center gap-2 font-body text-sm text-earth-light"><Icon className="h-4 w-4 shrink-0 text-gold" />{label}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
 
 export default HeroSection;

@@ -20,7 +20,7 @@
     --secondary-foreground: 30 20% 12%;
 
     --muted: 35 15% 88%;
-    --muted-foreground: 30 10% 46%;
+    --muted-foreground: 30 14% 30%;
 
     --accent: 43 65% 44%;
     --accent-foreground: 40 33% 96%;
@@ -65,7 +65,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 1.0625rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

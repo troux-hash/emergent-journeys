@@ -48,6 +48,8 @@ function buildXml(operators) {
     { loc: `${SITE_URL}/`, priority: '1.0' },
     { loc: `${SITE_URL}/discover`, priority: '0.9' },
     { loc: `${SITE_URL}/trust`, priority: '0.8' },
+    { loc: `${SITE_URL}/how-it-works`, priority: '0.8' },
+    { loc: `${SITE_URL}/faq`, priority: '0.8' },
   ]
   const operatorUrls = operators.map((op) => ({
     loc: `${SITE_URL}/operators/${op.slug}`,

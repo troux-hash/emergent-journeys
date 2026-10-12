@@ -1,51 +1,48 @@
 import { useState } from "react";
-
-const fmt = (n: number) => `${n < 0 ? "−" : ""}$${Math.abs(Math.round(n)).toLocaleString("en-US")}`;
+import { CURRENCIES, Currency, SUBSCRIPTION_USD, breakEven, formatMoney, monthlySavings } from "@/lib/pricing";
 
 const Field = ({ id, label, value, inputMode = "decimal", onChange }: { id: string; label: string; value: number; inputMode?: "decimal" | "numeric"; onChange: (v: number) => void }) => (
   <label htmlFor={id} className="block">
     <span className="mb-2 block font-label text-xs uppercase tracking-[0.15em] text-muted-foreground">{label}</span>
-    <input
-      id={id}
-      type="number"
-      inputMode={inputMode}
-      min={0}
-      value={Number.isFinite(value) ? value : ""}
-      onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))}
-      className="w-full border border-border bg-parchment px-4 py-3 font-display text-xl text-foreground focus:border-gold focus:outline-none"
-    />
+    <input id={id} type="number" inputMode={inputMode} min={0} value={Number.isFinite(value) ? value : ""} onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))} className="w-full border border-border bg-parchment px-4 py-3 font-display text-xl text-foreground focus:border-gold focus:outline-none" />
   </label>
 );
 
 const SavingsCalculator = () => {
-  const [bookingValue, setBookingValue] = useState(1000);
-  const [bookings, setBookings] = useState(4);
-
-  const savingLow = bookings * bookingValue * 0.08; // 15% OTA − 7% Fichua
-  const savingHigh = bookings * bookingValue * 0.13; // 20% OTA − 7% Fichua
-  const subscription = 99;
-  const netLow = savingLow - subscription;
-  const netHigh = savingHigh - subscription;
-  const breakEvenBest = bookingValue > 0 ? Math.ceil(subscription / (bookingValue * 0.13)) : 0;
-  const breakEvenConservative = bookingValue > 0 ? Math.ceil(subscription / (bookingValue * 0.08)) : 0;
+  const [cur, setCur] = useState<Currency>("USD");
+  const [valueUsd, setValueUsd] = useState(300);
+  const [bookings, setBookings] = useState(10);
+  const rate = CURRENCIES[cur].rate;
+  const s = monthlySavings(valueUsd, bookings);
+  const be = breakEven(valueUsd);
+  const m = (n: number) => formatMoney(n, cur);
 
   return (
-    <div className="mt-10 border border-border bg-parchment-dark p-6 md:p-8">
-      <p className="mb-2 font-label text-xs uppercase tracking-[0.3em] text-gold">Use your numbers</p>
-      <h3 className="font-display text-3xl text-foreground">Calculate your monthly savings</h3>
-      <p className="mb-6 mt-2 max-w-2xl font-body text-sm leading-relaxed text-muted-foreground">Enter the bookings you expect Fichua to bring and what each booking is worth.</p>
-      <div className="grid gap-4 md:grid-cols-2">
-        <Field id="calc-value" label="Average booking value ($)" value={bookingValue} onChange={setBookingValue} />
+    <div className="border border-border bg-parchment-dark p-6 md:p-8">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="mb-2 font-label text-xs uppercase tracking-[0.3em] text-gold">Use your numbers</p>
+          <h3 className="font-display text-3xl text-foreground">Your monthly savings, after the $99</h3>
+        </div>
+        <div role="group" aria-label="Currency" className="flex border border-border">
+          {(Object.keys(CURRENCIES) as Currency[]).map((c) => (
+            <button key={c} type="button" onClick={() => setCur(c)} aria-pressed={cur === c} className={`px-3 py-2 font-label text-xs ${cur === c ? "bg-primary text-primary-foreground" : "text-foreground"}`}>{c}</button>
+          ))}
+        </div>
+      </div>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <Field id="calc-value" label={`Average booking value (${cur})`} value={Math.round(valueUsd * rate)} onChange={(v) => setValueUsd(v / rate)} />
         <Field id="calc-count" label="Bookings from Fichua per month" value={bookings} inputMode="numeric" onChange={setBookings} />
       </div>
       <div aria-live="polite" className="mt-6 grid gap-5 border-t border-border pt-6 md:grid-cols-3">
-        <div><p className="font-body text-xs text-muted-foreground">Commission saved</p><p className="font-display text-2xl text-foreground">{fmt(savingLow)}–{fmt(savingHigh)}</p><p className="mt-1 font-body text-xs text-muted-foreground">Compared with a 15%–20% platform</p></div>
-        <div><p className="font-body text-xs text-muted-foreground">Monthly subscription</p><p className="font-display text-2xl text-foreground">{fmt(subscription)}</p><p className="mt-1 font-body text-xs text-muted-foreground">Flat rate, every month</p></div>
-        <div><p className="font-body text-xs text-muted-foreground">Extra revenue kept</p><p className="font-display text-2xl text-gold">{fmt(netLow)}–{fmt(netHigh)}</p><p className="mt-1 font-body text-xs text-muted-foreground">After the monthly subscription</p></div>
+        <div><p className="font-body text-sm text-muted-foreground">Commission saved</p><p className="font-display text-2xl text-foreground">{m(s.savedLow)}–{m(s.savedHigh)}</p><p className="mt-1 font-body text-xs text-muted-foreground">vs a 15%–20% platform</p></div>
+        <div><p className="font-body text-sm text-muted-foreground">Subscription</p><p className="font-display text-2xl text-foreground">−{m(SUBSCRIPTION_USD)}</p><p className="mt-1 font-body text-xs text-muted-foreground">Flat, every month</p></div>
+        <div><p className="font-body text-sm text-muted-foreground">You keep</p><p className="font-display text-2xl text-gold">{m(s.keptLow)}–{m(s.keptHigh)}</p><p className="mt-1 font-body text-xs text-muted-foreground">Extra, per month</p></div>
       </div>
-      <p className="mt-4 font-body text-sm text-muted-foreground">
-        {breakEvenBest > 0 ? `At this average booking value, your subscription pays for itself after ${breakEvenBest}${breakEvenConservative !== breakEvenBest ? `–${breakEvenConservative}` : ""} booking${breakEvenConservative === 1 ? "" : "s"}.` : "Enter your booking value to see your break-even point."}
+      <p className="mt-4 font-body text-base text-foreground">
+        {be ? `Break-even: ${be.best}${be.conservative !== be.best ? `–${be.conservative}` : ""} bookings a month at this booking value.` : "Enter your booking value to see your break-even point."}
       </p>
+      {cur !== "USD" && <p className="mt-2 font-body text-xs text-muted-foreground">Approximate conversion from USD; not a live exchange rate.</p>}
     </div>
   );
 };
