@@ -20,8 +20,11 @@ const HeroSection = () => (
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="mb-6 font-label text-xs uppercase tracking-[0.25em] text-gold">
           <span className="inline-flex border border-gold/60 px-3 py-2 text-earth-light">Not another booking platform · Direct bookings for independent lodges</span>
         </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }} className="mb-4 max-w-3xl font-display text-4xl font-medium leading-[1.02] text-earth-light md:text-5xl lg:text-6xl">
-          More bookings, <em className="text-gold">less commissions</em>,<br className="hidden md:block" /> more transparency, <em className="text-gold">more revenues</em>.
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }} className="mb-4 max-w-3xl font-display text-4xl font-medium leading-[1.05] text-earth-light md:text-5xl lg:text-6xl">
+          More bookings,<br />
+          <em className="text-gold">less commissions,</em><br />
+          more transparency,<br />
+          <em className="text-gold">more revenues.</em>
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8 }} className="mb-5 font-display text-2xl text-gold md:text-3xl">
           Up to 3x cheaper than Booking.com.
