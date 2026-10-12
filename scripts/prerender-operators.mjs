@@ -83,7 +83,7 @@ function buildHomepageJsonLd() {
 function buildHomepageBody() {
   return `<main>
       <p class="site-banner">Be visible. Be bookable. Increase your revenue.</p>
-      <section><p>Not another booking platform · Direct bookings for independent lodges</p><h1>Up to 3x cheaper than Booking.com.</h1><p>Fichua takes 7% on direct bookings — not the 15–20% big platforms charge. We make your lodge visible to travellers, Google and AI assistants, and the guest stays yours.</p><a href="mailto:tr@fichua.co?subject=Book%20a%20call%20with%20Fichua">Book a Call</a><p>Your first 10 bookings are free.</p><ul aria-label="Why trust Fichua"><li>Pilot live in Rwanda</li><li>Every lodge verified before it goes live</li><li>Built for Google and AI search</li><li>Recruiting across East &amp; West Africa</li></ul></section>
+      <section><p>Not another booking platform · Direct bookings for independent lodges</p><h1>More bookings, less commissions, more transparency, more revenues.</h1><p>Up to 3x cheaper than Booking.com.</p><p>Fichua takes 7% on direct bookings — not the 15–20% big platforms charge. We make your lodge visible to travellers, Google and AI assistants, and the guest stays yours.</p><a href="mailto:tr@fichua.co?subject=Book%20a%20call%20with%20Fichua">Book a Call</a><p>Your first 10 bookings are free.</p><ul aria-label="Why trust Fichua"><li>Pilot live in Rwanda</li><li>Every lodge verified before it goes live</li><li>Built for Google and AI search</li><li>Recruiting across East &amp; West Africa</li></ul></section>
       <section id="product"><h2>Your verified lodge page — found by people and by AI.</h2><p>Example page (illustrative): Fichua Verified · Musanze, Rwanda · Garden Room $120/night · Family Cottage $210/night · Book on WhatsApp.</p><h3>What "Verified" means</h3><ul><li>Identity and ownership confirmed</li><li>Photos checked against GPS location</li><li>WhatsApp answered by a real person</li><li>Payout account confirmed</li></ul><h3>What AI assistants read</h3><p>A Schema.org LodgingBusiness description with your name, location, rooms and prices.</p><ol><li>Traveller asks Google or an AI</li><li>Finds your verified page</li><li>Books with you directly on WhatsApp</li></ol></section>
       <section id="ai-visibility"><h2>Travellers now ask ChatGPT where to stay. Will it name you?</h2><p>Fichua publishes your rooms, prices and location in the structured format Google and AI assistants read — so when someone asks for a lodge like yours, you can be the answer.</p><p>Every booking that comes through your Fichua page is tracked to its source, so you see exactly what Fichua brought you — and pay only on those.</p></section>
       <section id="why-stay"><h2>Why lodges keep using Fichua.</h2><ul><li>Repeat bookings: past guests can rebook with you directly</li><li>Your guest list, exportable: real names, emails and WhatsApp numbers</li><li>Ongoing discovery on Google and AI</li><li>Trust that travels: the Fichua Verified badge</li></ul></section>
@@ -459,7 +459,7 @@ async function main() {
     if (!pattern.test(page)) throw new Error(`[prerender] Static page check failed: ${label}`)
   }
   const homepageChecks = [
-    ['visible homepage h1', /<h1>Up to 3x cheaper than Booking\.com\.<\/h1>/],
+    ['visible homepage h1', /<h1>More bookings, less commissions, more transparency, more revenues\.<\/h1>/],
     ['Organization schema', /"@type":"Organization"/],
     ['Product schema', /"@type":"Product"/],
     ['product mockup', /id="product"/],

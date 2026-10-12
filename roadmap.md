@@ -49,3 +49,5 @@
 - [ ] 3-month trial terms — waiting on user
 - [ ] French version — not requested yet
 - [x] Remove the four traveller-type cards from the AI visibility section (live page and crawlable HTML)
+- [x] Page title and metadata: "More bookings, less commissions, more transparency, more revenues"
+- [x] Same phrase as the visible homepage headline, with "Up to 3x cheaper than Booking.com" kept as the supporting line (live page and crawlable HTML)
