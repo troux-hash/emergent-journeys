@@ -13,8 +13,9 @@ const ProductMockup = () => (
   <section id="product" className="bg-parchment px-6 py-16 md:px-12 md:py-24 lg:px-20">
     <div className="mx-auto max-w-6xl">
       <RevealSection>
-        <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">The product</p>
+        <p className="mb-4 font-label text-xs uppercase tracking-[0.3em] text-gold">Your lodge, online</p>
         <h2 className="max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">Your verified lodge page — found by people and by AI.</h2>
+        <p className="mt-5 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">Give guests a feel for your place before they arrive — the rooms, the setting and the person ready to welcome them.</p>
       </RevealSection>
       <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <RevealSection delay={0.1}>

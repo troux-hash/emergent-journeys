@@ -2,10 +2,10 @@ import { Repeat, Download, Search, ShieldCheck } from "lucide-react";
 import RevealSection from "./RevealSection";
 
 const keep = [
-  { icon: Repeat, title: "Repeat bookings", body: "Past guests can rebook with you directly — no commission war." },
-  { icon: Download, title: "Your guest list, exportable", body: "Real names, emails and WhatsApp numbers you can download." },
+  { icon: Repeat, title: "Repeat bookings", body: "When a guest wants to come back, they can book with you directly." },
+  { icon: Download, title: "Your guest list, exportable", body: "Keep your guests' names and contact details, ready for their next stay." },
   { icon: Search, title: "Ongoing discovery", body: "Your verified page keeps getting found on Google and by AI." },
-  { icon: ShieldCheck, title: "Trust that travels", body: "The Fichua Verified badge gives new guests confidence." },
+  { icon: ShieldCheck, title: "Trust that travels", body: "Help a first-time guest feel confident about choosing your lodge." },
 ];
 
 const AudienceSection = () => (
