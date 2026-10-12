@@ -48,3 +48,4 @@
 - [ ] WhatsApp button — waiting on user's number (hidden until set)
 - [ ] 3-month trial terms — waiting on user
 - [ ] French version — not requested yet
+- [x] Remove the four traveller-type cards from the AI visibility section (live page and crawlable HTML)
