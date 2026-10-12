@@ -77,32 +77,49 @@ function buildHomepageJsonLd() {
         availability: 'https://schema.org/InStock',
       },
     },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: HOME_FAQS.map(([question, answer]) => ({
-        '@type': 'Question',
-        name: question,
-        acceptedAnswer: { '@type': 'Answer', text: answer },
-      })),
-    },
   ]
 }
 
 function buildHomepageBody() {
-  const faqs = HOME_FAQS.map(([question, answer]) => `<h3>${esc(question)}</h3><p>${esc(answer)}</p>`).join('')
   return `<main>
       <p class="site-banner">Be visible. Be bookable. Increase your revenue.</p>
-      <section><p>Now onboarding in Rwanda · For independent lodges across East & West Africa</p><p>Be visible. Be bookable. Increase your revenue.</p><h1>Keep up to $130 more on every $1,000 booking.</h1><p>Fichua helps independent lodges get found by travellers, Google and AI — then take verified direct bookings at 7%, not the 15–20% charged by large platforms.</p><a href="#contact">Make me visible</a><p>Nothing to pay until Fichua has delivered 10 bookings.</p></section>
-      <section><h2>Be visible. Be bookable. Increase your revenue.</h2><p>And keep more when you do. On a $1,000 booking, Fichua saves $80–$130 compared with a platform charging 15%–20% — so your $99 subscription pays for itself after one or two bookings.</p><table><thead><tr><th>On each booking</th><th>Fichua</th><th>Large platforms</th></tr></thead><tbody><tr><th>Commission on a $1,000 booking</th><td>$70</td><td>$150 (15%) – $200 (20%)</td></tr><tr><th>Revenue you keep</th><td>$930</td><td>$800–$850</td></tr><tr><th>Saving with Fichua</th><td>$80–$130</td><td>—</td></tr></tbody></table><form aria-label="Savings calculator"><p>Use your numbers</p><h3>Calculate your monthly savings</h3><p>Enter the bookings you expect Fichua to bring and what each booking is worth.</p><label for="prerender-calc-value">Average booking value ($)</label><input id="prerender-calc-value" name="booking_value" type="number" inputmode="decimal" min="0" value="1000"><label for="prerender-calc-count">Bookings from Fichua per month</label><input id="prerender-calc-count" name="bookings" type="number" inputmode="numeric" min="0" value="4"><p>At these example values: $320–$520 commission saved; $99 monthly subscription; $221–$421 extra revenue kept.</p></form></section>
+      <section><p>Not another booking platform · Direct bookings for independent lodges</p><h1>Up to 3x cheaper than Booking.com.</h1><p>Fichua takes 7% on direct bookings — not the 15–20% big platforms charge. We make your lodge visible to travellers, Google and AI assistants, and the guest stays yours.</p><a href="mailto:tr@fichua.co?subject=Book%20a%20call%20with%20Fichua">Book a Call</a><p>Your first 10 bookings are free.</p><ul aria-label="Why trust Fichua"><li>Pilot live in Rwanda</li><li>Every lodge verified before it goes live</li><li>Built for Google and AI search</li><li>Recruiting across East &amp; West Africa</li></ul></section>
+      <section id="product"><h2>Your verified lodge page — found by people and by AI.</h2><p>Example page (illustrative): Fichua Verified · Musanze, Rwanda · Garden Room $120/night · Family Cottage $210/night · Book on WhatsApp.</p><h3>What "Verified" means</h3><ul><li>Identity and ownership confirmed</li><li>Photos checked against GPS location</li><li>WhatsApp answered by a real person</li><li>Payout account confirmed</li></ul><h3>What AI assistants read</h3><p>A Schema.org LodgingBusiness description with your name, location, rooms and prices.</p><ol><li>Traveller asks Google or an AI</li><li>Finds your verified page</li><li>Books with you directly on WhatsApp</li></ol></section>
+      <section id="ai-visibility"><h2>Travellers now ask ChatGPT where to stay. Will it name you?</h2><p>Fichua publishes your rooms, prices and location in the structured format Google and AI assistants read — so when someone asks for a lodge like yours, you can be the answer.</p><h3>Where your guests come from</h3><p>Our pilot is in Rwanda. We focus on four kinds of travellers: NGO &amp; embassy staff; business &amp; conference travellers; diaspora; mid-range gorilla trekkers.</p><p>Every booking that comes through your Fichua page is tracked to its source, so you see exactly what Fichua brought you — and pay only on those.</p></section>
+      <section id="why-stay"><h2>Why lodges keep using Fichua.</h2><ul><li>Repeat bookings: past guests can rebook with you directly</li><li>Your guest list, exportable: real names, emails and WhatsApp numbers</li><li>Ongoing discovery on Google and AI</li><li>Trust that travels: the Fichua Verified badge</li></ul></section>
       <section id="ota-comparison"><h2>The biggest platforms lodge owners list on, side by side with Fichua.</h2><p>All of them are free to join and take commission on completed bookings. Indicative rates for a small Rwanda property in 2026 — your exact rate is set in each platform's own agreement, and paid visibility programmes can add more.</p><table><thead><tr><th>Platform</th><th>Indicative commission</th><th>Direct guest access</th><th>Data sharing &amp; management</th><th>How to register</th></tr></thead><tbody><tr><th>Booking.com</th><td>15% base — 17–22% in practice</td><td>✗ Platform controlled</td><td>✗ Masked email alias; replies through the extranet</td><td><ul><li>Sign up free at the Partner Hub</li><li>Submit your property and sign the agreement — this is where your rate is set</li><li>Load rooms, rates, photos and policies into the Extranet</li></ul></td></tr><tr><th>Expedia</th><td>15–25% (typically 18–20%)</td><td>✗ Platform controlled</td><td>✗ Masked contact; thread kept 45 days after check-out</td><td><ul><li>Sign up free via Partner Central</li><li>Add your property profile, room types, rates and cancellation policy</li><li>Choose your payment model and sign the contract</li></ul></td></tr><tr><th>Trip.com (China)</th><td>15–25% (set in your contract)</td><td>✗ Platform controlled</td><td>✗ No guest email or phone shared</td><td><ul><li>Register free at the Trip.com partner hub</li><li>Submit your property registration and sign the agreement</li><li>Load rates and inventory, then pass verification before going live</li></ul></td></tr><tr><th>MakeMyTrip (India)</th><td>15–20% (set in your contract)</td><td>✗ Platform controlled</td><td>✗ Not confirmed — check with MakeMyTrip</td><td><ul><li>Register free at the MakeMyTrip partner portal</li><li>Submit your property with photos and amenities, then sign the agreement</li><li>Load rates and inventory before going live</li></ul></td></tr><tr><th>Fichua (Direct)</th><td>7% on direct bookings</td><td>✓ Yours</td><td>✓ Real email and phone, full export</td><td><ul><li>Send the form on this page: your rooms, your prices, your WhatsApp</li><li>We verify you and publish your booking page for travellers, Google and AI assistants</li><li>Guests book with you directly and their details come to you</li></ul></td></tr></tbody></table><div><h3>The guest's real details reach you — and we keep them safe.</h3><p>What reaches you</p><ul><li>Name, email and WhatsApp number on every booking — not a masked alias that expires after check-out</li><li>Your guest list stays yours: ask us for the full record whenever you want it</li><li>Promotional messages go only to guests who agreed to hear from you</li></ul><p>How we keep it safe</p><ul><li>Every listing is verified before it goes live: identity, ownership, photos checked against GPS, a WhatsApp number a real person answered, and a payout account</li><li>Fichua never holds guest card details. Payment requests come from us directly during onboarding — never through a message asking you to click a link</li><li>We never ask for your password by WhatsApp, email or SMS</li><li>Guest details are used to confirm the booking, and marketing only happens with the guest's consent</li></ul></div><p>Direct guest access means the booking reaches you with the guest's name, email and WhatsApp, so you can confirm them, thank them and invite them back for their next stay. On the platforms above the guest belongs to the platform: enquiries and messages run through them and the contact details are not shared with you, so the next booking starts at zero again.</p><p>Data sharing and management is what you keep afterwards. Booking.com masks guest emails, Expedia can mask phone numbers and keeps messages for 45 days, and Trip.com shares no guest contact details at all — so there is little you can export or market to later. With Fichua you get the guest's real email and phone, and can export the full record, with marketing only where the guest has agreed. Platform terms vary by market and change often, so treat their columns as directional.</p><p>Every commission above is money a platform keeps from you. Fichua's 7% on direct bookings is less than half of all of them — and the guest relationship stays yours.</p></section>
-      <section><h2>Be visible. Be bookable. Increase your revenue. Keep more.</h2><p>Fichua publishes your verified rooms, prices and location as structured information search engines and AI assistants can understand, then gives guests a direct path to book.</p></section>
-      <section id="pricing"><h2>$99 a month. Plus 7% on the bookings we bring you.</h2><p>One flat rate to be visible, and 7% on delivered bookings. You pay nothing until Fichua has delivered ten bookings.</p></section>
-      <section><h2>How Fichua works</h2><ol><li>Tell us about your lodge.</li><li>We verify your identity, location and payout details.</li><li>Your page goes live for direct bookings.</li></ol></section>
-      <section id="values"><h2>&ldquo;Fichua&rdquo; means to reveal or uncover in Swahili.</h2><p>Our name is our purpose: making great local businesses visible to the travellers looking for them. Fichua uses science and data to reveal great local businesses to the world, building trust between travellers and operators, fairly and transparently.</p><h3>Science &amp; Transparency</h3><p>We make decisions based on evidence, not assumptions. We test our claims, measure real results for our partners, and share what we learn openly, including when something doesn't work.</p><p>In practice: Every partner can see exactly how Fichua is affecting their visibility and bookings.</p><h3>Trust &amp; Integrity</h3><p>Unlike platforms that hold back data and keep people apart, we share data openly and connect travellers directly with operators. We secure every transaction, so both sides are protected from booking to payment.</p><p>In practice: Operators own their customer relationships, and every payment on Fichua is safe for both sides.</p><h3>Growth &amp; Fairness</h3><p>We pursue big ambitions for the businesses we serve, and we only win when they win. Our pricing stays fair, and value stays with the people who create it.</p><p>In practice: We never charge partners more than we help them earn, and our fees are always clear.</p></section>
-      <section><h2>What lodge owners ask first.</h2>${faqs}</section>
-      <section id="contact"><h2>Put your lodge where guests can find it.</h2><p>Submit your property name and WhatsApp number to start. No upfront fee. No contract.</p><form aria-label="List your lodge with Fichua"><label for="prerender-property">Lodge or property name</label><input id="prerender-property" name="property_name" type="text" required><label for="prerender-whatsapp">WhatsApp number</label><input id="prerender-whatsapp" name="phone" type="tel" required><label for="prerender-email">Email (optional)</label><input id="prerender-email" name="email" type="email"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content"><button type="submit">Make me visible</button></form></section>
+      <section id="pricing"><h2>$99 a month + 7% on the bookings we bring.</h2><p>No setup fee, no contract, no exclusivity. Your subscription is covered once the commission you save beats $99 — about 1–2 bookings at $1,000, or 6–9 bookings at $150.</p><p>10 free bookings first: you pay nothing until Fichua has delivered ten bookings. Ask us about a 3-month trial option.</p><form aria-label="Savings calculator"><h3>Your monthly savings, after the $99</h3><p>Currency: USD, RWF or XOF (approximate).</p><label for="prerender-calc-value">Average booking value</label><input id="prerender-calc-value" name="booking_value" type="number" inputmode="decimal" min="0" value="300"><label for="prerender-calc-count">Bookings from Fichua per month</label><input id="prerender-calc-count" name="bookings" type="number" inputmode="numeric" min="0" value="10"><p>At these example values: $240–$390 commission saved; $99 subscription; $141–$291 extra kept per month. Break-even: 3–5 bookings a month.</p></form></section>
+      <section id="values"><h2>&ldquo;Fichua&rdquo; means to reveal or uncover in Swahili.</h2><p>We use science and data to reveal great local businesses to the world, building trust between travellers and operators, fairly and transparently.</p><h3>Science &amp; Transparency</h3><p>Every partner can see exactly how Fichua is affecting their visibility and bookings.</p><h3>Trust &amp; Integrity</h3><p>Operators own their customer relationships, and every payment on Fichua is safe for both sides.</p><h3>Growth &amp; Fairness</h3><p>We never charge partners more than we help them earn, and our fees are always clear.</p></section>
+      <p><a href="/how-it-works">How Fichua works</a> · <a href="/faq">Questions lodge owners ask</a></p>
+      ${LEAD_FORM_HTML}
     </main>`
+}
+
+const LEAD_FORM_HTML = `<section id="contact"><h2>Put your lodge where guests can find it.</h2><p>Submit your property name and WhatsApp number to start. No upfront fee. No contract.</p><form aria-label="List your lodge with Fichua"><label for="prerender-property">Lodge or property name</label><input id="prerender-property" name="property_name" type="text" required><label for="prerender-whatsapp">WhatsApp number</label><input id="prerender-whatsapp" name="phone" type="tel" required><label for="prerender-email">Email (optional)</label><input id="prerender-email" name="email" type="email"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content"><button type="submit">Make me visible</button></form></section>`
+
+function renderStaticPage(shell, route, title, desc, inner, jsonLd = []) {
+  const canonical = `${SITE_URL}${route}`
+  const schema = jsonLd.map((item) => `<script type="application/ld+json">${jsonLdSafe(item)}</script>`).join('\n  ')
+  let html = shell
+    .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${desc}">`)
+    .replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${title}">`)
+    .replace(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${title}">`)
+    .replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${desc}">`)
+    .replace(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${desc}">`)
+    .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}">`)
+    .replace('</head>', `  <link rel="canonical" href="${canonical}">\n  ${schema}\n</head>`)
+  return html.replace('<div id="root"></div>', `<div id="root"><main><p class="site-banner">Be visible. Be bookable. Increase your revenue.</p>${inner}${LEAD_FORM_HTML}</main></div>`)
+}
+
+function renderFaqPage(shell) {
+  const faqs = HOME_FAQS.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')
+  const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: HOME_FAQS.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })) }
+  return renderStaticPage(shell, '/faq', 'FAQ for lodge owners | Fichua', 'Answers for independent lodges: Fichua pricing, payouts, verification, countries and guest data.', `<section><h1>What lodge owners ask first.</h1>${faqs}</section>`, [faqLd])
+}
+
+function renderHowItWorksPage(shell) {
+  return renderStaticPage(shell, '/how-it-works', 'How Fichua works for lodges | Fichua', 'Three steps: tell us about your lodge, get verified, go live for direct bookings at 7%.', `<section><h1>How Fichua works</h1><ol><li><strong>Tell us about your place</strong> — your name, WhatsApp, rooms and prices.</li><li><strong>We verify you</strong> — identity and ownership, photos against your GPS location, a WhatsApp number a real person answers, and your payout account.</li><li><strong>You go live</strong> — your verified page is published for travellers, Google and AI assistants, and guests book with you directly.</li></ol></section>`)
 }
 
 function renderSampleLodge(shell) {
@@ -426,14 +443,34 @@ async function main() {
   mkdirSync(sampleDir, { recursive: true })
   const samplePage = renderSampleLodge(shell)
   writeFileSync(path.join(sampleDir, 'index.html'), samplePage)
+  const faqPage = renderFaqPage(shell)
+  mkdirSync(path.join(DIST, 'faq'), { recursive: true })
+  writeFileSync(path.join(DIST, 'faq', 'index.html'), faqPage)
+  const howPage = renderHowItWorksPage(shell)
+  mkdirSync(path.join(DIST, 'how-it-works'), { recursive: true })
+  writeFileSync(path.join(DIST, 'how-it-works', 'index.html'), howPage)
+  for (const [label, page, pattern] of [
+    ['FAQ h1', faqPage, /<h1>What lodge owners ask first\.<\/h1>/],
+    ['FAQ schema on /faq', faqPage, /"@type":"FAQPage"/],
+    ['FAQ canonical', faqPage, /<link rel="canonical" href="https:\/\/fichua\.co\/faq">/],
+    ['How it works h1', howPage, /<h1>How Fichua works<\/h1>/],
+    ['How it works canonical', howPage, /href="https:\/\/fichua\.co\/how-it-works"/],
+  ]) {
+    if (!pattern.test(page)) throw new Error(`[prerender] Static page check failed: ${label}`)
+  }
   const homepageChecks = [
-    ['visible homepage h1', /<h1>Keep up to \$130 more on every \$1,000 booking\.<\/h1>/],
+    ['visible homepage h1', /<h1>Up to 3x cheaper than Booking\.com\.<\/h1>/],
     ['Organization schema', /"@type":"Organization"/],
     ['Product schema', /"@type":"Product"/],
-    ['FAQ schema', /"@type":"FAQPage"/],
+    ['product mockup', /id="product"/],
+    ['traveller segments', /NGO &amp; embassy staff/],
+    ['why lodges stay', /Why lodges keep using Fichua/],
+    ['AI visibility hook', /Will it name you\?/],
+    ['honest break-even', /about 1–2 bookings at \$1,000, or 6–9 bookings at \$150/],
+    ['10 free bookings', /10 free bookings first/],
     ['lead form fields', /<input id="prerender-property"/],
     ['UTM fields', /name="utm_campaign"/],
-    ['Rwanda onboarding', /Now onboarding in Rwanda/],
+    ['Rwanda pilot', /Pilot live in Rwanda/],
     ['calculator fields', /id="prerender-calc-value"/],
     ['OTA comparison table', /id="ota-comparison"/],
     ['OTA booking.com row', /<th>Booking\.com<\/th><td>15% base/],
