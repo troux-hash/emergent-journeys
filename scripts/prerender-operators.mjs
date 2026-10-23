@@ -59,7 +59,7 @@ function buildHomepageJsonLd() {
       logo: `${SITE_URL}/og-image.jpg`,
       email: 'tr@fichua.co',
       description: 'Fichua helps independent lodges in East and West Africa get found and take more direct bookings.',
-      sameAs: ['https://instagram.com/fichua', 'https://linkedin.com/company/fichua', 'https://x.com/fichua'],
+      sameAs: ['https://instagram.com/fichuas', 'https://linkedin.com/company/fichuas', 'https://x.com/fichuas'],
     },
     {
       '@context': 'https://schema.org',
