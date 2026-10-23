@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { BOOK_CALL_URL } from "@/lib/contact";
+import logoOnLight from "@/assets/logo-on-light.png.asset.json";
+import logoOnDark from "@/assets/logo-on-dark.png.asset.json";
 
 const rawNavItems = [
   { label: "Product", href: "#product" },
@@ -52,7 +54,13 @@ const Navbar = () => {
           </p>
         </div>
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:px-12">
-          <a href="/" className={`font-display text-2xl font-semibold ${scrolled || mobileOpen ? "text-foreground" : "text-earth-light"}`} aria-label="Fichua home">Fichua<span className="text-gold">.</span></a>
+          <a href="/" aria-label="Fichua home" className="flex items-center">
+            <img
+              src={(scrolled || mobileOpen ? logoOnLight : logoOnDark).url}
+              alt="Fichua"
+              className="h-7 w-auto md:h-8"
+            />
+          </a>
           {/* Desktop nav */}
           <div className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
