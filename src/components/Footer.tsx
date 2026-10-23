@@ -4,11 +4,11 @@ import { Mail, Instagram, Linkedin } from "lucide-react";
 import logoStacked from "@/assets/logo-stacked-on-dark.png.asset.json";
 
 const socialLinks = [
-  { icon: Instagram, href: "https://instagram.com/fichua", label: "Instagram" },
-  { icon: Linkedin, href: "https://linkedin.com/company/fichua", label: "LinkedIn" },
+  { icon: Instagram, href: "https://instagram.com/fichuas", label: "Instagram" },
+  { icon: Linkedin, href: "https://linkedin.com/company/fichuas", label: "LinkedIn" },
   {
     label: "TikTok",
-    href: "https://tiktok.com/@fichua",
+    href: "https://tiktok.com/@fichuas",
     custom: (
       <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
         <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z" />
@@ -17,7 +17,7 @@ const socialLinks = [
   },
   {
     label: "X",
-    href: "https://x.com/fichua",
+    href: "https://x.com/fichuas",
     custom: (
       <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -33,7 +33,7 @@ const Footer = () => {
       <div className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto text-center">
           <RevealSection>
-            <img src={logoStacked.url} alt="Fichua" className="mx-auto mb-10 h-16 w-auto md:h-20" />
+            <img src={logoStacked.url} alt="Fichua" className="mx-auto mb-10 h-20 w-auto md:h-24" />
             <h2 className="font-display text-2xl md:text-4xl font-medium text-earth-light mb-4 leading-relaxed">
               Prefer to talk it through first?
             </h2>

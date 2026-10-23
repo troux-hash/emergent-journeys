@@ -58,7 +58,7 @@ const Navbar = () => {
             <img
               src={(scrolled || mobileOpen ? logoOnLight : logoOnDark).url}
               alt="Fichua"
-              className="h-7 w-auto md:h-8"
+              className="h-9 w-auto md:h-11"
             />
           </a>
           {/* Desktop nav */}
