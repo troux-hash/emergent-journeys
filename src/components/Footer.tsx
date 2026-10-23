@@ -33,7 +33,7 @@ const Footer = () => {
       <div className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto text-center">
           <RevealSection>
-            <img src={logoStacked.url} alt="Fichua" className="mx-auto mb-10 h-16 w-auto md:h-20" />
+            <img src={logoStacked.url} alt="Fichua" className="mx-auto mb-10 h-20 w-auto md:h-24" />
             <h2 className="font-display text-2xl md:text-4xl font-medium text-earth-light mb-4 leading-relaxed">
               Prefer to talk it through first?
             </h2>
